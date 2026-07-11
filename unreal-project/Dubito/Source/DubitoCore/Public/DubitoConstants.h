@@ -2,7 +2,7 @@
 
 #include "CoreMinimal.h"
 
-// V1 rule constants. Must match docs/DESIGN.md and docs/ARCHITECTURE.md.
+// V1 rule constants. Must match Documentation/DESIGN.md and Documentation/ARCHITECTURE.md.
 namespace DubitoConstants
 {
 	inline constexpr int32 MinPlayers = 2;

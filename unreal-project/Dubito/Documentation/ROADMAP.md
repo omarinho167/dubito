@@ -20,7 +20,7 @@ This is the execution plan. It stays at phase, sub-phase, responsibility, and va
 | 1 | Unreal Bootstrap | Done | clean UE project, first-party V1 stack, source-control foundation | build the project shell before any gameplay |
 | 2 | Core Rules | Done | pure rule model with tests | prove game logic without actors, widgets, maps, or live networking |
 | 3 | Greybox Table | Done | readable local table, cards, camera, basic UI shell | prove readability and input before multiplayer complexity |
-| 4 | Network Framework | Next | host-authoritative replicated match state | connect Unreal framework to the pure rules while preserving privacy |
+| 4 | Network Framework | In Progress | host-authoritative replicated match state | connect Unreal framework to the pure rules while preserving privacy |
 | 5 | Full Gameplay Loop | Locked | Play, Doubt, Discard, timer, win, post-game | add one player-facing action or flow at a time |
 | 6 | Steam Multiplayer | Locked | Steam lobbies/invites tested on real machines | swap from local validation to the real Steam path |
 | 7 | V1 Polish | Locked | clarity, accessibility, UX pass, packaging | harden the already-playable game |
@@ -155,16 +155,18 @@ Goal: connect Unreal gameplay framework to the pure rule model.
 
 Sub-phases:
 
-| ID | Name | Objective | Validation |
-|---|---|---|---|
-| 4.0 | Server authority bridge | Make GameMode own authoritative match state and route rule decisions through `DubitoCore`. | Actors and widgets render or send intent; they do not decide rules. |
-| 4.1 | Public GameState replication | Replicate phase, active player, round value, previous public claim, claimed pile ledger, pending-win flag, and timer deadline. | All players observe the same public state in PIE. |
-| 4.2 | PlayerState identity and ledgers | Replicate public player identity, seat, readiness, and public hand ledger. | Lobby and table can show public player state consistently. |
-| 4.3 | Owner-only private hand | Replicate exact private hand only to the owning PlayerController. | Non-owners cannot observe hand contents or actual played counts before reveal. |
-| 4.4 | Server action entry points | Add server actions for Ready, Start Match, Play, Doubt, and Discard. | Valid actions reach the core rules and update replicated state. |
-| 4.5 | Controlled rejection and resync | Handle stale turns, expired windows, illegal UI attempts, and ordinary invalid gameplay without disconnecting normal players. | Invalid ordinary actions produce a controlled rejection and state resync. |
-| 4.6 | Public events | Add self-contained reveal and game-over events. | Reveal and game-over UI can render from event payloads without guessing hidden state. |
-| 4.7 | PIE privacy validation | Run a 2 to 3 player listen-server PIE validation pass, with separate-process checks when needed. | Deal, turn advance, public claim, public ledgers, owner-only hands, and illegal-action behavior are verified. |
+| ID | Name | Status | Objective | Validation |
+|---|---|---|---|---|
+| 4.0 | Server authority bridge | Done | Make GameMode own authoritative match state and route rule decisions through `DubitoCore`. | Actors and widgets render or send intent; they do not decide rules. |
+| 4.1 | Public GameState replication | Next | Replicate phase, active player, round value, previous public claim, claimed pile ledger, pending-win flag, and timer deadline. | All players observe the same public state in PIE. |
+| 4.2 | PlayerState identity and ledgers | Locked | Replicate public player identity, seat, readiness, and public hand ledger. | Lobby and table can show public player state consistently. |
+| 4.3 | Owner-only private hand | Locked | Replicate exact private hand only to the owning PlayerController. | Non-owners cannot observe hand contents or actual played counts before reveal. |
+| 4.4 | Server action entry points | Locked | Add server actions for Ready, Start Match, Play, Doubt, and Discard. | Valid actions reach the core rules and update replicated state. |
+| 4.5 | Controlled rejection and resync | Locked | Handle stale turns, expired windows, illegal UI attempts, and ordinary invalid gameplay without disconnecting normal players. | Invalid ordinary actions produce a controlled rejection and state resync. |
+| 4.6 | Public events | Locked | Add self-contained reveal and game-over events. | Reveal and game-over UI can render from event payloads without guessing hidden state. |
+| 4.7 | PIE privacy validation | Locked | Run a 2 to 3 player listen-server PIE validation pass, with separate-process checks when needed. | Deal, turn advance, public claim, public ledgers, owner-only hands, and illegal-action behavior are verified. |
+
+Phase 4.0 outcome: `ADubitoGameMode` now owns the complete hidden match state on the server side, supports deterministic match setup from dealt hands or a shuffled deck, and exposes authority-only action methods that delegate legality and state mutation to `DubitoCore`. Replication, RPC entry points, UI binding, and live PIE privacy checks remain in later Phase 4 sub-phases.
 
 Phase 4 is complete when:
 

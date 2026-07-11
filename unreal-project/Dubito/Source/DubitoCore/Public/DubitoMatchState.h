@@ -7,7 +7,7 @@
 #include "DubitoAnnouncement.h"
 #include "DubitoMatchState.generated.h"
 
-// Replicated public phases (see docs/ARCHITECTURE.md state machine).
+// Replicated public phases (see Documentation/ARCHITECTURE.md state machine).
 UENUM(BlueprintType)
 enum class EDubitoPhase : uint8
 {

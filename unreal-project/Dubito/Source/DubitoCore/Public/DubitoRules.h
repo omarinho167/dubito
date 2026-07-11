@@ -46,7 +46,7 @@ namespace DubitoRules
 	DUBITOCORE_API void ApplyPlay(FDubitoMatchState& State, int32 PlayerId, const TArray<FDubitoCard>& ActualCards, const FDubitoAnnouncement& Announcement);
 
 	// --- Action legality / availability (Phase 2.2) ---
-	// These predicates answer the Action Matrix in docs/DESIGN.md: whether a given
+	// These predicates answer the Action Matrix in Documentation/DESIGN.md: whether a given
 	// action is currently available to a player, independent of the action's contents.
 
 	// Play is available whenever it is the caller's active turn (including the empty
