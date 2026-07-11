@@ -10,6 +10,35 @@
 
 class ADubitoGameMode;
 
+UENUM(BlueprintType)
+enum class EDubitoServerAction : uint8
+{
+	None,
+	Ready,
+	StartMatch,
+	Play,
+	Doubt,
+	Discard
+};
+
+UENUM(BlueprintType)
+enum class EDubitoActionRejectionReason : uint8
+{
+	None,
+	MissingAuthority,
+	MissingPlayer,
+	StartInvalidPlayers,
+	StartNotAllReady,
+	PlayWrongPhase,
+	PlayNotYourTurn,
+	PlayBadActualCount,
+	PlayBadAnnouncement,
+	PlayValueLocked,
+	PlayDontOwnCards,
+	DoubtUnavailable,
+	DiscardUnavailable
+};
+
 /**
  * Owning-client replicated private state for Phase 4.3.
  *
@@ -63,6 +92,9 @@ public:
 	UFUNCTION(Server, Reliable)
 	void ServerDiscard();
 
+	UFUNCTION(Client, Reliable)
+	void ClientReceiveActionRejected(EDubitoServerAction Action, EDubitoActionRejectionReason Reason, bool bRequestedResync);
+
 	void SetPrivateHand(const FDubitoHand& InPrivateHand);
 	void ClearPrivateHand();
 
@@ -74,12 +106,27 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Dubito|Private Hand")
 	int32 GetPrivateHandCount() const { return PrivateHand.Num(); }
 
+	UFUNCTION(BlueprintPure, Category = "Dubito|Actions")
+	EDubitoServerAction GetLastRejectedAction() const { return LastRejectedAction; }
+
+	UFUNCTION(BlueprintPure, Category = "Dubito|Actions")
+	EDubitoActionRejectionReason GetLastRejectionReason() const { return LastRejectionReason; }
+
+	UFUNCTION(BlueprintPure, Category = "Dubito|Actions")
+	int32 GetActionRejectionCount() const { return ActionRejectionCount; }
+
+	UFUNCTION(BlueprintPure, Category = "Dubito|Actions")
+	bool DidLastRejectionRequestResync() const { return bLastRejectionRequestedResync; }
+
 protected:
 	UFUNCTION()
 	void OnRep_PrivateHand();
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Dubito|Private Hand")
 	void OnPrivateHandUpdated();
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Dubito|Actions")
+	void OnServerActionRejected(EDubitoServerAction Action, EDubitoActionRejectionReason Reason);
 
 private:
 	ADubitoGameMode* GetAuthorityGameMode() const;
@@ -88,8 +135,14 @@ private:
 	bool ExecutePlayAction(const TArray<FDubitoCard>& ActualCards, const FDubitoAnnouncement& Announcement);
 	bool ExecuteDoubtAction();
 	bool ExecuteDiscardAction();
+	void RejectAction(ADubitoGameMode* GameMode, EDubitoServerAction Action, EDubitoActionRejectionReason Reason);
+	void RecordActionRejection(EDubitoServerAction Action, EDubitoActionRejectionReason Reason, bool bRequestedResync);
 
 	int32 AuthorityPlayerId = DubitoConstants::NoPlayerId;
+	EDubitoServerAction LastRejectedAction = EDubitoServerAction::None;
+	EDubitoActionRejectionReason LastRejectionReason = EDubitoActionRejectionReason::None;
+	int32 ActionRejectionCount = 0;
+	bool bLastRejectionRequestedResync = false;
 
 	UPROPERTY(ReplicatedUsing = OnRep_PrivateHand, BlueprintReadOnly, Category = "Dubito|Private Hand", meta = (AllowPrivateAccess = "true"))
 	FDubitoHand PrivateHand;

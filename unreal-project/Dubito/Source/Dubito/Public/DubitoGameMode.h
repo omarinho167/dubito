@@ -64,6 +64,7 @@ public:
 	bool RegisterAuthorityPlayerState(ADubitoPlayerState* PlayerState, int32 PlayerId, int32 SeatIndex);
 	bool RegisterAuthorityPlayerController(ADubitoPlayerController* PlayerController, int32 PlayerId);
 	bool SetAuthorityPlayerReady(int32 PlayerId, bool bReady);
+	void ForceAuthorityStateResync();
 
 private:
 	static EDubitoAuthorityStartResult ValidatePlayerIds(const TArray<int32>& PlayerIds);

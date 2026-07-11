@@ -321,6 +321,7 @@ bool FDubitoAuthorityBridgeServerActionsTest::RunTest(const FString&)
 				TestTrue(FString::Printf(TEXT("%s is a net RPC"), FunctionName), Function->HasAnyFunctionFlags(FUNC_Net));
 				TestTrue(FString::Printf(TEXT("%s runs on the server"), FunctionName), Function->HasAnyFunctionFlags(FUNC_NetServer));
 				TestTrue(FString::Printf(TEXT("%s is reliable"), FunctionName), Function->HasAnyFunctionFlags(FUNC_NetReliable));
+				TestFalse(FString::Printf(TEXT("%s does not use abusive RPC validation for ordinary gameplay"), FunctionName), Function->HasAnyFunctionFlags(FUNC_NetValidate));
 			}
 		};
 
@@ -374,6 +375,111 @@ bool FDubitoAuthorityBridgeServerActionsTest::RunTest(const FString&)
 		TestEqual(TEXT("Discard request clears public pile ledger"), PublicGameState->GetClaimedPileCount(), 0);
 		TestEqual(TEXT("Discard request resets public round value"), PublicGameState->GetRoundValue(), DubitoConstants::NoRoundValue);
 		TestEqual(TEXT("Discard request skips active player"), PublicGameState->GetActivePlayerId(), 10);
+	}
+
+	DestroyAuthorityTestWorld(World);
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDubitoAuthorityBridgeControlledRejectionTest, "Dubito.Unreal.AuthorityBridge.ControlledRejection", DubitoAuthorityFlags)
+bool FDubitoAuthorityBridgeControlledRejectionTest::RunTest(const FString&)
+{
+	UWorld* World = CreateAuthorityTestWorld();
+	ADubitoGameMode* GameMode = SpawnAuthorityGameMode(World);
+	ADubitoGameState* PublicGameState = World ? World->GetGameState<ADubitoGameState>() : nullptr;
+	ADubitoPlayerController* Controller10 = World ? World->SpawnActor<ADubitoPlayerController>() : nullptr;
+	ADubitoPlayerController* Controller20 = World ? World->SpawnActor<ADubitoPlayerController>() : nullptr;
+	ADubitoPlayerState* Player10 = World ? World->SpawnActor<ADubitoPlayerState>() : nullptr;
+	ADubitoPlayerState* Player20 = World ? World->SpawnActor<ADubitoPlayerState>() : nullptr;
+	TestNotNull(TEXT("GameMode spawns in transient authority world"), GameMode);
+	TestNotNull(TEXT("Dubito GameState exists in authority world"), PublicGameState);
+	TestNotNull(TEXT("Controller 10 spawns"), Controller10);
+	TestNotNull(TEXT("Controller 20 spawns"), Controller20);
+	TestNotNull(TEXT("Player 10 state spawns"), Player10);
+	TestNotNull(TEXT("Player 20 state spawns"), Player20);
+
+	if (GameMode && PublicGameState && Controller10 && Controller20 && Player10 && Player20)
+	{
+		Controller10->SetPlayerState(Player10);
+		Controller20->SetPlayerState(Player20);
+
+		TestTrue(TEXT("Player 10 public identity registers"), GameMode->RegisterAuthorityPlayerState(Player10, 10, 0));
+		TestTrue(TEXT("Player 20 public identity registers"), GameMode->RegisterAuthorityPlayerState(Player20, 20, 1));
+		TestTrue(TEXT("Controller 10 private identity registers"), GameMode->RegisterAuthorityPlayerController(Controller10, 10));
+		TestTrue(TEXT("Controller 20 private identity registers"), GameMode->RegisterAuthorityPlayerController(Controller20, 20));
+
+		Controller10->RequestReady(true);
+		Controller10->RequestStartMatch(505);
+		TestEqual(TEXT("Start before every registered player is ready is rejected"), Controller10->GetLastRejectedAction(), EDubitoServerAction::StartMatch);
+		TestEqual(TEXT("Start rejection explains not-all-ready"), Controller10->GetLastRejectionReason(), EDubitoActionRejectionReason::StartNotAllReady);
+		TestTrue(TEXT("Start rejection requests authority resync"), Controller10->DidLastRejectionRequestResync());
+		TestFalse(TEXT("Not-all-ready start does not mutate match started"), GameMode->HasAuthoritativeMatchStarted());
+
+		Controller20->RequestReady(true);
+		Controller10->RequestStartMatch(505);
+		TestTrue(TEXT("Start succeeds once registered players are ready"), GameMode->HasAuthoritativeMatchStarted());
+		TestEqual(TEXT("Active player after start is seat 0"), PublicGameState->GetActivePlayerId(), 10);
+
+		const FDubitoCard Player20OwnedCard = GameMode->GetAuthoritativeMatchState().Hands[20].Cards[0];
+		Controller20->ClearPrivateHand();
+		TestEqual(TEXT("Test intentionally desyncs owner hand before rejection"), Controller20->GetPrivateHandCount(), 0);
+
+		const int32 Controller20RejectionsBeforePlay = Controller20->GetActionRejectionCount();
+		Controller20->RequestPlayCards({ Player20OwnedCard }, FDubitoAnnouncement(Player20OwnedCard.Rank, 1));
+		TestEqual(TEXT("Out-of-turn play records a Play rejection"), Controller20->GetLastRejectedAction(), EDubitoServerAction::Play);
+		TestEqual(TEXT("Out-of-turn play rejection reason is NotYourTurn"), Controller20->GetLastRejectionReason(), EDubitoActionRejectionReason::PlayNotYourTurn);
+		TestEqual(TEXT("Out-of-turn play increments rejection count"), Controller20->GetActionRejectionCount(), Controller20RejectionsBeforePlay + 1);
+		TestTrue(TEXT("Out-of-turn play requests authority resync"), Controller20->DidLastRejectionRequestResync());
+		TestEqual(TEXT("Resync restores owner private hand from authoritative state"), Controller20->GetPrivateHandCount(), 26);
+		TestEqual(TEXT("Rejected play keeps active player unchanged"), PublicGameState->GetActivePlayerId(), 10);
+		TestEqual(TEXT("Rejected play keeps pile empty"), GameMode->GetAuthoritativeMatchState().ActualPile.Num(), 0);
+
+		const int32 Controller10RejectionsBeforeBadCount = Controller10->GetActionRejectionCount();
+		Controller10->RequestPlayCards({}, FDubitoAnnouncement(7, 1));
+		TestEqual(TEXT("Zero-card play records a Play rejection"), Controller10->GetLastRejectedAction(), EDubitoServerAction::Play);
+		TestEqual(TEXT("Zero-card play rejection reason is BadActualCount"), Controller10->GetLastRejectionReason(), EDubitoActionRejectionReason::PlayBadActualCount);
+		TestEqual(TEXT("Zero-card play increments rejection count"), Controller10->GetActionRejectionCount(), Controller10RejectionsBeforeBadCount + 1);
+		TestEqual(TEXT("Zero-card play keeps owner hand unchanged"), Controller10->GetPrivateHandCount(), 26);
+
+		const int32 Controller10RejectionsBeforeDiscard = Controller10->GetActionRejectionCount();
+		Controller10->RequestDiscard();
+		TestEqual(TEXT("Discard on empty pile records a Discard rejection"), Controller10->GetLastRejectedAction(), EDubitoServerAction::Discard);
+		TestEqual(TEXT("Discard on empty pile rejection reason is unavailable"), Controller10->GetLastRejectionReason(), EDubitoActionRejectionReason::DiscardUnavailable);
+		TestEqual(TEXT("Discard on empty pile increments rejection count"), Controller10->GetActionRejectionCount(), Controller10RejectionsBeforeDiscard + 1);
+
+		const FDubitoCard Player10OpeningCard = Controller10->GetPrivateHand().Cards[0];
+		Controller10->RequestPlayCards({ Player10OpeningCard }, FDubitoAnnouncement(Player10OpeningCard.Rank, 1));
+		TestEqual(TEXT("Valid play still reaches core after rejected attempts"), PublicGameState->GetActivePlayerId(), 20);
+		TestEqual(TEXT("Valid play does not add a rejection"), Controller10->GetActionRejectionCount(), Controller10RejectionsBeforeDiscard + 1);
+
+		const int32 Controller10RejectionsBeforeStaleDoubt = Controller10->GetActionRejectionCount();
+		Controller10->RequestDoubt();
+		TestEqual(TEXT("Non-immediate stale Doubt records a Doubt rejection"), Controller10->GetLastRejectedAction(), EDubitoServerAction::Doubt);
+		TestEqual(TEXT("Non-immediate stale Doubt rejection reason is unavailable"), Controller10->GetLastRejectionReason(), EDubitoActionRejectionReason::DoubtUnavailable);
+		TestEqual(TEXT("Non-immediate stale Doubt increments rejection count"), Controller10->GetActionRejectionCount(), Controller10RejectionsBeforeStaleDoubt + 1);
+		TestEqual(TEXT("Stale Doubt keeps active responder unchanged"), PublicGameState->GetActivePlayerId(), 20);
+
+		const FDubitoCard Player20FollowCard = Controller20->GetPrivateHand().Cards[0];
+		const int32 WrongLockedValue = Player10OpeningCard.Rank == DubitoConstants::MaxCardRank ? DubitoConstants::MinCardRank : Player10OpeningCard.Rank + 1;
+		const int32 Controller20RejectionsBeforeValueLocked = Controller20->GetActionRejectionCount();
+		Controller20->RequestPlayCards({ Player20FollowCard }, FDubitoAnnouncement(WrongLockedValue, 1));
+		TestEqual(TEXT("Wrong locked claim records a Play rejection"), Controller20->GetLastRejectedAction(), EDubitoServerAction::Play);
+		TestEqual(TEXT("Wrong locked claim rejection reason is ValueLocked"), Controller20->GetLastRejectionReason(), EDubitoActionRejectionReason::PlayValueLocked);
+		TestEqual(TEXT("Wrong locked claim increments rejection count"), Controller20->GetActionRejectionCount(), Controller20RejectionsBeforeValueLocked + 1);
+
+		const int32 Controller20RejectionsBeforeBadAnnouncement = Controller20->GetActionRejectionCount();
+		Controller20->RequestPlayCards({ Player20FollowCard }, FDubitoAnnouncement(DubitoConstants::NoRoundValue, 1));
+		TestEqual(TEXT("Malformed claim records a Play rejection"), Controller20->GetLastRejectedAction(), EDubitoServerAction::Play);
+		TestEqual(TEXT("Malformed claim rejection reason is BadAnnouncement"), Controller20->GetLastRejectionReason(), EDubitoActionRejectionReason::PlayBadAnnouncement);
+		TestEqual(TEXT("Malformed claim increments rejection count"), Controller20->GetActionRejectionCount(), Controller20RejectionsBeforeBadAnnouncement + 1);
+
+		const FDubitoCard Player10UnownedCard = Controller10->GetPrivateHand().Cards[0];
+		const int32 Controller20RejectionsBeforeUnowned = Controller20->GetActionRejectionCount();
+		Controller20->RequestPlayCards({ Player10UnownedCard }, FDubitoAnnouncement(Player10OpeningCard.Rank, 1));
+		TestEqual(TEXT("Unowned actual card records a Play rejection"), Controller20->GetLastRejectedAction(), EDubitoServerAction::Play);
+		TestEqual(TEXT("Unowned actual card rejection reason is DontOwnCards"), Controller20->GetLastRejectionReason(), EDubitoActionRejectionReason::PlayDontOwnCards);
+		TestEqual(TEXT("Unowned actual card increments rejection count"), Controller20->GetActionRejectionCount(), Controller20RejectionsBeforeUnowned + 1);
+		TestEqual(TEXT("Rejected follow-up attempts keep responder active"), PublicGameState->GetActivePlayerId(), 20);
 	}
 
 	DestroyAuthorityTestWorld(World);

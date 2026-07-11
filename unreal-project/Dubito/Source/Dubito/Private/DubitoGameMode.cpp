@@ -329,6 +329,11 @@ bool ADubitoGameMode::SetAuthorityPlayerReady(int32 PlayerId, bool bReady)
 	return true;
 }
 
+void ADubitoGameMode::ForceAuthorityStateResync()
+{
+	SyncReplicatedState();
+}
+
 void ADubitoGameMode::RefreshTurnDeadlineForCurrentState()
 {
 	if (!bAuthoritativeMatchStarted || AuthoritativeMatchState.Phase != EDubitoPhase::PlayerTurn || AuthoritativeMatchState.ActivePlayerId() == DubitoConstants::NoPlayerId)

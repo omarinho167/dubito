@@ -4,6 +4,46 @@
 #include "DubitoPlayerState.h"
 #include "Net/UnrealNetwork.h"
 
+namespace
+{
+	EDubitoActionRejectionReason ToStartRejectionReason(EDubitoAuthorityStartResult Result)
+	{
+		switch (Result)
+		{
+		case EDubitoAuthorityStartResult::NotAllReady:
+			return EDubitoActionRejectionReason::StartNotAllReady;
+		case EDubitoAuthorityStartResult::InvalidPlayerCount:
+		case EDubitoAuthorityStartResult::InvalidPlayerId:
+		case EDubitoAuthorityStartResult::DuplicatePlayerId:
+		case EDubitoAuthorityStartResult::MissingHand:
+		default:
+			return EDubitoActionRejectionReason::StartInvalidPlayers;
+		}
+	}
+
+	EDubitoActionRejectionReason ToPlayRejectionReason(EDubitoPlayValidity Result)
+	{
+		switch (Result)
+		{
+		case EDubitoPlayValidity::WrongPhase:
+			return EDubitoActionRejectionReason::PlayWrongPhase;
+		case EDubitoPlayValidity::NotYourTurn:
+			return EDubitoActionRejectionReason::PlayNotYourTurn;
+		case EDubitoPlayValidity::BadActualCount:
+			return EDubitoActionRejectionReason::PlayBadActualCount;
+		case EDubitoPlayValidity::BadAnnouncement:
+			return EDubitoActionRejectionReason::PlayBadAnnouncement;
+		case EDubitoPlayValidity::ValueLocked:
+			return EDubitoActionRejectionReason::PlayValueLocked;
+		case EDubitoPlayValidity::DontOwnCards:
+			return EDubitoActionRejectionReason::PlayDontOwnCards;
+		case EDubitoPlayValidity::Valid:
+		default:
+			return EDubitoActionRejectionReason::None;
+		}
+	}
+}
+
 ADubitoPlayerController::ADubitoPlayerController()
 {
 	SetReplicates(true);
@@ -112,6 +152,11 @@ void ADubitoPlayerController::ServerDiscard_Implementation()
 	ExecuteDiscardAction();
 }
 
+void ADubitoPlayerController::ClientReceiveActionRejected_Implementation(EDubitoServerAction Action, EDubitoActionRejectionReason Reason, bool bRequestedResync)
+{
+	RecordActionRejection(Action, Reason, bRequestedResync);
+}
+
 void ADubitoPlayerController::SetPrivateHand(const FDubitoHand& InPrivateHand)
 {
 	PrivateHand = InPrivateHand;
@@ -139,34 +184,147 @@ bool ADubitoPlayerController::ExecuteReadyAction(bool bReady)
 {
 	ADubitoGameMode* GameMode = GetAuthorityGameMode();
 	const int32 PlayerId = ResolveAuthorityPlayerId();
-	return GameMode && PlayerId != DubitoConstants::NoPlayerId && GameMode->SetAuthorityPlayerReady(PlayerId, bReady);
+	if (!GameMode)
+	{
+		RejectAction(nullptr, EDubitoServerAction::Ready, EDubitoActionRejectionReason::MissingAuthority);
+		return false;
+	}
+
+	if (PlayerId == DubitoConstants::NoPlayerId || !GameMode->SetAuthorityPlayerReady(PlayerId, bReady))
+	{
+		RejectAction(GameMode, EDubitoServerAction::Ready, EDubitoActionRejectionReason::MissingPlayer);
+		return false;
+	}
+
+	return true;
 }
 
 bool ADubitoPlayerController::ExecuteStartMatchAction(int32 ShuffleSeed)
 {
 	ADubitoGameMode* GameMode = GetAuthorityGameMode();
 	const int32 PlayerId = ResolveAuthorityPlayerId();
-	return GameMode && PlayerId != DubitoConstants::NoPlayerId && GameMode->StartAuthoritativeMatchFromRegisteredPlayers(ShuffleSeed) == EDubitoAuthorityStartResult::Success;
+	if (!GameMode)
+	{
+		RejectAction(nullptr, EDubitoServerAction::StartMatch, EDubitoActionRejectionReason::MissingAuthority);
+		return false;
+	}
+
+	if (PlayerId == DubitoConstants::NoPlayerId)
+	{
+		RejectAction(GameMode, EDubitoServerAction::StartMatch, EDubitoActionRejectionReason::MissingPlayer);
+		return false;
+	}
+
+	const EDubitoAuthorityStartResult StartResult = GameMode->StartAuthoritativeMatchFromRegisteredPlayers(ShuffleSeed);
+	if (StartResult != EDubitoAuthorityStartResult::Success)
+	{
+		RejectAction(GameMode, EDubitoServerAction::StartMatch, ToStartRejectionReason(StartResult));
+		return false;
+	}
+
+	return true;
 }
 
 bool ADubitoPlayerController::ExecutePlayAction(const TArray<FDubitoCard>& ActualCards, const FDubitoAnnouncement& Announcement)
 {
 	ADubitoGameMode* GameMode = GetAuthorityGameMode();
 	const int32 PlayerId = ResolveAuthorityPlayerId();
-	return GameMode && PlayerId != DubitoConstants::NoPlayerId && GameMode->AuthorityPlayCards(PlayerId, ActualCards, Announcement) == EDubitoPlayValidity::Valid;
+	if (!GameMode)
+	{
+		RejectAction(nullptr, EDubitoServerAction::Play, EDubitoActionRejectionReason::MissingAuthority);
+		return false;
+	}
+
+	if (PlayerId == DubitoConstants::NoPlayerId)
+	{
+		RejectAction(GameMode, EDubitoServerAction::Play, EDubitoActionRejectionReason::MissingPlayer);
+		return false;
+	}
+
+	const EDubitoPlayValidity PlayResult = GameMode->AuthorityPlayCards(PlayerId, ActualCards, Announcement);
+	if (PlayResult != EDubitoPlayValidity::Valid)
+	{
+		RejectAction(GameMode, EDubitoServerAction::Play, ToPlayRejectionReason(PlayResult));
+		return false;
+	}
+
+	return true;
 }
 
 bool ADubitoPlayerController::ExecuteDoubtAction()
 {
 	ADubitoGameMode* GameMode = GetAuthorityGameMode();
 	const int32 PlayerId = ResolveAuthorityPlayerId();
+	if (!GameMode)
+	{
+		RejectAction(nullptr, EDubitoServerAction::Doubt, EDubitoActionRejectionReason::MissingAuthority);
+		return false;
+	}
+
+	if (PlayerId == DubitoConstants::NoPlayerId)
+	{
+		RejectAction(GameMode, EDubitoServerAction::Doubt, EDubitoActionRejectionReason::MissingPlayer);
+		return false;
+	}
+
 	FDubitoRevealInfo Reveal;
-	return GameMode && PlayerId != DubitoConstants::NoPlayerId && GameMode->AuthorityResolveDoubt(PlayerId, Reveal);
+	if (!GameMode->AuthorityResolveDoubt(PlayerId, Reveal))
+	{
+		RejectAction(GameMode, EDubitoServerAction::Doubt, EDubitoActionRejectionReason::DoubtUnavailable);
+		return false;
+	}
+
+	return true;
 }
 
 bool ADubitoPlayerController::ExecuteDiscardAction()
 {
 	ADubitoGameMode* GameMode = GetAuthorityGameMode();
 	const int32 PlayerId = ResolveAuthorityPlayerId();
-	return GameMode && PlayerId != DubitoConstants::NoPlayerId && GameMode->AuthorityDiscard(PlayerId);
+	if (!GameMode)
+	{
+		RejectAction(nullptr, EDubitoServerAction::Discard, EDubitoActionRejectionReason::MissingAuthority);
+		return false;
+	}
+
+	if (PlayerId == DubitoConstants::NoPlayerId)
+	{
+		RejectAction(GameMode, EDubitoServerAction::Discard, EDubitoActionRejectionReason::MissingPlayer);
+		return false;
+	}
+
+	if (!GameMode->AuthorityDiscard(PlayerId))
+	{
+		RejectAction(GameMode, EDubitoServerAction::Discard, EDubitoActionRejectionReason::DiscardUnavailable);
+		return false;
+	}
+
+	return true;
+}
+
+void ADubitoPlayerController::RejectAction(ADubitoGameMode* GameMode, EDubitoServerAction Action, EDubitoActionRejectionReason Reason)
+{
+	const bool bRequestedResync = GameMode != nullptr;
+	if (bRequestedResync)
+	{
+		GameMode->ForceAuthorityStateResync();
+	}
+
+	if (GetNetMode() == NM_Standalone || IsLocalController())
+	{
+		RecordActionRejection(Action, Reason, bRequestedResync);
+	}
+	else
+	{
+		ClientReceiveActionRejected(Action, Reason, bRequestedResync);
+	}
+}
+
+void ADubitoPlayerController::RecordActionRejection(EDubitoServerAction Action, EDubitoActionRejectionReason Reason, bool bRequestedResync)
+{
+	LastRejectedAction = Action;
+	LastRejectionReason = Reason;
+	bLastRejectionRequestedResync = bRequestedResync;
+	++ActionRejectionCount;
+	OnServerActionRejected(Action, Reason);
 }

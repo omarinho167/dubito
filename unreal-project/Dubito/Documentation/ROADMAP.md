@@ -162,8 +162,8 @@ Sub-phases:
 | 4.2 | PlayerState identity and ledgers | Done | Replicate public player identity, seat, readiness, and public hand ledger. | Lobby and table can show public player state consistently. |
 | 4.3 | Owner-only private hand | Done | Replicate exact private hand only to the owning PlayerController. | Non-owners cannot observe hand contents or actual played counts before reveal. |
 | 4.4 | Server action entry points | Done | Add server actions for Ready, Start Match, Play, Doubt, and Discard. | Valid actions reach the core rules and update replicated state. |
-| 4.5 | Controlled rejection and resync | Next | Handle stale turns, expired windows, illegal UI attempts, and ordinary invalid gameplay without disconnecting normal players. | Invalid ordinary actions produce a controlled rejection and state resync. |
-| 4.6 | Public events | Locked | Add self-contained reveal and game-over events. | Reveal and game-over UI can render from event payloads without guessing hidden state. |
+| 4.5 | Controlled rejection and resync | Done | Handle stale turns, expired windows, illegal UI attempts, and ordinary invalid gameplay without disconnecting normal players. | Invalid ordinary actions produce a controlled rejection and state resync. |
+| 4.6 | Public events | Next | Add self-contained reveal and game-over events. | Reveal and game-over UI can render from event payloads without guessing hidden state. |
 | 4.7 | PIE privacy validation | Locked | Run a 2 to 3 player listen-server PIE validation pass, with separate-process checks when needed. | Deal, turn advance, public claim, public ledgers, owner-only hands, and illegal-action behavior are verified. |
 
 Phase 4.0 outcome: `ADubitoGameMode` now owns the complete hidden match state on the server side, supports deterministic match setup from dealt hands or a shuffled deck, and exposes authority-only action methods that delegate legality and state mutation to `DubitoCore`. Replication, RPC entry points, UI binding, and live PIE privacy checks remain in later Phase 4 sub-phases.
@@ -175,6 +175,8 @@ Phase 4.2 outcome: `ADubitoPlayerState` now carries public identity, seat, readi
 Phase 4.3 outcome: `ADubitoPlayerController` now carries the exact private hand through owner-only replication. `ADubitoGameMode` can register authority-side player controllers and synchronizes exact hands after setup, play, Doubt, Discard, timeout, and disconnect outcomes. Non-owner surfaces still receive only public player ledgers, public claims, and public match state.
 
 Phase 4.4 outcome: `ADubitoPlayerController` now exposes reliable server actions for Ready, Start Match, Play, Doubt, and Discard. These actions resolve the server-side player id from registered controller/player state ownership, route valid gameplay through `ADubitoGameMode` and `DubitoCore`, and update public and owner-only replicated state. Detailed rejection payloads and resync feedback remain scheduled for Phase 4.5.
+
+Phase 4.5 outcome: ordinary invalid server actions now produce controlled owner-facing rejection reasons without using RPC validation disconnect paths. Rejected Ready, Start Match, Play, Doubt, and Discard requests ask `ADubitoGameMode` to resync public and owner-only state, and automation covers stale turns, unavailable windows, bad play payloads, not-ready start, and desynchronized private-hand repair.
 
 Phase 4 is complete when:
 
