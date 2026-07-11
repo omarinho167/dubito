@@ -1,0 +1,8 @@
+# Source assets staged outside the Unreal project.
+# Kept out of the repo until a phase imports them into Content/ (owner decision, Phase 1.0).
+/Assets/
+
+# OS noise
+Thumbs.db
+Desktop.ini
+.DS_Store

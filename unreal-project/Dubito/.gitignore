@@ -1,0 +1,27 @@
+# Unreal Engine generated folders (never tracked)
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+Build/
+
+# Plugin build artifacts
+Plugins/**/Binaries/
+Plugins/**/Intermediate/
+
+# IDE / project file generation
+.vs/
+.vscode/
+.idea/
+*.sln
+*.suo
+*.VC.db
+*.VC.opendb
+*.opensdf
+*.opendb
+*.sdf
+*.xcodeproj
+*.xcworkspace
+
+# Local-only agent/editor config (machine specific)
+.claude/settings.local.json
