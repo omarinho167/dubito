@@ -98,6 +98,25 @@ EDubitoAuthorityStartResult ADubitoGameMode::StartAuthoritativeMatchFromShuffled
 	return Result;
 }
 
+EDubitoAuthorityStartResult ADubitoGameMode::StartAuthoritativeMatchFromRegisteredPlayers(int32 ShuffleSeed)
+{
+	bool bAllRegisteredPlayersReady = true;
+	const TArray<int32> PlayerIds = BuildRegisteredPlayerIdsBySeat(bAllRegisteredPlayersReady);
+
+	const EDubitoAuthorityStartResult PlayerValidation = ValidatePlayerIds(PlayerIds);
+	if (PlayerValidation != EDubitoAuthorityStartResult::Success)
+	{
+		return PlayerValidation;
+	}
+
+	if (!bAllRegisteredPlayersReady)
+	{
+		return EDubitoAuthorityStartResult::NotAllReady;
+	}
+
+	return StartAuthoritativeMatchFromShuffledDeck(PlayerIds, ShuffleSeed);
+}
+
 bool ADubitoGameMode::CanAuthorityPlay(int32 PlayerId) const
 {
 	return DubitoRules::CanPlay(AuthoritativeMatchState, PlayerId);
@@ -189,6 +208,14 @@ bool ADubitoGameMode::RegisterAuthorityPlayerState(ADubitoPlayerState* PlayerSta
 		return false;
 	}
 
+	for (const TPair<int32, TWeakObjectPtr<ADubitoPlayerState>>& RegisteredPlayerState : PlayerStatesById)
+	{
+		if (RegisteredPlayerState.Key != PlayerId && RegisteredPlayerState.Value.IsValid() && RegisteredPlayerState.Value.Get() == PlayerState)
+		{
+			return false;
+		}
+	}
+
 	if (const TWeakObjectPtr<ADubitoPlayerState>* Existing = PlayerStatesById.Find(PlayerId))
 	{
 		if (Existing->IsValid() && Existing->Get() != PlayerState)
@@ -215,6 +242,14 @@ bool ADubitoGameMode::RegisterAuthorityPlayerController(ADubitoPlayerController*
 		return false;
 	}
 
+	for (const TPair<int32, TWeakObjectPtr<ADubitoPlayerController>>& RegisteredPlayerController : PlayerControllersById)
+	{
+		if (RegisteredPlayerController.Key != PlayerId && RegisteredPlayerController.Value.IsValid() && RegisteredPlayerController.Value.Get() == PlayerController)
+		{
+			return false;
+		}
+	}
+
 	if (const TWeakObjectPtr<ADubitoPlayerController>* Existing = PlayerControllersById.Find(PlayerId))
 	{
 		if (Existing->IsValid() && Existing->Get() != PlayerController)
@@ -224,6 +259,7 @@ bool ADubitoGameMode::RegisterAuthorityPlayerController(ADubitoPlayerController*
 	}
 
 	PlayerControllersById.Add(PlayerId, PlayerController);
+	PlayerController->SetAuthorityPlayerId(PlayerId);
 
 	if (const FDubitoHand* Hand = AuthoritativeMatchState.Hands.Find(PlayerId))
 	{
@@ -235,6 +271,49 @@ bool ADubitoGameMode::RegisterAuthorityPlayerController(ADubitoPlayerController*
 	}
 
 	return true;
+}
+
+TArray<int32> ADubitoGameMode::BuildRegisteredPlayerIdsBySeat(bool& bOutAllRegisteredPlayersReady) const
+{
+	struct FRegisteredPlayerStartInfo
+	{
+		int32 PlayerId = DubitoConstants::NoPlayerId;
+		int32 SeatIndex = INDEX_NONE;
+	};
+
+	TArray<FRegisteredPlayerStartInfo> RegisteredPlayers;
+	bOutAllRegisteredPlayersReady = true;
+
+	for (const TPair<int32, TWeakObjectPtr<ADubitoPlayerState>>& RegisteredPlayerState : PlayerStatesById)
+	{
+		const ADubitoPlayerState* PlayerState = RegisteredPlayerState.Value.Get();
+		if (!PlayerState || PlayerState->GetDubitoPlayerId() == DubitoConstants::NoPlayerId || PlayerState->GetSeatIndex() < 0)
+		{
+			continue;
+		}
+
+		bOutAllRegisteredPlayersReady &= PlayerState->IsReady();
+		RegisteredPlayers.Add({ PlayerState->GetDubitoPlayerId(), PlayerState->GetSeatIndex() });
+	}
+
+	RegisteredPlayers.Sort([](const FRegisteredPlayerStartInfo& Left, const FRegisteredPlayerStartInfo& Right)
+	{
+		if (Left.SeatIndex == Right.SeatIndex)
+		{
+			return Left.PlayerId < Right.PlayerId;
+		}
+
+		return Left.SeatIndex < Right.SeatIndex;
+	});
+
+	TArray<int32> PlayerIds;
+	PlayerIds.Reserve(RegisteredPlayers.Num());
+	for (const FRegisteredPlayerStartInfo& RegisteredPlayer : RegisteredPlayers)
+	{
+		PlayerIds.Add(RegisteredPlayer.PlayerId);
+	}
+
+	return PlayerIds;
 }
 
 bool ADubitoGameMode::SetAuthorityPlayerReady(int32 PlayerId, bool bReady)

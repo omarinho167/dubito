@@ -24,7 +24,8 @@ enum class EDubitoAuthorityStartResult : uint8
 	InvalidPlayerCount,
 	InvalidPlayerId,
 	DuplicatePlayerId,
-	MissingHand
+	MissingHand,
+	NotAllReady
 };
 
 /**
@@ -48,6 +49,7 @@ public:
 
 	EDubitoAuthorityStartResult StartAuthoritativeMatchFromHands(const TArray<int32>& PlayerIds, const TMap<int32, FDubitoHand>& DealtHands);
 	EDubitoAuthorityStartResult StartAuthoritativeMatchFromShuffledDeck(const TArray<int32>& PlayerIds, int32 ShuffleSeed);
+	EDubitoAuthorityStartResult StartAuthoritativeMatchFromRegisteredPlayers(int32 ShuffleSeed);
 
 	bool CanAuthorityPlay(int32 PlayerId) const;
 	bool CanAuthorityDoubt(int32 PlayerId) const;
@@ -65,6 +67,7 @@ public:
 
 private:
 	static EDubitoAuthorityStartResult ValidatePlayerIds(const TArray<int32>& PlayerIds);
+	TArray<int32> BuildRegisteredPlayerIdsBySeat(bool& bOutAllRegisteredPlayersReady) const;
 
 	void RefreshTurnDeadlineForCurrentState();
 	void SyncReplicatedState();

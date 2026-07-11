@@ -97,6 +97,7 @@ namespace
 		if (GameMode)
 		{
 			GameMode->GameState = World->GetGameState();
+			World->CopyGameState(GameMode, World->GetGameState());
 		}
 		return GameMode;
 	}
@@ -286,6 +287,93 @@ bool FDubitoAuthorityBridgePrivateHandTest::RunTest(const FString&)
 
 		GameMode->AuthorityHandleDisconnect(20);
 		TestEqual(TEXT("Disconnected owner private hand is cleared"), Controller20->GetPrivateHandCount(), 0);
+	}
+
+	DestroyAuthorityTestWorld(World);
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDubitoAuthorityBridgeServerActionsTest, "Dubito.Unreal.AuthorityBridge.ServerActions", DubitoAuthorityFlags)
+bool FDubitoAuthorityBridgeServerActionsTest::RunTest(const FString&)
+{
+	UWorld* World = CreateAuthorityTestWorld();
+	ADubitoGameMode* GameMode = SpawnAuthorityGameMode(World);
+	ADubitoGameState* PublicGameState = World ? World->GetGameState<ADubitoGameState>() : nullptr;
+	ADubitoPlayerController* Controller10 = World ? World->SpawnActor<ADubitoPlayerController>() : nullptr;
+	ADubitoPlayerController* Controller20 = World ? World->SpawnActor<ADubitoPlayerController>() : nullptr;
+	ADubitoPlayerState* Player10 = World ? World->SpawnActor<ADubitoPlayerState>() : nullptr;
+	ADubitoPlayerState* Player20 = World ? World->SpawnActor<ADubitoPlayerState>() : nullptr;
+	TestNotNull(TEXT("GameMode spawns in transient authority world"), GameMode);
+	TestNotNull(TEXT("Dubito GameState exists in authority world"), PublicGameState);
+	TestNotNull(TEXT("Controller 10 spawns"), Controller10);
+	TestNotNull(TEXT("Controller 20 spawns"), Controller20);
+	TestNotNull(TEXT("Player 10 state spawns"), Player10);
+	TestNotNull(TEXT("Player 20 state spawns"), Player20);
+
+	if (GameMode && PublicGameState && Controller10 && Controller20 && Player10 && Player20)
+	{
+		auto TestServerRpc = [this](const TCHAR* FunctionName)
+		{
+			const UFunction* Function = ADubitoPlayerController::StaticClass()->FindFunctionByName(FunctionName);
+			TestNotNull(FString::Printf(TEXT("%s RPC exists"), FunctionName), Function);
+			if (Function)
+			{
+				TestTrue(FString::Printf(TEXT("%s is a net RPC"), FunctionName), Function->HasAnyFunctionFlags(FUNC_Net));
+				TestTrue(FString::Printf(TEXT("%s runs on the server"), FunctionName), Function->HasAnyFunctionFlags(FUNC_NetServer));
+				TestTrue(FString::Printf(TEXT("%s is reliable"), FunctionName), Function->HasAnyFunctionFlags(FUNC_NetReliable));
+			}
+		};
+
+		TestServerRpc(TEXT("ServerSetReady"));
+		TestServerRpc(TEXT("ServerStartMatch"));
+		TestServerRpc(TEXT("ServerPlayCards"));
+		TestServerRpc(TEXT("ServerDoubt"));
+		TestServerRpc(TEXT("ServerDiscard"));
+
+		Controller10->SetPlayerState(Player10);
+		Controller20->SetPlayerState(Player20);
+
+		TestTrue(TEXT("Player 10 public identity registers"), GameMode->RegisterAuthorityPlayerState(Player10, 10, 0));
+		TestTrue(TEXT("Player 20 public identity registers"), GameMode->RegisterAuthorityPlayerState(Player20, 20, 1));
+		TestTrue(TEXT("Controller 10 private identity registers"), GameMode->RegisterAuthorityPlayerController(Controller10, 10));
+		TestTrue(TEXT("Controller 20 private identity registers"), GameMode->RegisterAuthorityPlayerController(Controller20, 20));
+		TestEqual(TEXT("Controller 10 resolves its server player id"), Controller10->ResolveAuthorityPlayerId(), 10);
+		TestEqual(TEXT("Controller 20 resolves its server player id"), Controller20->ResolveAuthorityPlayerId(), 20);
+
+		Controller10->RequestReady(true);
+		TestTrue(TEXT("Ready request reaches PlayerState through server action"), Player10->IsReady());
+		Controller10->RequestStartMatch(404);
+		TestFalse(TEXT("Start request waits for all registered players to be ready"), GameMode->HasAuthoritativeMatchStarted());
+
+		Controller20->RequestReady(true);
+		TestTrue(TEXT("Second ready request reaches PlayerState through server action"), Player20->IsReady());
+		Controller10->RequestStartMatch(404);
+		TestTrue(TEXT("Start request reaches core setup through server action"), GameMode->HasAuthoritativeMatchStarted());
+		TestEqual(TEXT("Registered seat order drives first active player"), GameMode->GetAuthoritativeMatchState().ActivePlayerId(), 10);
+		TestEqual(TEXT("Public GameState syncs after server start action"), PublicGameState->GetActivePlayerId(), 10);
+		TestEqual(TEXT("Owner private hand syncs after server start action"), Controller10->GetPrivateHandCount(), 26);
+
+		const FDubitoCard Player10OpeningCard = Controller10->GetPrivateHand().Cards[0];
+		Controller10->RequestPlayCards({ Player10OpeningCard }, FDubitoAnnouncement(Player10OpeningCard.Rank, 1));
+		TestEqual(TEXT("Play request advances authoritative turn"), GameMode->GetAuthoritativeMatchState().ActivePlayerId(), 20);
+		TestEqual(TEXT("Play request updates public active player"), PublicGameState->GetActivePlayerId(), 20);
+		TestTrue(TEXT("Play request publishes previous claim"), PublicGameState->HasPreviousPublicClaim());
+		TestEqual(TEXT("Play request updates owner private hand"), Controller10->GetPrivateHandCount(), 25);
+
+		Controller20->RequestDoubt();
+		TestEqual(TEXT("Doubt request resolves through core and returns turn after wrong Doubt"), GameMode->GetAuthoritativeMatchState().ActivePlayerId(), 10);
+		TestEqual(TEXT("Doubt request clears public claim"), PublicGameState->GetClaimedPileCount(), 0);
+		TestEqual(TEXT("Doubt loser receives actual pile in private hand"), Controller20->GetPrivateHandCount(), 27);
+
+		const FDubitoCard Player10SecondCard = Controller10->GetPrivateHand().Cards[0];
+		Controller10->RequestPlayCards({ Player10SecondCard }, FDubitoAnnouncement(Player10SecondCard.Rank, 1));
+		TestEqual(TEXT("Second play makes player 20 active"), GameMode->GetAuthoritativeMatchState().ActivePlayerId(), 20);
+
+		Controller20->RequestDiscard();
+		TestEqual(TEXT("Discard request clears authoritative pile"), GameMode->GetAuthoritativeMatchState().ActualPile.Num(), 0);
+		TestEqual(TEXT("Discard request clears public pile ledger"), PublicGameState->GetClaimedPileCount(), 0);
+		TestEqual(TEXT("Discard request resets public round value"), PublicGameState->GetRoundValue(), DubitoConstants::NoRoundValue);
+		TestEqual(TEXT("Discard request skips active player"), PublicGameState->GetActivePlayerId(), 10);
 	}
 
 	DestroyAuthorityTestWorld(World);
