@@ -89,4 +89,70 @@ namespace DubitoRules
 
 		AdvanceTurn(State);
 	}
+
+	bool CanPlay(const FDubitoMatchState& State, int32 PlayerId)
+	{
+		return State.Phase == EDubitoPhase::PlayerTurn && State.ActivePlayerId() == PlayerId;
+	}
+
+	bool CanDoubt(const FDubitoMatchState& State, int32 PlayerId)
+	{
+		return State.Phase == EDubitoPhase::PlayerTurn
+			&& State.ActivePlayerId() == PlayerId
+			&& State.bLastPlayDoubtable
+			&& State.LastClaimantId != DubitoConstants::NoPlayerId;
+	}
+
+	bool CanDiscard(const FDubitoMatchState& State, int32 PlayerId)
+	{
+		return State.Phase == EDubitoPhase::PlayerTurn
+			&& State.ActivePlayerId() == PlayerId
+			&& !State.IsPileEmpty()
+			&& !State.HasPendingWin();
+	}
+
+	EDubitoPlayValidity ValidatePlay(const FDubitoMatchState& State, int32 PlayerId, const TArray<FDubitoCard>& ActualCards, const FDubitoAnnouncement& Announcement)
+	{
+		if (State.Phase != EDubitoPhase::PlayerTurn)
+		{
+			return EDubitoPlayValidity::WrongPhase;
+		}
+		if (State.ActivePlayerId() != PlayerId)
+		{
+			return EDubitoPlayValidity::NotYourTurn;
+		}
+		if (ActualCards.Num() < DubitoConstants::MinCardsPerPlay || ActualCards.Num() > DubitoConstants::MaxCardsPerPlay)
+		{
+			return EDubitoPlayValidity::BadActualCount;
+		}
+		if (!Announcement.IsWellFormed())
+		{
+			return EDubitoPlayValidity::BadAnnouncement;
+		}
+		if (!IsAnnouncementValidForRound(Announcement, State.RoundValue))
+		{
+			// Well-formed but the value is not the locked round value.
+			return EDubitoPlayValidity::ValueLocked;
+		}
+
+		// Ownership: the caller must hold every actual card. Check against a copy so
+		// duplicates would be consumed correctly.
+		if (const FDubitoHand* Hand = State.Hands.Find(PlayerId))
+		{
+			FDubitoHand Working = *Hand;
+			for (const FDubitoCard& Card : ActualCards)
+			{
+				if (!Working.Remove(Card))
+				{
+					return EDubitoPlayValidity::DontOwnCards;
+				}
+			}
+		}
+		else
+		{
+			return EDubitoPlayValidity::DontOwnCards;
+		}
+
+		return EDubitoPlayValidity::Valid;
+	}
 }

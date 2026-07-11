@@ -5,6 +5,19 @@
 #include "DubitoAnnouncement.h"
 #include "DubitoCard.h"
 
+// Why a proposed Play is or is not valid. Ordinary illegal gameplay uses these
+// reasons for controlled rejection; it is not treated as an abusive payload.
+enum class EDubitoPlayValidity : uint8
+{
+	Valid,
+	WrongPhase,     // not in an active player turn
+	NotYourTurn,    // caller is not the active player
+	BadActualCount, // number of actual cards is outside 1..4
+	BadAnnouncement,// claimed count/value is not well-formed
+	ValueLocked,    // claimed value does not match the locked round value
+	DontOwnCards    // caller does not hold all of the actual cards
+};
+
 // Pure rule functions operating on FDubitoMatchState. The server (GameMode) owns a
 // match state and routes all rule decisions through these functions. Nothing here
 // reads UI, actors, or networking.
@@ -30,4 +43,24 @@ namespace DubitoRules
 	// last play for a possible Doubt, flags a pending win if the hand empties, and
 	// advances the turn.
 	DUBITOCORE_API void ApplyPlay(FDubitoMatchState& State, int32 PlayerId, const TArray<FDubitoCard>& ActualCards, const FDubitoAnnouncement& Announcement);
+
+	// --- Action legality / availability (Phase 2.2) ---
+	// These predicates answer the Action Matrix in docs/DESIGN.md: whether a given
+	// action is currently available to a player, independent of the action's contents.
+
+	// Play is available whenever it is the caller's active turn (including the empty
+	// pile that opens a round, and the pending-win window).
+	DUBITOCORE_API bool CanPlay(const FDubitoMatchState& State, int32 PlayerId);
+
+	// Doubt is available only to the immediate next player (the active player) and only
+	// while there is a doubtable previous claim.
+	DUBITOCORE_API bool CanDoubt(const FDubitoMatchState& State, int32 PlayerId);
+
+	// Discard is available only to the active player, only on a non-empty pile, and
+	// never while a win is pending.
+	DUBITOCORE_API bool CanDiscard(const FDubitoMatchState& State, int32 PlayerId);
+
+	// Full validation of a proposed Play's contents (turn, actual count 1..4, announcement
+	// legal for the round, and ownership of every actual card). Returns Valid or the reason.
+	DUBITOCORE_API EDubitoPlayValidity ValidatePlay(const FDubitoMatchState& State, int32 PlayerId, const TArray<FDubitoCard>& ActualCards, const FDubitoAnnouncement& Announcement);
 }
