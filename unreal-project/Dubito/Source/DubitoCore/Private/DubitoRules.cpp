@@ -49,6 +49,14 @@ namespace DubitoRules
 
 	void ApplyPlay(FDubitoMatchState& State, int32 PlayerId, const TArray<FDubitoCard>& ActualCards, const FDubitoAnnouncement& Announcement)
 	{
+		// If a win is pending, the responder choosing to Play (rather than Doubt) forfeits
+		// the doubt window and confirms the pending winner; the play itself does not happen.
+		if (State.HasPendingWin())
+		{
+			ConfirmWin(State, State.PendingWinnerId);
+			return;
+		}
+
 		// Opening the round on an empty pile locks the round value to the claimed value.
 		if (!State.IsRoundOpen())
 		{
@@ -244,5 +252,151 @@ namespace DubitoRules
 		}
 
 		return Reveal;
+	}
+
+	void ApplyDiscard(FDubitoMatchState& State, int32 PlayerId)
+	{
+		// Remove the pile from the game and clear the round; hands are not affected.
+		State.ActualPile.Reset();
+		State.ClaimedPileCount = 0;
+		State.RoundValue = DubitoConstants::NoRoundValue;
+		State.bLastPlayDoubtable = false;
+		State.LastClaimantId = DubitoConstants::NoPlayerId;
+		State.LastActualCards.Reset();
+		State.LastAnnouncement = FDubitoAnnouncement();
+
+		// The active player skips their turn.
+		AdvanceTurn(State);
+	}
+
+	void NoteVoluntaryAction(FDubitoMatchState& State, int32 PlayerId)
+	{
+		if (int32* Streak = State.ConsecutiveTimeouts.Find(PlayerId))
+		{
+			*Streak = 0;
+		}
+	}
+
+	// Picks the single card and announcement a timeout auto-plays: truthful when possible,
+	// a forced minimal bluff (claiming the locked value) when no truthful option exists.
+	static void SelectTimeoutPlay(const FDubitoMatchState& State, int32 PlayerId, TArray<FDubitoCard>& OutCards, FDubitoAnnouncement& OutAnnouncement)
+	{
+		OutCards.Reset();
+
+		const FDubitoHand* Hand = State.Hands.Find(PlayerId);
+		if (!Hand || Hand->IsEmpty())
+		{
+			return;
+		}
+
+		if (!State.IsRoundOpen())
+		{
+			// Opening: play the first card truthfully at its own value, claim count 1.
+			const FDubitoCard& Card = Hand->Cards[0];
+			OutCards = { Card };
+			OutAnnouncement = FDubitoAnnouncement(Card.Rank, 1);
+			return;
+		}
+
+		// Round open: prefer a truthful card matching the locked round value.
+		for (const FDubitoCard& Card : Hand->Cards)
+		{
+			if (Card.Rank == State.RoundValue)
+			{
+				OutCards = { Card };
+				OutAnnouncement = FDubitoAnnouncement(State.RoundValue, 1);
+				return;
+			}
+		}
+
+		// No truthful option: forced minimal bluff with the first card, claiming the locked value.
+		const FDubitoCard& Card = Hand->Cards[0];
+		OutCards = { Card };
+		OutAnnouncement = FDubitoAnnouncement(State.RoundValue, 1);
+	}
+
+	void ResolveTimeout(FDubitoMatchState& State, int32 PlayerId)
+	{
+		// A timeout during a pending-win response confirms the pending winner.
+		if (State.HasPendingWin())
+		{
+			ConfirmWin(State, State.PendingWinnerId);
+			return;
+		}
+
+		TArray<FDubitoCard> Cards;
+		FDubitoAnnouncement Announcement;
+		SelectTimeoutPlay(State, PlayerId, Cards, Announcement);
+		if (Cards.Num() > 0)
+		{
+			ApplyPlay(State, PlayerId, Cards, Announcement);
+		}
+
+		// Count the timeout; three in a row is treated as a disconnect.
+		int32& Streak = State.ConsecutiveTimeouts.FindOrAdd(PlayerId);
+		++Streak;
+		if (Streak >= DubitoConstants::MaxConsecutiveTimeouts)
+		{
+			HandleDisconnect(State, PlayerId);
+		}
+	}
+
+	void HandleDisconnect(FDubitoMatchState& State, int32 PlayerId)
+	{
+		const int32 RemoveIndex = State.TurnOrder.IndexOfByKey(PlayerId);
+		if (RemoveIndex == INDEX_NONE)
+		{
+			return; // not part of the match
+		}
+
+		const bool bWasActive = (State.ActivePlayerId() == PlayerId);
+		const bool bWasResponder = State.HasPendingWin() && bWasActive;
+
+		// A disconnected previous claimant's claim is no longer doubtable.
+		if (State.LastClaimantId == PlayerId)
+		{
+			State.bLastPlayDoubtable = false;
+			State.LastClaimantId = DubitoConstants::NoPlayerId;
+		}
+
+		// If the pending winner themselves leaves, the win is no longer pending.
+		if (State.PendingWinnerId == PlayerId)
+		{
+			State.PendingWinnerId = DubitoConstants::NoPlayerId;
+		}
+
+		// Remove the player's hand and ledgers; the pile remains in play.
+		State.Hands.Remove(PlayerId);
+		State.PublicHandCounts.Remove(PlayerId);
+		State.ConsecutiveTimeouts.Remove(PlayerId);
+		State.TurnOrder.RemoveAt(RemoveIndex);
+
+		if (State.TurnOrder.Num() == 0)
+		{
+			State.ActiveSeatIndex = 0;
+			State.Phase = EDubitoPhase::GameOver;
+			return;
+		}
+
+		// Fix the active seat: removing a seat before the active one shifts it down;
+		// removing the active seat itself makes the next player active (advance turn).
+		if (RemoveIndex < State.ActiveSeatIndex)
+		{
+			--State.ActiveSeatIndex;
+		}
+		State.ActiveSeatIndex %= State.TurnOrder.Num();
+
+		// Disconnecting as the pending-win responder confirms the pending winner.
+		if (bWasResponder)
+		{
+			ConfirmWin(State, State.PendingWinnerId);
+			return;
+		}
+
+		// Last player standing wins.
+		if (State.TurnOrder.Num() == 1)
+		{
+			ConfirmWin(State, State.TurnOrder[0]);
+		}
 	}
 }

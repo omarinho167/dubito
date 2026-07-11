@@ -81,4 +81,25 @@ namespace DubitoRules
 
 	// Confirms WinnerId as the winner and moves the match to GameOver.
 	DUBITOCORE_API void ConfirmWin(FDubitoMatchState& State, int32 WinnerId);
+
+	// --- Discard, timer, disconnect, pending win (Phase 2.4) ---
+
+	// Applies a Discard by the active player (assumed legal): removes the pile from the
+	// game, clears the round value, and skips the active player's turn. Hands are untouched.
+	DUBITOCORE_API void ApplyDiscard(FDubitoMatchState& State, int32 PlayerId);
+
+	// Resets a player's consecutive-timeout streak; the server calls this on any voluntary action.
+	DUBITOCORE_API void NoteVoluntaryAction(FDubitoMatchState& State, int32 PlayerId);
+
+	// Resolves a turn timeout for the given player. During a pending-win response it confirms
+	// the pending winner. Otherwise it auto-plays exactly one card claiming count 1 (truthful
+	// when possible, a forced minimal bluff when the locked value makes truth impossible),
+	// increments the timeout streak, and treats the third consecutive timeout as a disconnect.
+	DUBITOCORE_API void ResolveTimeout(FDubitoMatchState& State, int32 PlayerId);
+
+	// Removes a disconnected player's hand and ledgers from the game (the pile remains),
+	// keeps their stale claim un-doubtable, advances the turn if they were active, confirms
+	// the pending winner if they were the pending-win responder, and confirms the last
+	// remaining player as the winner.
+	DUBITOCORE_API void HandleDisconnect(FDubitoMatchState& State, int32 PlayerId);
 }
