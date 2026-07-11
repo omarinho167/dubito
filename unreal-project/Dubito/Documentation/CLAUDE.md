@@ -1,11 +1,11 @@
 # Dubito Agent Guide
 
-This file is mirrored in `docs/AGENT.md` and `docs/CLAUDE.md`. Keep both files identical.
+This file is mirrored at the repository root and under `Documentation/`. Keep all copies identical.
 
 Dubito is a Steam-focused multiplayer bluffing card game for 2 to 8 players. V1 must prove the complete playable loop with
 a small, first-party Unreal stack before visual or systems expansion.
 
-All conception documentation lives under `docs/`.
+All conception documentation lives under `Documentation/`.
 
 ## Read Routing
 
@@ -13,20 +13,21 @@ Read only what matches the task.
 
 | Task | Read |
 |---|---|
-| Any agent session | `docs/AGENT.md` or `docs/CLAUDE.md` |
-| Rules, UX, V1 scope, art direction | `docs/DESIGN.md` |
-| Edge cases or implementation validation | `docs/v1/EDGE_CASES.md` |
-| Unreal stack, network, data contracts | `docs/ARCHITECTURE.md` |
-| Official UE/Steam constraints | `docs/reference/UE_STEAM_SOURCES.md` |
-| Execution order or phase status | `docs/ROADMAP.md` |
+| Any agent session | `AGENT.md`, `CLAUDE.md`, `Documentation/AGENT.md`, or `Documentation/CLAUDE.md` |
+| Rules, UX, V1 scope, art direction | `Documentation/DESIGN.md` |
+| Edge cases or implementation validation | `Documentation/v1/EDGE_CASES.md` |
+| Unreal stack, network, data contracts | `Documentation/ARCHITECTURE.md` |
+| Official UE/Steam constraints | `Documentation/reference/UE_STEAM_SOURCES.md` |
+| Execution order or phase status | `Documentation/ROADMAP.md` |
 
 Do not read every file by default. Start with the routed owner file, then open detail files only when the task needs them.
-When executing roadmap work, pick the exact sub-phase ID from `docs/ROADMAP.md`; do not treat a full phase as a single agent task.
+When executing roadmap work, pick the exact sub-phase ID from `Documentation/ROADMAP.md`; do not treat a full phase as a single agent task.
 
 ## Current Phase
 
-Phase 0 conception documentation, Phase 1 Unreal bootstrap, and Phase 2 core rules are complete. Phase 3 is Greybox Table.
-Start with Phase 3.0, then advance through the Phase 3 sub-phases in roadmap order unless the owner explicitly changes priorities.
+Phase 0 conception documentation, Phase 1 Unreal bootstrap, Phase 2 core rules, and Phase 3 greybox table are complete.
+Phase 4 is Network Framework.
+Start with Phase 4.0, then advance through the Phase 4 sub-phases in roadmap order unless the owner explicitly changes priorities.
 
 No gameplay code should be written during Phase 0. Documentation changes are allowed.
 
@@ -45,7 +46,7 @@ No gameplay code should be written during Phase 0. Documentation changes are all
 
 ## Rule Invariants
 
-`docs/DESIGN.md` owns the rules.
+`Documentation/DESIGN.md` owns the rules.
 
 - Round value is opened on an empty pile, then locked until the pile is emptied.
 - Players secretly play 1 to 4 actual cards.
@@ -95,12 +96,12 @@ Public counts are ledgers, not proof. Own hand is exact. Pending-win is driven b
 - Inline identifiers are allowed when they name a future class, module, file, property, or Unreal concept.
 - Roadmap phases are milestones; roadmap sub-phases are execution units for agents.
 - If a fact appears in two docs, update both or remove one duplicate.
-- If this file changes, copy the exact same content to both `docs/AGENT.md` and `docs/CLAUDE.md`.
+- If this file changes, copy the exact same content to `AGENT.md`, `CLAUDE.md`, `Documentation/AGENT.md`, and `Documentation/CLAUDE.md`.
 
 ## Closeout
 
 Before stopping after meaningful documentation work:
 
-1. Check `docs/DESIGN.md`, `docs/ARCHITECTURE.md`, `docs/ROADMAP.md`, `docs/AGENT.md`, and `docs/CLAUDE.md` for contradictions.
-2. Confirm `docs/AGENT.md` and `docs/CLAUDE.md` are identical.
+1. Check `Documentation/DESIGN.md`, `Documentation/ARCHITECTURE.md`, `Documentation/ROADMAP.md`, `AGENT.md`, `CLAUDE.md`, `Documentation/AGENT.md`, and `Documentation/CLAUDE.md` for contradictions.
+2. Confirm all `AGENT.md` and `CLAUDE.md` copies are identical.
 3. Search for stale paths, code fences, and deferred V2 items accidentally marked as V1.

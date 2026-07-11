@@ -2,7 +2,7 @@
 
 Read this file only when implementing, testing, or reviewing rules/UX behavior.
 
-`docs/DESIGN.md` owns the rule contract. This file expands expected responses.
+`Documentation/DESIGN.md` owns the rule contract. This file expands expected responses.
 
 ## Turn And Phase
 

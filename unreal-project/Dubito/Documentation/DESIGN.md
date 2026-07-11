@@ -2,7 +2,7 @@
 
 This file defines what V1 must be. It is intentionally concise: rules, UX contract, V1 scope, and design constraints.
 
-Detailed edge cases live in `docs/v1/EDGE_CASES.md`. Architecture lives in `docs/ARCHITECTURE.md`.
+Detailed edge cases live in `Documentation/v1/EDGE_CASES.md`. Architecture lives in `Documentation/ARCHITECTURE.md`.
 
 No code snippets belong in this conception file.
 

@@ -19,8 +19,8 @@ This is the execution plan. It stays at phase, sub-phase, responsibility, and va
 | 0 | Conception | Done | compact, coherent V1 documentation | freeze the contract before implementation |
 | 1 | Unreal Bootstrap | Done | clean UE project, first-party V1 stack, source-control foundation | build the project shell before any gameplay |
 | 2 | Core Rules | Done | pure rule model with tests | prove game logic without actors, widgets, maps, or live networking |
-| 3 | Greybox Table | Next | readable local table, cards, camera, basic UI shell | prove readability and input before multiplayer complexity |
-| 4 | Network Framework | Locked | host-authoritative replicated match state | connect Unreal framework to the pure rules while preserving privacy |
+| 3 | Greybox Table | Done | readable local table, cards, camera, basic UI shell | prove readability and input before multiplayer complexity |
+| 4 | Network Framework | Next | host-authoritative replicated match state | connect Unreal framework to the pure rules while preserving privacy |
 | 5 | Full Gameplay Loop | Locked | Play, Doubt, Discard, timer, win, post-game | add one player-facing action or flow at a time |
 | 6 | Steam Multiplayer | Locked | Steam lobbies/invites tested on real machines | swap from local validation to the real Steam path |
 | 7 | V1 Polish | Locked | clarity, accessibility, UX pass, packaging | harden the already-playable game |
@@ -59,19 +59,19 @@ Sub-phases:
 
 | ID | Name | Objective | Validation |
 |---|---|---|---|
-| 0.0 | V1 product contract | Define V1 promise, scope, V2 exclusions, and player fantasy. | `docs/DESIGN.md` clearly separates V1 from V2. |
+| 0.0 | V1 product contract | Define V1 promise, scope, V2 exclusions, and player fantasy. | `Documentation/DESIGN.md` clearly separates V1 from V2. |
 | 0.1 | Rules and hidden information | Define round value, claimed count bluff, Doubt, Discard, timer, pending-win, disconnect, and public ledgers. | Rules and edge cases agree with each other. |
-| 0.2 | First-party Unreal stack | Choose UE, native replication, Online Subsystem Steam, CommonUI/UMG, Enhanced Input, and no third-party or V2 plugin dependency. | `docs/ARCHITECTURE.md` has no avoidable beta or third-party baseline dependency. |
-| 0.3 | Agent routing | Keep docs concise and routed by task. | `docs/AGENT.md` and `docs/CLAUDE.md` are identical and explain what to read. |
+| 0.2 | First-party Unreal stack | Choose UE, native replication, Online Subsystem Steam, CommonUI/UMG, Enhanced Input, and no third-party or V2 plugin dependency. | `Documentation/ARCHITECTURE.md` has no avoidable beta or third-party baseline dependency. |
+| 0.3 | Agent routing | Keep docs concise and routed by task. | `AGENT.md`, `CLAUDE.md`, `Documentation/AGENT.md`, and `Documentation/CLAUDE.md` are identical and explain what to read. |
 | 0.4 | Human action gates | Identify purchases, account actions, asset approval, and license checks before implementation. | Roadmap human-action table lists every known owner gate. |
 | 0.5 | Contradiction pass | Remove stale paths, accidental V2 scope, and implementation detail from conception docs. | No conception doc contains code fences or command blocks. |
 
 Phase 0 is complete when:
 
-- docs under `docs/` are concise enough for agents to route by task;
+- docs under `Documentation/` are concise enough for agents to route by task;
 - V1 stack has no avoidable beta or third-party dependency;
 - no conception doc contains code fences or command blocks;
-- `docs/AGENT.md` and `docs/CLAUDE.md` are identical and explain what to read.
+- all `AGENT.md` and `CLAUDE.md` copies are identical and explain what to read.
 
 ## Phase 1 - Unreal Bootstrap
 
@@ -88,7 +88,7 @@ Sub-phases:
 | 1.2 | Unreal project root | Use `unreal-project/Dubito/` as the Unreal project root and make it C++ capable before gameplay work. | Project opens with zero startup errors. |
 | 1.3 | Module foundation | Add `DubitoCore`, `Dubito`, and `DubitoTests` responsibilities without gameplay logic. | Modules compile and match the architecture contract. |
 | 1.4 | Required V1 systems | Enable Online Subsystem Steam, Online Subsystem Utils, Common UI, UMG, Enhanced Input, and Automation support. | Required systems are enabled; excluded systems remain out of V1. |
-| 1.5 | Documentation handoff | Copy the repository `docs/` folder into `unreal-project/Dubito/Documentation/` without fragmenting conceptual ownership. | Unreal project contains the docs, and root docs remain the source during conception. |
+| 1.5 | Documentation handoff | Copy the conception documentation into `unreal-project/Dubito/Documentation/` without fragmenting conceptual ownership. | Unreal project contains the docs, and `Documentation/` is canonical for implementation. |
 | 1.6 | Steam dev setup | Add AppID 480 local development support without touching release configuration. | Local Steam testing prerequisites are present and documented. |
 
 Phase 1 is complete when:
@@ -115,14 +115,14 @@ Sub-phases:
 | 2.2 | Action legality | Validate Play, Doubt, and Discard independently from UI and networking. | Tests cover legal and illegal action boundaries. |
 | 2.3 | Doubt and pile resolution | Resolve correct Doubt, wrong Doubt, pile transfer, round reset, and claimant/doubter turn outcomes. | Tests cover value lie, count lie, both lies, and honest play. |
 | 2.4 | Timer, disconnect, and pending win | Model timeout auto-play, anti-AFK disconnect, pending-win window, and last-player-standing behavior. | Tests cover timeout branches, final Doubt window, and disconnect outcomes. |
-| 2.5 | Edge-case matrix pass | Align implementation tests with `docs/v1/EDGE_CASES.md`. | Every must-cover edge case has an explicit test or a documented validation path. |
+| 2.5 | Edge-case matrix pass | Align implementation tests with `Documentation/v1/EDGE_CASES.md`. | Every must-cover edge case has an explicit test or a documented validation path. |
 
 Phase 2 is complete when:
 
 - rule tests pass;
 - rules do not depend on actors, widgets, maps, or live networking;
 - hidden-count invariants are tested;
-- implementation behavior matches `docs/DESIGN.md` and `docs/v1/EDGE_CASES.md`.
+- implementation behavior matches `Documentation/DESIGN.md` and `Documentation/v1/EDGE_CASES.md`.
 
 ## Phase 3 - Greybox Table
 
@@ -130,14 +130,16 @@ Goal: make the game readable locally before multiplayer complexity.
 
 Sub-phases:
 
-| ID | Name | Objective | Validation |
-|---|---|---|---|
-| 3.0 | Map shell | Build Main Menu, Waiting Room, Table, and Post Game maps as greybox surfaces. | Maps exist, load, and match the planned flow. |
-| 3.1 | Seated table readability | Add seated camera, limited free-look, table, 8 seats, center pile anchor, and simple player placeholders. | One local player can read table orientation, seats, and center pile area. |
-| 3.2 | Card and pile presentation | Add simple own-hand cards, card backs, neutral opponent packets, and claimed stake presentation. | Own hand is exact; opponent packet and pile visuals do not imply actual hidden counts. |
-| 3.3 | UI shell | Add CommonUI/UMG shell for menu, waiting room, HUD, action bar, confirm modal, reveal panel, help card, and post-game. | Surfaces exist with placeholder content and no gameplay authority. |
-| 3.4 | Input baseline | Prove mouse, keyboard, and gamepad focus/confirm for menus and action bar. | No V1 UI surface requires mouse-only interaction. |
-| 3.5 | Visual asset gate | Decide whether internal placeholders are readable enough, or ask the owner for approved card/table placeholder assets. | Either primitives are accepted, or owner-approved asset constraints and target folders are recorded before import. |
+| ID | Name | Status | Objective | Validation |
+|---|---|---|---|---|
+| 3.0 | Map shell | Done | Build Main Menu, Waiting Room, Table, and Post Game maps as greybox surfaces. | Maps exist, load, and match the planned flow. |
+| 3.1 | Seated table readability | Done | Add seated camera, limited free-look, table, 8 seats, center pile anchor, and simple player placeholders. | One local player can read table orientation, seats, and center pile area. |
+| 3.2 | Card and pile presentation | Done | Add simple own-hand cards, card backs, neutral opponent packets, and claimed stake presentation. | Own hand is exact; opponent packet and pile visuals do not imply actual hidden counts. |
+| 3.3 | UI shell | Done | Add CommonUI/UMG shell for menu, waiting room, HUD, action bar, confirm modal, reveal panel, help card, and post-game. | Surfaces exist with placeholder content and no gameplay authority. |
+| 3.4 | Input baseline | Done | Prove mouse, keyboard, and gamepad focus/confirm for menus and action bar. | No V1 UI surface requires mouse-only interaction. |
+| 3.5 | Visual asset gate | Done | Decide whether internal placeholders are readable enough, or ask the owner for approved card/table placeholder assets. | Either primitives are accepted, or owner-approved asset constraints and target folders are recorded before import. |
+
+Phase 3.5 outcome: internal Unreal primitives, generated greybox maps, and shell placeholders are accepted for the V1 greybox baseline. No external card, table, character, or UI asset is imported for Phase 3. If later owner review or playtesting finds a readability blocker, the owner must approve the asset category, license constraints, and target folder before import.
 
 Phase 3 is complete when:
 
@@ -188,7 +190,7 @@ Sub-phases:
 | 5.5 | Pending-win and Post Game | Implement final Doubt window, win confirmation, game-over reason, and post-game presentation. | Last-card play, correct final Doubt, wrong final Doubt, timeout confirmation, and last-player-standing are validated. |
 | 5.6 | Local session flow | Implement local host/join or null/LAN flow from Main Menu to Waiting Room to Table to Post Game and back, suitable for same-PC loopback testing. | Two local instances can enter a match, ready up, start, finish, and return without developer tools. |
 | 5.7 | First-run help | Add first-run help card, persistent help access, and contextual hints without blocking experienced play. | A new player can complete a turn and understand Doubt from on-screen cues. |
-| 5.8 | Edge-case validation | Verify every relevant case in `docs/v1/EDGE_CASES.md`. | Winner, wrong Doubt, right Doubt, discard, timeout, disconnect, modal, resize, and input robustness paths are covered. |
+| 5.8 | Edge-case validation | Verify every relevant case in `Documentation/v1/EDGE_CASES.md`. | Winner, wrong Doubt, right Doubt, discard, timeout, disconnect, modal, resize, and input robustness paths are covered. |
 | 5.9 | Packaged local full-game pass | Validate the loop by launching two packaged instances on one PC. | Two packaged local instances complete a full game while preserving hidden information rules. |
 
 Phase 5 is complete when:

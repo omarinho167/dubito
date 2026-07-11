@@ -3,7 +3,7 @@
 This file defines the V1 technical contract. It avoids code snippets and focuses on decisions, responsibilities, and
 validation criteria.
 
-Official-source notes live in `docs/reference/UE_STEAM_SOURCES.md`. Game design lives in `docs/DESIGN.md`.
+Official-source notes live in `Documentation/reference/UE_STEAM_SOURCES.md`. Game design lives in `Documentation/DESIGN.md`.
 
 ## V1 Stack
 
@@ -239,14 +239,14 @@ Server-only resolution steps should not become public phases unless the UI needs
 | No round value | 0 |
 | No player id | -1 |
 
-Constants must match `docs/DESIGN.md`.
+Constants must match `Documentation/DESIGN.md`.
 
 ## Project Layout Contract
 
 | Path | Purpose |
 |---|---|
 | `unreal-project/Dubito/` | Unreal project root |
-| `unreal-project/Dubito/Documentation/` | copy of this `docs/` folder after bootstrap |
+| `unreal-project/Dubito/Documentation/` | conceptual documentation after bootstrap |
 | `unreal-project/Dubito/Source/DubitoCore/` | pure rules |
 | `unreal-project/Dubito/Source/Dubito/` | Unreal gameplay, network, UI shells |
 | `unreal-project/Dubito/Source/DubitoTests/` | automation tests |
@@ -257,8 +257,8 @@ Constants must match `docs/DESIGN.md`.
 | `unreal-project/Dubito/Content/Art/Marketing/` | optional project copy of approved release marketing assets |
 | `unreal-project/Dubito/Content/Audio/SFX/` | owner-approved V1 action and UI sounds, only after gameplay loop works |
 
-During conception, keep all documentation under the repository `docs/` folder. During Unreal bootstrap, copy this folder
-into `unreal-project/Dubito/Documentation/` so the Unreal project can be opened as a standalone workspace.
+During conception, keep conceptual documentation together. After Unreal bootstrap, `Documentation/` inside the Unreal
+project is canonical for implementation agents.
 
 ## Asset Intake Policy
 
@@ -308,4 +308,4 @@ Likely asset asks:
 
 ## Sources
 
-Official source notes checked July 11, 2026 are summarized in `docs/reference/UE_STEAM_SOURCES.md`.
+Official source notes checked July 11, 2026 are summarized in `Documentation/reference/UE_STEAM_SOURCES.md`.
