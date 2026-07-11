@@ -3,6 +3,7 @@
 #include "DubitoConstants.h"
 #include "DubitoDeck.h"
 #include "DubitoGameState.h"
+#include "DubitoHUD.h"
 #include "DubitoPlayerController.h"
 #include "DubitoPlayerState.h"
 
@@ -55,6 +56,7 @@ ADubitoGameMode::ADubitoGameMode()
 	GameStateClass = ADubitoGameState::StaticClass();
 	PlayerControllerClass = ADubitoPlayerController::StaticClass();
 	PlayerStateClass = ADubitoPlayerState::StaticClass();
+	HUDClass = ADubitoHUD::StaticClass();
 }
 
 EDubitoAuthorityStartResult ADubitoGameMode::ValidatePlayerIds(const TArray<int32>& PlayerIds)

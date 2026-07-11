@@ -31,6 +31,11 @@ struct DUBITO_API FDubitoGameOverInfo
 	EDubitoGameOverReason Reason = EDubitoGameOverReason::Unknown;
 };
 
+// Native broadcast fired whenever the replicated public match snapshot changes, on both
+// the authoritative sync and the client OnRep. Lets C++ HUD widgets refresh event-driven
+// from replicated state without a Blueprint hop (Documentation/ARCHITECTURE.md UI rule).
+DECLARE_MULTICAST_DELEGATE(FDubitoPublicMatchStateChanged);
+
 /**
  * Replicated public match state for Phase 4.1.
  *
@@ -73,6 +78,9 @@ public:
 	int32 GetPreviousClaimantId() const { return PreviousClaimantId; }
 
 	UFUNCTION(BlueprintPure, Category = "Dubito|Public State")
+	bool IsPreviousClaimDoubtable() const { return bPreviousClaimDoubtable; }
+
+	UFUNCTION(BlueprintPure, Category = "Dubito|Public State")
 	FDubitoAnnouncement GetPreviousPublicAnnouncement() const { return PreviousPublicAnnouncement; }
 
 	UFUNCTION(BlueprintPure, Category = "Dubito|Public State")
@@ -96,6 +104,9 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Dubito|Public Events")
 	int32 GetGameOverEventCount() const { return GameOverEventCount; }
 
+	// Subscribe to be notified (server sync + client OnRep) when public match state changes.
+	FDubitoPublicMatchStateChanged OnPublicMatchStateChanged;
+
 protected:
 	UFUNCTION()
 	void OnRep_PublicMatchState();
@@ -110,6 +121,8 @@ protected:
 	void OnGameOver(const FDubitoGameOverInfo& GameOver);
 
 private:
+	void NotifyPublicMatchStateUpdated();
+
 	FDubitoRevealInfo LastPublicReveal;
 	int32 PublicRevealEventCount = 0;
 	FDubitoGameOverInfo LastGameOver;
@@ -129,6 +142,11 @@ private:
 
 	UPROPERTY(ReplicatedUsing = OnRep_PublicMatchState, BlueprintReadOnly, Category = "Dubito|Public State", meta = (AllowPrivateAccess = "true"))
 	int32 PreviousClaimantId = DubitoConstants::NoPlayerId;
+
+	// Whether the previous public claim can still be doubted by the active player. A stale
+	// claim left by a disconnected player stays visible but is not doubtable.
+	UPROPERTY(ReplicatedUsing = OnRep_PublicMatchState, BlueprintReadOnly, Category = "Dubito|Public State", meta = (AllowPrivateAccess = "true"))
+	bool bPreviousClaimDoubtable = false;
 
 	UPROPERTY(ReplicatedUsing = OnRep_PublicMatchState, BlueprintReadOnly, Category = "Dubito|Public State", meta = (AllowPrivateAccess = "true"))
 	FDubitoAnnouncement PreviousPublicAnnouncement;

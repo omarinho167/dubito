@@ -21,22 +21,28 @@ void ADubitoPlayerState::SetPublicIdentity(int32 InDubitoPlayerId, int32 InSeatI
 {
 	DubitoPlayerId = InDubitoPlayerId;
 	SeatIndex = InSeatIndex;
-	OnPublicPlayerStateUpdated();
+	NotifyPublicPlayerStateUpdated();
 }
 
 void ADubitoPlayerState::SetReady(bool bInReady)
 {
 	bReady = bInReady;
-	OnPublicPlayerStateUpdated();
+	NotifyPublicPlayerStateUpdated();
 }
 
 void ADubitoPlayerState::SetPublicHandCount(int32 InPublicHandCount)
 {
 	PublicHandCount = FMath::Max(0, InPublicHandCount);
-	OnPublicPlayerStateUpdated();
+	NotifyPublicPlayerStateUpdated();
 }
 
 void ADubitoPlayerState::OnRep_PublicPlayerState()
 {
+	NotifyPublicPlayerStateUpdated();
+}
+
+void ADubitoPlayerState::NotifyPublicPlayerStateUpdated()
+{
+	OnPublicPlayerStateChangedNative.Broadcast();
 	OnPublicPlayerStateUpdated();
 }

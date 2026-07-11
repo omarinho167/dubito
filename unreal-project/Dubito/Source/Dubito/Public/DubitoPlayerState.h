@@ -5,6 +5,10 @@
 #include "DubitoConstants.h"
 #include "DubitoPlayerState.generated.h"
 
+// Native broadcast fired whenever this player's replicated public state changes, on both
+// the authoritative sync and the client OnRep. Lets the table HUD refresh seat ledgers.
+DECLARE_MULTICAST_DELEGATE(FDubitoPublicPlayerStateChanged);
+
 /**
  * Replicated public per-player state for Phase 4.2.
  *
@@ -37,6 +41,9 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Dubito|Public Player")
 	int32 GetPublicHandCount() const { return PublicHandCount; }
 
+	// Subscribe to be notified (server sync + client OnRep) when public player state changes.
+	FDubitoPublicPlayerStateChanged OnPublicPlayerStateChangedNative;
+
 protected:
 	UFUNCTION()
 	void OnRep_PublicPlayerState();
@@ -45,6 +52,8 @@ protected:
 	void OnPublicPlayerStateUpdated();
 
 private:
+	void NotifyPublicPlayerStateUpdated();
+
 	UPROPERTY(ReplicatedUsing = OnRep_PublicPlayerState, BlueprintReadOnly, Category = "Dubito|Public Player", meta = (AllowPrivateAccess = "true"))
 	int32 DubitoPlayerId = DubitoConstants::NoPlayerId;
 

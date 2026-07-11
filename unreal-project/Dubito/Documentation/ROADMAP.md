@@ -21,7 +21,7 @@ This is the execution plan. It stays at phase, sub-phase, responsibility, and va
 | 2 | Core Rules | Done | pure rule model with tests | prove game logic without actors, widgets, maps, or live networking |
 | 3 | Greybox Table | Done | readable local table, cards, camera, basic UI shell | prove readability and input before multiplayer complexity |
 | 4 | Network Framework | Done | host-authoritative replicated match state | connect Unreal framework to the pure rules while preserving privacy |
-| 5 | Full Gameplay Loop | Next | Play, Doubt, Discard, timer, win, post-game | add one player-facing action or flow at a time |
+| 5 | Full Gameplay Loop | In progress | Play, Doubt, Discard, timer, win, post-game | add one player-facing action or flow at a time |
 | 6 | Steam Multiplayer | Locked | Steam lobbies/invites tested on real machines | swap from local validation to the real Steam path |
 | 7 | V1 Polish | Locked | clarity, accessibility, UX pass, packaging | harden the already-playable game |
 | 8 | Release Prep | Locked | real AppID, depot, store/build checklist | prepare release only after V1 is proven |
@@ -196,18 +196,29 @@ Goal: make one complete local/networked game playable.
 
 Sub-phases:
 
-| ID | Name | Objective | Validation |
-|---|---|---|---|
-| 5.0 | State display and table binding | Bind replicated state to the table HUD, seats, public claim, public ledgers, timer, and action availability. | A player can always answer whose turn it is, what claim can be judged, what actions are legal, and what public stake is shown. |
-| 5.1 | Play interaction | Implement selection, claim controls, server confirmation, hand update, claimed ledger update, and turn advance. | Play works from input to confirmed state without exposing actual hidden count to non-owners. |
-| 5.2 | Doubt interaction and reveal | Implement hold-to-confirm Doubt, reveal presentation, verdict, pile transfer, and post-reveal turn outcome. | Correct Doubt, wrong Doubt, value lie, count lie, and honest play are all readable and correct. |
-| 5.3 | Discard interaction | Implement Discard confirmation, pile clear, round value reset, and skipped turn. | Discard is legal only in the intended states and clearly explains blocked states. |
-| 5.4 | Timer and pending requests | Implement turn countdown, timeout auto-play, anti-AFK disconnect, and one-pending-request behavior. | Timeout branches match the rules and spammed input cannot create duplicate actions. |
-| 5.5 | Pending-win and Post Game | Implement final Doubt window, win confirmation, game-over reason, and post-game presentation. | Last-card play, correct final Doubt, wrong final Doubt, timeout confirmation, and last-player-standing are validated. |
-| 5.6 | Local session flow | Implement local host/join or null/LAN flow from Main Menu to Waiting Room to Table to Post Game and back, suitable for same-PC loopback testing. | Two local instances can enter a match, ready up, start, finish, and return without developer tools. |
-| 5.7 | First-run help | Add first-run help card, persistent help access, and contextual hints without blocking experienced play. | A new player can complete a turn and understand Doubt from on-screen cues. |
-| 5.8 | Edge-case validation | Verify every relevant case in `Documentation/v1/EDGE_CASES.md`. | Winner, wrong Doubt, right Doubt, discard, timeout, disconnect, modal, resize, and input robustness paths are covered. |
-| 5.9 | Packaged local full-game pass | Validate the loop by launching two packaged instances on one PC. | Two packaged local instances complete a full game while preserving hidden information rules. |
+| ID | Name | Status | Objective | Validation |
+|---|---|---|---|---|
+| 5.0 | State display and table binding | Done | Bind replicated state to the table HUD, seats, public claim, public ledgers, timer, and action availability. | A player can always answer whose turn it is, what claim can be judged, what actions are legal, and what public stake is shown. |
+| 5.1 | Play interaction | Next | Implement selection, claim controls, server confirmation, hand update, claimed ledger update, and turn advance. | Play works from input to confirmed state without exposing actual hidden count to non-owners. |
+| 5.2 | Doubt interaction and reveal | Locked | Implement hold-to-confirm Doubt, reveal presentation, verdict, pile transfer, and post-reveal turn outcome. | Correct Doubt, wrong Doubt, value lie, count lie, and honest play are all readable and correct. |
+| 5.3 | Discard interaction | Locked | Implement Discard confirmation, pile clear, round value reset, and skipped turn. | Discard is legal only in the intended states and clearly explains blocked states. |
+| 5.4 | Timer and pending requests | Locked | Implement turn countdown, timeout auto-play, anti-AFK disconnect, and one-pending-request behavior. | Timeout branches match the rules and spammed input cannot create duplicate actions. |
+| 5.5 | Pending-win and Post Game | Locked | Implement final Doubt window, win confirmation, game-over reason, and post-game presentation. | Last-card play, correct final Doubt, wrong final Doubt, timeout confirmation, and last-player-standing are validated. |
+| 5.6 | Local session flow | Locked | Implement local host/join or null/LAN flow from Main Menu to Waiting Room to Table to Post Game and back, suitable for same-PC loopback testing. | Two local instances can enter a match, ready up, start, finish, and return without developer tools. |
+| 5.7 | First-run help | Locked | Add first-run help card, persistent help access, and contextual hints without blocking experienced play. | A new player can complete a turn and understand Doubt from on-screen cues. |
+| 5.8 | Edge-case validation | Locked | Verify every relevant case in `Documentation/v1/EDGE_CASES.md`. | Winner, wrong Doubt, right Doubt, discard, timeout, disconnect, modal, resize, and input robustness paths are covered. |
+| 5.9 | Packaged local full-game pass | Locked | Validate the loop by launching two packaged instances on one PC. | Two packaged local instances complete a full game while preserving hidden information rules. |
+
+Phase 5.0 outcome: a pure, engine-independent presentation view-model (`BuildDubitoTableHudSnapshot`) derives the table HUD from
+replicated public state plus the local player's own identity and hand: whose turn it is, the previous public claim and whether
+it is doubtable, per-seat public ledgers, the claimed pile stake, the turn countdown, and best-effort Play/Doubt/Discard
+availability that mirrors the server legality predicates. `ADubitoGameState` now also replicates a public
+`bPreviousClaimDoubtable` flag and broadcasts a native state-changed delegate, and `ADubitoPlayerState` broadcasts an
+equivalent delegate, so a C++ HUD refreshes event-driven from replicated state. `UDubitoTableHudWidget` renders the snapshot and
+`ADubitoHUD` (wired as the GameMode `HUDClass`) shows it to the owning client on the Table map. The view-model is covered by
+automation (whose-turn, action matrix incl. pending-win and stale-claim, claim/stake presentation, timer math, seat ledgers);
+the widget still needs an on-screen in-match visual pass, which depends on the Phase 5.6 ready/start flow (or a live PIE session
+driven through the editor) to populate a real match.
 
 Phase 5 is complete when:
 

@@ -95,7 +95,7 @@ it can be enabled later, but the design must work without it.
 | Unreal role | Dubito responsibility |
 |---|---|
 | GameMode | server-only authority; owns actual game state, deals, validates, resolves turns |
-| GameState | replicated public state: phase, active player, round value, public claim, claimed pile ledger, timer deadline |
+| GameState | replicated public state: phase, active player, round value, public claim, previous-claim doubtable flag, claimed pile ledger, timer deadline |
 | PlayerState | replicated public identity, seat, readiness, public hand ledger |
 | PlayerController | owning client input, server RPCs, owner-only private hand state |
 | Pawn | seated camera and local free-look only |
@@ -139,6 +139,7 @@ Replicated to everyone:
 - active player;
 - round value;
 - previous public claim;
+- whether the previous claim is doubtable;
 - claimed pile ledger;
 - public hand ledgers;
 - pending-win flag;

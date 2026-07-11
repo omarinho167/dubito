@@ -18,6 +18,7 @@ void ADubitoGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME(ADubitoGameState, RoundValue);
 	DOREPLIFETIME(ADubitoGameState, bHasPreviousPublicClaim);
 	DOREPLIFETIME(ADubitoGameState, PreviousClaimantId);
+	DOREPLIFETIME(ADubitoGameState, bPreviousClaimDoubtable);
 	DOREPLIFETIME(ADubitoGameState, PreviousPublicAnnouncement);
 	DOREPLIFETIME(ADubitoGameState, ClaimedPileCount);
 	DOREPLIFETIME(ADubitoGameState, bHasPendingWin);
@@ -35,9 +36,10 @@ void ADubitoGameState::SyncFromAuthoritativeState(const FDubitoMatchState& State
 
 	bHasPreviousPublicClaim = State.LastClaimantId != DubitoConstants::NoPlayerId && State.LastAnnouncement.IsWellFormed();
 	PreviousClaimantId = bHasPreviousPublicClaim ? State.LastClaimantId : DubitoConstants::NoPlayerId;
+	bPreviousClaimDoubtable = bHasPreviousPublicClaim && State.bLastPlayDoubtable;
 	PreviousPublicAnnouncement = bHasPreviousPublicClaim ? State.LastAnnouncement : FDubitoAnnouncement();
 
-	OnPublicMatchStateUpdated();
+	NotifyPublicMatchStateUpdated();
 }
 
 void ADubitoGameState::PublishPublicReveal(const FDubitoRevealInfo& Reveal)
@@ -82,5 +84,11 @@ void ADubitoGameState::MulticastGameOver_Implementation(const FDubitoGameOverInf
 
 void ADubitoGameState::OnRep_PublicMatchState()
 {
+	NotifyPublicMatchStateUpdated();
+}
+
+void ADubitoGameState::NotifyPublicMatchStateUpdated()
+{
+	OnPublicMatchStateChanged.Broadcast();
 	OnPublicMatchStateUpdated();
 }
