@@ -5,6 +5,7 @@
 #include "DubitoGameMode.h"
 #include "DubitoGameState.h"
 #include "DubitoHand.h"
+#include "DubitoPlayerState.h"
 #include "Engine/Engine.h"
 #include "Engine/World.h"
 #include "UObject/Package.h"
@@ -229,6 +230,73 @@ bool FDubitoAuthorityBridgePendingWinPublicStateTest::RunTest(const FString&)
 		TestEqual(TEXT("Timeout during pending-win response publishes GameOver"), static_cast<int32>(PublicGameState->GetPublicPhase()), static_cast<int32>(EDubitoPhase::GameOver));
 		TestFalse(TEXT("GameOver clears pending-win flag"), PublicGameState->HasPendingWin());
 		TestEqual(TEXT("GameOver clears public timer deadline"), PublicGameState->GetTurnDeadlineServerTimeSeconds(), 0.0);
+	}
+
+	DestroyAuthorityTestWorld(World);
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDubitoAuthorityBridgePlayerStateTest, "Dubito.Unreal.AuthorityBridge.PlayerState", DubitoAuthorityFlags)
+bool FDubitoAuthorityBridgePlayerStateTest::RunTest(const FString&)
+{
+	UWorld* World = CreateAuthorityTestWorld();
+	ADubitoGameMode* GameMode = SpawnAuthorityGameMode(World);
+	ADubitoPlayerState* Player10 = World ? World->SpawnActor<ADubitoPlayerState>() : nullptr;
+	ADubitoPlayerState* Player20 = World ? World->SpawnActor<ADubitoPlayerState>() : nullptr;
+	ADubitoPlayerState* DuplicatePlayer10 = World ? World->SpawnActor<ADubitoPlayerState>() : nullptr;
+	TestNotNull(TEXT("GameMode spawns in transient authority world"), GameMode);
+	TestNotNull(TEXT("Player 10 state spawns"), Player10);
+	TestNotNull(TEXT("Player 20 state spawns"), Player20);
+
+	if (GameMode && Player10 && Player20)
+	{
+		TestEqual(TEXT("GameMode declares Dubito PlayerState class"), GameMode->PlayerStateClass.Get(), ADubitoPlayerState::StaticClass());
+
+		auto TestReplicatedProperty = [this](const TCHAR* PropertyName)
+		{
+			const FProperty* Property = FindFProperty<FProperty>(ADubitoPlayerState::StaticClass(), PropertyName);
+			TestNotNull(FString::Printf(TEXT("%s property exists"), PropertyName), Property);
+			if (Property)
+			{
+				TestTrue(FString::Printf(TEXT("%s is marked for replication"), PropertyName), Property->HasAnyPropertyFlags(CPF_Net));
+			}
+		};
+
+		TestReplicatedProperty(TEXT("DubitoPlayerId"));
+		TestReplicatedProperty(TEXT("SeatIndex"));
+		TestReplicatedProperty(TEXT("bReady"));
+		TestReplicatedProperty(TEXT("PublicHandCount"));
+
+		TestTrue(TEXT("Player 10 public identity registers"), GameMode->RegisterAuthorityPlayerState(Player10, 10, 0));
+		TestTrue(TEXT("Player 20 public identity registers"), GameMode->RegisterAuthorityPlayerState(Player20, 20, 1));
+		TestFalse(TEXT("Duplicate player id cannot bind to a different PlayerState"), GameMode->RegisterAuthorityPlayerState(DuplicatePlayer10, 10, 2));
+
+		TestEqual(TEXT("Player 10 id is public"), Player10->GetDubitoPlayerId(), 10);
+		TestEqual(TEXT("Player 10 seat is public"), Player10->GetSeatIndex(), 0);
+		TestEqual(TEXT("Player 20 id is public"), Player20->GetDubitoPlayerId(), 20);
+		TestEqual(TEXT("Player 20 seat is public"), Player20->GetSeatIndex(), 1);
+
+		TestTrue(TEXT("Ready flag can be set for registered player"), GameMode->SetAuthorityPlayerReady(10, true));
+		TestTrue(TEXT("Ready flag is replicated public state"), Player10->IsReady());
+		TestFalse(TEXT("Unknown player ready update is rejected"), GameMode->SetAuthorityPlayerReady(30, true));
+
+		TestEqual(TEXT("Valid start succeeds"), static_cast<int32>(GameMode->StartAuthoritativeMatchFromHands({ 10, 20 }, MakeTwoPlayerHands())), static_cast<int32>(EDubitoAuthorityStartResult::Success));
+		TestEqual(TEXT("Player 10 public hand ledger mirrors dealt size"), Player10->GetPublicHandCount(), 2);
+		TestEqual(TEXT("Player 20 public hand ledger mirrors dealt size"), Player20->GetPublicHandCount(), 2);
+
+		TestEqual(TEXT("Claimed count can diverge from actual count"), static_cast<int32>(GameMode->AuthorityPlayCards(10, { C(EDubitoSuit::Clubs, 7) }, FDubitoAnnouncement(7, 4))), static_cast<int32>(EDubitoPlayValidity::Valid));
+		TestEqual(TEXT("Player 10 ledger follows claimed count and clamps at zero"), Player10->GetPublicHandCount(), 0);
+		TestEqual(TEXT("Player 20 ledger is unchanged before response"), Player20->GetPublicHandCount(), 2);
+
+		FDubitoRevealInfo Reveal;
+		TestTrue(TEXT("Active next player resolves Doubt"), GameMode->AuthorityResolveDoubt(20, Reveal));
+		TestTrue(TEXT("Count lie was detected"), Reveal.bWasLie);
+		TestEqual(TEXT("Liar public ledger receives claimed stake"), Player10->GetPublicHandCount(), 4);
+		TestEqual(TEXT("Authoritative actual hand is not the public ledger"), GameMode->GetAuthoritativeMatchState().Hands[10].Num(), 2);
+
+		GameMode->AuthorityHandleDisconnect(20);
+		TestEqual(TEXT("Disconnected player public ledger is cleared"), Player20->GetPublicHandCount(), 0);
+		TestEqual(TEXT("Disconnected player identity remains public for UI cleanup"), Player20->GetDubitoPlayerId(), 20);
 	}
 
 	DestroyAuthorityTestWorld(World);

@@ -10,6 +10,7 @@
 #include "DubitoGameMode.generated.h"
 
 class ADubitoGameState;
+class ADubitoPlayerState;
 
 /**
  * Result for server-authoritative match setup.
@@ -57,14 +58,20 @@ public:
 	void AuthorityResolveTimeout(int32 PlayerId);
 	void AuthorityHandleDisconnect(int32 PlayerId);
 
+	bool RegisterAuthorityPlayerState(ADubitoPlayerState* PlayerState, int32 PlayerId, int32 SeatIndex);
+	bool SetAuthorityPlayerReady(int32 PlayerId, bool bReady);
+
 private:
 	static EDubitoAuthorityStartResult ValidatePlayerIds(const TArray<int32>& PlayerIds);
 
 	void RefreshTurnDeadlineForCurrentState();
+	void SyncPublicState();
 	void SyncPublicGameState();
+	void SyncPublicPlayerStates();
 
 	FDubitoMatchState AuthoritativeMatchState;
 	bool bAuthoritativeMatchStarted = false;
 	int32 RemovedDealCardCount = 0;
 	double TurnDeadlineServerTimeSeconds = 0.0;
+	TMap<int32, TWeakObjectPtr<ADubitoPlayerState>> PlayerStatesById;
 };
