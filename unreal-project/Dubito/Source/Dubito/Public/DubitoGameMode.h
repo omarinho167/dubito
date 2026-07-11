@@ -9,6 +9,8 @@
 #include "DubitoRules.h"
 #include "DubitoGameMode.generated.h"
 
+class ADubitoGameState;
+
 /**
  * Result for server-authoritative match setup.
  *
@@ -58,7 +60,11 @@ public:
 private:
 	static EDubitoAuthorityStartResult ValidatePlayerIds(const TArray<int32>& PlayerIds);
 
+	void RefreshTurnDeadlineForCurrentState();
+	void SyncPublicGameState();
+
 	FDubitoMatchState AuthoritativeMatchState;
 	bool bAuthoritativeMatchStarted = false;
 	int32 RemovedDealCardCount = 0;
+	double TurnDeadlineServerTimeSeconds = 0.0;
 };

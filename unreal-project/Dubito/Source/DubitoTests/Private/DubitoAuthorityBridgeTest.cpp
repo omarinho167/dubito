@@ -3,6 +3,7 @@
 #include "DubitoCard.h"
 #include "DubitoConstants.h"
 #include "DubitoGameMode.h"
+#include "DubitoGameState.h"
 #include "DubitoHand.h"
 #include "Engine/Engine.h"
 #include "Engine/World.h"
@@ -79,7 +80,23 @@ namespace
 
 	ADubitoGameMode* SpawnAuthorityGameMode(UWorld* World)
 	{
-		return World ? World->SpawnActor<ADubitoGameMode>() : nullptr;
+		if (!World)
+		{
+			return nullptr;
+		}
+
+		if (!World->GetGameState())
+		{
+			ADubitoGameState* PublicGameState = World->SpawnActor<ADubitoGameState>();
+			World->SetGameState(PublicGameState);
+		}
+
+		ADubitoGameMode* GameMode = World->SpawnActor<ADubitoGameMode>();
+		if (GameMode)
+		{
+			GameMode->GameState = World->GetGameState();
+		}
+		return GameMode;
 	}
 }
 
@@ -112,6 +129,106 @@ bool FDubitoAuthorityBridgeStartTest::RunTest(const FString&)
 		TestEqual(TEXT("Authoritative hidden hands are held server-side"), State.Hands.Num(), 2);
 		TestEqual(TEXT("Public hand ledger mirrors dealt size for player 10"), State.PublicHandCounts[10], 2);
 		TestEqual(TEXT("Public hand ledger mirrors dealt size for player 20"), State.PublicHandCounts[20], 2);
+	}
+
+	DestroyAuthorityTestWorld(World);
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDubitoAuthorityBridgePublicStateTest, "Dubito.Unreal.AuthorityBridge.PublicState", DubitoAuthorityFlags)
+bool FDubitoAuthorityBridgePublicStateTest::RunTest(const FString&)
+{
+	UWorld* World = CreateAuthorityTestWorld();
+	ADubitoGameMode* GameMode = SpawnAuthorityGameMode(World);
+	ADubitoGameState* PublicGameState = World ? World->GetGameState<ADubitoGameState>() : nullptr;
+	TestNotNull(TEXT("GameMode spawns in transient authority world"), GameMode);
+	TestNotNull(TEXT("Dubito GameState exists in authority world"), PublicGameState);
+
+	if (GameMode && PublicGameState)
+	{
+		TestEqual(TEXT("GameMode declares Dubito GameState class"), GameMode->GameStateClass.Get(), ADubitoGameState::StaticClass());
+
+		auto TestReplicatedProperty = [this](const TCHAR* PropertyName)
+		{
+			const FProperty* Property = FindFProperty<FProperty>(ADubitoGameState::StaticClass(), PropertyName);
+			TestNotNull(FString::Printf(TEXT("%s property exists"), PropertyName), Property);
+			if (Property)
+			{
+				TestTrue(FString::Printf(TEXT("%s is marked for replication"), PropertyName), Property->HasAnyPropertyFlags(CPF_Net));
+			}
+		};
+
+		TestReplicatedProperty(TEXT("PublicPhase"));
+		TestReplicatedProperty(TEXT("ActivePlayerId"));
+		TestReplicatedProperty(TEXT("RoundValue"));
+		TestReplicatedProperty(TEXT("bHasPreviousPublicClaim"));
+		TestReplicatedProperty(TEXT("PreviousClaimantId"));
+		TestReplicatedProperty(TEXT("PreviousPublicAnnouncement"));
+		TestReplicatedProperty(TEXT("ClaimedPileCount"));
+		TestReplicatedProperty(TEXT("bHasPendingWin"));
+		TestReplicatedProperty(TEXT("TurnDeadlineServerTimeSeconds"));
+
+		TestEqual(TEXT("Valid start succeeds"), static_cast<int32>(GameMode->StartAuthoritativeMatchFromHands({ 10, 20 }, MakeTwoPlayerHands())), static_cast<int32>(EDubitoAuthorityStartResult::Success));
+
+		TestEqual(TEXT("Public phase mirrors authoritative phase"), static_cast<int32>(PublicGameState->GetPublicPhase()), static_cast<int32>(EDubitoPhase::PlayerTurn));
+		TestEqual(TEXT("Public active player mirrors turn"), PublicGameState->GetActivePlayerId(), 10);
+		TestEqual(TEXT("Public round starts unset"), PublicGameState->GetRoundValue(), DubitoConstants::NoRoundValue);
+		TestFalse(TEXT("No previous public claim after setup"), PublicGameState->HasPreviousPublicClaim());
+		TestEqual(TEXT("Public claimed pile ledger starts empty"), PublicGameState->GetClaimedPileCount(), 0);
+		TestFalse(TEXT("No pending win after setup"), PublicGameState->HasPendingWin());
+		TestTrue(TEXT("Turn deadline is published for active turn"), PublicGameState->GetTurnDeadlineServerTimeSeconds() > PublicGameState->GetServerWorldTimeSeconds());
+
+		TestEqual(TEXT("Play with bluffable claimed count succeeds"), static_cast<int32>(GameMode->AuthorityPlayCards(10, { C(EDubitoSuit::Clubs, 7) }, FDubitoAnnouncement(7, 2))), static_cast<int32>(EDubitoPlayValidity::Valid));
+
+		const FDubitoAnnouncement PublicClaim = PublicGameState->GetPreviousPublicAnnouncement();
+		TestEqual(TEXT("Public active player advances"), PublicGameState->GetActivePlayerId(), 20);
+		TestEqual(TEXT("Public round value locks to claim value"), PublicGameState->GetRoundValue(), 7);
+		TestTrue(TEXT("Previous public claim is available"), PublicGameState->HasPreviousPublicClaim());
+		TestEqual(TEXT("Previous public claimant is replicated"), PublicGameState->GetPreviousClaimantId(), 10);
+		TestEqual(TEXT("Previous public claim value is replicated"), PublicClaim.ClaimedValue, 7);
+		TestEqual(TEXT("Previous public claim count is replicated as claimed, not actual"), PublicClaim.ClaimedCount, 2);
+		TestEqual(TEXT("Claimed pile ledger follows claimed count"), PublicGameState->GetClaimedPileCount(), 2);
+		TestFalse(TEXT("No pending win while actual hand still has a card"), PublicGameState->HasPendingWin());
+
+		TestTrue(TEXT("Active player discards through core"), GameMode->AuthorityDiscard(20));
+		TestEqual(TEXT("Discard clears public claimed pile ledger"), PublicGameState->GetClaimedPileCount(), 0);
+		TestEqual(TEXT("Discard clears public round"), PublicGameState->GetRoundValue(), DubitoConstants::NoRoundValue);
+		TestFalse(TEXT("Discard clears previous public claim"), PublicGameState->HasPreviousPublicClaim());
+		TestEqual(TEXT("Discard publishes next active player"), PublicGameState->GetActivePlayerId(), 10);
+	}
+
+	DestroyAuthorityTestWorld(World);
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDubitoAuthorityBridgePendingWinPublicStateTest, "Dubito.Unreal.AuthorityBridge.PendingWinPublicState", DubitoAuthorityFlags)
+bool FDubitoAuthorityBridgePendingWinPublicStateTest::RunTest(const FString&)
+{
+	UWorld* World = CreateAuthorityTestWorld();
+	ADubitoGameMode* GameMode = SpawnAuthorityGameMode(World);
+	ADubitoGameState* PublicGameState = World ? World->GetGameState<ADubitoGameState>() : nullptr;
+	TestNotNull(TEXT("GameMode spawns in transient authority world"), GameMode);
+	TestNotNull(TEXT("Dubito GameState exists in authority world"), PublicGameState);
+
+	if (GameMode && PublicGameState)
+	{
+		TMap<int32, FDubitoHand> Hands;
+		Hands.Add(10, MakeHand({ C(EDubitoSuit::Clubs, 7) }));
+		Hands.Add(20, MakeHand({ C(EDubitoSuit::Spades, 7), C(EDubitoSuit::Hearts, 4) }));
+
+		TestEqual(TEXT("Valid start succeeds"), static_cast<int32>(GameMode->StartAuthoritativeMatchFromHands({ 10, 20 }, Hands)), static_cast<int32>(EDubitoAuthorityStartResult::Success));
+		TestEqual(TEXT("Last-card play succeeds"), static_cast<int32>(GameMode->AuthorityPlayCards(10, { C(EDubitoSuit::Clubs, 7) }, FDubitoAnnouncement(7, 1))), static_cast<int32>(EDubitoPlayValidity::Valid));
+
+		TestTrue(TEXT("Pending-win flag is public"), PublicGameState->HasPendingWin());
+		TestEqual(TEXT("Pending-win response player is active"), PublicGameState->GetActivePlayerId(), 20);
+		TestTrue(TEXT("Pending-win claim remains public"), PublicGameState->HasPreviousPublicClaim());
+		TestEqual(TEXT("Pending-win claimant remains public"), PublicGameState->GetPreviousClaimantId(), 10);
+		TestTrue(TEXT("Pending-win response has a turn deadline"), PublicGameState->GetTurnDeadlineServerTimeSeconds() > PublicGameState->GetServerWorldTimeSeconds());
+
+		GameMode->AuthorityResolveTimeout(20);
+		TestEqual(TEXT("Timeout during pending-win response publishes GameOver"), static_cast<int32>(PublicGameState->GetPublicPhase()), static_cast<int32>(EDubitoPhase::GameOver));
+		TestFalse(TEXT("GameOver clears pending-win flag"), PublicGameState->HasPendingWin());
+		TestEqual(TEXT("GameOver clears public timer deadline"), PublicGameState->GetTurnDeadlineServerTimeSeconds(), 0.0);
 	}
 
 	DestroyAuthorityTestWorld(World);

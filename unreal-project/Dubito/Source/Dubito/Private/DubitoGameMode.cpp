@@ -2,10 +2,12 @@
 
 #include "DubitoConstants.h"
 #include "DubitoDeck.h"
+#include "DubitoGameState.h"
 
 ADubitoGameMode::ADubitoGameMode()
 {
 	bReplicates = false;
+	GameStateClass = ADubitoGameState::StaticClass();
 }
 
 EDubitoAuthorityStartResult ADubitoGameMode::ValidatePlayerIds(const TArray<int32>& PlayerIds)
@@ -56,6 +58,8 @@ EDubitoAuthorityStartResult ADubitoGameMode::StartAuthoritativeMatchFromHands(co
 	AuthoritativeMatchState = MoveTemp(NewState);
 	bAuthoritativeMatchStarted = true;
 	RemovedDealCardCount = 0;
+	RefreshTurnDeadlineForCurrentState();
+	SyncPublicGameState();
 
 	return EDubitoAuthorityStartResult::Success;
 }
@@ -115,6 +119,8 @@ EDubitoPlayValidity ADubitoGameMode::AuthorityPlayCards(int32 PlayerId, const TA
 
 	DubitoRules::NoteVoluntaryAction(AuthoritativeMatchState, PlayerId);
 	DubitoRules::ApplyPlay(AuthoritativeMatchState, PlayerId, ActualCards, Announcement);
+	RefreshTurnDeadlineForCurrentState();
+	SyncPublicGameState();
 	return EDubitoPlayValidity::Valid;
 }
 
@@ -129,6 +135,8 @@ bool ADubitoGameMode::AuthorityResolveDoubt(int32 PlayerId, FDubitoRevealInfo& O
 
 	DubitoRules::NoteVoluntaryAction(AuthoritativeMatchState, PlayerId);
 	OutReveal = DubitoRules::ResolveDoubt(AuthoritativeMatchState, PlayerId);
+	RefreshTurnDeadlineForCurrentState();
+	SyncPublicGameState();
 	return true;
 }
 
@@ -141,15 +149,59 @@ bool ADubitoGameMode::AuthorityDiscard(int32 PlayerId)
 
 	DubitoRules::NoteVoluntaryAction(AuthoritativeMatchState, PlayerId);
 	DubitoRules::ApplyDiscard(AuthoritativeMatchState, PlayerId);
+	RefreshTurnDeadlineForCurrentState();
+	SyncPublicGameState();
 	return true;
 }
 
 void ADubitoGameMode::AuthorityResolveTimeout(int32 PlayerId)
 {
+	if (AuthoritativeMatchState.Phase != EDubitoPhase::PlayerTurn || AuthoritativeMatchState.ActivePlayerId() != PlayerId)
+	{
+		return;
+	}
+
 	DubitoRules::ResolveTimeout(AuthoritativeMatchState, PlayerId);
+	RefreshTurnDeadlineForCurrentState();
+	SyncPublicGameState();
 }
 
 void ADubitoGameMode::AuthorityHandleDisconnect(int32 PlayerId)
 {
+	if (!AuthoritativeMatchState.TurnOrder.Contains(PlayerId))
+	{
+		return;
+	}
+
 	DubitoRules::HandleDisconnect(AuthoritativeMatchState, PlayerId);
+	RefreshTurnDeadlineForCurrentState();
+	SyncPublicGameState();
+}
+
+void ADubitoGameMode::RefreshTurnDeadlineForCurrentState()
+{
+	if (!bAuthoritativeMatchStarted || AuthoritativeMatchState.Phase != EDubitoPhase::PlayerTurn || AuthoritativeMatchState.ActivePlayerId() == DubitoConstants::NoPlayerId)
+	{
+		TurnDeadlineServerTimeSeconds = 0.0;
+		return;
+	}
+
+	const UWorld* World = GetWorld();
+	const AGameStateBase* PublicGameState = World ? World->GetGameState() : nullptr;
+	const double CurrentServerTime = PublicGameState ? PublicGameState->GetServerWorldTimeSeconds() : (World ? World->GetTimeSeconds() : 0.0);
+	TurnDeadlineServerTimeSeconds = CurrentServerTime + static_cast<double>(DubitoConstants::TurnSeconds);
+}
+
+void ADubitoGameMode::SyncPublicGameState()
+{
+	ADubitoGameState* PublicGameState = GetGameState<ADubitoGameState>();
+	if (!PublicGameState && GetWorld())
+	{
+		PublicGameState = GetWorld()->GetGameState<ADubitoGameState>();
+	}
+
+	if (PublicGameState)
+	{
+		PublicGameState->SyncFromAuthoritativeState(AuthoritativeMatchState, TurnDeadlineServerTimeSeconds);
+	}
 }
