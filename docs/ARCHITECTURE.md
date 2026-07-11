@@ -177,10 +177,27 @@ Steam/lobby contract:
 
 Build order:
 
-1. local null/LAN flow first;
-2. packaged two-instance test on one PC;
-3. Steam two-machine test with two Steam accounts;
-4. release AppID and depot setup.
+1. PIE listen-server validation for fast replication and UI iteration;
+2. PIE separate-process or standalone validation when process separation matters;
+3. local null/LAN flow and packaged two-instance test on one PC;
+4. Steam two-machine test with two Steam accounts;
+5. release AppID and depot setup.
+
+## Local Multiplayer Test Ladder
+
+The default V1 test path avoids depending on friends until the Steam-specific phase. Multiplayer must be proven locally
+first, then packaged locally, then over Steam.
+
+| Step | Test mode | Purpose | Limitation |
+|---|---|---|---|
+| 1 | PIE listen server, multiple players | Fast daily validation for replication, action flow, UI state, and privacy rules. | Fastest path, but less representative of packaged runtime. |
+| 2 | PIE with separate processes or standalone instances | Catches process-separation issues earlier than packaging. | Slower than single-process PIE and still editor-driven. |
+| 3 | Packaged local two-instance test on one PC | Main pre-Steam proof: launch the game twice, host in one instance, join locally in the other. | Validates gameplay and local connection flow, not real Steam lobby/invite behavior. |
+| 4 | Steam two-machine test | Final V1 multiplayer proof for Steam lobbies, invites, travel, and host-leave behavior. | Requires two Steam accounts and two machines or an explicitly accepted reduced pass. |
+
+Important: Unreal's automatic PIE client connection is useful for gameplay testing, but it can bypass the session
+interface. Session creation, discovery, lobby errors, and invite behavior must be validated through the local session flow
+and then again in the Steam phase.
 
 ## Travel
 
@@ -270,8 +287,9 @@ Likely asset asks:
 | Layer | Validation |
 |---|---|
 | Core rules | Automation tests for deck, hand, validator, turn state, public ledgers |
-| Network | PIE multiplayer listen-server tests |
-| Packaged local | two instances on one PC |
+| Network | PIE multiplayer listen-server tests, then separate-process or standalone checks when process behavior matters |
+| Local flow | null/LAN or local host/join path on the same PC |
+| Packaged local | two packaged instances on one PC |
 | Steam | two machines, two Steam accounts |
 | UX | screenshot/viewport checks for action matrix and hidden-count presentation |
 

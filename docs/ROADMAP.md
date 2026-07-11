@@ -32,7 +32,9 @@ This is the execution plan. It stays at phase, sub-phase, responsibility, and va
 - Phase 2 and Phase 3 can proceed partly in parallel after Phase 1, because pure rules and greybox readability are separate risk surfaces.
 - Phase 4 depends on the Phase 2 rules contract and enough Phase 3 UI/map structure to observe replicated state.
 - Phase 5 should be mostly sequential. Play, Doubt, Discard, timer, pending-win, and session flow each build on previous behavior.
+- Local multiplayer validation escalates from PIE multi-player, to separate-process or standalone checks, to two packaged instances on one PC.
 - Phase 6 depends on a validated local packaged loop. Steam should expose transport/session problems, not unfinished game-loop problems.
+- Do not require friends or external testers before Phase 6; the pre-Steam target is owner-run testing on one PC.
 - Phase 7 can identify polish needs earlier, but should not integrate external SFX or final UX polish before the full loop is stable.
 - Phase 8 is release preparation, not feature development. Any new feature request at that point should be treated as a scope change.
 
@@ -158,7 +160,7 @@ Sub-phases:
 | 4.4 | Server action entry points | Add server actions for Ready, Start Match, Play, Doubt, and Discard. | Valid actions reach the core rules and update replicated state. |
 | 4.5 | Controlled rejection and resync | Handle stale turns, expired windows, illegal UI attempts, and ordinary invalid gameplay without disconnecting normal players. | Invalid ordinary actions produce a controlled rejection and state resync. |
 | 4.6 | Public events | Add self-contained reveal and game-over events. | Reveal and game-over UI can render from event payloads without guessing hidden state. |
-| 4.7 | PIE privacy validation | Run a 2 to 3 player listen-server PIE validation pass. | Deal, turn advance, public claim, public ledgers, owner-only hands, and illegal-action behavior are verified. |
+| 4.7 | PIE privacy validation | Run a 2 to 3 player listen-server PIE validation pass, with separate-process checks when needed. | Deal, turn advance, public claim, public ledgers, owner-only hands, and illegal-action behavior are verified. |
 
 Phase 4 is complete when:
 
@@ -182,14 +184,14 @@ Sub-phases:
 | 5.3 | Discard interaction | Implement Discard confirmation, pile clear, round value reset, and skipped turn. | Discard is legal only in the intended states and clearly explains blocked states. |
 | 5.4 | Timer and pending requests | Implement turn countdown, timeout auto-play, anti-AFK disconnect, and one-pending-request behavior. | Timeout branches match the rules and spammed input cannot create duplicate actions. |
 | 5.5 | Pending-win and Post Game | Implement final Doubt window, win confirmation, game-over reason, and post-game presentation. | Last-card play, correct final Doubt, wrong final Doubt, timeout confirmation, and last-player-standing are validated. |
-| 5.6 | Local session flow | Implement local host/join or null/LAN flow from Main Menu to Waiting Room to Table to Post Game and back. | Two local instances can enter a match, ready up, start, finish, and return without developer tools. |
+| 5.6 | Local session flow | Implement local host/join or null/LAN flow from Main Menu to Waiting Room to Table to Post Game and back, suitable for same-PC loopback testing. | Two local instances can enter a match, ready up, start, finish, and return without developer tools. |
 | 5.7 | First-run help | Add first-run help card, persistent help access, and contextual hints without blocking experienced play. | A new player can complete a turn and understand Doubt from on-screen cues. |
 | 5.8 | Edge-case validation | Verify every relevant case in `docs/v1/EDGE_CASES.md`. | Winner, wrong Doubt, right Doubt, discard, timeout, disconnect, modal, resize, and input robustness paths are covered. |
-| 5.9 | Packaged local full-game pass | Validate the loop in two packaged local instances. | Two packaged local instances complete a full game while preserving hidden information rules. |
+| 5.9 | Packaged local full-game pass | Validate the loop by launching two packaged instances on one PC. | Two packaged local instances complete a full game while preserving hidden information rules. |
 
 Phase 5 is complete when:
 
-- two packaged local instances can complete a full game;
+- two packaged local instances on one PC can complete a full game;
 - winner, wrong Doubt, right Doubt, discard, timeout, and disconnect paths are all validated;
 - public ledger UI remains understandable and never pretends hidden counts are exact;
 - no required V1 flow depends on developer-only tools.
@@ -206,7 +208,7 @@ Sub-phases:
 | 6.1 | Steam session configuration | Configure Steam lobbies and sessions through Online Subsystem Steam. | Host session creation works outside PIE with Steam running. |
 | 6.2 | Discovery, join, and invite | Test host, find, join, invite, full lobby, not found, and already-started paths. | Join paths are reliable enough for V1 and failure states are understandable. |
 | 6.3 | Steam travel flow | Validate waiting room to table and back through the Steam session path. | Steam travel does not bypass readiness, rules, or privacy validation. |
-| 6.4 | Two-machine full-game test | Play a full game on two machines with two Steam accounts. | Both players complete a game; each sees only their own exact hand. |
+| 6.4 | Two-machine full-game test | Play a full game on two machines with two Steam accounts after the one-PC packaged test has passed. | Both players complete a game; each sees only their own exact hand. |
 | 6.5 | Steam regression pass | Re-test host leave, disconnect, illegal actions, and hidden-information invariants under Steam. | No Steam-only path bypasses rule validation or hidden information rules. |
 
 Phase 6 is complete when:
@@ -267,8 +269,9 @@ Agents must call these out when the phase or sub-phase is reached instead of sil
 |---|---|---|
 | 1.0 | Confirm installed Unreal version and Steam account availability for local testing | before bootstrap validation |
 | 1.0 | Confirm Git LFS and locking policy | before any `.uasset`, `.umap`, audio, or texture file is tracked |
+| 1.0 | Install UE C++ build prerequisites: Visual Studio 2022 C++ toolchain, Windows 10/11 SDK, and .NET Framework 4.6+ SDK (required by SwarmInterface) | before the first C++ module build |
 | 3.5 | Select or approve external visual assets only if placeholders are not readable enough | before import into `unreal-project/Dubito/Content/Cards/` or `unreal-project/Dubito/Content/Art/Prototype/` |
-| 6.0 | Provide two Steam accounts and two test machines, or explicitly accept a reduced test pass | before Steam multiplayer validation |
+| 6.0 | Provide two Steam accounts and two test machines, or explicitly accept a reduced test pass | after the packaged one-PC full-game pass, before Steam multiplayer validation |
 | 7.3 | Select or approve external SFX only after exact event needs are known | before import into `unreal-project/Dubito/Content/Audio/SFX/` |
 | 8.0 | Purchase or activate Steam app credit and provide real AppID | before release app configuration |
 | 8.3 | Provide or approve Steam store assets and marketing copy | before release packaging |

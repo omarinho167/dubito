@@ -22,7 +22,19 @@ This file is reference material. Agents should read it only for Unreal/Steam dec
   replication conditions include owner-only replication. Use this for exact private hands.
 - [Travelling in multiplayer](https://dev.epicgames.com/documentation/en-us/unreal-engine/travelling-in-multiplayer-in-unreal-engine):
   Epic recommends seamless travel when possible after initial connection; server travel moves connected clients.
-- PIE multiplayer supports local listen-server testing and remains the daily network validation path before real Steam tests.
+- [Play In Editor Multiplayer Options](https://dev.epicgames.com/documentation/unreal-engine/play-in-editor-multiplayer-options-in-unreal-engine):
+  PIE can spawn multiple networked worlds for fast local multiplayer iteration. Play As Listen Server lets the editor act
+  as both server and client, and additional clients can be opened from the player count.
+- [Testing Multiplayer](https://dev.epicgames.com/documentation/unreal-engine/testing-multiplayer-in-unreal-engine):
+  Unreal can run multiple multiplayer windows in one editor process for speed, or launch separate instances when the
+  single-process shortcut is disabled. Separate instances are slower but more representative of runtime process behavior.
+- [Testing and Debugging Networked Games](https://dev.epicgames.com/documentation/unreal-engine/testing-and-debugging-networked-games-in-unreal-engine):
+  PIE listen-server/client modes can auto-connect clients locally by IP. This is useful for gameplay testing, but does not
+  validate session discovery, lobby search, or invite behavior by itself.
+- [Command-Line Arguments](https://dev.epicgames.com/documentation/unreal-engine/command-line-arguments-in-unreal-engine):
+  standalone and packaged instances can receive launch parameters, which is useful for local two-window testing on one PC.
+- PIE multiplayer supports local listen-server testing and remains the daily network validation path before packaged local
+  and real Steam tests.
 
 ## Steam And OSS
 
@@ -42,6 +54,8 @@ This file is reference material. Agents should read it only for Unreal/Steam dec
 - CommonUI is accepted for V1 because it is built into Unreal and directly supports layered, controller-friendly UI.
 - Do not add Advanced Sessions for V1 unless the owner explicitly approves a documented OSS Steam blocker.
 - Defer MVVM until after V1, or adopt only if the installed engine version and project needs justify it.
+- Use the local multiplayer test ladder before Steam: PIE listen server, separate-process or standalone checks when useful,
+  packaged two-instance test on one PC, then Steam two-machine validation.
 - Do not select external asset sources in this reference file; assets are owner-selected/imported later when a phase needs
   them.
 - Avoid designing around dedicated servers, cross-platform identity, or backend matchmaking in V1.
