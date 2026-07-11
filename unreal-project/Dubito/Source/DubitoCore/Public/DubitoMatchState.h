@@ -46,8 +46,9 @@ struct FDubitoMatchState
 	int32 ClaimedPileCount = 0;
 	TMap<int32, int32> PublicHandCounts;
 
-	// --- Pending win ---
+	// --- Pending win / result ---
 	int32 PendingWinnerId = DubitoConstants::NoPlayerId;
+	int32 WinnerId = DubitoConstants::NoPlayerId;
 
 	// --- Anti-AFK ---
 	TMap<int32, int32> ConsecutiveTimeouts;

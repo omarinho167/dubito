@@ -4,6 +4,7 @@
 #include "DubitoMatchState.h"
 #include "DubitoAnnouncement.h"
 #include "DubitoCard.h"
+#include "DubitoReveal.h"
 
 // Why a proposed Play is or is not valid. Ordinary illegal gameplay uses these
 // reasons for controlled rejection; it is not treated as an abusive payload.
@@ -63,4 +64,21 @@ namespace DubitoRules
 	// Full validation of a proposed Play's contents (turn, actual count 1..4, announcement
 	// legal for the round, and ownership of every actual card). Returns Valid or the reason.
 	DUBITOCORE_API EDubitoPlayValidity ValidatePlay(const FDubitoMatchState& State, int32 PlayerId, const TArray<FDubitoCard>& ActualCards, const FDubitoAnnouncement& Announcement);
+
+	// --- Doubt resolution & win confirmation (Phase 2.3) ---
+
+	// True if the recorded last play is a lie: its actual count differs from the claimed
+	// count, or any actual card's rank is not the locked round value.
+	DUBITOCORE_API bool WasLastPlayALie(const FDubitoMatchState& State);
+
+	// Resolves a Doubt by the active player against the recorded last play. Transfers the
+	// whole pile to the loser (actual cards to the hidden hand; public ledger by the
+	// claimed stake), empties the pile, resets the round, and sets the next turn: on a
+	// correct doubt the doubter plays next; on a wrong doubt the doubter loses the turn.
+	// Resolves any pending win (correct doubt cancels it, wrong doubt confirms it).
+	// Returns a self-contained reveal payload.
+	DUBITOCORE_API FDubitoRevealInfo ResolveDoubt(FDubitoMatchState& State, int32 DoubterId);
+
+	// Confirms WinnerId as the winner and moves the match to GameOver.
+	DUBITOCORE_API void ConfirmWin(FDubitoMatchState& State, int32 WinnerId);
 }

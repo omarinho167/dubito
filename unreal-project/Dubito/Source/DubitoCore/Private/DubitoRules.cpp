@@ -155,4 +155,94 @@ namespace DubitoRules
 
 		return EDubitoPlayValidity::Valid;
 	}
+
+	void ConfirmWin(FDubitoMatchState& State, int32 WinnerId)
+	{
+		State.WinnerId = WinnerId;
+		State.PendingWinnerId = DubitoConstants::NoPlayerId;
+		State.Phase = EDubitoPhase::GameOver;
+	}
+
+	bool WasLastPlayALie(const FDubitoMatchState& State)
+	{
+		// A lie if the actual count differs from the claimed count...
+		if (State.LastActualCards.Num() != State.LastAnnouncement.ClaimedCount)
+		{
+			return true;
+		}
+		// ...or if any actual card is not the locked round value.
+		for (const FDubitoCard& Card : State.LastActualCards)
+		{
+			if (Card.Rank != State.RoundValue)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	FDubitoRevealInfo ResolveDoubt(FDubitoMatchState& State, int32 DoubterId)
+	{
+		FDubitoRevealInfo Reveal;
+		Reveal.ClaimantId = State.LastClaimantId;
+		Reveal.DoubterId = DoubterId;
+		Reveal.Claim = State.LastAnnouncement;
+		Reveal.RevealedCards = State.LastActualCards;
+
+		const bool bWasLie = WasLastPlayALie(State);
+		Reveal.bWasLie = bWasLie;
+
+		// The liar (on a correct doubt) or the doubter (on a wrong doubt) takes the pile.
+		const int32 LoserId = bWasLie ? State.LastClaimantId : DoubterId;
+		Reveal.LoserId = LoserId;
+		Reveal.ClaimedStakeTransferred = State.ClaimedPileCount;
+
+		// Move the whole hidden pile into the loser's actual hand.
+		if (FDubitoHand* LoserHand = State.Hands.Find(LoserId))
+		{
+			LoserHand->Cards.Append(State.ActualPile);
+		}
+		// The loser's public ledger rises by the claimed stake, not the hidden pile size.
+		int32& LoserPublic = State.PublicHandCounts.FindOrAdd(LoserId);
+		LoserPublic += State.ClaimedPileCount;
+
+		// Empty the pile and reset the round: a new round opens on the now-empty pile.
+		State.ActualPile.Reset();
+		State.ClaimedPileCount = 0;
+		State.RoundValue = DubitoConstants::NoRoundValue;
+		State.bLastPlayDoubtable = false;
+		State.LastClaimantId = DubitoConstants::NoPlayerId;
+		State.LastActualCards.Reset();
+		State.LastAnnouncement = FDubitoAnnouncement();
+
+		if (State.HasPendingWin())
+		{
+			if (bWasLie)
+			{
+				// Correct doubt cancels the win: the would-be winner took cards back.
+				State.PendingWinnerId = DubitoConstants::NoPlayerId;
+				// Doubter plays next; the active seat is already the doubter.
+			}
+			else
+			{
+				// Wrong doubt confirms the pending win.
+				Reveal.bWinConfirmed = true;
+				Reveal.WinnerId = State.PendingWinnerId;
+				ConfirmWin(State, State.PendingWinnerId);
+			}
+			return Reveal;
+		}
+
+		if (bWasLie)
+		{
+			// Correct doubt: the liar took the pile; the doubter plays next (active unchanged).
+		}
+		else
+		{
+			// Wrong doubt: the doubter took the pile and loses the turn.
+			AdvanceTurn(State);
+		}
+
+		return Reveal;
+	}
 }
