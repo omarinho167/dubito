@@ -16,5 +16,14 @@ public class DubitoTests : ModuleRules
 			"DubitoCore",
 			"Dubito"
 		});
+
+		PrivateDependencyModuleNames.AddRange(new string[]
+		{
+			"CQTest",
+			"EngineSettings",
+			"LevelEditor",
+			"NetCore",
+			"UnrealEd"
+		});
 	}
 }

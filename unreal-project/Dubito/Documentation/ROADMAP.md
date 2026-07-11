@@ -20,8 +20,8 @@ This is the execution plan. It stays at phase, sub-phase, responsibility, and va
 | 1 | Unreal Bootstrap | Done | clean UE project, first-party V1 stack, source-control foundation | build the project shell before any gameplay |
 | 2 | Core Rules | Done | pure rule model with tests | prove game logic without actors, widgets, maps, or live networking |
 | 3 | Greybox Table | Done | readable local table, cards, camera, basic UI shell | prove readability and input before multiplayer complexity |
-| 4 | Network Framework | In Progress | host-authoritative replicated match state | connect Unreal framework to the pure rules while preserving privacy |
-| 5 | Full Gameplay Loop | Locked | Play, Doubt, Discard, timer, win, post-game | add one player-facing action or flow at a time |
+| 4 | Network Framework | Done | host-authoritative replicated match state | connect Unreal framework to the pure rules while preserving privacy |
+| 5 | Full Gameplay Loop | Next | Play, Doubt, Discard, timer, win, post-game | add one player-facing action or flow at a time |
 | 6 | Steam Multiplayer | Locked | Steam lobbies/invites tested on real machines | swap from local validation to the real Steam path |
 | 7 | V1 Polish | Locked | clarity, accessibility, UX pass, packaging | harden the already-playable game |
 | 8 | Release Prep | Locked | real AppID, depot, store/build checklist | prepare release only after V1 is proven |
@@ -164,7 +164,7 @@ Sub-phases:
 | 4.4 | Server action entry points | Done | Add server actions for Ready, Start Match, Play, Doubt, and Discard. | Valid actions reach the core rules and update replicated state. |
 | 4.5 | Controlled rejection and resync | Done | Handle stale turns, expired windows, illegal UI attempts, and ordinary invalid gameplay without disconnecting normal players. | Invalid ordinary actions produce a controlled rejection and state resync. |
 | 4.6 | Public events | Done | Add self-contained reveal and game-over events. | Reveal and game-over UI can render from event payloads without guessing hidden state. |
-| 4.7 | PIE privacy validation | Next | Run a 2 to 3 player listen-server PIE validation pass, with separate-process checks when needed. | Deal, turn advance, public claim, public ledgers, owner-only hands, and illegal-action behavior are verified. |
+| 4.7 | PIE privacy validation | Done | Run a 2 to 3 player listen-server PIE validation pass, with separate-process checks when needed. | Deal, turn advance, public claim, public ledgers, owner-only hands, and illegal-action behavior are verified. |
 
 Phase 4.0 outcome: `ADubitoGameMode` now owns the complete hidden match state on the server side, supports deterministic match setup from dealt hands or a shuffled deck, and exposes authority-only action methods that delegate legality and state mutation to `DubitoCore`. Replication, RPC entry points, UI binding, and live PIE privacy checks remain in later Phase 4 sub-phases.
 
@@ -179,6 +179,8 @@ Phase 4.4 outcome: `ADubitoPlayerController` now exposes reliable server actions
 Phase 4.5 outcome: ordinary invalid server actions now produce controlled owner-facing rejection reasons without using RPC validation disconnect paths. Rejected Ready, Start Match, Play, Doubt, and Discard requests ask `ADubitoGameMode` to resync public and owner-only state, and automation covers stale turns, unavailable windows, bad play payloads, not-ready start, and desynchronized private-hand repair.
 
 Phase 4.6 outcome: `ADubitoGameState` now publishes reliable public reveal and game-over events with self-contained payloads. Reveal events carry claimant, doubter, public claim, the doubted actual play, verdict, loser, claimed stake transfer, and pending-win confirmation data. Game-over events carry winner and reason for failed final Doubt, declined pending-win response, pending-win timeout, pending-win responder disconnect, last-player-standing, or no-players-remaining outcomes. Automation covers payload completeness and confirms timeout, disconnect, and declined pending-win paths do not expose reveal payloads.
+
+Phase 4.7 outcome: CQTest PIE network automation now launches a 2-client listen-server session, registers three deterministic players, starts a match from fixed hands, verifies public deal state and owner-only private hand replication on both clients, advances a bluffable claim without leaking opponent hands, and verifies stale illegal Discard returns a controlled rejection without disconnect. CommonUI now uses `UCommonGameViewportClient` so PIE validation starts without CommonUI viewport errors.
 
 Phase 4 is complete when:
 

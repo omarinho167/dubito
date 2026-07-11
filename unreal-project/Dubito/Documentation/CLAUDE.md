@@ -26,8 +26,8 @@ When executing roadmap work, pick the exact sub-phase ID from `Documentation/ROA
 ## Current Phase
 
 Phase 0 conception documentation, Phase 1 Unreal bootstrap, Phase 2 core rules, and Phase 3 greybox table are complete.
-Phase 4 is Network Framework. Phase 4.0, Phase 4.1, Phase 4.2, Phase 4.3, Phase 4.4, Phase 4.5, and Phase 4.6 are complete.
-Continue with Phase 4.7, then advance through the Phase 4 sub-phases in roadmap order unless the owner explicitly changes priorities.
+Phase 4 Network Framework is complete.
+Current implementation work starts at Phase 5 Full Gameplay Loop. Continue with Phase 5.0, then advance through the Phase 5 sub-phases in roadmap order unless the owner explicitly changes priorities.
 
 No gameplay code should be written during Phase 0. Documentation changes are allowed.
 
