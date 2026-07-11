@@ -17,8 +17,8 @@ This is the execution plan. It stays at phase, sub-phase, responsibility, and va
 | Phase | Name | Status | Goal | Sub-phase strategy |
 |---|---|---|---|---|
 | 0 | Conception | Done | compact, coherent V1 documentation | freeze the contract before implementation |
-| 1 | Unreal Bootstrap | Next | clean UE project, first-party V1 stack, source-control foundation | build the project shell before any gameplay |
-| 2 | Core Rules | Locked | pure rule model with tests | prove game logic without actors, widgets, maps, or live networking |
+| 1 | Unreal Bootstrap | Done | clean UE project, first-party V1 stack, source-control foundation | build the project shell before any gameplay |
+| 2 | Core Rules | Next | pure rule model with tests | prove game logic without actors, widgets, maps, or live networking |
 | 3 | Greybox Table | Locked | readable local table, cards, camera, basic UI shell | prove readability and input before multiplayer complexity |
 | 4 | Network Framework | Locked | host-authoritative replicated match state | connect Unreal framework to the pure rules while preserving privacy |
 | 5 | Full Gameplay Loop | Locked | Play, Doubt, Discard, timer, win, post-game | add one player-facing action or flow at a time |
@@ -77,7 +77,7 @@ Phase 0 is complete when:
 
 Goal: create the project foundation without gameplay complexity.
 
-Status: Next.
+Status: Done.
 
 Sub-phases:
 
