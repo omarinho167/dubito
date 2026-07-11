@@ -21,10 +21,12 @@ Read only what matches the task.
 | Execution order or phase status | `docs/ROADMAP.md` |
 
 Do not read every file by default. Start with the routed owner file, then open detail files only when the task needs them.
+When executing roadmap work, pick the exact sub-phase ID from `docs/ROADMAP.md`; do not treat a full phase as a single agent task.
 
 ## Current Phase
 
 Phase 0 conception documentation is complete. Phase 1 is Unreal bootstrap.
+Start with Phase 1.0, then advance through the Phase 1 sub-phases in roadmap order unless the owner explicitly changes priorities.
 
 No gameplay code should be written during Phase 0. Documentation changes are allowed.
 
@@ -36,7 +38,7 @@ No gameplay code should be written during Phase 0. Documentation changes are all
 - Unreal native replication plus Online Subsystem Steam.
 - CommonUI/UMG for menus and HUD; Enhanced Input for gameplay controls.
 - CommonUI is accepted because it is a built-in Unreal plugin.
-- No third-party plugin or external asset dependency in the V1 baseline.
+- No third-party runtime plugin or external asset dependency in the V1 baseline.
 - No MVVM dependency in V1.
 - Greybox/readable tavern and simple cards before final art.
 - V2 only: MetaHuman, Fab/Megascans, Lumen polish, Nanite, Niagara, emotes, Guillotine.
@@ -52,6 +54,7 @@ No gameplay code should be written during Phase 0. Documentation changes are all
 - Doubt is correct if actual count differs from claimed count, or if any actual card is not the round value.
 - Discard is legal only for the active player, only on a non-empty pile, and never while a win is pending.
 - Timeout auto-plays one card; truthful if possible, forced minimal bluff only when truth is impossible.
+- Timeout or disconnect during a pending-win response confirms the pending winner.
 
 ## Hidden Information Invariants
 
@@ -78,17 +81,19 @@ Public counts are ledgers, not proof. Own hand is exact. Pending-win is driven b
 ## Human Action Rules
 
 - If a task needs a human decision, account action, purchase, license review, or manual asset import, state it explicitly in
-  the relevant conception doc or roadmap phase.
+  the relevant conception doc or roadmap phase/sub-phase.
 - Assets are selected and imported by the project owner when a later phase needs them. Agents may define needed asset
   categories, license constraints, timing, and target folders, but must not assume or add external assets without explicit
   approval.
-- Additional plugins, tools, templates, or asset packs stay out of V1 unless the owner approves a documented blocker.
+- Runtime-affecting plugins, tools, templates, or asset packs stay out of V1 unless the owner approves a documented blocker.
+- Editor-only helper plugins may remain if they do not become V1 runtime dependencies.
 
 ## Documentation Rules
 
 - Phase 0 docs contain contracts, decisions, responsibilities, and validation criteria.
 - Do not add code snippets or command blocks to conception docs.
 - Inline identifiers are allowed when they name a future class, module, file, property, or Unreal concept.
+- Roadmap phases are milestones; roadmap sub-phases are execution units for agents.
 - If a fact appears in two docs, update both or remove one duplicate.
 - If this file changes, copy the exact same content to both `docs/AGENT.md` and `docs/CLAUDE.md`.
 

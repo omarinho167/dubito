@@ -1,38 +1,70 @@
 # Dubito - V1 Roadmap
 
-This is the execution plan. It stays at phase/task/validation level and intentionally avoids code snippets or command blocks.
+This is the execution plan. It stays at phase, sub-phase, responsibility, and validation level. It intentionally contains no code snippets, no command blocks, and no implementation recipes.
+
+## Roadmap Rules
+
+- Phases are milestones. Sub-phases are the execution units agents should pick up.
+- A sub-phase should be small enough for one focused agent session and large enough to leave the project in a testable state.
+- Each sub-phase has one main risk surface. Avoid combining core rules, network privacy, UI flow, Steam setup, and asset work in one unit.
+- Work should normally proceed one sub-phase at a time. Parallel work is allowed only where the dependency notes below explicitly say it is safe.
+- Every sub-phase must end with a clear validation result, an updated status, and any unresolved risk called out.
+- Human decisions, purchases, account actions, license checks, and external asset choices are explicit gates. Agents do not silently assume them.
+- Conceptual documentation stays conceptual: no code blocks, no command blocks, and no step-by-step shell instructions. Inline identifiers are allowed when they name planned files, modules, folders, properties, or Unreal concepts.
 
 ## Phase Overview
 
-| Phase | Name | Status | Goal |
-|---|---|---|---|
-| 0 | Conception | Done | compact, coherent V1 documentation |
-| 1 | Unreal Bootstrap | Next | clean UE project, first-party V1 stack, source-control foundation |
-| 2 | Core Rules | Locked | pure rule model with tests |
-| 3 | Greybox Table | Locked | readable local table, cards, camera, basic UI shell |
-| 4 | Network Framework | Locked | host-authoritative replicated match state |
-| 5 | Full Gameplay Loop | Locked | Play, Doubt, Discard, timer, win, post-game |
-| 6 | Steam Multiplayer | Locked | Steam lobbies/invites tested on real machines |
-| 7 | V1 Polish | Locked | clarity, accessibility, UX pass, packaging |
-| 8 | Release Prep | Locked | real AppID, depot, store/build checklist |
+| Phase | Name | Status | Goal | Sub-phase strategy |
+|---|---|---|---|---|
+| 0 | Conception | Done | compact, coherent V1 documentation | freeze the contract before implementation |
+| 1 | Unreal Bootstrap | Next | clean UE project, first-party V1 stack, source-control foundation | build the project shell before any gameplay |
+| 2 | Core Rules | Locked | pure rule model with tests | prove game logic without actors, widgets, maps, or live networking |
+| 3 | Greybox Table | Locked | readable local table, cards, camera, basic UI shell | prove readability and input before multiplayer complexity |
+| 4 | Network Framework | Locked | host-authoritative replicated match state | connect Unreal framework to the pure rules while preserving privacy |
+| 5 | Full Gameplay Loop | Locked | Play, Doubt, Discard, timer, win, post-game | add one player-facing action or flow at a time |
+| 6 | Steam Multiplayer | Locked | Steam lobbies/invites tested on real machines | swap from local validation to the real Steam path |
+| 7 | V1 Polish | Locked | clarity, accessibility, UX pass, packaging | harden the already-playable game |
+| 8 | Release Prep | Locked | real AppID, depot, store/build checklist | prepare release only after V1 is proven |
+
+## Dependency Strategy
+
+- Phase 1 unlocks all implementation work. Do not start gameplay implementation before the project, modules, source control rules, and required Unreal systems exist.
+- Phase 2 and Phase 3 can proceed partly in parallel after Phase 1, because pure rules and greybox readability are separate risk surfaces.
+- Phase 4 depends on the Phase 2 rules contract and enough Phase 3 UI/map structure to observe replicated state.
+- Phase 5 should be mostly sequential. Play, Doubt, Discard, timer, pending-win, and session flow each build on previous behavior.
+- Phase 6 depends on a validated local packaged loop. Steam should expose transport/session problems, not unfinished game-loop problems.
+- Phase 7 can identify polish needs earlier, but should not integrate external SFX or final UX polish before the full loop is stable.
+- Phase 8 is release preparation, not feature development. Any new feature request at that point should be treated as a scope change.
+
+## Sub-phase Template
+
+Use this mental template for every implementation handoff:
+
+- Objective: the one outcome this sub-phase must achieve.
+- Scope: the systems that may be changed.
+- Out of scope: adjacent work that must wait.
+- Human gate: any required owner action or approval.
+- Validation: what proves the sub-phase is complete.
+- Closeout: update status, note risks, and keep conception docs consistent if the contract changed.
 
 ## Phase 0 - Conception
 
 Goal: make V1 coherent before any gameplay code.
 
-Tasks:
+Status: Done.
 
-- [x] Define rules and hidden-count model.
-- [x] Define V1 scope versus V2.
-- [x] Define first-party V1 Unreal stack.
-- [x] Remove code snippets from conception docs.
-- [x] Split long reference material into routed detail docs.
-- [x] Mirror `docs/AGENT.md` and `docs/CLAUDE.md` exactly.
-- [x] Record CommonUI as accepted and keep other plugins/assets out of the V1 baseline.
-- [x] Record where human actions are required instead of letting agents assume them.
-- [x] Final contradiction pass after this refinement.
+Sub-phases:
 
-Done when:
+| ID | Name | Objective | Validation |
+|---|---|---|---|
+| 0.0 | V1 product contract | Define V1 promise, scope, V2 exclusions, and player fantasy. | `docs/DESIGN.md` clearly separates V1 from V2. |
+| 0.1 | Rules and hidden information | Define round value, claimed count bluff, Doubt, Discard, timer, pending-win, disconnect, and public ledgers. | Rules and edge cases agree with each other. |
+| 0.2 | First-party Unreal stack | Choose UE, native replication, Online Subsystem Steam, CommonUI/UMG, Enhanced Input, and no third-party or V2 plugin dependency. | `docs/ARCHITECTURE.md` has no avoidable beta or third-party baseline dependency. |
+| 0.3 | Agent routing | Keep docs concise and routed by task. | `docs/AGENT.md` and `docs/CLAUDE.md` are identical and explain what to read. |
+| 0.4 | Human action gates | Identify purchases, account actions, asset approval, and license checks before implementation. | Roadmap human-action table lists every known owner gate. |
+| 0.5 | Contradiction pass | Remove stale paths, accidental V2 scope, and implementation detail from conception docs. | No conception doc contains code fences or command blocks. |
+
+Phase 0 is complete when:
 
 - docs under `docs/` are concise enough for agents to route by task;
 - V1 stack has no avoidable beta or third-party dependency;
@@ -43,134 +75,144 @@ Done when:
 
 Goal: create the project foundation without gameplay complexity.
 
-Tasks:
+Status: Next.
 
-- [ ] Confirm installed Unreal version: 5.8 target, 5.7 fallback only if bootstrap blocks.
-- [ ] Create `DubitoUE` as a blank C++ Unreal project.
-- [ ] Copy the repository `docs/` folder into `DubitoUE/Documentation/`.
-- [ ] Keep all concept Markdown under `docs/`; do not scatter documentation outside that folder.
-- [ ] Add modules for rules, game runtime, and tests.
-- [ ] Enable required V1 systems: Online Subsystem Steam, Online Subsystem Utils, Common UI, UMG, Enhanced Input, Automation support.
-- [ ] Configure Git ignore rules before generated Unreal files accumulate.
-- [ ] Configure Git LFS before binary assets land.
-- [ ] Add local development AppID 480 setup for Steam testing.
-- [ ] Human: confirm installed Unreal version and local Steam testing account availability.
-- [ ] Human: confirm Git LFS is acceptable before any binary asset enters the repository.
+Sub-phases:
 
-Done when:
+| ID | Name | Objective | Validation |
+|---|---|---|---|
+| 1.0 | Human bootstrap gates | Confirm installed Unreal version, local Steam testing availability, and Git LFS policy before binary assets appear. | Owner decisions are recorded before project validation. |
+| 1.1 | Repository hygiene | Establish ignore and LFS rules before generated Unreal folders or binary assets accumulate. | Generated folders are not tracked, and binary asset policy is clear. |
+| 1.2 | Unreal project root | Use `unreal-project/Dubito/` as the Unreal project root and make it C++ capable before gameplay work. | Project opens with zero startup errors. |
+| 1.3 | Module foundation | Add `DubitoCore`, `Dubito`, and `DubitoTests` responsibilities without gameplay logic. | Modules compile and match the architecture contract. |
+| 1.4 | Required V1 systems | Enable Online Subsystem Steam, Online Subsystem Utils, Common UI, UMG, Enhanced Input, and Automation support. | Required systems are enabled; excluded systems remain out of V1. |
+| 1.5 | Documentation handoff | Copy the repository `docs/` folder into `unreal-project/Dubito/Documentation/` without fragmenting conceptual ownership. | Unreal project contains the docs, and root docs remain the source during conception. |
+| 1.6 | Steam dev setup | Add AppID 480 local development support without touching release configuration. | Local Steam testing prerequisites are present and documented. |
+
+Phase 1 is complete when:
 
 - project opens with zero startup errors;
 - modules compile;
-- required plugins/systems are enabled;
+- required plugins and systems are enabled;
 - source control ignores generated folders;
-- no binary assets are tracked outside LFS rules.
+- no binary assets are tracked outside LFS rules;
+- no gameplay code has been introduced prematurely.
 
 ## Phase 2 - Core Rules
 
 Goal: implement the engine-independent rule model first.
 
-Contracts to cover:
+Sub-phases:
 
-- card and deck integrity;
-- deterministic shuffle/deal;
-- hand add/remove semantics;
-- announcement validity;
-- locked round value;
-- claimed count bluff;
-- Doubt correctness for value and count lies;
-- discard legality;
-- timeout behavior;
-- pending-win window;
-- disconnection behavior;
-- public ledger updates versus hidden actual counts.
+| ID | Name | Objective | Validation |
+|---|---|---|---|
+| 2.0 | Card, deck, and hand primitives | Model card identity, deck integrity, deterministic shuffle/deal, and hand add/remove semantics. | Tests prove deck uniqueness, deal behavior, and hand mutation rules. |
+| 2.1 | Claims, round value, and ledgers | Model announcement validity, locked round value, claimed count, claimed pile ledger, and hidden actual pile state. | Tests prove public ledgers do not expose hidden actual counts. |
+| 2.2 | Action legality | Validate Play, Doubt, and Discard independently from UI and networking. | Tests cover legal and illegal action boundaries. |
+| 2.3 | Doubt and pile resolution | Resolve correct Doubt, wrong Doubt, pile transfer, round reset, and claimant/doubter turn outcomes. | Tests cover value lie, count lie, both lies, and honest play. |
+| 2.4 | Timer, disconnect, and pending win | Model timeout auto-play, anti-AFK disconnect, pending-win window, and last-player-standing behavior. | Tests cover timeout branches, final Doubt window, and disconnect outcomes. |
+| 2.5 | Edge-case matrix pass | Align implementation tests with `docs/v1/EDGE_CASES.md`. | Every must-cover edge case has an explicit test or a documented validation path. |
 
-Done when:
+Phase 2 is complete when:
 
 - rule tests pass;
 - rules do not depend on actors, widgets, maps, or live networking;
-- hidden-count invariants are tested.
+- hidden-count invariants are tested;
+- implementation behavior matches `docs/DESIGN.md` and `docs/v1/EDGE_CASES.md`.
 
 ## Phase 3 - Greybox Table
 
 Goal: make the game readable locally before multiplayer complexity.
 
-Tasks:
+Sub-phases:
 
-- [ ] Build Main Menu, Waiting Room, Table, and Post Game maps as greybox.
-- [ ] Add a seated camera with limited free-look.
-- [ ] Add table, 8 seats, center pile anchor, and simple player placeholders.
-- [ ] Add simple card visuals sufficient to identify own hand.
-- [ ] Add CommonUI/UMG shell for menu, HUD, action bar, confirm modal, reveal panel.
-- [ ] Prove gamepad focus/confirm works for menu and action bar.
-- [ ] Human, only if needed: select or approve external card/table placeholder assets after the agent specifies category,
-      license constraint, and target folder.
+| ID | Name | Objective | Validation |
+|---|---|---|---|
+| 3.0 | Map shell | Build Main Menu, Waiting Room, Table, and Post Game maps as greybox surfaces. | Maps exist, load, and match the planned flow. |
+| 3.1 | Seated table readability | Add seated camera, limited free-look, table, 8 seats, center pile anchor, and simple player placeholders. | One local player can read table orientation, seats, and center pile area. |
+| 3.2 | Card and pile presentation | Add simple own-hand cards, card backs, neutral opponent packets, and claimed stake presentation. | Own hand is exact; opponent packet and pile visuals do not imply actual hidden counts. |
+| 3.3 | UI shell | Add CommonUI/UMG shell for menu, waiting room, HUD, action bar, confirm modal, reveal panel, help card, and post-game. | Surfaces exist with placeholder content and no gameplay authority. |
+| 3.4 | Input baseline | Prove mouse, keyboard, and gamepad focus/confirm for menus and action bar. | No V1 UI surface requires mouse-only interaction. |
+| 3.5 | Visual asset gate | Decide whether internal placeholders are readable enough, or ask the owner for approved card/table placeholder assets. | Either primitives are accepted, or owner-approved asset constraints and target folders are recorded before import. |
 
-Done when:
+Phase 3 is complete when:
 
 - one local player can see the full table layout;
 - own hand and center pile areas are readable;
 - no UI surface requires mouse-only interaction;
-- opponent packet/pile presentation does not imply actual hidden counts.
+- opponent packet and pile presentation do not imply actual hidden counts;
+- external visual assets, if any, were explicitly approved by the owner.
 
 ## Phase 4 - Network Framework
 
 Goal: connect Unreal gameplay framework to the pure rule model.
 
-Tasks:
+Sub-phases:
 
-- [ ] Add server-only authority in GameMode.
-- [ ] Replicate public match state through GameState.
-- [ ] Replicate public player identity/readiness/ledger through PlayerState.
-- [ ] Replicate exact private hand only to the owning PlayerController.
-- [ ] Add server actions for Play, Doubt, Discard, Ready, and Start Match.
-- [ ] Add controlled rejection/resync for stale or illegal actions.
-- [ ] Add reveal and game-over public events.
-- [ ] Add server-authoritative turn timer.
+| ID | Name | Objective | Validation |
+|---|---|---|---|
+| 4.0 | Server authority bridge | Make GameMode own authoritative match state and route rule decisions through `DubitoCore`. | Actors and widgets render or send intent; they do not decide rules. |
+| 4.1 | Public GameState replication | Replicate phase, active player, round value, previous public claim, claimed pile ledger, pending-win flag, and timer deadline. | All players observe the same public state in PIE. |
+| 4.2 | PlayerState identity and ledgers | Replicate public player identity, seat, readiness, and public hand ledger. | Lobby and table can show public player state consistently. |
+| 4.3 | Owner-only private hand | Replicate exact private hand only to the owning PlayerController. | Non-owners cannot observe hand contents or actual played counts before reveal. |
+| 4.4 | Server action entry points | Add server actions for Ready, Start Match, Play, Doubt, and Discard. | Valid actions reach the core rules and update replicated state. |
+| 4.5 | Controlled rejection and resync | Handle stale turns, expired windows, illegal UI attempts, and ordinary invalid gameplay without disconnecting normal players. | Invalid ordinary actions produce a controlled rejection and state resync. |
+| 4.6 | Public events | Add self-contained reveal and game-over events. | Reveal and game-over UI can render from event payloads without guessing hidden state. |
+| 4.7 | PIE privacy validation | Run a 2 to 3 player listen-server PIE validation pass. | Deal, turn advance, public claim, public ledgers, owner-only hands, and illegal-action behavior are verified. |
 
-Done when:
+Phase 4 is complete when:
 
 - PIE listen-server test runs with 2 to 3 players;
 - deal, turn advance, public claim, public ledgers, and owner-only hands replicate correctly;
 - non-owners cannot observe actual played counts before reveal;
-- illegal actions reject without disconnecting ordinary players.
+- illegal actions reject without disconnecting ordinary players;
+- reveal and game-over events are self-contained enough for UI.
 
 ## Phase 5 - Full Gameplay Loop
 
 Goal: make one complete local/networked game playable.
 
-Tasks:
+Sub-phases:
 
-- [ ] Implement Play interaction: selection, claim, server confirmation, turn advance.
-- [ ] Implement Doubt interaction: hold-to-confirm, reveal, verdict, pile transfer.
-- [ ] Implement Discard interaction: confirmation, pile clear, skipped turn.
-- [ ] Implement timeout auto-play and anti-AFK disconnect behavior.
-- [ ] Implement pending-win and post-game flow.
-- [ ] Implement local session flow from menu to waiting room to table to post-game.
-- [ ] Add first-run help card and persistent help access.
-- [ ] Verify all edge cases in `docs/v1/EDGE_CASES.md`.
+| ID | Name | Objective | Validation |
+|---|---|---|---|
+| 5.0 | State display and table binding | Bind replicated state to the table HUD, seats, public claim, public ledgers, timer, and action availability. | A player can always answer whose turn it is, what claim can be judged, what actions are legal, and what public stake is shown. |
+| 5.1 | Play interaction | Implement selection, claim controls, server confirmation, hand update, claimed ledger update, and turn advance. | Play works from input to confirmed state without exposing actual hidden count to non-owners. |
+| 5.2 | Doubt interaction and reveal | Implement hold-to-confirm Doubt, reveal presentation, verdict, pile transfer, and post-reveal turn outcome. | Correct Doubt, wrong Doubt, value lie, count lie, and honest play are all readable and correct. |
+| 5.3 | Discard interaction | Implement Discard confirmation, pile clear, round value reset, and skipped turn. | Discard is legal only in the intended states and clearly explains blocked states. |
+| 5.4 | Timer and pending requests | Implement turn countdown, timeout auto-play, anti-AFK disconnect, and one-pending-request behavior. | Timeout branches match the rules and spammed input cannot create duplicate actions. |
+| 5.5 | Pending-win and Post Game | Implement final Doubt window, win confirmation, game-over reason, and post-game presentation. | Last-card play, correct final Doubt, wrong final Doubt, timeout confirmation, and last-player-standing are validated. |
+| 5.6 | Local session flow | Implement local host/join or null/LAN flow from Main Menu to Waiting Room to Table to Post Game and back. | Two local instances can enter a match, ready up, start, finish, and return without developer tools. |
+| 5.7 | First-run help | Add first-run help card, persistent help access, and contextual hints without blocking experienced play. | A new player can complete a turn and understand Doubt from on-screen cues. |
+| 5.8 | Edge-case validation | Verify every relevant case in `docs/v1/EDGE_CASES.md`. | Winner, wrong Doubt, right Doubt, discard, timeout, disconnect, modal, resize, and input robustness paths are covered. |
+| 5.9 | Packaged local full-game pass | Validate the loop in two packaged local instances. | Two packaged local instances complete a full game while preserving hidden information rules. |
 
-Done when:
+Phase 5 is complete when:
 
 - two packaged local instances can complete a full game;
 - winner, wrong Doubt, right Doubt, discard, timeout, and disconnect paths are all validated;
-- public ledger UI remains understandable and never pretends hidden counts are exact.
+- public ledger UI remains understandable and never pretends hidden counts are exact;
+- no required V1 flow depends on developer-only tools.
 
 ## Phase 6 - Steam Multiplayer
 
 Goal: prove the real Steam transport.
 
-Tasks:
+Sub-phases:
 
-- [ ] Configure Steam lobbies/sessions through Online Subsystem Steam.
-- [ ] Test AppID 480 locally with Steam running.
-- [ ] Test host, find, join, invite, and lobby full/error states.
-- [ ] Test two machines with two Steam accounts.
-- [ ] Verify travel from waiting room to table and back.
+| ID | Name | Objective | Validation |
+|---|---|---|---|
+| 6.0 | Steam test gate | Confirm two Steam accounts, two test machines, AppID 480 expectations, and owner availability. | Human prerequisites are explicit before Steam validation begins. |
+| 6.1 | Steam session configuration | Configure Steam lobbies and sessions through Online Subsystem Steam. | Host session creation works outside PIE with Steam running. |
+| 6.2 | Discovery, join, and invite | Test host, find, join, invite, full lobby, not found, and already-started paths. | Join paths are reliable enough for V1 and failure states are understandable. |
+| 6.3 | Steam travel flow | Validate waiting room to table and back through the Steam session path. | Steam travel does not bypass readiness, rules, or privacy validation. |
+| 6.4 | Two-machine full-game test | Play a full game on two machines with two Steam accounts. | Both players complete a game; each sees only their own exact hand. |
+| 6.5 | Steam regression pass | Re-test host leave, disconnect, illegal actions, and hidden-information invariants under Steam. | No Steam-only path bypasses rule validation or hidden information rules. |
 
-Done when:
+Phase 6 is complete when:
 
 - Steam-hosted match works outside PIE;
-- invite/join flow is reliable enough for V1;
+- invite and join flow is reliable enough for V1;
 - host leave ends the session gracefully;
 - no Steam-only path bypasses rule validation or hidden information rules.
 
@@ -178,38 +220,40 @@ Done when:
 
 Goal: make the playable game clear, robust, and shippable enough for first release testing.
 
-Tasks:
+Sub-phases:
 
-- [ ] Pass through every disabled-action reason.
-- [ ] Pass through gamepad/keyboard/mouse navigation.
-- [ ] Add reduce-motion support.
-- [ ] Add simple SFX for key actions.
-- [ ] Add readable timing and feedback for pending state.
-- [ ] Fix text overflow at 1280x800 and common desktop resolutions.
-- [ ] Package a Development build for external playtest.
-- [ ] Human, only if needed: select or approve external SFX after the agent specifies exact event list, license constraint,
-      and target folder.
+| ID | Name | Objective | Validation |
+|---|---|---|---|
+| 7.0 | Disabled-action clarity | Pass through every disabled-action reason on hover, focus, or press. | Players understand why every unavailable action is blocked. |
+| 7.1 | Input and layout robustness | Pass through gamepad, keyboard, mouse, resize, and common desktop resolutions. | Critical text and action controls remain visible and usable. |
+| 7.2 | Accessibility and motion | Add reduce-motion support and readable pending-state feedback. | Reduced motion preserves clarity without cinematic camera movement. |
+| 7.3 | SFX gate and integration | Ask the owner for approved SFX only after exact event needs are known, then add simple feedback sounds. | Audio exists for key actions without introducing unapproved assets. |
+| 7.4 | Repeated playtest hardening | Run repeated full-game playtests and fix friction, dead ends, and unclear states. | Packaged build survives repeated full-game playtests. |
+| 7.5 | External playtest build | Package a Development build suitable for owner-approved external playtest. | No V1 flow requires developer tools, and known limitations are recorded. |
 
-Done when:
+Phase 7 is complete when:
 
-- new players understand turn, claim, legal actions, and public stake without explanation;
+- new players understand turn, claim, legal actions, and public stake without verbal explanation;
 - no V1 flow requires developer tools;
-- packaged build survives repeated full-game playtests.
+- packaged build survives repeated full-game playtests;
+- any external SFX were owner-approved with license and target folder constraints.
 
 ## Phase 8 - Release Prep
 
 Goal: prepare the Steam release path after V1 is proven.
 
-Tasks:
+Sub-phases:
 
-- [ ] Purchase/activate the real Steam app credit.
-- [ ] Replace development AppID with real AppID in release configuration.
-- [ ] Remove local `steam_appid.txt` from shipped depot.
-- [ ] Prepare store capsule, screenshots, description, and build depot.
-- [ ] Run release packaging validation.
-- [ ] Human: provide or approve final Steamworks assets and any required account/payment actions.
+| ID | Name | Objective | Validation |
+|---|---|---|---|
+| 8.0 | Steamworks human gate | Purchase or activate the real Steam app credit and obtain the real AppID. | Owner account/payment actions are complete. |
+| 8.1 | Release app configuration | Replace development AppID usage with release configuration. | Shipping build launches through Steam with the real AppID. |
+| 8.2 | Depot hygiene | Ensure local development files are not shipped in the Steam depot. | Release package contains no local-only Steam development file. |
+| 8.3 | Store assets and screenshots | Prepare or import owner-approved capsule art, screenshots, description, and store metadata. | Steamworks store checklist has no blocking asset or metadata item. |
+| 8.4 | Release packaging validation | Validate the final Shipping build and depot upload path. | Steamworks release checklist has no blocking technical item. |
+| 8.5 | V1 scope freeze | Freeze V1 unless a release blocker appears. | No new feature work enters the release branch without explicit scope change. |
 
-Done when:
+Phase 8 is complete when:
 
 - Steamworks release checklist has no blocking technical item;
 - Shipping build launches through Steam;
@@ -217,13 +261,24 @@ Done when:
 
 ## Human Actions By Phase
 
-Agents must call these out when the phase is reached instead of silently assuming them.
+Agents must call these out when the phase or sub-phase is reached instead of silently assuming them.
 
-| Phase | Human action | Trigger |
+| Phase or sub-phase | Human action | Trigger |
 |---|---|---|
-| 1 | Confirm installed Unreal version and Steam account availability for local testing | before bootstrap validation |
-| 1 | Confirm Git LFS/locking policy | before any `.uasset`, `.umap`, audio, or texture file is tracked |
-| 3 | Select or approve external visual assets only if placeholders are not readable enough | before import into `DubitoUE/Content/Cards/` or `DubitoUE/Content/Art/Prototype/` |
-| 6 | Provide two Steam accounts and two test machines, or explicitly accept a reduced test pass | before Steam multiplayer validation |
-| 7 | Select or approve external SFX only after exact event needs are known | before import into `DubitoUE/Content/Audio/SFX/` |
-| 8 | Purchase/activate Steam app credit, provide real AppID, approve store assets | before release packaging |
+| 1.0 | Confirm installed Unreal version and Steam account availability for local testing | before bootstrap validation |
+| 1.0 | Confirm Git LFS and locking policy | before any `.uasset`, `.umap`, audio, or texture file is tracked |
+| 3.5 | Select or approve external visual assets only if placeholders are not readable enough | before import into `unreal-project/Dubito/Content/Cards/` or `unreal-project/Dubito/Content/Art/Prototype/` |
+| 6.0 | Provide two Steam accounts and two test machines, or explicitly accept a reduced test pass | before Steam multiplayer validation |
+| 7.3 | Select or approve external SFX only after exact event needs are known | before import into `unreal-project/Dubito/Content/Audio/SFX/` |
+| 8.0 | Purchase or activate Steam app credit and provide real AppID | before release app configuration |
+| 8.3 | Provide or approve Steam store assets and marketing copy | before release packaging |
+
+## Agent Closeout Criteria
+
+Before an agent marks any sub-phase complete:
+
+- the validation criteria for that exact sub-phase are met or the sub-phase stays in progress;
+- any changed rule, architecture, UX, asset, or roadmap decision is reflected in the matching conception doc;
+- hidden-information and owner-approval constraints have not been weakened;
+- no conceptual doc gained code fences or command blocks;
+- remaining risks are named in the handoff instead of being hidden in implementation details.

@@ -87,7 +87,7 @@ Read this file only when implementing, testing, or reviewing rules/UX behavior.
 | Next player doubts correctly | Would-be winner takes pile; game continues |
 | Next player doubts wrongly | Winner confirmed |
 | Next player plays or times out | Winner confirmed |
-| Next player disconnects during pending win | Winner confirmed unless design later chooses stricter rule |
+| Next player disconnects during pending win | Winner confirmed |
 | Last remaining player | Wins automatically |
 
 ## Connection And Session

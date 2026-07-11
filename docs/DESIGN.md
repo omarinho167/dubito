@@ -107,6 +107,8 @@ On timeout:
 4. claim truthfully if possible;
 5. if the locked round value makes truth impossible, perform a forced minimal bluff.
 
+Exception: during a pending-win response, timeout confirms the pending winner instead of auto-playing.
+
 Timeout never auto-discards.
 
 ### Winning
@@ -115,7 +117,7 @@ Timeout never auto-discards.
 - The next player may still Doubt.
 - Correct Doubt cancels the win because the would-be winner takes cards back.
 - Wrong Doubt confirms the win.
-- No Doubt confirms the win when the next player plays or times out.
+- No Doubt confirms the win when the next player starts Play, times out, or disconnects during the pending-win response.
 - Discard is blocked during pending win.
 
 ### Disconnection
@@ -123,6 +125,7 @@ Timeout never auto-discards.
 - A disconnected player's hand is removed from the game.
 - The center pile remains.
 - If the disconnected player was the previous claimant, their claim is no longer doubtable, but the pile and round value stay.
+- If a player disconnects while they are the pending-win responder, the pending winner is confirmed.
 - If only one player remains, that player wins.
 - If the host leaves, the match ends for everyone.
 
@@ -211,10 +214,10 @@ Expected asset categories, when needed:
 
 | Category | Timing | Target |
 |---|---|---|
-| Card faces, backs, and simple card materials | Phase 3 if internal placeholders are not readable enough | `DubitoUE/Content/Cards/` |
-| Tavern table, seats, and neutral player placeholders | Phase 3 only if greybox primitives block readability | `DubitoUE/Content/Art/Prototype/` |
-| Action and UI SFX | Phase 7 after full gameplay loop validation | `DubitoUE/Content/Audio/SFX/` |
-| Store and marketing art | Phase 8 release prep | Steamworks and `DubitoUE/Content/Art/Marketing/` if a project copy is needed |
+| Card faces, backs, and simple card materials | Phase 3 if internal placeholders are not readable enough | `unreal-project/Dubito/Content/Cards/` |
+| Tavern table, seats, and neutral player placeholders | Phase 3 only if greybox primitives block readability | `unreal-project/Dubito/Content/Art/Prototype/` |
+| Action and UI SFX | Phase 7 after full gameplay loop validation | `unreal-project/Dubito/Content/Audio/SFX/` |
+| Store and marketing art | Phase 8 release prep | Steamworks and `unreal-project/Dubito/Content/Art/Marketing/` if a project copy is needed |
 
 ## Open Playtest Knobs
 
