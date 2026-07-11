@@ -238,6 +238,114 @@ bool FDubitoAuthorityBridgePendingWinPublicStateTest::RunTest(const FString&)
 	return true;
 }
 
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDubitoAuthorityBridgePublicEventsTest, "Dubito.Unreal.AuthorityBridge.PublicEvents", DubitoAuthorityFlags)
+bool FDubitoAuthorityBridgePublicEventsTest::RunTest(const FString&)
+{
+	UWorld* World = CreateAuthorityTestWorld();
+	ADubitoGameMode* GameMode = SpawnAuthorityGameMode(World);
+	ADubitoGameState* PublicGameState = World ? World->GetGameState<ADubitoGameState>() : nullptr;
+	TestNotNull(TEXT("GameMode spawns in transient authority world"), GameMode);
+	TestNotNull(TEXT("Dubito GameState exists in authority world"), PublicGameState);
+
+	if (GameMode && PublicGameState)
+	{
+		auto TestMulticastRpc = [this](const TCHAR* FunctionName)
+		{
+			const UFunction* Function = ADubitoGameState::StaticClass()->FindFunctionByName(FunctionName);
+			TestNotNull(FString::Printf(TEXT("%s RPC exists"), FunctionName), Function);
+			if (Function)
+			{
+				TestTrue(FString::Printf(TEXT("%s is a net RPC"), FunctionName), Function->HasAnyFunctionFlags(FUNC_Net));
+				TestTrue(FString::Printf(TEXT("%s multicasts to public observers"), FunctionName), Function->HasAnyFunctionFlags(FUNC_NetMulticast));
+				TestTrue(FString::Printf(TEXT("%s is reliable for terminal/reveal UI"), FunctionName), Function->HasAnyFunctionFlags(FUNC_NetReliable));
+			}
+		};
+
+		TestMulticastRpc(TEXT("MulticastPublicReveal"));
+		TestMulticastRpc(TEXT("MulticastGameOver"));
+
+		TestEqual(TEXT("Valid start succeeds for reveal event"), static_cast<int32>(GameMode->StartAuthoritativeMatchFromHands({ 10, 20 }, MakeTwoPlayerHands())), static_cast<int32>(EDubitoAuthorityStartResult::Success));
+		TestEqual(TEXT("Opening value lie succeeds"), static_cast<int32>(GameMode->AuthorityPlayCards(10, { C(EDubitoSuit::Clubs, 2) }, FDubitoAnnouncement(7, 1))), static_cast<int32>(EDubitoPlayValidity::Valid));
+		TestEqual(TEXT("Play alone does not reveal actual cards"), PublicGameState->GetPublicRevealEventCount(), 0);
+
+		FDubitoRevealInfo Reveal;
+		TestTrue(TEXT("Active next player resolves Doubt"), GameMode->AuthorityResolveDoubt(20, Reveal));
+		TestEqual(TEXT("Doubt emits one public reveal event"), PublicGameState->GetPublicRevealEventCount(), 1);
+		TestEqual(TEXT("Non-terminal reveal does not emit GameOver"), PublicGameState->GetGameOverEventCount(), 0);
+
+		const FDubitoRevealInfo PublicReveal = PublicGameState->GetLastPublicReveal();
+		TestEqual(TEXT("Reveal claimant is public"), PublicReveal.ClaimantId, 10);
+		TestEqual(TEXT("Reveal doubter is public"), PublicReveal.DoubterId, 20);
+		TestEqual(TEXT("Reveal includes claimed value"), PublicReveal.Claim.ClaimedValue, 7);
+		TestEqual(TEXT("Reveal includes claimed count"), PublicReveal.Claim.ClaimedCount, 1);
+		TestEqual(TEXT("Reveal exposes only the doubted actual play"), PublicReveal.RevealedCards.Num(), 1);
+		TestTrue(TEXT("Reveal includes the doubted actual card"), PublicReveal.RevealedCards.Contains(C(EDubitoSuit::Clubs, 2)));
+		TestTrue(TEXT("Reveal carries verdict"), PublicReveal.bWasLie);
+		TestEqual(TEXT("Reveal carries loser"), PublicReveal.LoserId, 10);
+		TestEqual(TEXT("Reveal carries claimed stake transfer"), PublicReveal.ClaimedStakeTransferred, 1);
+		TestFalse(TEXT("Non-terminal reveal does not confirm win"), PublicReveal.bWinConfirmed);
+		TestEqual(TEXT("Non-terminal reveal has no winner"), PublicReveal.WinnerId, DubitoConstants::NoPlayerId);
+
+		TMap<int32, FDubitoHand> FinalHands;
+		FinalHands.Add(10, MakeHand({ C(EDubitoSuit::Clubs, 7) }));
+		FinalHands.Add(20, MakeHand({ C(EDubitoSuit::Spades, 7) }));
+
+		const int32 RevealEventsBeforeFinalDoubt = PublicGameState->GetPublicRevealEventCount();
+		const int32 GameOverEventsBeforeFinalDoubt = PublicGameState->GetGameOverEventCount();
+		TestEqual(TEXT("Restart valid match for wrong final Doubt"), static_cast<int32>(GameMode->StartAuthoritativeMatchFromHands({ 10, 20 }, FinalHands)), static_cast<int32>(EDubitoAuthorityStartResult::Success));
+		TestEqual(TEXT("Last-card truthful play creates pending win"), static_cast<int32>(GameMode->AuthorityPlayCards(10, { C(EDubitoSuit::Clubs, 7) }, FDubitoAnnouncement(7, 1))), static_cast<int32>(EDubitoPlayValidity::Valid));
+		TestTrue(TEXT("Wrong final Doubt resolves"), GameMode->AuthorityResolveDoubt(20, Reveal));
+		TestEqual(TEXT("Terminal Doubt emits one more reveal"), PublicGameState->GetPublicRevealEventCount(), RevealEventsBeforeFinalDoubt + 1);
+		TestEqual(TEXT("Wrong final Doubt emits GameOver"), PublicGameState->GetGameOverEventCount(), GameOverEventsBeforeFinalDoubt + 1);
+		TestTrue(TEXT("Terminal reveal confirms win"), PublicGameState->GetLastPublicReveal().bWinConfirmed);
+		TestEqual(TEXT("Terminal reveal carries winner"), PublicGameState->GetLastPublicReveal().WinnerId, 10);
+		TestEqual(TEXT("GameOver winner is public"), PublicGameState->GetLastGameOver().WinnerId, 10);
+		TestEqual(TEXT("GameOver reason is failed pending-win Doubt"), PublicGameState->GetLastGameOver().Reason, EDubitoGameOverReason::PendingWinDoubtFailed);
+
+		const int32 RevealEventsBeforeDecline = PublicGameState->GetPublicRevealEventCount();
+		const int32 GameOverEventsBeforeDecline = PublicGameState->GetGameOverEventCount();
+		TestEqual(TEXT("Restart valid match for pending-win decline"), static_cast<int32>(GameMode->StartAuthoritativeMatchFromHands({ 10, 20 }, FinalHands)), static_cast<int32>(EDubitoAuthorityStartResult::Success));
+		TestEqual(TEXT("Last-card truthful play creates pending win again"), static_cast<int32>(GameMode->AuthorityPlayCards(10, { C(EDubitoSuit::Clubs, 7) }, FDubitoAnnouncement(7, 1))), static_cast<int32>(EDubitoPlayValidity::Valid));
+		TestEqual(TEXT("Responder valid play declines pending-win Doubt window"), static_cast<int32>(GameMode->AuthorityPlayCards(20, { C(EDubitoSuit::Spades, 7) }, FDubitoAnnouncement(7, 1))), static_cast<int32>(EDubitoPlayValidity::Valid));
+		TestEqual(TEXT("Declining pending-win does not emit reveal"), PublicGameState->GetPublicRevealEventCount(), RevealEventsBeforeDecline);
+		TestEqual(TEXT("Declining pending-win emits GameOver"), PublicGameState->GetGameOverEventCount(), GameOverEventsBeforeDecline + 1);
+		TestEqual(TEXT("Decline GameOver winner is pending winner"), PublicGameState->GetLastGameOver().WinnerId, 10);
+		TestEqual(TEXT("Decline GameOver reason is explicit"), PublicGameState->GetLastGameOver().Reason, EDubitoGameOverReason::PendingWinDeclined);
+
+		const int32 RevealEventsBeforeTimeout = PublicGameState->GetPublicRevealEventCount();
+		const int32 GameOverEventsBeforeTimeout = PublicGameState->GetGameOverEventCount();
+		TestEqual(TEXT("Restart valid match for pending-win timeout"), static_cast<int32>(GameMode->StartAuthoritativeMatchFromHands({ 10, 20 }, FinalHands)), static_cast<int32>(EDubitoAuthorityStartResult::Success));
+		TestEqual(TEXT("Last-card truthful play creates pending win before timeout"), static_cast<int32>(GameMode->AuthorityPlayCards(10, { C(EDubitoSuit::Clubs, 7) }, FDubitoAnnouncement(7, 1))), static_cast<int32>(EDubitoPlayValidity::Valid));
+		GameMode->AuthorityResolveTimeout(20);
+		TestEqual(TEXT("Pending-win timeout does not emit reveal"), PublicGameState->GetPublicRevealEventCount(), RevealEventsBeforeTimeout);
+		TestEqual(TEXT("Pending-win timeout emits GameOver"), PublicGameState->GetGameOverEventCount(), GameOverEventsBeforeTimeout + 1);
+		TestEqual(TEXT("Timeout GameOver winner is pending winner"), PublicGameState->GetLastGameOver().WinnerId, 10);
+		TestEqual(TEXT("Timeout GameOver reason is explicit"), PublicGameState->GetLastGameOver().Reason, EDubitoGameOverReason::PendingWinTimeout);
+
+		const int32 RevealEventsBeforePendingDisconnect = PublicGameState->GetPublicRevealEventCount();
+		const int32 GameOverEventsBeforePendingDisconnect = PublicGameState->GetGameOverEventCount();
+		TestEqual(TEXT("Restart valid match for pending-win responder disconnect"), static_cast<int32>(GameMode->StartAuthoritativeMatchFromHands({ 10, 20 }, FinalHands)), static_cast<int32>(EDubitoAuthorityStartResult::Success));
+		TestEqual(TEXT("Last-card truthful play creates pending win before disconnect"), static_cast<int32>(GameMode->AuthorityPlayCards(10, { C(EDubitoSuit::Clubs, 7) }, FDubitoAnnouncement(7, 1))), static_cast<int32>(EDubitoPlayValidity::Valid));
+		GameMode->AuthorityHandleDisconnect(20);
+		TestEqual(TEXT("Pending-win responder disconnect does not emit reveal"), PublicGameState->GetPublicRevealEventCount(), RevealEventsBeforePendingDisconnect);
+		TestEqual(TEXT("Pending-win responder disconnect emits GameOver"), PublicGameState->GetGameOverEventCount(), GameOverEventsBeforePendingDisconnect + 1);
+		TestEqual(TEXT("Responder disconnect GameOver winner is pending winner"), PublicGameState->GetLastGameOver().WinnerId, 10);
+		TestEqual(TEXT("Responder disconnect GameOver reason is explicit"), PublicGameState->GetLastGameOver().Reason, EDubitoGameOverReason::PendingWinResponderDisconnected);
+
+		const int32 RevealEventsBeforeStandingWin = PublicGameState->GetPublicRevealEventCount();
+		const int32 GameOverEventsBeforeStandingWin = PublicGameState->GetGameOverEventCount();
+		TestEqual(TEXT("Restart valid match for last-player-standing disconnect"), static_cast<int32>(GameMode->StartAuthoritativeMatchFromHands({ 10, 20 }, MakeTwoPlayerHands())), static_cast<int32>(EDubitoAuthorityStartResult::Success));
+		GameMode->AuthorityHandleDisconnect(20);
+		TestEqual(TEXT("Last-player-standing disconnect does not emit reveal"), PublicGameState->GetPublicRevealEventCount(), RevealEventsBeforeStandingWin);
+		TestEqual(TEXT("Last-player-standing disconnect emits GameOver"), PublicGameState->GetGameOverEventCount(), GameOverEventsBeforeStandingWin + 1);
+		TestEqual(TEXT("Last-player-standing winner is public"), PublicGameState->GetLastGameOver().WinnerId, 10);
+		TestEqual(TEXT("Last-player-standing reason is explicit"), PublicGameState->GetLastGameOver().Reason, EDubitoGameOverReason::LastPlayerStanding);
+	}
+
+	DestroyAuthorityTestWorld(World);
+	return true;
+}
+
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDubitoAuthorityBridgePrivateHandTest, "Dubito.Unreal.AuthorityBridge.PrivateHand", DubitoAuthorityFlags)
 bool FDubitoAuthorityBridgePrivateHandTest::RunTest(const FString&)
 {

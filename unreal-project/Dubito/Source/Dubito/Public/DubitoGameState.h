@@ -4,7 +4,32 @@
 #include "GameFramework/GameStateBase.h"
 #include "DubitoAnnouncement.h"
 #include "DubitoMatchState.h"
+#include "DubitoReveal.h"
 #include "DubitoGameState.generated.h"
+
+UENUM(BlueprintType)
+enum class EDubitoGameOverReason : uint8
+{
+	Unknown,
+	PendingWinDoubtFailed,
+	PendingWinDeclined,
+	PendingWinTimeout,
+	PendingWinResponderDisconnected,
+	LastPlayerStanding,
+	NoPlayersRemaining
+};
+
+USTRUCT(BlueprintType)
+struct DUBITO_API FDubitoGameOverInfo
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadOnly, Category = "Dubito|Public Events")
+	int32 WinnerId = DubitoConstants::NoPlayerId;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Dubito|Public Events")
+	EDubitoGameOverReason Reason = EDubitoGameOverReason::Unknown;
+};
 
 /**
  * Replicated public match state for Phase 4.1.
@@ -23,6 +48,14 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	void SyncFromAuthoritativeState(const FDubitoMatchState& State, double InTurnDeadlineServerTimeSeconds);
+	void PublishPublicReveal(const FDubitoRevealInfo& Reveal);
+	void PublishGameOver(const FDubitoGameOverInfo& GameOver);
+
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastPublicReveal(const FDubitoRevealInfo& Reveal);
+
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastGameOver(const FDubitoGameOverInfo& GameOver);
 
 	UFUNCTION(BlueprintPure, Category = "Dubito|Public State")
 	EDubitoPhase GetPublicPhase() const { return PublicPhase; }
@@ -51,6 +84,18 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Dubito|Public State")
 	double GetTurnDeadlineServerTimeSeconds() const { return TurnDeadlineServerTimeSeconds; }
 
+	UFUNCTION(BlueprintPure, Category = "Dubito|Public Events")
+	FDubitoRevealInfo GetLastPublicReveal() const { return LastPublicReveal; }
+
+	UFUNCTION(BlueprintPure, Category = "Dubito|Public Events")
+	int32 GetPublicRevealEventCount() const { return PublicRevealEventCount; }
+
+	UFUNCTION(BlueprintPure, Category = "Dubito|Public Events")
+	FDubitoGameOverInfo GetLastGameOver() const { return LastGameOver; }
+
+	UFUNCTION(BlueprintPure, Category = "Dubito|Public Events")
+	int32 GetGameOverEventCount() const { return GameOverEventCount; }
+
 protected:
 	UFUNCTION()
 	void OnRep_PublicMatchState();
@@ -58,7 +103,18 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Dubito|Public State")
 	void OnPublicMatchStateUpdated();
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "Dubito|Public Events")
+	void OnPublicReveal(const FDubitoRevealInfo& Reveal);
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Dubito|Public Events")
+	void OnGameOver(const FDubitoGameOverInfo& GameOver);
+
 private:
+	FDubitoRevealInfo LastPublicReveal;
+	int32 PublicRevealEventCount = 0;
+	FDubitoGameOverInfo LastGameOver;
+	int32 GameOverEventCount = 0;
+
 	UPROPERTY(ReplicatedUsing = OnRep_PublicMatchState, BlueprintReadOnly, Category = "Dubito|Public State", meta = (AllowPrivateAccess = "true"))
 	EDubitoPhase PublicPhase = EDubitoPhase::Lobby;
 

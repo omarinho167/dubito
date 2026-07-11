@@ -6,6 +6,49 @@
 #include "DubitoPlayerController.h"
 #include "DubitoPlayerState.h"
 
+namespace
+{
+	ADubitoGameState* ResolvePublicGameState(ADubitoGameMode* GameMode)
+	{
+		UWorld* World = GameMode ? GameMode->GetWorld() : nullptr;
+		return World ? World->GetGameState<ADubitoGameState>() : nullptr;
+	}
+
+	void BroadcastPublicReveal(ADubitoGameMode* GameMode, const FDubitoRevealInfo& Reveal)
+	{
+		if (ADubitoGameState* PublicGameState = ResolvePublicGameState(GameMode))
+		{
+			PublicGameState->PublishPublicReveal(Reveal);
+		}
+	}
+
+	void BroadcastGameOver(ADubitoGameMode* GameMode, EDubitoGameOverReason Reason)
+	{
+		if (!GameMode)
+		{
+			return;
+		}
+
+		if (ADubitoGameState* PublicGameState = ResolvePublicGameState(GameMode))
+		{
+			FDubitoGameOverInfo GameOver;
+			GameOver.WinnerId = GameMode->GetAuthoritativeMatchState().WinnerId;
+			GameOver.Reason = Reason;
+			PublicGameState->PublishGameOver(GameOver);
+		}
+	}
+
+	void BroadcastGameOverIfNeeded(ADubitoGameMode* GameMode, EDubitoPhase PreviousPhase, EDubitoGameOverReason Reason)
+	{
+		if (GameMode
+			&& PreviousPhase != EDubitoPhase::GameOver
+			&& GameMode->GetAuthoritativeMatchState().Phase == EDubitoPhase::GameOver)
+		{
+			BroadcastGameOver(GameMode, Reason);
+		}
+	}
+}
+
 ADubitoGameMode::ADubitoGameMode()
 {
 	bReplicates = false;
@@ -140,10 +183,16 @@ EDubitoPlayValidity ADubitoGameMode::AuthorityPlayCards(int32 PlayerId, const TA
 		return Validation;
 	}
 
+	const EDubitoPhase PreviousPhase = AuthoritativeMatchState.Phase;
+	const bool bWasPendingWin = AuthoritativeMatchState.HasPendingWin();
 	DubitoRules::NoteVoluntaryAction(AuthoritativeMatchState, PlayerId);
 	DubitoRules::ApplyPlay(AuthoritativeMatchState, PlayerId, ActualCards, Announcement);
 	RefreshTurnDeadlineForCurrentState();
 	SyncReplicatedState();
+	if (bWasPendingWin)
+	{
+		BroadcastGameOverIfNeeded(this, PreviousPhase, EDubitoGameOverReason::PendingWinDeclined);
+	}
 	return EDubitoPlayValidity::Valid;
 }
 
@@ -156,10 +205,13 @@ bool ADubitoGameMode::AuthorityResolveDoubt(int32 PlayerId, FDubitoRevealInfo& O
 		return false;
 	}
 
+	const EDubitoPhase PreviousPhase = AuthoritativeMatchState.Phase;
 	DubitoRules::NoteVoluntaryAction(AuthoritativeMatchState, PlayerId);
 	OutReveal = DubitoRules::ResolveDoubt(AuthoritativeMatchState, PlayerId);
 	RefreshTurnDeadlineForCurrentState();
 	SyncReplicatedState();
+	BroadcastPublicReveal(this, OutReveal);
+	BroadcastGameOverIfNeeded(this, PreviousPhase, EDubitoGameOverReason::PendingWinDoubtFailed);
 	return true;
 }
 
@@ -184,9 +236,12 @@ void ADubitoGameMode::AuthorityResolveTimeout(int32 PlayerId)
 		return;
 	}
 
+	const EDubitoPhase PreviousPhase = AuthoritativeMatchState.Phase;
+	const bool bWasPendingWin = AuthoritativeMatchState.HasPendingWin();
 	DubitoRules::ResolveTimeout(AuthoritativeMatchState, PlayerId);
 	RefreshTurnDeadlineForCurrentState();
 	SyncReplicatedState();
+	BroadcastGameOverIfNeeded(this, PreviousPhase, bWasPendingWin ? EDubitoGameOverReason::PendingWinTimeout : EDubitoGameOverReason::LastPlayerStanding);
 }
 
 void ADubitoGameMode::AuthorityHandleDisconnect(int32 PlayerId)
@@ -196,9 +251,15 @@ void ADubitoGameMode::AuthorityHandleDisconnect(int32 PlayerId)
 		return;
 	}
 
+	const EDubitoPhase PreviousPhase = AuthoritativeMatchState.Phase;
+	const bool bWasPendingWinResponder = AuthoritativeMatchState.HasPendingWin() && AuthoritativeMatchState.ActivePlayerId() == PlayerId;
 	DubitoRules::HandleDisconnect(AuthoritativeMatchState, PlayerId);
 	RefreshTurnDeadlineForCurrentState();
 	SyncReplicatedState();
+	const EDubitoGameOverReason Reason = bWasPendingWinResponder
+		? EDubitoGameOverReason::PendingWinResponderDisconnected
+		: (AuthoritativeMatchState.WinnerId == DubitoConstants::NoPlayerId ? EDubitoGameOverReason::NoPlayersRemaining : EDubitoGameOverReason::LastPlayerStanding);
+	BroadcastGameOverIfNeeded(this, PreviousPhase, Reason);
 }
 
 bool ADubitoGameMode::RegisterAuthorityPlayerState(ADubitoPlayerState* PlayerState, int32 PlayerId, int32 SeatIndex)
