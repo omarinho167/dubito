@@ -18,8 +18,8 @@ This is the execution plan. It stays at phase, sub-phase, responsibility, and va
 |---|---|---|---|---|
 | 0 | Conception | Done | compact, coherent V1 documentation | freeze the contract before implementation |
 | 1 | Unreal Bootstrap | Done | clean UE project, first-party V1 stack, source-control foundation | build the project shell before any gameplay |
-| 2 | Core Rules | Next | pure rule model with tests | prove game logic without actors, widgets, maps, or live networking |
-| 3 | Greybox Table | Locked | readable local table, cards, camera, basic UI shell | prove readability and input before multiplayer complexity |
+| 2 | Core Rules | Done | pure rule model with tests | prove game logic without actors, widgets, maps, or live networking |
+| 3 | Greybox Table | Next | readable local table, cards, camera, basic UI shell | prove readability and input before multiplayer complexity |
 | 4 | Network Framework | Locked | host-authoritative replicated match state | connect Unreal framework to the pure rules while preserving privacy |
 | 5 | Full Gameplay Loop | Locked | Play, Doubt, Discard, timer, win, post-game | add one player-facing action or flow at a time |
 | 6 | Steam Multiplayer | Locked | Steam lobbies/invites tested on real machines | swap from local validation to the real Steam path |
@@ -103,6 +103,8 @@ Phase 1 is complete when:
 ## Phase 2 - Core Rules
 
 Goal: implement the engine-independent rule model first.
+
+Status: Done.
 
 Sub-phases:
 

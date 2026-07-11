@@ -317,6 +317,13 @@ namespace DubitoRules
 
 	void ResolveTimeout(FDubitoMatchState& State, int32 PlayerId)
 	{
+		// The timer is a turn timer: reveal/game-over phases and stale timer callbacks
+		// must not mutate the authoritative rule state.
+		if (State.Phase != EDubitoPhase::PlayerTurn || State.ActivePlayerId() != PlayerId)
+		{
+			return;
+		}
+
 		// A timeout during a pending-win response confirms the pending winner.
 		if (State.HasPendingWin())
 		{

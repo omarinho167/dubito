@@ -25,8 +25,8 @@ When executing roadmap work, pick the exact sub-phase ID from `docs/ROADMAP.md`;
 
 ## Current Phase
 
-Phase 0 conception documentation is complete. Phase 1 is Unreal bootstrap.
-Start with Phase 1.0, then advance through the Phase 1 sub-phases in roadmap order unless the owner explicitly changes priorities.
+Phase 0 conception documentation, Phase 1 Unreal bootstrap, and Phase 2 core rules are complete. Phase 3 is Greybox Table.
+Start with Phase 3.0, then advance through the Phase 3 sub-phases in roadmap order unless the owner explicitly changes priorities.
 
 No gameplay code should be written during Phase 0. Documentation changes are allowed.
 
