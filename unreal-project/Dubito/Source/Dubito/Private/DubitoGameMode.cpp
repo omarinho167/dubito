@@ -3,12 +3,14 @@
 #include "DubitoConstants.h"
 #include "DubitoDeck.h"
 #include "DubitoGameState.h"
+#include "DubitoPlayerController.h"
 #include "DubitoPlayerState.h"
 
 ADubitoGameMode::ADubitoGameMode()
 {
 	bReplicates = false;
 	GameStateClass = ADubitoGameState::StaticClass();
+	PlayerControllerClass = ADubitoPlayerController::StaticClass();
 	PlayerStateClass = ADubitoPlayerState::StaticClass();
 }
 
@@ -61,7 +63,7 @@ EDubitoAuthorityStartResult ADubitoGameMode::StartAuthoritativeMatchFromHands(co
 	bAuthoritativeMatchStarted = true;
 	RemovedDealCardCount = 0;
 	RefreshTurnDeadlineForCurrentState();
-	SyncPublicState();
+	SyncReplicatedState();
 
 	return EDubitoAuthorityStartResult::Success;
 }
@@ -122,7 +124,7 @@ EDubitoPlayValidity ADubitoGameMode::AuthorityPlayCards(int32 PlayerId, const TA
 	DubitoRules::NoteVoluntaryAction(AuthoritativeMatchState, PlayerId);
 	DubitoRules::ApplyPlay(AuthoritativeMatchState, PlayerId, ActualCards, Announcement);
 	RefreshTurnDeadlineForCurrentState();
-	SyncPublicState();
+	SyncReplicatedState();
 	return EDubitoPlayValidity::Valid;
 }
 
@@ -138,7 +140,7 @@ bool ADubitoGameMode::AuthorityResolveDoubt(int32 PlayerId, FDubitoRevealInfo& O
 	DubitoRules::NoteVoluntaryAction(AuthoritativeMatchState, PlayerId);
 	OutReveal = DubitoRules::ResolveDoubt(AuthoritativeMatchState, PlayerId);
 	RefreshTurnDeadlineForCurrentState();
-	SyncPublicState();
+	SyncReplicatedState();
 	return true;
 }
 
@@ -152,7 +154,7 @@ bool ADubitoGameMode::AuthorityDiscard(int32 PlayerId)
 	DubitoRules::NoteVoluntaryAction(AuthoritativeMatchState, PlayerId);
 	DubitoRules::ApplyDiscard(AuthoritativeMatchState, PlayerId);
 	RefreshTurnDeadlineForCurrentState();
-	SyncPublicState();
+	SyncReplicatedState();
 	return true;
 }
 
@@ -165,7 +167,7 @@ void ADubitoGameMode::AuthorityResolveTimeout(int32 PlayerId)
 
 	DubitoRules::ResolveTimeout(AuthoritativeMatchState, PlayerId);
 	RefreshTurnDeadlineForCurrentState();
-	SyncPublicState();
+	SyncReplicatedState();
 }
 
 void ADubitoGameMode::AuthorityHandleDisconnect(int32 PlayerId)
@@ -177,7 +179,7 @@ void ADubitoGameMode::AuthorityHandleDisconnect(int32 PlayerId)
 
 	DubitoRules::HandleDisconnect(AuthoritativeMatchState, PlayerId);
 	RefreshTurnDeadlineForCurrentState();
-	SyncPublicState();
+	SyncReplicatedState();
 }
 
 bool ADubitoGameMode::RegisterAuthorityPlayerState(ADubitoPlayerState* PlayerState, int32 PlayerId, int32 SeatIndex)
@@ -201,6 +203,35 @@ bool ADubitoGameMode::RegisterAuthorityPlayerState(ADubitoPlayerState* PlayerSta
 	if (const int32* PublicCount = AuthoritativeMatchState.PublicHandCounts.Find(PlayerId))
 	{
 		PlayerState->SetPublicHandCount(*PublicCount);
+	}
+
+	return true;
+}
+
+bool ADubitoGameMode::RegisterAuthorityPlayerController(ADubitoPlayerController* PlayerController, int32 PlayerId)
+{
+	if (!PlayerController || PlayerId == DubitoConstants::NoPlayerId)
+	{
+		return false;
+	}
+
+	if (const TWeakObjectPtr<ADubitoPlayerController>* Existing = PlayerControllersById.Find(PlayerId))
+	{
+		if (Existing->IsValid() && Existing->Get() != PlayerController)
+		{
+			return false;
+		}
+	}
+
+	PlayerControllersById.Add(PlayerId, PlayerController);
+
+	if (const FDubitoHand* Hand = AuthoritativeMatchState.Hands.Find(PlayerId))
+	{
+		PlayerController->SetPrivateHand(*Hand);
+	}
+	else
+	{
+		PlayerController->ClearPrivateHand();
 	}
 
 	return true;
@@ -233,10 +264,11 @@ void ADubitoGameMode::RefreshTurnDeadlineForCurrentState()
 	TurnDeadlineServerTimeSeconds = CurrentServerTime + static_cast<double>(DubitoConstants::TurnSeconds);
 }
 
-void ADubitoGameMode::SyncPublicState()
+void ADubitoGameMode::SyncReplicatedState()
 {
 	SyncPublicGameState();
 	SyncPublicPlayerStates();
+	SyncPrivateHands();
 }
 
 void ADubitoGameMode::SyncPublicGameState()
@@ -272,6 +304,29 @@ void ADubitoGameMode::SyncPublicPlayerStates()
 		if (SeatIndex != INDEX_NONE && PlayerState->GetSeatIndex() != SeatIndex)
 		{
 			PlayerState->SetPublicIdentity(PlayerId, SeatIndex);
+		}
+	}
+}
+
+void ADubitoGameMode::SyncPrivateHands()
+{
+	for (auto It = PlayerControllersById.CreateIterator(); It; ++It)
+	{
+		ADubitoPlayerController* PlayerController = It.Value().Get();
+		if (!PlayerController)
+		{
+			It.RemoveCurrent();
+			continue;
+		}
+
+		const int32 PlayerId = It.Key();
+		if (const FDubitoHand* Hand = AuthoritativeMatchState.Hands.Find(PlayerId))
+		{
+			PlayerController->SetPrivateHand(*Hand);
+		}
+		else
+		{
+			PlayerController->ClearPrivateHand();
 		}
 	}
 }

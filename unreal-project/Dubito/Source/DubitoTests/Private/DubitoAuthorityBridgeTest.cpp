@@ -5,6 +5,7 @@
 #include "DubitoGameMode.h"
 #include "DubitoGameState.h"
 #include "DubitoHand.h"
+#include "DubitoPlayerController.h"
 #include "DubitoPlayerState.h"
 #include "Engine/Engine.h"
 #include "Engine/World.h"
@@ -230,6 +231,61 @@ bool FDubitoAuthorityBridgePendingWinPublicStateTest::RunTest(const FString&)
 		TestEqual(TEXT("Timeout during pending-win response publishes GameOver"), static_cast<int32>(PublicGameState->GetPublicPhase()), static_cast<int32>(EDubitoPhase::GameOver));
 		TestFalse(TEXT("GameOver clears pending-win flag"), PublicGameState->HasPendingWin());
 		TestEqual(TEXT("GameOver clears public timer deadline"), PublicGameState->GetTurnDeadlineServerTimeSeconds(), 0.0);
+	}
+
+	DestroyAuthorityTestWorld(World);
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDubitoAuthorityBridgePrivateHandTest, "Dubito.Unreal.AuthorityBridge.PrivateHand", DubitoAuthorityFlags)
+bool FDubitoAuthorityBridgePrivateHandTest::RunTest(const FString&)
+{
+	UWorld* World = CreateAuthorityTestWorld();
+	ADubitoGameMode* GameMode = SpawnAuthorityGameMode(World);
+	ADubitoPlayerController* Controller10 = World ? World->SpawnActor<ADubitoPlayerController>() : nullptr;
+	ADubitoPlayerController* Controller20 = World ? World->SpawnActor<ADubitoPlayerController>() : nullptr;
+	ADubitoPlayerController* DuplicateController10 = World ? World->SpawnActor<ADubitoPlayerController>() : nullptr;
+	TestNotNull(TEXT("GameMode spawns in transient authority world"), GameMode);
+	TestNotNull(TEXT("Controller 10 spawns"), Controller10);
+	TestNotNull(TEXT("Controller 20 spawns"), Controller20);
+
+	if (GameMode && Controller10 && Controller20)
+	{
+		TestEqual(TEXT("GameMode declares Dubito PlayerController class"), GameMode->PlayerControllerClass.Get(), ADubitoPlayerController::StaticClass());
+
+		const FProperty* PrivateHandProperty = FindFProperty<FProperty>(ADubitoPlayerController::StaticClass(), TEXT("PrivateHand"));
+		TestNotNull(TEXT("PrivateHand property exists"), PrivateHandProperty);
+		if (PrivateHandProperty)
+		{
+			TestTrue(TEXT("PrivateHand is marked for replication"), PrivateHandProperty->HasAnyPropertyFlags(CPF_Net));
+			TestEqual(TEXT("PrivateHand uses owner-only replication"), static_cast<int32>(ADubitoPlayerController::GetPrivateHandReplicationCondition()), static_cast<int32>(COND_OwnerOnly));
+		}
+
+		TestTrue(TEXT("Controller 10 registers for private hand sync"), GameMode->RegisterAuthorityPlayerController(Controller10, 10));
+		TestTrue(TEXT("Controller 20 registers for private hand sync"), GameMode->RegisterAuthorityPlayerController(Controller20, 20));
+		TestFalse(TEXT("Duplicate controller cannot bind to same player id"), GameMode->RegisterAuthorityPlayerController(DuplicateController10, 10));
+		TestEqual(TEXT("Registered controller has no private hand before match start"), Controller10->GetPrivateHandCount(), 0);
+
+		TestEqual(TEXT("Valid start succeeds"), static_cast<int32>(GameMode->StartAuthoritativeMatchFromHands({ 10, 20 }, MakeTwoPlayerHands())), static_cast<int32>(EDubitoAuthorityStartResult::Success));
+		TestEqual(TEXT("Controller 10 receives exact private hand"), Controller10->GetPrivateHandCount(), 2);
+		TestTrue(TEXT("Controller 10 sees owned Clubs 7"), Controller10->GetPrivateHand().Contains(C(EDubitoSuit::Clubs, 7)));
+		TestTrue(TEXT("Controller 10 sees owned Clubs 2"), Controller10->GetPrivateHand().Contains(C(EDubitoSuit::Clubs, 2)));
+		TestEqual(TEXT("Controller 20 receives exact private hand"), Controller20->GetPrivateHandCount(), 2);
+
+		TestEqual(TEXT("Play succeeds"), static_cast<int32>(GameMode->AuthorityPlayCards(10, { C(EDubitoSuit::Clubs, 7) }, FDubitoAnnouncement(7, 4))), static_cast<int32>(EDubitoPlayValidity::Valid));
+		TestEqual(TEXT("Controller 10 private hand removes actual card only"), Controller10->GetPrivateHandCount(), 1);
+		TestFalse(TEXT("Played actual card leaves owner hand"), Controller10->GetPrivateHand().Contains(C(EDubitoSuit::Clubs, 7)));
+		TestTrue(TEXT("Unplayed owned card remains in owner hand"), Controller10->GetPrivateHand().Contains(C(EDubitoSuit::Clubs, 2)));
+		TestEqual(TEXT("Controller 20 private hand is unchanged before responding"), Controller20->GetPrivateHandCount(), 2);
+
+		FDubitoRevealInfo Reveal;
+		TestTrue(TEXT("Active next player resolves Doubt"), GameMode->AuthorityResolveDoubt(20, Reveal));
+		TestTrue(TEXT("Doubt detects the count lie"), Reveal.bWasLie);
+		TestEqual(TEXT("Controller 10 private hand receives actual pile card back"), Controller10->GetPrivateHandCount(), 2);
+		TestTrue(TEXT("Transferred actual card is visible to its owner again"), Controller10->GetPrivateHand().Contains(C(EDubitoSuit::Clubs, 7)));
+
+		GameMode->AuthorityHandleDisconnect(20);
+		TestEqual(TEXT("Disconnected owner private hand is cleared"), Controller20->GetPrivateHandCount(), 0);
 	}
 
 	DestroyAuthorityTestWorld(World);
