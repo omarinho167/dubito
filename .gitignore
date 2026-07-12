@@ -2,6 +2,16 @@
 # Kept out of the repo until a phase imports them into Content/ (owner decision, Phase 1.0).
 /Assets/
 
+# Large owner-supplied Fab asset packs (multi-GB). Kept out of the repo because they blow
+# past GitHub's free LFS quota; they are re-downloadable from the owner's Fab library and
+# re-imported into Content/ when needed (owner decision, Visual Track V).
+/unreal-project/Dubito/Content/MetaHumans/
+/unreal-project/Dubito/Content/Scifi_desert_city/
+# MetaHuman source package (~1.5 GB, not needed at runtime once assembled)
+*.mhpkg
+# Raw downloaded audio zips (staging only; extract to Content/Audio/SFX/*.wav later)
+/unreal-project/Dubito/Content/Audio/SFX/*.zip
+
 # OS noise
 Thumbs.db
 Desktop.ini

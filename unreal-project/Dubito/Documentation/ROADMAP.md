@@ -315,6 +315,40 @@ Phase 5 is complete when:
 - public ledger UI remains understandable and never pretends hidden counts are exact;
 - no required V1 flow depends on developer-only tools.
 
+## Visual Track V - Sci-Fi Real-Art Pass (owner-reprioritized)
+
+Owner decision (2026-07-13): pivot the V1 presentation from the greybox "infernal tavern" to a real-art sci-fi setting, and
+accept MetaHuman into the V1 baseline despite the earlier V2 exclusion. This is an owner-approved scope change; the added
+MetaHuman/runtime plugin dependency and the performance cost of rigged characters at up to 8 seats are accepted risks to be
+watched. Rules, networking, and hidden-information invariants are unchanged; this track only touches presentation. Assets are
+owner-supplied and license/commercial-use is confirmed per asset before use.
+
+Imported and verified assets: Sci-Fi Desert City kit (`/Game/Scifi_desert_city/`, including `Meshes/Table/SM_table`,
+`Meshes/Stool/SM_stool`, props, lamps, HDRI, and a showcase level); MetaHuman Vampire (`/Game/MetaHumans/Vampire/BP_Vampire`,
+assembled). Pending owner delivery: Cinzel font (target `Content/UI/Fonts/`) and Kenney interface + casino card SFX (target
+`Content/Audio/SFX/`).
+
+| ID | Name | Status | Objective | Validation |
+|---|---|---|---|---|
+| V.0 | Documentation pivot | In progress | Record the sci-fi + MetaHuman decision across `DESIGN.md` and the four `AGENT.md`/`CLAUDE.md` copies, and reconcile the V2 exclusion line. | No conception doc contradicts the new direction; all guide copies stay identical. |
+| V.1 | Table scene dressing | In progress | Dress the Table map with `SM_table`, up to 8 `SM_stool`, supporting props, and mood lighting in a seated card-table arrangement. | The Table map reads as a sci-fi card table with a clear center pile area and up to 8 seats. |
+| V.2 | Seated POV camera | Locked | Add a seated first-person camera pawn/controller with limited free-look, replacing the default view. | In game, the local player is seated at the table looking at the center pile, with bounded free-look. |
+| V.3 | 3D cards and pile | Locked | Present the own hand and center pile as 3D card actors using the existing 52 face textures and the shared back, migrating off the 2D-only card HUD. | Own hand is exact and readable in 3D; face-down cards use the shared back so hidden-information invariants hold. |
+| V.4 | Opponent avatars | Locked | Seat `BP_Vampire` (and any later variations) on occupied stools, driven by replicated seat occupancy. | Each occupied non-local seat shows an avatar, empty seats show none, and performance stays acceptable. |
+| V.5 | UI skin pass | Locked | Apply the Cinzel font and restyle the HUD and menus to the sci-fi look. | Menus and HUD use the new font and styling without losing readability or disabled-reason clarity. |
+| V.6 | Audio pass | Locked | Wire interface and card SFX to place, flip, doubt, and win/lose events. | Key actions have audio feedback and no unapproved assets are added. |
+| V.7 | Visual integration and network check | Locked | Confirm the dressed scene, 3D cards, and avatars preserve replication, hidden-information rules, and acceptable performance in a 2-instance local pass. | A local 2-instance game plays with the new visuals while each client sees only its own exact hand. |
+
+Integration note (2026-07-13): `L_showcase_level` (the desert environment) is a World Partition level, so it cannot be pulled
+into the `Table` map as a Level Instance (an instanced attempt renders empty). Owner decision: **make the desert level the
+actual gameplay map** — copy it to serve as the networked table map and adapt the framework (including the `ADubitoGameMode`
+world-name `Table` suffix gate and player spawn), rather than importing the environment into the current `Table` map. The V.1
+first dressing (table + 8 `SM_stool` + one standing `BP_Vampire`) currently lives in `L_showcase_level` at world center
+~(650,0,100) on flat sand with the domed buildings as backdrop, as a visual prototype pending that map-integration step.
+
+Visual Track V is complete when the gameplay map presents a seated sci-fi card table with 3D cards, seated POV, opponent avatars,
+restyled UI, and event audio, without weakening any hidden-information or networking invariant.
+
 ## Phase 6 - Steam Multiplayer
 
 Goal: prove the real Steam transport.
