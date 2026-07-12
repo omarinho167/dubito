@@ -2,9 +2,11 @@
 
 #include "Blueprint/WidgetTree.h"
 #include "Components/Border.h"
+#include "Components/Button.h"
 #include "Components/TextBlock.h"
 #include "Components/VerticalBox.h"
 #include "Components/VerticalBoxSlot.h"
+#include "DubitoGameInstance.h"
 #include "DubitoGameState.h"
 #include "DubitoPlayerController.h"
 #include "DubitoPlayerState.h"
@@ -75,7 +77,36 @@ void UDubitoPostGameWidget::EnsurePostGameTree()
 	ReasonText = MakeLine(FLinearColor(0.74f, 0.80f, 0.84f, 1.0f));
 	HintText = MakeLine(FLinearColor(0.56f, 0.62f, 0.68f, 1.0f));
 
+	// Return-to-menu: tears down the session and travels this instance back to the Main Menu.
+	ReturnButton = WidgetTree->ConstructWidget<UButton>(UButton::StaticClass(), TEXT("ReturnBtn"));
+	{
+		UTextBlock* ReturnLabel = WidgetTree->ConstructWidget<UTextBlock>(UTextBlock::StaticClass());
+		ReturnLabel->SetText(FText::FromString(TEXT("RETURN TO MENU")));
+		ReturnLabel->SetJustification(ETextJustify::Center);
+		ReturnLabel->SetColorAndOpacity(FSlateColor(FLinearColor(0.95f, 0.97f, 0.94f, 1.0f)));
+		ReturnButton->AddChild(ReturnLabel);
+
+		FScriptDelegate Delegate;
+		Delegate.BindUFunction(this, GET_FUNCTION_NAME_CHECKED(UDubitoPostGameWidget, HandleReturnToMenu));
+		ReturnButton->OnClicked.Add(Delegate);
+
+		UVerticalBoxSlot* ButtonSlot = PanelStack->AddChildToVerticalBox(ReturnButton);
+		ButtonSlot->SetHorizontalAlignment(HAlign_Center);
+		ButtonSlot->SetPadding(FMargin(0.0f, 16.0f, 0.0f, 0.0f));
+	}
+
 	WidgetTree->RootWidget = Root;
+}
+
+void UDubitoPostGameWidget::HandleReturnToMenu()
+{
+	if (UWorld* World = GetWorld())
+	{
+		if (UDubitoGameInstance* GameInstance = World->GetGameInstance<UDubitoGameInstance>())
+		{
+			GameInstance->ReturnToMenu();
+		}
+	}
 }
 
 void UDubitoPostGameWidget::NativeConstruct()
@@ -144,7 +175,8 @@ void UDubitoPostGameWidget::HandleGameOver(const FDubitoGameOverInfo& GameOver)
 	}
 
 	ApplyViewToWidgets();
-	SetVisibility(ESlateVisibility::HitTestInvisible);
+	// Visible (not HitTestInvisible) so the Return-to-Menu button receives clicks.
+	SetVisibility(ESlateVisibility::Visible);
 	OnPostGamePresented(CachedView);
 }
 
@@ -178,6 +210,6 @@ void UDubitoPostGameWidget::ApplyViewToWidgets()
 
 	if (HintText)
 	{
-		HintText->SetText(FText::FromString(TEXT("Return to the menu (session flow arrives in Phase 5.6)")));
+		HintText->SetText(FText::FromString(TEXT("Press RETURN TO MENU to leave the session")));
 	}
 }

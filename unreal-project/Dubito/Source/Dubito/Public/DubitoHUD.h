@@ -8,6 +8,8 @@ class UDubitoTableHudWidget;
 class UDubitoPlayActionWidget;
 class UDubitoRevealWidget;
 class UDubitoPostGameWidget;
+class UDubitoMainMenuWidget;
+class UDubitoLobbyWidget;
 
 /**
  * Phase 5.0 HUD owner.
@@ -47,12 +49,21 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Dubito|HUD")
 	TSubclassOf<UDubitoPostGameWidget> PostGameWidgetClass;
 
+	// Class of the greybox Main Menu shown on the front map (Phase 5.6 local session flow).
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Dubito|HUD")
+	TSubclassOf<UDubitoMainMenuWidget> MainMenuWidgetClass;
+
+	// Class of the pre-match lobby shown on the Table map before the deal (Phase 5.6).
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Dubito|HUD")
+	TSubclassOf<UDubitoLobbyWidget> LobbyWidgetClass;
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 private:
 	bool IsTableMap() const;
+	bool IsMainMenuMap() const;
 
 	UPROPERTY(Transient)
 	TObjectPtr<UDubitoTableHudWidget> TableHudWidget = nullptr;
@@ -65,4 +76,10 @@ private:
 
 	UPROPERTY(Transient)
 	TObjectPtr<UDubitoPostGameWidget> PostGameWidget = nullptr;
+
+	UPROPERTY(Transient)
+	TObjectPtr<UDubitoMainMenuWidget> MainMenuWidget = nullptr;
+
+	UPROPERTY(Transient)
+	TObjectPtr<UDubitoLobbyWidget> LobbyWidget = nullptr;
 };

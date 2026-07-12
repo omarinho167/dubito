@@ -7,6 +7,7 @@
 #include "DubitoPostGameWidget.generated.h"
 
 class ADubitoGameState;
+class UButton;
 class UTextBlock;
 class UVerticalBox;
 
@@ -39,6 +40,10 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Dubito|Post Game")
 	void OnPostGamePresented(const FDubitoPostGameView& View);
 
+	// Phase 5.6: tear the session down and travel back to the Main Menu.
+	UFUNCTION()
+	void HandleReturnToMenu();
+
 private:
 	void EnsurePostGameTree();
 	void BindToGameState();
@@ -70,4 +75,7 @@ private:
 
 	UPROPERTY(Transient)
 	TObjectPtr<UTextBlock> HintText = nullptr;
+
+	UPROPERTY(Transient)
+	TObjectPtr<UButton> ReturnButton = nullptr;
 };

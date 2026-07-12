@@ -61,6 +61,96 @@ ADubitoGameMode::ADubitoGameMode()
 	HUDClass = ADubitoHUD::StaticClass();
 }
 
+void ADubitoGameMode::PostLogin(APlayerController* NewPlayer)
+{
+	Super::PostLogin(NewPlayer);
+
+	if (!IsSessionSeatingMap())
+	{
+		return;
+	}
+
+	// Only seat players while still gathering the lobby; no late joins into a live match.
+	if (bAuthoritativeMatchStarted || AuthoritativeMatchState.Phase != EDubitoPhase::Lobby)
+	{
+		return;
+	}
+
+	ADubitoPlayerController* Controller = Cast<ADubitoPlayerController>(NewPlayer);
+	ADubitoPlayerState* PlayerState = NewPlayer ? NewPlayer->GetPlayerState<ADubitoPlayerState>() : nullptr;
+	if (!Controller || !PlayerState)
+	{
+		return;
+	}
+
+	if (PlayerStatesById.Num() >= DubitoConstants::MaxPlayers)
+	{
+		return; // the table is full
+	}
+
+	const int32 SeatIndex = FirstFreeSeatIndex();
+	const int32 PlayerId = SeatIndex + 1; // 1..8, never NoPlayerId; seat 0 is the host
+	RegisterAuthorityPlayerState(PlayerState, PlayerId, SeatIndex);
+	RegisterAuthorityPlayerController(Controller, PlayerId);
+}
+
+void ADubitoGameMode::Logout(AController* Exiting)
+{
+	if (IsSessionSeatingMap())
+	{
+		if (ADubitoPlayerController* Controller = Cast<ADubitoPlayerController>(Exiting))
+		{
+			const int32 PlayerId = Controller->GetAuthorityPlayerId();
+			if (PlayerId != DubitoConstants::NoPlayerId)
+			{
+				// If a live match is running, resolve the disconnect through the rules first so the
+				// pending-win / last-player-standing outcomes fire before we drop the registration.
+				if (bAuthoritativeMatchStarted
+					&& AuthoritativeMatchState.Phase != EDubitoPhase::GameOver
+					&& AuthoritativeMatchState.TurnOrder.Contains(PlayerId))
+				{
+					AuthorityHandleDisconnect(PlayerId);
+				}
+
+				PlayerControllersById.Remove(PlayerId);
+				PlayerStatesById.Remove(PlayerId);
+			}
+		}
+	}
+
+	Super::Logout(Exiting);
+}
+
+bool ADubitoGameMode::IsSessionSeatingMap() const
+{
+	const UWorld* World = GetWorld();
+	// World->GetMapName() carries the PIE prefix (e.g. UEDPIE_0_Table); match by suffix, mirroring
+	// ADubitoHUD::IsTableMap so the seating map and the table HUD agree.
+	return World && World->GetMapName().EndsWith(TEXT("Table"));
+}
+
+int32 ADubitoGameMode::FirstFreeSeatIndex() const
+{
+	TSet<int32> UsedSeats;
+	for (const TPair<int32, TWeakObjectPtr<ADubitoPlayerState>>& Entry : PlayerStatesById)
+	{
+		if (const ADubitoPlayerState* PlayerState = Entry.Value.Get())
+		{
+			UsedSeats.Add(PlayerState->GetSeatIndex());
+		}
+	}
+
+	for (int32 Seat = 0; Seat < DubitoConstants::MaxPlayers; ++Seat)
+	{
+		if (!UsedSeats.Contains(Seat))
+		{
+			return Seat;
+		}
+	}
+
+	return DubitoConstants::MaxPlayers - 1;
+}
+
 EDubitoAuthorityStartResult ADubitoGameMode::ValidatePlayerIds(const TArray<int32>& PlayerIds)
 {
 	if (PlayerIds.Num() < DubitoConstants::MinPlayers || PlayerIds.Num() > DubitoConstants::MaxPlayers)

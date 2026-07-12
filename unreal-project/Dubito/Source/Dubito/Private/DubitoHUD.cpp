@@ -1,6 +1,8 @@
 #include "DubitoHUD.h"
 
 #include "Blueprint/UserWidget.h"
+#include "DubitoLobbyWidget.h"
+#include "DubitoMainMenuWidget.h"
 #include "DubitoPlayActionWidget.h"
 #include "DubitoPostGameWidget.h"
 #include "DubitoRevealWidget.h"
@@ -14,6 +16,8 @@ ADubitoHUD::ADubitoHUD()
 	PlayActionWidgetClass = UDubitoPlayActionWidget::StaticClass();
 	RevealWidgetClass = UDubitoRevealWidget::StaticClass();
 	PostGameWidgetClass = UDubitoPostGameWidget::StaticClass();
+	MainMenuWidgetClass = UDubitoMainMenuWidget::StaticClass();
+	LobbyWidgetClass = UDubitoLobbyWidget::StaticClass();
 }
 
 void ADubitoHUD::BeginPlay()
@@ -26,9 +30,33 @@ void ADubitoHUD::BeginPlay()
 		return;
 	}
 
+	// Front map: show the greybox Main Menu (Host/Join/Quit). It owns its own UI input mode.
+	if (IsMainMenuMap())
+	{
+		if (MainMenuWidgetClass)
+		{
+			MainMenuWidget = CreateWidget<UDubitoMainMenuWidget>(OwningController, MainMenuWidgetClass);
+			if (MainMenuWidget)
+			{
+				MainMenuWidget->AddToPlayerScreen();
+			}
+		}
+		return;
+	}
+
 	if (!IsTableMap() || !TableHudWidgetClass)
 	{
 		return;
+	}
+
+	// The table mixes a 3D view with clickable lobby/action buttons: show the cursor and accept
+	// both game and UI input so the Phase 5.1-5.6 buttons are usable in a standalone game.
+	OwningController->bShowMouseCursor = true;
+	{
+		FInputModeGameAndUI InputMode;
+		InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+		InputMode.SetHideCursorDuringCapture(false);
+		OwningController->SetInputMode(InputMode);
 	}
 
 	TableHudWidget = CreateWidget<UDubitoTableHudWidget>(OwningController, TableHudWidgetClass);
@@ -66,6 +94,17 @@ void ADubitoHUD::BeginPlay()
 			PostGameWidget->AddToPlayerScreen(30);
 		}
 	}
+
+	if (LobbyWidgetClass)
+	{
+		LobbyWidget = CreateWidget<UDubitoLobbyWidget>(OwningController, LobbyWidgetClass);
+		if (LobbyWidget)
+		{
+			// Above the table HUD/action bar while the match is still in the lobby; it hides itself
+			// once the deal begins. Below the post-game screen (z 30), which only shows at game over.
+			LobbyWidget->AddToPlayerScreen(25);
+		}
+	}
 }
 
 void ADubitoHUD::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -94,6 +133,18 @@ void ADubitoHUD::EndPlay(const EEndPlayReason::Type EndPlayReason)
 		PostGameWidget = nullptr;
 	}
 
+	if (MainMenuWidget)
+	{
+		MainMenuWidget->RemoveFromParent();
+		MainMenuWidget = nullptr;
+	}
+
+	if (LobbyWidget)
+	{
+		LobbyWidget->RemoveFromParent();
+		LobbyWidget = nullptr;
+	}
+
 	Super::EndPlay(EndPlayReason);
 }
 
@@ -107,4 +158,16 @@ bool ADubitoHUD::IsTableMap() const
 
 	// World->GetMapName() carries the PIE prefix (e.g. UEDPIE_0_Table); match by suffix.
 	return World->GetMapName().EndsWith(TEXT("Table"));
+}
+
+bool ADubitoHUD::IsMainMenuMap() const
+{
+	const UWorld* World = GetWorld();
+	if (!World)
+	{
+		return false;
+	}
+
+	// Same suffix match as IsTableMap, for the front map that hosts the session menu.
+	return World->GetMapName().EndsWith(TEXT("MainMenu"));
 }

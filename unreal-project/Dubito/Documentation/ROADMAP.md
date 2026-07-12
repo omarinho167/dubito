@@ -206,8 +206,8 @@ Sub-phases:
 | 5.3 | Discard interaction | Done | Implement Discard confirmation, pile clear, round value reset, and skipped turn. | Discard is legal only in the intended states and clearly explains blocked states. |
 | 5.4 | Timer and pending requests | Done | Implement turn countdown, timeout auto-play, anti-AFK disconnect, and one-pending-request behavior. | Timeout branches match the rules and spammed input cannot create duplicate actions. |
 | 5.5 | Pending-win and Post Game | Done | Implement final Doubt window, win confirmation, game-over reason, and post-game presentation. | Last-card play, correct final Doubt, wrong final Doubt, timeout confirmation, and last-player-standing are validated. |
-| 5.6 | Local session flow | Next | Implement local host/join or null/LAN flow from Main Menu to Waiting Room to Table to Post Game and back, suitable for same-PC loopback testing. | Two local instances can enter a match, ready up, start, finish, and return without developer tools. |
-| 5.7 | First-run help | Locked | Add first-run help card, persistent help access, and contextual hints without blocking experienced play. | A new player can complete a turn and understand Doubt from on-screen cues. |
+| 5.6 | Local session flow | Done | Implement local host/join or null/LAN flow from Main Menu to Waiting Room to Table to Post Game and back, suitable for same-PC loopback testing. | Two local instances can enter a match, ready up, start, finish, and return without developer tools. |
+| 5.7 | First-run help | Next | Add first-run help card, persistent help access, and contextual hints without blocking experienced play. | A new player can complete a turn and understand Doubt from on-screen cues. |
 | 5.8 | Edge-case validation | Locked | Verify every relevant case in `Documentation/v1/EDGE_CASES.md`. | Winner, wrong Doubt, right Doubt, discard, timeout, disconnect, modal, resize, and input robustness paths are covered. |
 | 5.9 | Packaged local full-game pass | Locked | Validate the loop by launching two packaged instances on one PC. | Two packaged local instances complete a full game while preserving hidden information rules. |
 
@@ -286,6 +286,27 @@ Play available and the previous last-card claim doubtable (emphasized hold-to-co
 stake. Automation covers the post-game view-model (invalid/default, win/loss/spectator perspective, no-winner ending, and every
 rule-defined winning reason). The terminal card's return-to-menu affordance is intentionally deferred to the Phase 5.6 local
 session flow, and the on-screen post-game/pending-win feel needs that same live pass.
+
+Phase 5.6 outcome: the same-PC local session loop is now playable end to end without developer tools. `UDubitoGameInstance`
+owns the pre-Steam transport: Host opens the Table map as a listen server (`ServerTravel Table?listen`), Join connects a second
+local instance by address (default `127.0.0.1`), and Return-to-menu uses the built-in `ReturnToMainMenu` teardown. It
+deliberately does not create an Online Subsystem session; Steam lobbies/sessions stay in Phase 6. `ADubitoGameMode` now seats
+and unseats real connections on `PostLogin`/`Logout`, gated to the Table map (world name suffix `Table`) so the Phase 4.7
+CQTest listen-server, which runs this GameMode on a transient map and registers players by hand, is untouched; the host takes
+seat 0 and each joiner the next free seat, reusing the existing `RegisterAuthorityPlayerState`/`RegisterAuthorityPlayerController`
+and `StartAuthoritativeMatchFromRegisteredPlayers` paths. A pure `BuildDubitoLobbyView` derives the pre-match lobby (who is
+seated, who is ready, whether the local player is the host, and a specific Start-blocked reason) and is covered by automation
+(invalid/no-local-seat, host-can-start, and each blocked reason in precedence order). `ADubitoHUD` became map-aware: it shows a
+programmatic `UDubitoMainMenuWidget` (Host/Join/Quit) on the front map and a `UDubitoLobbyWidget` (ready toggle + host-only
+Start) on the Table map that hides itself once the deal begins, and it now enables the mouse cursor and Game+UI input on the
+Table so the Phase 5.1-5.5 action-bar buttons are finally clickable in a standalone game. `UDubitoPostGameWidget` gained a real
+Return-to-Menu button. Scope decision: to keep the loop robust for blind (no live 2-player PIE) implementation, the V1 local flow
+uses a single networked map (the Table) whose lobby phase is the pre-match "waiting room" and whose post-game panel is the
+terminal screen, rather than server-travelling between separate Waiting Room and Post Game maps mid-session; those greybox maps
+stay reserved for a richer/Steam flow. Known limitation carried to the live pass and Phase 6: if the host clicks Return first, a
+still-connected client relies on default network-failure handling to fall back to the menu; the validated path is each instance
+returning via its own button. All Phase 5.0-5.5 on-screen passes were blocked on this flow and are now unblocked; the live
+two-instance validation is owner-run (see the handoff note).
 
 Phase 5 is complete when:
 

@@ -43,6 +43,11 @@ class DUBITO_API ADubitoGameMode : public AGameModeBase
 public:
 	ADubitoGameMode();
 
+	// Phase 5.6: seat and unseat players as they join/leave the Table listen server. Gated to the
+	// Table map so automation running this GameMode on a transient map keeps its manual registration.
+	virtual void PostLogin(APlayerController* NewPlayer) override;
+	virtual void Logout(AController* Exiting) override;
+
 	const FDubitoMatchState& GetAuthoritativeMatchState() const { return AuthoritativeMatchState; }
 	bool HasAuthoritativeMatchStarted() const { return bAuthoritativeMatchStarted; }
 	int32 GetRemovedDealCardCount() const { return RemovedDealCardCount; }
@@ -73,6 +78,11 @@ public:
 private:
 	static EDubitoAuthorityStartResult ValidatePlayerIds(const TArray<int32>& PlayerIds);
 	TArray<int32> BuildRegisteredPlayerIdsBySeat(bool& bOutAllRegisteredPlayersReady) const;
+
+	// True only on the Table map, where the live session flow seats real connections. Automation
+	// drives this GameMode on a transient map and registers players by hand, so it returns false.
+	bool IsSessionSeatingMap() const;
+	int32 FirstFreeSeatIndex() const;
 
 	void RefreshTurnDeadlineForCurrentState();
 	void ScheduleTurnTimer();
