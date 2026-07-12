@@ -46,6 +46,10 @@ public:
 	const FDubitoMatchState& GetAuthoritativeMatchState() const { return AuthoritativeMatchState; }
 	bool HasAuthoritativeMatchStarted() const { return bAuthoritativeMatchStarted; }
 	int32 GetRemovedDealCardCount() const { return RemovedDealCardCount; }
+	double GetTurnDeadlineServerTimeSeconds() const { return TurnDeadlineServerTimeSeconds; }
+
+	// True while the authoritative turn timer is scheduled to auto-resolve the active turn.
+	bool IsTurnTimerActive() const;
 
 	EDubitoAuthorityStartResult StartAuthoritativeMatchFromHands(const TArray<int32>& PlayerIds, const TMap<int32, FDubitoHand>& DealtHands);
 	EDubitoAuthorityStartResult StartAuthoritativeMatchFromShuffledDeck(const TArray<int32>& PlayerIds, int32 ShuffleSeed);
@@ -71,6 +75,9 @@ private:
 	TArray<int32> BuildRegisteredPlayerIdsBySeat(bool& bOutAllRegisteredPlayersReady) const;
 
 	void RefreshTurnDeadlineForCurrentState();
+	void ScheduleTurnTimer();
+	void ClearTurnTimer();
+	void HandleTurnTimerElapsed();
 	void SyncReplicatedState();
 	void SyncPublicGameState();
 	void SyncPublicPlayerStates();
@@ -80,6 +87,7 @@ private:
 	bool bAuthoritativeMatchStarted = false;
 	int32 RemovedDealCardCount = 0;
 	double TurnDeadlineServerTimeSeconds = 0.0;
+	FTimerHandle TurnTimerHandle;
 	TMap<int32, TWeakObjectPtr<ADubitoPlayerController>> PlayerControllersById;
 	TMap<int32, TWeakObjectPtr<ADubitoPlayerState>> PlayerStatesById;
 };

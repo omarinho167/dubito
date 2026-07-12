@@ -3,38 +3,21 @@
 #include "CoreMinimal.h"
 #include "GameFramework/GameStateBase.h"
 #include "DubitoAnnouncement.h"
+#include "DubitoGameOver.h"
 #include "DubitoMatchState.h"
 #include "DubitoReveal.h"
 #include "DubitoGameState.generated.h"
-
-UENUM(BlueprintType)
-enum class EDubitoGameOverReason : uint8
-{
-	Unknown,
-	PendingWinDoubtFailed,
-	PendingWinDeclined,
-	PendingWinTimeout,
-	PendingWinResponderDisconnected,
-	LastPlayerStanding,
-	NoPlayersRemaining
-};
-
-USTRUCT(BlueprintType)
-struct DUBITO_API FDubitoGameOverInfo
-{
-	GENERATED_BODY()
-
-	UPROPERTY(BlueprintReadOnly, Category = "Dubito|Public Events")
-	int32 WinnerId = DubitoConstants::NoPlayerId;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Dubito|Public Events")
-	EDubitoGameOverReason Reason = EDubitoGameOverReason::Unknown;
-};
 
 // Native broadcast fired whenever the replicated public match snapshot changes, on both
 // the authoritative sync and the client OnRep. Lets C++ HUD widgets refresh event-driven
 // from replicated state without a Blueprint hop (Documentation/ARCHITECTURE.md UI rule).
 DECLARE_MULTICAST_DELEGATE(FDubitoPublicMatchStateChanged);
+
+// Native broadcasts for the self-contained public reveal / game-over events, so a C++
+// reveal widget can present them event-driven (mirrors OnPublicMatchStateChanged). These
+// fire wherever the multicast lands: authority loopback and every client.
+DECLARE_MULTICAST_DELEGATE_OneParam(FDubitoPublicRevealEvent, const FDubitoRevealInfo&);
+DECLARE_MULTICAST_DELEGATE_OneParam(FDubitoPublicGameOverEvent, const FDubitoGameOverInfo&);
 
 /**
  * Replicated public match state for Phase 4.1.
@@ -106,6 +89,10 @@ public:
 
 	// Subscribe to be notified (server sync + client OnRep) when public match state changes.
 	FDubitoPublicMatchStateChanged OnPublicMatchStateChanged;
+
+	// Subscribe to be notified when a public reveal / game-over event lands on this client.
+	FDubitoPublicRevealEvent OnPublicRevealEvent;
+	FDubitoPublicGameOverEvent OnPublicGameOverEvent;
 
 protected:
 	UFUNCTION()

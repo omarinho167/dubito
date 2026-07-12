@@ -6,6 +6,8 @@
 #include "DubitoHUD.h"
 #include "DubitoPlayerController.h"
 #include "DubitoPlayerState.h"
+#include "Engine/World.h"
+#include "TimerManager.h"
 
 namespace
 {
@@ -402,6 +404,7 @@ void ADubitoGameMode::RefreshTurnDeadlineForCurrentState()
 	if (!bAuthoritativeMatchStarted || AuthoritativeMatchState.Phase != EDubitoPhase::PlayerTurn || AuthoritativeMatchState.ActivePlayerId() == DubitoConstants::NoPlayerId)
 	{
 		TurnDeadlineServerTimeSeconds = 0.0;
+		ClearTurnTimer();
 		return;
 	}
 
@@ -409,6 +412,46 @@ void ADubitoGameMode::RefreshTurnDeadlineForCurrentState()
 	const AGameStateBase* PublicGameState = World ? World->GetGameState() : nullptr;
 	const double CurrentServerTime = PublicGameState ? PublicGameState->GetServerWorldTimeSeconds() : (World ? World->GetTimeSeconds() : 0.0);
 	TurnDeadlineServerTimeSeconds = CurrentServerTime + static_cast<double>(DubitoConstants::TurnSeconds);
+
+	// Keep the authoritative turn timer in lockstep with the deadline so an idle turn
+	// auto-resolves as a timeout (Documentation/DESIGN.md timer rules).
+	ScheduleTurnTimer();
+}
+
+void ADubitoGameMode::ScheduleTurnTimer()
+{
+	UWorld* World = GetWorld();
+	if (!World)
+	{
+		return;
+	}
+
+	// Fire once, TurnSeconds from now, for the player whose turn is currently open. Resolving
+	// a timeout advances the turn and reschedules a fresh timer for the next player.
+	World->GetTimerManager().SetTimer(TurnTimerHandle, this, &ADubitoGameMode::HandleTurnTimerElapsed,
+		static_cast<float>(DubitoConstants::TurnSeconds), false);
+}
+
+void ADubitoGameMode::ClearTurnTimer()
+{
+	if (UWorld* World = GetWorld())
+	{
+		World->GetTimerManager().ClearTimer(TurnTimerHandle);
+	}
+}
+
+void ADubitoGameMode::HandleTurnTimerElapsed()
+{
+	// The active player let the clock run out; resolve it as a rules timeout for whoever is
+	// currently on the clock (AuthorityResolveTimeout re-checks phase/active player and is a
+	// no-op if the state has already moved on).
+	AuthorityResolveTimeout(AuthoritativeMatchState.ActivePlayerId());
+}
+
+bool ADubitoGameMode::IsTurnTimerActive() const
+{
+	const UWorld* World = GetWorld();
+	return World && World->GetTimerManager().IsTimerActive(TurnTimerHandle);
 }
 
 void ADubitoGameMode::SyncReplicatedState()

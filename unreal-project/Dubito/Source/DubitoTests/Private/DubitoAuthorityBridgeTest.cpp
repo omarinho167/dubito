@@ -753,4 +753,85 @@ bool FDubitoAuthorityBridgeResolveTest::RunTest(const FString&)
 	return true;
 }
 
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDubitoAuthorityBridgeTurnTimerTest, "Dubito.Unreal.AuthorityBridge.TurnTimer", DubitoAuthorityFlags)
+bool FDubitoAuthorityBridgeTurnTimerTest::RunTest(const FString&)
+{
+	UWorld* World = CreateAuthorityTestWorld();
+	ADubitoGameMode* GameMode = SpawnAuthorityGameMode(World);
+	TestNotNull(TEXT("GameMode spawns in transient authority world"), GameMode);
+
+	if (GameMode)
+	{
+		// No match: no turn timer and no deadline.
+		TestFalse(TEXT("No turn timer before a match starts"), GameMode->IsTurnTimerActive());
+
+		TestEqual(TEXT("Valid start succeeds"), static_cast<int32>(GameMode->StartAuthoritativeMatchFromHands({ 10, 20 }, MakeTwoPlayerHands())), static_cast<int32>(EDubitoAuthorityStartResult::Success));
+		TestTrue(TEXT("Turn timer is scheduled during a player turn"), GameMode->IsTurnTimerActive());
+		TestTrue(TEXT("Turn deadline is set during a player turn"), GameMode->GetTurnDeadlineServerTimeSeconds() > 0.0);
+
+		// Resolve the active turn as a timeout: it auto-plays one truthful card and advances.
+		GameMode->AuthorityResolveTimeout(10);
+		const FDubitoMatchState& AfterTimeout = GameMode->GetAuthoritativeMatchState();
+		TestEqual(TEXT("Timeout auto-play opens the round at the played card value"), AfterTimeout.RoundValue, 7);
+		TestEqual(TEXT("Timeout auto-play removes one card from the actor's public ledger"), AfterTimeout.PublicHandCounts[10], 1);
+		TestEqual(TEXT("Timeout advances the turn to the next player"), AfterTimeout.ActivePlayerId(), 20);
+		TestTrue(TEXT("Turn timer reschedules for the new active player"), GameMode->IsTurnTimerActive());
+
+		// A stale timeout callback for a player who is no longer active is a safe no-op.
+		const FDubitoMatchState BeforeStale = GameMode->GetAuthoritativeMatchState();
+		GameMode->AuthorityResolveTimeout(10);
+		TestEqual(TEXT("Stale timeout does not advance the turn"), GameMode->GetAuthoritativeMatchState().ActivePlayerId(), BeforeStale.ActivePlayerId());
+		TestEqual(TEXT("Stale timeout does not change the round value"), GameMode->GetAuthoritativeMatchState().RoundValue, BeforeStale.RoundValue);
+
+		// Ending the match clears the turn timer and deadline.
+		GameMode->AuthorityHandleDisconnect(20);
+		TestEqual(TEXT("Last player standing ends the match"), static_cast<int32>(GameMode->GetAuthoritativeMatchState().Phase), static_cast<int32>(EDubitoPhase::GameOver));
+		TestFalse(TEXT("No turn timer once the match is over"), GameMode->IsTurnTimerActive());
+		TestEqual(TEXT("No turn deadline once the match is over"), GameMode->GetTurnDeadlineServerTimeSeconds(), 0.0);
+	}
+
+	DestroyAuthorityTestWorld(World);
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FDubitoAuthorityBridgeSpamTest, "Dubito.Unreal.AuthorityBridge.SpamGuard", DubitoAuthorityFlags)
+bool FDubitoAuthorityBridgeSpamTest::RunTest(const FString&)
+{
+	UWorld* World = CreateAuthorityTestWorld();
+	ADubitoGameMode* GameMode = SpawnAuthorityGameMode(World);
+	TestNotNull(TEXT("GameMode spawns in transient authority world"), GameMode);
+
+	if (GameMode)
+	{
+		TestEqual(TEXT("Valid start succeeds"), static_cast<int32>(GameMode->StartAuthoritativeMatchFromHands({ 10, 20 }, MakeTwoPlayerHands())), static_cast<int32>(EDubitoAuthorityStartResult::Success));
+
+		// A valid opening play applies once and advances the turn.
+		TestEqual(TEXT("First play applies"), static_cast<int32>(GameMode->AuthorityPlayCards(10, { C(EDubitoSuit::Clubs, 7) }, FDubitoAnnouncement(7, 1))), static_cast<int32>(EDubitoPlayValidity::Valid));
+		const FDubitoMatchState AfterFirst = GameMode->GetAuthoritativeMatchState();
+		TestEqual(TEXT("Turn advanced after the first play"), AfterFirst.ActivePlayerId(), 20);
+		TestEqual(TEXT("Public ledger dropped one after the first play"), AfterFirst.PublicHandCounts[10], 1);
+
+		// Spamming the same play from the player who just acted cannot create a duplicate: the
+		// authoritative turn check rejects it and nothing changes.
+		TestEqual(TEXT("Duplicate play from the just-acted player is rejected"), static_cast<int32>(GameMode->AuthorityPlayCards(10, { C(EDubitoSuit::Clubs, 2) }, FDubitoAnnouncement(7, 1))), static_cast<int32>(EDubitoPlayValidity::NotYourTurn));
+		TestFalse(TEXT("The just-acted player cannot Play again"), GameMode->CanAuthorityPlay(10));
+		TestFalse(TEXT("The just-acted player cannot Doubt their own claim"), GameMode->CanAuthorityDoubt(10));
+		TestFalse(TEXT("The just-acted player cannot Discard out of turn"), GameMode->CanAuthorityDiscard(10));
+
+		const FDubitoMatchState AfterSpam = GameMode->GetAuthoritativeMatchState();
+		TestEqual(TEXT("Spammed play does not advance the turn again"), AfterSpam.ActivePlayerId(), AfterFirst.ActivePlayerId());
+		TestEqual(TEXT("Spammed play does not touch the public ledger"), AfterSpam.PublicHandCounts[10], AfterFirst.PublicHandCounts[10]);
+		TestEqual(TEXT("Spammed play does not grow the pile"), AfterSpam.ClaimedPileCount, AfterFirst.ClaimedPileCount);
+
+		// A second, legitimate Doubt from the same doubter cannot double-resolve: the first
+		// consumes the doubtable claim, the second is rejected.
+		FDubitoRevealInfo Reveal;
+		TestTrue(TEXT("Active next player resolves one Doubt"), GameMode->AuthorityResolveDoubt(20, Reveal));
+		TestFalse(TEXT("A repeated Doubt cannot resolve again"), GameMode->AuthorityResolveDoubt(20, Reveal));
+	}
+
+	DestroyAuthorityTestWorld(World);
+	return true;
+}
+
 #endif // WITH_DEV_AUTOMATION_TESTS

@@ -72,6 +72,7 @@ void ADubitoGameState::MulticastPublicReveal_Implementation(const FDubitoRevealI
 {
 	LastPublicReveal = Reveal;
 	++PublicRevealEventCount;
+	OnPublicRevealEvent.Broadcast(Reveal);
 	OnPublicReveal(Reveal);
 }
 
@@ -79,6 +80,7 @@ void ADubitoGameState::MulticastGameOver_Implementation(const FDubitoGameOverInf
 {
 	LastGameOver = GameOver;
 	++GameOverEventCount;
+	OnPublicGameOverEvent.Broadcast(GameOver);
 	OnGameOver(GameOver);
 }
 

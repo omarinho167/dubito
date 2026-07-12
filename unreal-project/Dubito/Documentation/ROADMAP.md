@@ -141,6 +141,8 @@ Sub-phases:
 
 Phase 3.5 outcome: internal Unreal primitives, generated greybox maps, and shell placeholders are accepted for the V1 greybox baseline. No external card, table, character, or UI asset is imported for Phase 3. If later owner review or playtesting finds a readability blocker, the owner must approve the asset category, license constraints, and target folder before import.
 
+Phase 3.5 follow-up (during Phase 5): the owner supplied and approved a standard 52-card face/back image pack. The 52 face textures were imported as `Texture2D` assets into `Content/Cards/Faces/` (named `T_Card_<Suit>_<NN>`, rank `01`=Ace..`13`=King), plus a single shared `Content/Cards/T_Card_Back` and `Content/Cards/T_Card_Side`. Raw source images and the original pack archive live outside the cooked tree under `Art/Cards/` so the editor directory watcher does not auto-reimport them. License is cleared: the owner confirmed the pack is original artwork made by a personal collaborator and authorized for the project's commercial Steam use. Wiring these textures into a card material and on-table rendering is Phase 5.1+ work; the shared single card back must be reused for every face-down card to preserve the hidden-information invariants.
+
 Phase 3 is complete when:
 
 - one local player can see the full table layout;
@@ -199,12 +201,12 @@ Sub-phases:
 | ID | Name | Status | Objective | Validation |
 |---|---|---|---|---|
 | 5.0 | State display and table binding | Done | Bind replicated state to the table HUD, seats, public claim, public ledgers, timer, and action availability. | A player can always answer whose turn it is, what claim can be judged, what actions are legal, and what public stake is shown. |
-| 5.1 | Play interaction | Next | Implement selection, claim controls, server confirmation, hand update, claimed ledger update, and turn advance. | Play works from input to confirmed state without exposing actual hidden count to non-owners. |
-| 5.2 | Doubt interaction and reveal | Locked | Implement hold-to-confirm Doubt, reveal presentation, verdict, pile transfer, and post-reveal turn outcome. | Correct Doubt, wrong Doubt, value lie, count lie, and honest play are all readable and correct. |
-| 5.3 | Discard interaction | Locked | Implement Discard confirmation, pile clear, round value reset, and skipped turn. | Discard is legal only in the intended states and clearly explains blocked states. |
-| 5.4 | Timer and pending requests | Locked | Implement turn countdown, timeout auto-play, anti-AFK disconnect, and one-pending-request behavior. | Timeout branches match the rules and spammed input cannot create duplicate actions. |
-| 5.5 | Pending-win and Post Game | Locked | Implement final Doubt window, win confirmation, game-over reason, and post-game presentation. | Last-card play, correct final Doubt, wrong final Doubt, timeout confirmation, and last-player-standing are validated. |
-| 5.6 | Local session flow | Locked | Implement local host/join or null/LAN flow from Main Menu to Waiting Room to Table to Post Game and back, suitable for same-PC loopback testing. | Two local instances can enter a match, ready up, start, finish, and return without developer tools. |
+| 5.1 | Play interaction | Done | Implement selection, claim controls, server confirmation, hand update, claimed ledger update, and turn advance. | Play works from input to confirmed state without exposing actual hidden count to non-owners. |
+| 5.2 | Doubt interaction and reveal | Done | Implement hold-to-confirm Doubt, reveal presentation, verdict, pile transfer, and post-reveal turn outcome. | Correct Doubt, wrong Doubt, value lie, count lie, and honest play are all readable and correct. |
+| 5.3 | Discard interaction | Done | Implement Discard confirmation, pile clear, round value reset, and skipped turn. | Discard is legal only in the intended states and clearly explains blocked states. |
+| 5.4 | Timer and pending requests | Done | Implement turn countdown, timeout auto-play, anti-AFK disconnect, and one-pending-request behavior. | Timeout branches match the rules and spammed input cannot create duplicate actions. |
+| 5.5 | Pending-win and Post Game | Done | Implement final Doubt window, win confirmation, game-over reason, and post-game presentation. | Last-card play, correct final Doubt, wrong final Doubt, timeout confirmation, and last-player-standing are validated. |
+| 5.6 | Local session flow | Next | Implement local host/join or null/LAN flow from Main Menu to Waiting Room to Table to Post Game and back, suitable for same-PC loopback testing. | Two local instances can enter a match, ready up, start, finish, and return without developer tools. |
 | 5.7 | First-run help | Locked | Add first-run help card, persistent help access, and contextual hints without blocking experienced play. | A new player can complete a turn and understand Doubt from on-screen cues. |
 | 5.8 | Edge-case validation | Locked | Verify every relevant case in `Documentation/v1/EDGE_CASES.md`. | Winner, wrong Doubt, right Doubt, discard, timeout, disconnect, modal, resize, and input robustness paths are covered. |
 | 5.9 | Packaged local full-game pass | Locked | Validate the loop by launching two packaged instances on one PC. | Two packaged local instances complete a full game while preserving hidden information rules. |
@@ -219,6 +221,71 @@ equivalent delegate, so a C++ HUD refreshes event-driven from replicated state. 
 automation (whose-turn, action matrix incl. pending-win and stale-claim, claim/stake presentation, timer math, seat ledgers);
 the widget still needs an on-screen in-match visual pass, which depends on the Phase 5.6 ready/start flow (or a live PIE session
 driven through the editor) to populate a real match.
+
+Phase 5.1 outcome: a pure, engine-independent Play composition view-model (`BuildDubitoPlaySelectionView`) turns the local
+player's exact hand plus the replicated public round context plus in-progress intent (picked card indices, chosen claimed
+value, claimed count) into the flags an action bar needs and a submittable `(ActualCards, Announcement)` payload. It reuses
+`DubitoRules::IsAnnouncementValidForRound` so the value-lock rule is never duplicated: the value control is exposed only while
+opening a round and locked to the round value once open, while the claimed count stays a free 1..4 bluff. Selection is gated to
+1..4 unique in-hand cards and mirrors the server Play predicates as a best-effort client gate; the server still validates and
+resyncs. `UDubitoPlayActionWidget` (added to the Table HUD via `ADubitoHUD`, gated to the owning local player) reads the exact
+hand from `ADubitoPlayerController`, drives selection/claim through discrete cursor + toggle + stepper controls so it is usable
+without a mouse, and confirms by calling the existing `RequestPlayCards` server path, after which the confirmed hand/ledger/turn
+arrive as replicated state and clear the in-progress intent. The view-model is covered by automation (turn gating, opening vs
+locked value, selection bounds, claimed-count bounds incl. bluff, payload determinism); the widget still needs an on-screen
+in-match interaction pass, which depends on the Phase 5.6 ready/start flow (or a live PIE session driven through the editor) to
+populate a real turn. It only ever reads the local exact hand, so it cannot leak an opponent's actual count.
+
+Phase 5.2 outcome: a pure, engine-independent reveal presentation view-model (`BuildDubitoRevealView`) turns the self-contained
+public `FDubitoRevealInfo` plus the local player's identity into legible facts: the verdict (correct vs wrong doubt), the exact
+lie kind (honest, count lie, value lie, or both) derived from the claim vs the revealed cards, the claim/actual comparison, who
+takes the pile and the claimed stake moved, any confirmed win, and local-perspective flags (claimant/doubter/loser/winner). It
+reads only the server-scrubbed public payload, so it never leaks hidden state. `ADubitoGameState` now also exposes native
+`OnPublicRevealEvent`/`OnPublicGameOverEvent` broadcasts (mirroring `OnPublicMatchStateChanged`) so a C++ widget renders the beat
+event-driven. `UDubitoRevealWidget` (added to the Table HUD via `ADubitoHUD`) presents the reveal and game-over cards and
+auto-hides the reveal after a short beat, and `UDubitoPlayActionWidget` gained hold-to-confirm Doubt: a press begins the hold, a
+release before the threshold cancels, and holding past it sends the existing `RequestDoubt` server path, gated by a public-state
+doubtability check that mirrors `DubitoRules::CanDoubt`. The view-model is covered by automation (invalid/default, honest wrong
+doubt, count lie, value lie, count-and-value lie, and win-confirmed with local-perspective flags); the on-screen reveal beat and
+the Doubt hold interaction still need a live in-match pass, which depends on the Phase 5.6 ready/start flow (or a live PIE
+session driven through the editor) to populate a real Doubt.
+
+Phase 5.3 outcome: a pure, engine-independent Discard availability view-model (`BuildDubitoDiscardView`) mirrors
+`DubitoRules::CanDiscard` from public state and, when Discard is unavailable, names the specific blocked reason (not your turn,
+a win is pending, or an empty pile) so the disabled control can explain itself. `UDubitoPlayActionWidget` gained a Discard
+control with a light confirmation: the first click arms it (with a short auto-disarm timer), a second click within the window
+sends the existing `RequestDiscard` server path, and the status line always explains the current available/armed/blocked state.
+The server still owns the pile clear, round-value reset, and skipped turn, which arrive as replicated state. The view-model is
+covered by automation (available case, and each blocked reason with turn precedence); the on-screen confirmation still needs a
+live in-match pass, which depends on the Phase 5.6 ready/start flow (or a live PIE session driven through the editor).
+
+Phase 5.4 outcome: `ADubitoGameMode` now owns an authoritative turn timer (`FTimerHandle` kept in lockstep with the turn
+deadline in `RefreshTurnDeadlineForCurrentState`): when a turn's `TurnSeconds` elapse it fires `AuthorityResolveTimeout` for the
+player on the clock, which routes through `DubitoRules::ResolveTimeout` to auto-play one card (truthful when possible, a forced
+minimal bluff otherwise), confirm a pending winner instead when a win is pending, and count the anti-AFK streak so the third
+consecutive timeout removes the player via `HandleDisconnect`. The timer reschedules for the next player after each voluntary or
+timed-out action and clears on any non-`PlayerTurn` phase (reveal, game over); `IsTurnTimerActive` and
+`GetTurnDeadlineServerTimeSeconds` expose it for validation. Spammed input cannot create duplicate actions: the server already
+rejects any second action from a player who is no longer active (the authoritative turn/`CanDoubt` checks), and
+`UDubitoPlayActionWidget` adds a one-pending-request guard that blocks a second Play/Doubt/Discard send until replicated state
+confirms the first (with a short safety window in case a rejected action produces no state change). Automation covers the timer
+being scheduled during a turn and cleared at game over, timeout auto-play advancing the turn, stale timeout callbacks being a
+safe no-op, and duplicate Play/Doubt being rejected without double-applying; the turn countdown display itself already ships from
+Phase 5.0, and the on-screen pending/timeout feel still needs a live in-match pass gated on the Phase 5.6 flow.
+
+Phase 5.5 outcome: the pending-win rules and the server-side game-over broadcasting already shipped (core `ApplyPlay` flags the
+pending win, `ResolveDoubt`/`ConfirmWin`/`ResolveTimeout`/`HandleDisconnect` resolve it, and `ADubitoGameMode` emits the reveal +
+`FDubitoGameOverInfo` with the correct `EDubitoGameOverReason` in Phases 4.6/5.4). Phase 5.5 added the client terminal
+presentation. `EDubitoGameOverReason`/`FDubitoGameOverInfo` moved into a light `DubitoGameOver.h` so a pure view-model can use
+them without depending on the GameState actor. A new pure `BuildDubitoPostGameView` turns the game-over payload plus the local
+identity into the terminal result: the winner (or none), the human-facing reason, and whether the local player won, lost, or
+watched. `UDubitoPostGameWidget` (added to the Table HUD via `ADubitoHUD`, top-most) binds the native `OnPublicGameOverEvent` and
+presents a persistent result card, and the reveal panel's game-over handling moved here so the reveal stays the cinematic beat and
+post-game owns the terminal screen. The final Doubt window itself is already covered: during a pending win the action bar keeps
+Play available and the previous last-card claim doubtable (emphasized hold-to-confirm Doubt), and the HUD shows the pending-win
+stake. Automation covers the post-game view-model (invalid/default, win/loss/spectator perspective, no-winner ending, and every
+rule-defined winning reason). The terminal card's return-to-menu affordance is intentionally deferred to the Phase 5.6 local
+session flow, and the on-screen post-game/pending-win feel needs that same live pass.
 
 Phase 5 is complete when:
 
@@ -301,7 +368,7 @@ Agents must call these out when the phase or sub-phase is reached instead of sil
 | 1.0 | Confirm installed Unreal version and Steam account availability for local testing | before bootstrap validation |
 | 1.0 | Confirm Git LFS and locking policy | before any `.uasset`, `.umap`, audio, or texture file is tracked |
 | 1.0 | Install UE C++ build prerequisites: Visual Studio 2022 C++ toolchain, Windows 10/11 SDK, and .NET Framework 4.6+ SDK (required by SwarmInterface) | before the first C++ module build |
-| 3.5 | Select or approve external visual assets only if placeholders are not readable enough | before import into `unreal-project/Dubito/Content/Cards/` or `unreal-project/Dubito/Content/Art/Prototype/` |
+| 3.5 | Select or approve external visual assets only if placeholders are not readable enough | before import into `unreal-project/Dubito/Content/Cards/` or `unreal-project/Dubito/Content/Art/Prototype/` — card face/back pack supplied and imported during Phase 5; license cleared (original art by owner's collaborator, commercial use authorized) |
 | 6.0 | Provide two Steam accounts and two test machines, or explicitly accept a reduced test pass | after the packaged one-PC full-game pass, before Steam multiplayer validation |
 | 7.3 | Select or approve external SFX only after exact event needs are known | before import into `unreal-project/Dubito/Content/Audio/SFX/` |
 | 8.0 | Purchase or activate Steam app credit and provide real AppID | before release app configuration |
