@@ -98,6 +98,11 @@ void UDubitoTableHudWidget::EnsureHudTree()
 	ActionsText = BuildHudTextBlock(*WidgetTree, HudActionsName, FLinearColor(0.58f, 0.82f, 0.74f, 1.0f));
 	SeatsBox = WidgetTree->ConstructWidget<UVerticalBox>(UVerticalBox::StaticClass(), HudSeatsName);
 
+	// Static panel header; the fields below update from replicated state.
+	UTextBlock* HeaderText = BuildHudTextBlock(*WidgetTree, TEXT("TableHudHeader"), FLinearColor(0.98f, 0.86f, 0.42f, 1.0f));
+	HeaderText->SetText(FText::FromString(TEXT("DUBITO  -  TABLE")));
+	AddStackChild(*Stack, *HeaderText, FMargin(0.0f, 0.0f, 0.0f, 10.0f));
+
 	AddStackChild(*Stack, *PhaseText, FMargin(0.0f, 0.0f, 0.0f, 4.0f));
 	AddStackChild(*Stack, *TurnText, FMargin(0.0f, 0.0f, 0.0f, 4.0f));
 	AddStackChild(*Stack, *TimerText, FMargin(0.0f, 0.0f, 0.0f, 12.0f));

@@ -2,11 +2,16 @@
 
 #include "Blueprint/WidgetTree.h"
 #include "Components/Border.h"
+#include "Components/HorizontalBox.h"
+#include "Components/HorizontalBoxSlot.h"
+#include "Components/Image.h"
 #include "Components/TextBlock.h"
 #include "Components/VerticalBox.h"
 #include "Components/VerticalBoxSlot.h"
+#include "DubitoCardVisuals.h"
 #include "DubitoPlayerController.h"
 #include "DubitoPlayerState.h"
+#include "Engine/Texture2D.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerState.h"
 #include "TimerManager.h"
@@ -112,6 +117,15 @@ void UDubitoRevealWidget::EnsureRevealTree()
 	VerdictText = MakeLine(FLinearColor(0.98f, 0.80f, 0.35f, 1.0f));
 	ClaimText = MakeLine(FLinearColor(0.86f, 0.89f, 0.88f, 1.0f));
 	ActualText = MakeLine(FLinearColor(0.96f, 0.92f, 0.84f, 1.0f));
+
+	// Row of the actually-played card faces, shown between the claim/actual text and the outcome.
+	RevealCardsBox = WidgetTree->ConstructWidget<UHorizontalBox>(UHorizontalBox::StaticClass());
+	{
+		UVerticalBoxSlot* CardsSlot = PanelStack->AddChildToVerticalBox(RevealCardsBox);
+		CardsSlot->SetHorizontalAlignment(HAlign_Center);
+		CardsSlot->SetPadding(FMargin(0.0f, 6.0f));
+	}
+
 	OutcomeText = MakeLine(FLinearColor(0.72f, 0.84f, 0.80f, 1.0f));
 	WinText = MakeLine(FLinearColor(0.60f, 0.92f, 0.66f, 1.0f));
 
@@ -222,6 +236,35 @@ void UDubitoRevealWidget::ApplyViewToWidgets()
 	{
 		ActualText->SetText(FText::FromString(FString::Printf(TEXT("Actually played (%d): %s"),
 			CachedView.ActualCount, *CardsToString(CachedView.RevealedCards))));
+	}
+
+	if (RevealCardsBox)
+	{
+		RevealCardsBox->ClearChildren();
+		for (const FDubitoCard& Card : CachedView.RevealedCards)
+		{
+			UBorder* CardBorder = WidgetTree->ConstructWidget<UBorder>(UBorder::StaticClass());
+			CardBorder->SetBrushColor(FLinearColor(0.10f, 0.12f, 0.15f, 1.0f));
+			CardBorder->SetPadding(FMargin(2.0f));
+
+			if (UTexture2D* FaceTexture = LoadDubitoCardFaceTexture(Card))
+			{
+				UImage* CardImage = WidgetTree->ConstructWidget<UImage>(UImage::StaticClass());
+				CardImage->SetBrushFromTexture(FaceTexture, false);
+				CardImage->SetDesiredSizeOverride(FVector2D(56.0f, 78.0f));
+				CardBorder->SetContent(CardImage);
+			}
+			else
+			{
+				UTextBlock* CardText = WidgetTree->ConstructWidget<UTextBlock>(UTextBlock::StaticClass());
+				CardText->SetText(FText::FromString(RankToString(Card.Rank) + SuitToString(Card.Suit)));
+				CardText->SetColorAndOpacity(FSlateColor(FLinearColor(0.92f, 0.94f, 0.92f, 1.0f)));
+				CardBorder->SetContent(CardText);
+			}
+
+			UHorizontalBoxSlot* CardSlot = RevealCardsBox->AddChildToHorizontalBox(CardBorder);
+			CardSlot->SetPadding(FMargin(3.0f, 0.0f));
+		}
 	}
 
 	if (OutcomeText)

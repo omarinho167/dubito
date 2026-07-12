@@ -9,6 +9,9 @@ Build/
 Plugins/**/Binaries/
 Plugins/**/Intermediate/
 
+# Agent tooling (local, not project source)
+.codex/
+
 # IDE / project file generation
 .vs/
 .vscode/

@@ -214,7 +214,7 @@ Expected asset categories, when needed:
 
 | Category | Timing | Target |
 |---|---|---|
-| Card faces, backs, and simple card materials | Phase 3 if internal placeholders are not readable enough | `unreal-project/Dubito/Content/Cards/` |
+| Card faces, backs, and simple card materials | Imported during Phase 5 (owner-supplied 52-card pack) | `unreal-project/Dubito/Content/Cards/` (assets: `Faces/T_Card_<Suit>_<NN>`, shared `T_Card_Back`, `T_Card_Side`; raw source under `Art/Cards/`) |
 | Tavern table, seats, and neutral player placeholders | Phase 3 only if greybox primitives block readability | `unreal-project/Dubito/Content/Art/Prototype/` |
 | Action and UI SFX | Phase 7 after full gameplay loop validation | `unreal-project/Dubito/Content/Audio/SFX/` |
 | Store and marketing art | Phase 8 release prep | Steamworks and `unreal-project/Dubito/Content/Art/Marketing/` if a project copy is needed |

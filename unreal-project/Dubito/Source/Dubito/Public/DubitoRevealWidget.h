@@ -6,6 +6,7 @@
 #include "DubitoGameState.h"
 #include "DubitoRevealWidget.generated.h"
 
+class UHorizontalBox;
 class UTextBlock;
 class UVerticalBox;
 
@@ -73,6 +74,10 @@ private:
 
 	UPROPERTY(Transient)
 	TObjectPtr<UTextBlock> ActualText = nullptr;
+
+	// Row of imported card-face images for the revealed actual cards.
+	UPROPERTY(Transient)
+	TObjectPtr<UHorizontalBox> RevealCardsBox = nullptr;
 
 	UPROPERTY(Transient)
 	TObjectPtr<UTextBlock> OutcomeText = nullptr;

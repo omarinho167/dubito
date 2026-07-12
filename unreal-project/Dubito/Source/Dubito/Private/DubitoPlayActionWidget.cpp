@@ -5,10 +5,13 @@
 #include "Components/Button.h"
 #include "Components/HorizontalBox.h"
 #include "Components/HorizontalBoxSlot.h"
+#include "Components/Image.h"
 #include "Components/TextBlock.h"
 #include "Components/VerticalBox.h"
 #include "Components/VerticalBoxSlot.h"
+#include "DubitoCardVisuals.h"
 #include "DubitoGameState.h"
+#include "Engine/Texture2D.h"
 #include "DubitoPlayerController.h"
 #include "DubitoPlayerState.h"
 #include "Engine/World.h"
@@ -624,31 +627,37 @@ void UDubitoPlayActionWidget::ApplyViewToWidgets()
 		HandBox->ClearChildren();
 		for (const FDubitoPlayCardView& CardView : CachedView.Cards)
 		{
-			UTextBlock* CardText = WidgetTree->ConstructWidget<UTextBlock>(UTextBlock::StaticClass());
-
 			const bool bAtCursor = CardView.HandIndex == CursorIndex;
-			FString Label = CardToString(CardView.Card);
-			if (CardView.bSelected)
+
+			// The selection/cursor state reads through the framing border: gold when picked, blue
+			// when under the cursor, dark otherwise. The card face itself is the imported texture.
+			UBorder* CardBorder = WidgetTree->ConstructWidget<UBorder>(UBorder::StaticClass());
+			const FLinearColor BorderColor = CardView.bSelected
+				? FLinearColor(0.96f, 0.80f, 0.30f, 1.0f)
+				: (bAtCursor ? FLinearColor(0.55f, 0.80f, 0.98f, 1.0f) : FLinearColor(0.10f, 0.12f, 0.15f, 1.0f));
+			CardBorder->SetBrushColor(BorderColor);
+			CardBorder->SetPadding(FMargin(3.0f));
+
+			if (UTexture2D* FaceTexture = LoadDubitoCardFaceTexture(CardView.Card))
 			{
-				Label = FString::Printf(TEXT("[%s]"), *Label);
+				UImage* CardImage = WidgetTree->ConstructWidget<UImage>(UImage::StaticClass());
+				CardImage->SetBrushFromTexture(FaceTexture, false);
+				CardImage->SetDesiredSizeOverride(FVector2D(64.0f, 90.0f));
+				CardBorder->SetContent(CardImage);
 			}
 			else
 			{
-				Label = FString::Printf(TEXT(" %s "), *Label);
+				// Fallback when the owner-local card pack is absent: keep the legible text label.
+				UTextBlock* CardText = WidgetTree->ConstructWidget<UTextBlock>(UTextBlock::StaticClass());
+				CardText->SetText(FText::FromString(CardToString(CardView.Card)));
+				CardText->SetColorAndOpacity(FSlateColor(FLinearColor(0.92f, 0.94f, 0.92f, 1.0f)));
+				CardBorder->SetContent(CardText);
 			}
-			if (bAtCursor)
-			{
-				Label = FString::Printf(TEXT(">%s<"), *Label);
-			}
-			CardText->SetText(FText::FromString(Label));
 
-			const FLinearColor CardColor = CardView.bSelected
-				? FLinearColor(0.96f, 0.86f, 0.55f, 1.0f)
-				: (bAtCursor ? FLinearColor(0.86f, 0.92f, 0.96f, 1.0f) : FLinearColor(0.72f, 0.77f, 0.80f, 1.0f));
-			CardText->SetColorAndOpacity(FSlateColor(CardColor));
-
-			UHorizontalBoxSlot* CardSlot = HandBox->AddChildToHorizontalBox(CardText);
+			UHorizontalBoxSlot* CardSlot = HandBox->AddChildToHorizontalBox(CardBorder);
 			CardSlot->SetPadding(FMargin(4.0f, 0.0f));
+			// Lift the focused card so the cursor position is obvious at a glance.
+			CardBorder->SetRenderTranslation(FVector2D(0.0f, bAtCursor ? -10.0f : 0.0f));
 		}
 	}
 
