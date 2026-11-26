@@ -63,7 +63,7 @@ Limite connue : l'hôte a toutes les mains en mémoire. Un hôte tricheur peut l
 2. **Dans Unity** : tests EditMode en ligne de commande (`Unity.exe -batchmode -runTests -testPlatform EditMode …`), sur une copie si l'éditeur est ouvert.
 3. **Réseau local** : hôte + client(s) sur la même machine (éditeur + build, ou plusieurs builds), transport local sans Steam.
 4. **Steam** : deux PC avec deux comptes Steam différents. App ID de test **480 (Spacewar)** au début, avec un filtre de lobby propre à Dubito ; vrai App ID dès qu'il existe.
-5. **Unity MCP** : sert à créer et inspecter des scènes et prefabs et à lancer des tests. Il ne remplace ni les tests automatiques ni la vérification visuelle par le propriétaire.
+5. **Unity CLI** (`unity command …`, paquet `com.unity.pipeline` ; remplace le MCP intégré déprécié, D-37) : sert à créer et inspecter des scènes et prefabs et à lancer des tests. Il ne remplace ni les tests automatiques ni la vérification visuelle par le propriétaire.
 
 ## 5. Pièges Steam connus
 

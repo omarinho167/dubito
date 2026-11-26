@@ -34,7 +34,7 @@ Ordre de lecture pour une tâche : ROADMAP (étape en cours), puis le fichier co
 Le propriétaire parle à **Claude** (Claude Code). **Codex** est branché à Claude par le plugin Codex (agents `codex:*`), et le propriétaire a un abonnement aux deux : on l'exploite au maximum (DECISIONS D-35).
 
 - **Claude, chef d'équipe** : dialogue avec le propriétaire, conception, découpage en tâches, intégration, docs, vérification finale.
-- **Codex** : grosses tâches de code bien délimitées, recherches, travail mécanique, et relecture du travail de Claude (`dubito-cross-review`).
+- **Codex** : grosses tâches de code bien délimitées, **modélisation 3D dans Blender** (D-38), recherches, travail mécanique, et relecture du travail de Claude (`dubito-cross-review`).
 - Une tâche confiée à Codex reçoit un brief complet (Codex ne voit pas la conversation) : fichiers, sections de RULES, critère de fin. Claude vérifie le résultat (tests, diff) avant de le déclarer fait.
 - Deux agents n'écrivent jamais dans les mêmes fichiers en même temps.
 - En cas de doute sur qui fait quoi, Claude pose la question au propriétaire (`dubito-ask-owner`).
@@ -48,11 +48,9 @@ Une seule copie, dans `.agents/skills/` (lu par Codex). Claude Code les lit via 
 powershell -ExecutionPolicy Bypass -File tools\setup-skills.ps1
 ```
 
-| Skill | Quand |
-|---|---|
-| `dubito-rule-change` | Toute règle ajoutée, modifiée ou clarifiée |
-| `dubito-ask-owner` | Une décision appartient au propriétaire |
-| `dubito-cross-review` | Après un changement important : relecture par l'autre agent |
+**Au début de chaque tâche, lire le skill `dubito-route`** : il dit quel skill utiliser (règles, Unity, tests, réseau, Blender, 3D, relecture) et dans quel ordre. La liste des skills et leur usage n'est écrite que là.
+
+Sources et choix des skills : [docs/research/SKILLS-ET-OUTILS.md](docs/research/SKILLS-ET-OUTILS.md).
 
 Frontmatter portable seulement : `name` et `description`. Pas d'options propres à Claude ou à Codex.
 
