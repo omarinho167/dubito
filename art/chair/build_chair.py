@@ -3,7 +3,9 @@ Only the generated CHAIR scene is replaced; unrelated scenes are preserved.
 -- --iteration 1 produces the first comparison; default 2 is the delivery.
 Iteration 1: dossier trop court, lattes trop fines, traverse basse trop haute.
 Iteration 2: height .940, slats .040, lean 8.3 deg, lower rail .535.
-Remaining: no wood grain, inferred back, four side bars visible in profile.
+After rebuilding, run bake_chair.py headless to restore the baked oak textures,
+then run review_textured.py with system Python/Pillow for reference sheets.
+Remaining: inferred back, four side bars visible in profile.
 Perspective measurements (front 1361x1824): top y249, seat y1034, floor y1675;
 seat x345..1016; posts x424..938. Side top x1028 y234, knee x947 y1035.
 These are perspective constraints, not orthographic dimensions. Hidden back inferred.
