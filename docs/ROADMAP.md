@@ -17,8 +17,8 @@
 - [x] 1.1 Créer le projet Unity 6.3 LTS (URP) dans `unity/`, les asmdefs et le `.gitignore` ; s'assurer qu'il compile. *(2026-11-26)*
 - [x] 1.2 Core : cartes, paquet, distribution, ordre du tour (`RULES §3`). Tests `C-SET-*`. *(2026-11-26)*
 - [x] 1.3 Core : Jouer, Douter, Défausser (`RULES §4`). Tests `C-PLA-*`, `C-DOU-*`, `C-DEF-*`. *(2026-11-26 ; C-DOU-09/12/13 avec 1.4–1.5)*
-- [ ] 1.4 Core : chrono, tours sautés, exclusion (`RULES §5`). Tests `C-CHR-*`.
-- [ ] 1.5 Core : victoire, déconnexion, ordre de résolution (`RULES §6–8`). Tests `C-VIC-*`, `C-DEC-*`.
+- [x] 1.4 Core : chrono, tours sautés, exclusion (`RULES §5`). Tests `C-CHR-*`. *(2026-11-26)*
+- [x] 1.5 Core : victoire, déconnexion, ordre de résolution (`RULES §6–8`). Tests `C-VIC-*`, `C-DEC-*`. *(2026-11-26 ; C-DEC-07 en phase 3)*
 - [ ] 1.6 Core : vues filtrées par joueur (`RULES §9`). Tests `C-PRV-*` + invariants.
 - [x] 1.7 Projet `dotnet test` hors Unity sur les mêmes sources. *(2026-11-26, fait avec 1.2)*
 

@@ -27,6 +27,7 @@ namespace Dubito.Core
             if (error != CommandError.None) return Result(error);
 
             var next = new GameState(State);
+            next.MutableSkippedTurns[playerId] = 0;
             switch (command.Kind)
             {
                 case CommandKind.Play:
@@ -69,16 +70,126 @@ namespace Dubito.Core
             if (State.Phase != GamePhase.Revelation) return Result(CommandError.NoRevelation);
             var next = new GameState(State);
             var reveal = next.Revelation;
-            int recipient = reveal.IsDoubtCorrect ? reveal.AccusedPlayerId : reveal.DoubterId;
-            next.MutableHands[recipient].AddRange(next.Pile);
             int? winner = reveal.IsDoubtCorrect ? null : next.PendingWinnerId;
+            int recipient = reveal.IsAutomatic ? -1 :
+                (reveal.IsDoubtCorrect ? reveal.AccusedPlayerId : reveal.DoubterId);
+            if (recipient < 0 || next.MutablePendingDepartures.Contains(recipient))
+                next.MutableRemovedCards.AddRange(next.Pile);
+            else next.MutableHands[recipient].AddRange(next.Pile);
+            int active = reveal.IsAutomatic || reveal.IsDoubtCorrect
+                ? reveal.DoubterId : NextPlayer(next, reveal.DoubterId);
             next.PendingWinnerId = null;
             ClearRound(next);
             next.Phase = GamePhase.Playing;
+            // Find the next surviving seat before removing seats from the ring.
+            while (next.MutablePendingDepartures.Contains(active) &&
+                   next.PendingDepartures.Count < next.TurnOrder.Count)
+                active = NextPlayer(next, active);
+            foreach (int player in next.PendingDepartures) RemoveSeat(next, player);
+            next.MutablePendingDepartures.Clear();
             if (winner.HasValue) Finish(next, winner.Value);
-            else Activate(next, reveal.IsDoubtCorrect ? reveal.DoubterId : NextPlayer(next, reveal.DoubterId));
+            else if (next.TurnOrder.Count == 1) Finish(next, next.TurnOrder[0]);
+            else if (next.TurnOrder.Count == 0) FinishWithoutWinner(next);
+            else Activate(next, active);
             Publish(next);
             return Result(CommandError.None);
+        }
+
+        // Host supplies elapsed game time in message order. A large delta can span
+        // several turns; time supplied during revelation is discarded, never banked.
+        public CommandResult AdvanceTime(double seconds)
+        {
+            if (double.IsNaN(seconds) || double.IsInfinity(seconds) || seconds < 0)
+                return Result(CommandError.InvalidElapsedTime);
+            if (State.Phase == GamePhase.Finished) return Result(CommandError.GameFinished);
+            if (State.IsTimerPaused || seconds == 0) return Result(CommandError.None);
+            var next = new GameState(State);
+            bool turnExpired = false;
+            while (next.Phase == GamePhase.Playing && seconds >= next.RemainingTurnSeconds)
+            {
+                turnExpired = true;
+                seconds -= next.RemainingTurnSeconds;
+                int player = next.ActivePlayerId;
+                next.MutableSkippedTurns[player]++;
+                if (next.LastPlay != null && next.LastPlay.RespondentId == player)
+                    next.LastPlay = next.LastPlay.CloseDoubtWindow();
+                if (next.PendingWinnerId.HasValue)
+                {
+                    int winner = next.PendingWinnerId.Value;
+                    if (next.SkippedTurns[player] >= 2) RemoveSeat(next, player);
+                    Finish(next, winner);
+                }
+                else if (next.SkippedTurns[player] >= 2) Depart(next, player);
+                else Activate(next, NextPlayer(next, player));
+            }
+            if (next.Phase == GamePhase.Playing) next.RemainingTurnSeconds -= seconds;
+            // A countdown alone keeps the revision: commands prepared before a tick stay valid.
+            if (turnExpired) Publish(next);
+            else State = next;
+            return Result(CommandError.None);
+        }
+
+        // Authenticated host event, not a player command. During revelation the
+        // departure is recorded without allowing it to override the verdict.
+        public CommandResult RemovePlayer(int playerId)
+        {
+            if (State.Phase == GamePhase.Finished) return Result(CommandError.GameFinished);
+            if (!State.MutableTurnOrder.Contains(playerId) || State.MutablePendingDepartures.Contains(playerId))
+                return Result(CommandError.PlayerNotInGame);
+            var next = new GameState(State);
+            if (next.Phase == GamePhase.Revelation)
+                next.MutablePendingDepartures.Add(playerId);
+            else if (next.PendingWinnerId == playerId)
+            {
+                next.MutablePendingDepartures.Add(playerId);
+                next.Revelation = new DoubtRevelation(next.LastPlay, next.LastPlay.RespondentId, true);
+                next.LastPlay = next.LastPlay.CloseDoubtWindow();
+                next.Phase = GamePhase.Revelation;
+            }
+            else Depart(next, playerId);
+            Publish(next);
+            return Result(CommandError.None);
+        }
+
+        // Host departure ends the session without evaluating any pending verdict.
+        public CommandResult StopGame()
+        {
+            if (State.Phase == GamePhase.Finished) return Result(CommandError.GameFinished);
+            var next = new GameState(State);
+            foreach (int player in next.PendingDepartures) RemoveSeat(next, player);
+            next.MutablePendingDepartures.Clear();
+            FinishWithoutWinner(next);
+            Publish(next);
+            return Result(CommandError.None);
+        }
+
+        private static void Depart(GameState s, int player)
+        {
+            int following = NextPlayer(s, player);
+            bool wasActive = s.ActivePlayerId == player;
+            int? winner = wasActive ? s.PendingWinnerId : null;
+            if (s.LastPlay != null && (wasActive || s.LastPlay.PlayerId == player || s.LastPlay.RespondentId == player))
+                s.LastPlay = s.LastPlay.CloseDoubtWindow();
+            RemoveSeat(s, player);
+            if (winner.HasValue) Finish(s, winner.Value);
+            else if (s.TurnOrder.Count == 1) Finish(s, s.TurnOrder[0]);
+            else if (wasActive) Activate(s, following);
+        }
+
+        private static void RemoveSeat(GameState s, int player)
+        {
+            s.MutableRemovedCards.AddRange(s.Hands[player]);
+            s.MutableHands[player].Clear();
+            s.MutableTurnOrder.Remove(player);
+        }
+
+        private static void FinishWithoutWinner(GameState s)
+        {
+            s.Revelation = null;
+            s.WinnerId = null;
+            s.PendingWinnerId = null;
+            s.Phase = GamePhase.Finished;
+            if (s.LastPlay != null) s.LastPlay = s.LastPlay.CloseDoubtWindow();
         }
 
         private CommandError Validate(int playerId, GameCommand c)

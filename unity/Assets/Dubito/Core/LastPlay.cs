@@ -34,9 +34,11 @@ namespace Dubito.Core
         public int DoubterId { get; }
         public IReadOnlyList<Card> Cards { get; }
         public bool IsDoubtCorrect { get; }
+        public bool IsAutomatic { get; }
 
-        internal DoubtRevelation(LastPlay play, int doubterId)
+        internal DoubtRevelation(LastPlay play, int doubterId, bool isAutomatic = false)
         {
+            IsAutomatic = isAutomatic;
             AccusedPlayerId = play.PlayerId;
             DoubterId = doubterId;
             Cards = play.Cards;

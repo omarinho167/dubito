@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace Dubito.Tests.Core
 {
-    public class ActionTests
+    public partial class ActionTests
     {
         private static Card C(CardRank rank, CardSuit suit = CardSuit.Clubs) => new Card(rank, suit);
 

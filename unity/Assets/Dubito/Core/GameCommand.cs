@@ -24,7 +24,9 @@ namespace Dubito.Core
         NoDoubtablePlay = 12,
         EmptyPile = 13,
         PendingVictory = 14,
-        NoRevelation = 15
+        NoRevelation = 15,
+        InvalidElapsedTime = 16,
+        PlayerNotInGame = 17
     }
 
     // Player identity is supplied separately by the authenticated host, not by the command.
