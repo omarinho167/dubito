@@ -1,0 +1,19 @@
+{
+    "name": "Dubito.Editor",
+    "rootNamespace": "Dubito.EditorTools",
+    "references": [
+        "Dubito.Core",
+        "Dubito.Presentation"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

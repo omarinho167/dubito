@@ -67,3 +67,6 @@
 | D-47 | Hot-seat : bascule **automatique** vers le joueur actif après chaque action (UX §9). | Le plus rapide pour tester les règles en 3D. | P |
 | D-48 | **Claude et Codex voient les mêmes skills**, pour Dubito (tout dans le dépôt) et pour tout le PC (dossier commun `~/.agents/skills` + jonctions), vérifié par `tools/sync-skills.ps1`. | Les deux agents travaillent sur le même sujet. | P |
 | D-49 | Skills tiers importés après audit (liste : `.agents/skills/THIRD_PARTY.md`) : Blender EL4CTEO 1.3.3, image→3D, game-feel, audio, assets 2D, Steam, débogage, game-designer ; documentation Scenario Labs sans ses scripts. | Choix du propriétaire ; scripts Scenario refusés à l'audit (pont permissif, incompatible Windows). | P |
+| D-50 | Valeurs des cartes en **Liberation Sans Bold** (OFL 1.1, version 2.1.5 du dépôt officiel), versionnée avec sa licence dans `tools/cards/fonts/`. | Même police libre que l'interface (ASSETS §1). | P |
+| D-51 | Dos des cartes **bordeaux** avec liseré crème, motif géométrique original symétrique. | Contraste fort avec le tapis vert. | P |
+| D-52 | Calcul lourd sur le **GPU** (RTX 3070) : Blender en EEVEE ou Cycles GPU OptiX, jamais Cycles CPU (AGENTS règle 9). | Bien plus rapide que le processeur. | P |

@@ -28,7 +28,8 @@ Ordre de lecture pour une tâche : ROADMAP (étape en cours), puis le fichier co
 6. **Questions au propriétaire** : sous forme de **choix multiples** (2 à 4 options, la recommandation en premier), jamais de questions ouvertes. Chaque réponse importante devient une entrée de DECISIONS.md.
 7. **Vérification visuelle** : c'est le propriétaire qui valide ce qui se voit à l'écran. Ne pas déclarer « ça marche » sur la seule base d'une capture.
 8. **Pas d'asset externe** (modèles, sons, packs) sans l'accord du propriétaire, avec la licence vérifiée.
-9. Ne pas mettre d'avancement, de compte rendu ou d'astuce d'outil dans les docs de conception. Ça va dans les commits ou dans ROADMAP (une ligne).
+9. **Calcul sur le GPU** (NVIDIA RTX 3070, bien plus rapide que le CPU) : rendus et bakes Blender en EEVEE ou Cycles **GPU OptiX** (repli CUDA), jamais Cycles CPU ; tout calcul lourd qui peut tourner sur GPU y tourne.
+10. Ne pas mettre d'avancement, de compte rendu ou d'astuce d'outil dans les docs de conception. Ça va dans les commits ou dans ROADMAP (une ligne).
 
 ## Claude et Codex
 
