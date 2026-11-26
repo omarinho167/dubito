@@ -38,3 +38,7 @@ Desktop.ini
 
 # Jonction locale vers .agents/skills (creee par tools/setup-skills.ps1)
 /.claude/skills
+
+# Résultats de tests locaux
+/TestResults/
+/unity/test-results.xml

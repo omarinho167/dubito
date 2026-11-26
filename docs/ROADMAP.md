@@ -8,13 +8,13 @@
 - [x] 0.1 Récupérer les anciennes docs, choisir la version des règles (juillet 2026). *(2026-11-26)*
 - [x] 0.2 Trancher les trous de règles et le périmètre V1 avec le propriétaire. *(2026-11-26)*
 - [x] 0.3 Recherches : stack Unity/Steam, concurrence. *(2026-11-26)*
-- [ ] 0.4 Relecture de la nouvelle doc par le propriétaire.
+- [x] 0.4 Relecture de la nouvelle doc par le propriétaire. *(2026-11-26)*
 
 **Fin de phase** : le propriétaire valide RULES, CASES, UX, VISION et ARCHITECTURE.
 
 ## Phase 1 : projet Unity et moteur de règles
 
-- [ ] 1.1 Créer le projet Unity 6.3 LTS (URP) dans `unity/`, les asmdefs et le `.gitignore` ; s'assurer qu'il compile.
+- [x] 1.1 Créer le projet Unity 6.3 LTS (URP) dans `unity/`, les asmdefs et le `.gitignore` ; s'assurer qu'il compile. *(2026-11-26)*
 - [ ] 1.2 Core : cartes, paquet, distribution, ordre du tour (`RULES §3`). Tests `C-SET-*`.
 - [ ] 1.3 Core : Jouer, Douter, Défausser (`RULES §4`). Tests `C-PLA-*`, `C-DOU-*`, `C-DEF-*`.
 - [ ] 1.4 Core : chrono, tours sautés, exclusion (`RULES §5`). Tests `C-CHR-*`.

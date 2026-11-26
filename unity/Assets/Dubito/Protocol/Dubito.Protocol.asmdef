@@ -1,0 +1,16 @@
+{
+    "name": "Dubito.Protocol",
+    "rootNamespace": "Dubito.Protocol",
+    "references": [
+        "Dubito.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

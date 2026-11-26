@@ -1,0 +1,17 @@
+{
+    "name": "Dubito.Networking",
+    "rootNamespace": "Dubito.Networking",
+    "references": [
+        "Dubito.Core",
+        "Dubito.Protocol"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

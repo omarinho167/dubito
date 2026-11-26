@@ -1,0 +1,19 @@
+{
+    "name": "Dubito.Presentation",
+    "rootNamespace": "Dubito.Presentation",
+    "references": [
+        "Dubito.Core",
+        "Dubito.Protocol",
+        "Dubito.Networking",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
