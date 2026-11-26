@@ -8,6 +8,7 @@
 
 ## Modifications locales
 
+- Description raccourcie (269 caractères) pour tenir dans le catalogue des deux agents ; contenu inchangé.
 - Aucune.
 
 Pour mettre à jour : comparer avec la nouvelle version amont (diff), relire, puis remplacer en gardant ces modifications.

@@ -8,6 +8,7 @@
 
 ## Modifications locales
 
+- Description raccourcie (326 caractères) pour tenir dans le catalogue des deux agents ; contenu inchangé.
 - Ajout de la section « Dans Dubito » en tête du SKILL.md : Dans Dubito : `scripts/init_master.py` et `scripts/roundtrip.py` **réinitialisent Blender** ; ne les lancer que dans un Blender séparé (`blender -b`), jamais dans la session MCP ouverte du propriétaire. Pillow est un prérequis (déjà installé sur le PC) ; ne rien installer automatiquement. Le flux Dubito reste `blender-model-from-reference` (références, ASSETS.md) ; ce skill apporte la comparaison mesurée aux photos (silhouettes, mêmes caméras).
 
 Pour mettre à jour : comparer avec la nouvelle version amont (diff), relire, puis remplacer en gardant ces modifications.

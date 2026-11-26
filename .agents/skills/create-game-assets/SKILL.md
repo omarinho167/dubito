@@ -1,11 +1,6 @@
 ---
 name: create-game-assets
-description: >
-  Plans, generates or sources, and validates consistent game art: style guides, sprites, pixel
-  art, tilesets, icons and textures, with QA and licence records. Use when making or AI-generating
-  game art, fixing fake transparency, or checking Steam AI disclosure. Not for engine import
-  (`godot-tilemap`, `godot-animation`, `unity-tilemap-2d`), UI layout (`game-ui-ux`) or sound
-  (`audio-design`).
+description: "Plans, generates or sources and validates consistent 2D game art (style guides, icons, textures, sprites) with QA and licence records. Use when making or checking game art; not for engine import, UI layout or sound."
 ---
 
 > **Dans Dubito** — `docs/ASSETS.md` reste l'unique liste d'assets ; les faces de cartes suivent `dubito-card-faces`. Aucun asset externe ni génération par service sans accord du propriétaire. Pillow est un prérequis : ne pas lancer `pip install` automatiquement.

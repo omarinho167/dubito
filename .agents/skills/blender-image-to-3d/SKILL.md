@@ -1,6 +1,6 @@
 ---
 name: blender-image-to-3d
-description: Build a game-ready 3D asset in Blender from reference images (concept art, photos, turnarounds, sketches, screenshots) for any category, including characters, creatures, architecture, vehicles, props, weapons and environment pieces, through gated phases with rendered evidence compared against the reference. Use this whenever a user supplies or mentions a reference image and wants a 3D model or game asset made from it (modelled, blocked out, sculpted, retopologised, textured, rigged, animated or exported for a game engine), even when Blender is not named. Includes bpy scripts for scene calibration, review renders matched to the reference camera, silhouette measurement, validation, baking, GLB/FBX export with manifests, and clean reimport.
+description: "Build a game-ready asset in Blender from reference images (photos, concept art, turnarounds) through gated phases, with renders matched to the reference camera and measured silhouette comparison; scripts for calibration, review, validation, baking, export and reimport. Use whenever a reference image should become a 3D model."
 license: MIT
 ---
 

@@ -8,6 +8,7 @@
 
 ## Modifications locales
 
+- Description raccourcie (253 caractères) pour tenir dans le catalogue des deux agents ; contenu inchangé.
 - Ajout de la section « Dans Dubito » en tête du SKILL.md : Dans Dubito, les assets suivent `docs/ASSETS.md` et ses décisions (pas de génération ni d'import d'asset externe sans accord du propriétaire).
 
 Pour mettre à jour : comparer avec la nouvelle version amont (diff), relire, puis remplacer en gardant ces modifications.

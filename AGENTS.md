@@ -59,6 +59,7 @@ Frontmatter portable seulement : `name` et `description`. Pas d'options propres 
 
 - **Projet** : tout skill propre à Dubito ou importé pour lui vit dans `.agents/skills/` (y compris les skills tiers). Exceptions : les skills installés et mis à jour par un outil (`unity-cli`, `unity-pipeline` par Unity CLI) et les plugins, qui restent au niveau du PC.
 - **PC** : `~\.agents\skills` est le dossier commun aux deux outils pour les autres projets ; `tools\sync-skills.ps1` relie chaque skill à Claude par une jonction, sans toucher aux dossiers gérés par un outil (`~\.claude\skills\synced`, `~\.codex\skills\.system`, skills synchronisés par d'autres projets).
+- Skills rarement utiles ici : rangés dans `.agents/skills-library/` (hors catalogue des deux agents, liste dans `dubito-route`), pour que la liste chargée reste courte. Descriptions : 300 caractères environ au maximum.
 - Après avoir ajouté ou installé un skill, n'importe où : lancer le script ; sans option il vérifie, avec `-Apply` il corrige (sauvegarde d'abord).
 
 ```powershell

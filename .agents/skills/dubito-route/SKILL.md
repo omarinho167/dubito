@@ -47,6 +47,8 @@ Charger en plus, seulement si la tâche le demande. Les notes « Dans Dubito » 
 | Conception, playtests (phase 5) | `game-designer` |
 | Publication Steam (plus tard) | `steam-publish` |
 
+**Rangés à part** (dans `.agents/skills-library/`, non chargés automatiquement pour garder la liste des skills courte) : `blender-addon-development`, `blender-clothing`, `blender-facial-shapekeys`, `blender-geometry-nodes`, `blender-hair-grooming`, `blender-sculpting`, `blender-simulation`, `blender-time-of-day`, `blender-video-editing`, `blender-weather-fx`. Si une tâche en a vraiment besoin, lire directement `.agents/skills-library/<nom>/SKILL.md`.
+
 Une validation déjà donnée par le propriétaire dans la conversation vaut pour l'étape 1.
 
 Répartition Claude / Codex : voir `AGENTS.md`, section « Claude et Codex ».

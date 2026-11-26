@@ -8,6 +8,7 @@
 
 ## Modifications locales
 
+- Description raccourcie (215 caractères) pour tenir dans le catalogue des deux agents ; contenu inchangé.
 - Ajout de la section « Dans Dubito » en tête du SKILL.md : Dans Dubito, `docs/ASSETS.md` reste l'unique liste d'assets ; les faces de cartes suivent `dubito-card-faces`. Aucun asset externe ni génération par service sans accord du propriétaire. Pillow est un prérequis : ne pas lancer `pip install` automatiquement.
 
 Pour mettre à jour : comparer avec la nouvelle version amont (diff), relire, puis remplacer en gardant ces modifications.

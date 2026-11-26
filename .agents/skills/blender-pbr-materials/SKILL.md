@@ -1,6 +1,6 @@
 ---
 name: blender-pbr-materials
-description: Physically based materials in Blender 5.3 - metal/roughness rules, Principled BSDF inputs, color spaces (sRGB vs Non-Color), measured albedo/F0 values, texture-set auto-wiring, ORM channel packing, DirectX vs OpenGL normals, alpha modes, displacement, view transforms (AgX, Khronos PBR Neutral), engine-ready material rules. Use when creating, fixing, or exporting materials and textures.
+description: "Physically based materials in Blender 5.3: metal/roughness rules, Principled BSDF, sRGB vs Non-Color, measured albedo values, texture-set wiring, ORM packing, DirectX/OpenGL normals, alpha modes, engine-ready materials. Use when creating, fixing or exporting materials."
 license: MIT
 metadata:
   author: blender-agent-skills

@@ -8,6 +8,7 @@
 
 ## Modifications locales
 
+- Description raccourcie (265 caractères) pour tenir dans le catalogue des deux agents ; contenu inchangé.
 - Ajout de la section « Dans Dubito » en tête du SKILL.md : Dans Dubito, aucune ressource externe (HDRI Poly Haven ou autre) sans l'accord du propriétaire et sa licence vérifiée (`AGENTS.md` règle 8). Ne pas supposer qu'un outil `search_assets`/`import_asset` existe.
 
 Pour mettre à jour : comparer avec la nouvelle version amont (diff), relire, puis remplacer en gardant ces modifications.

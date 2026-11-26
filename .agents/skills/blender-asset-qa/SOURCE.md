@@ -8,6 +8,7 @@
 
 ## Modifications locales
 
+- Description raccourcie (275 caractères) pour tenir dans le catalogue des deux agents ; contenu inchangé.
 - Ajout de la section « Dans Dubito » en tête du SKILL.md : Dans Dubito, ce contrôle est technique ; il ne remplace pas la validation du propriétaire (`dubito-visual-review`).
 
 Pour mettre à jour : comparer avec la nouvelle version amont (diff), relire, puis remplacer en gardant ces modifications.
