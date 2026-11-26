@@ -70,3 +70,5 @@
 | D-50 | Valeurs des cartes en **Liberation Sans Bold** (OFL 1.1, version 2.1.5 du dépôt officiel), versionnée avec sa licence dans `tools/cards/fonts/`. | Même police libre que l'interface (ASSETS §1). | P |
 | D-51 | Dos des cartes **bordeaux** avec liseré crème, motif géométrique original symétrique. | Contraste fort avec le tapis vert. | P |
 | D-52 | Calcul lourd sur le **GPU** (RTX 3070) : Blender en EEVEE ou Cycles GPU OptiX, jamais Cycles CPU (AGENTS règle 9). | Bien plus rapide que le processeur. | P |
+| D-53 | Flux validé pour les modèles 3D : Claude écrit le prompt d'image (Nano Banana Pro), le propriétaire génère les images de référence, Codex modélise dans Blender. Style visuel définitif à choisir plus tard (Meshy AI à évaluer alors, coûts compris). | Test de la chaise réussi (étape 2.0). | P |
+| D-54 | Scène plus claire : lumière d'ambiance relevée + lumière d'appoint douce ; la table reste l'endroit le plus éclairé. | « Trop sombre » à la revue de l'étape 2.0. | P |

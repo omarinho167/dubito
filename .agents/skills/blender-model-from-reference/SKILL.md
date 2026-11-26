@@ -12,6 +12,7 @@ Pour Dubito : décor (table, chaises, cartes) et personnages **stylisés simples
 - Lister les vues fournies (face, profil, dos, trois-quarts), les dimensions connues, ce qui est essentiel (silhouette, tête, mains, couleurs) et ce qui est **deviné** (faces cachées).
 - Une photo en perspective n'est pas un plan orthographique. Une vue de profil inventée ou générée par IA = proposition à faire valider si elle change le design.
 - S'il manque une vue indispensable, demander au propriétaire (choix multiples : « je devine », « tu fournis l'image », « je génère une proposition »).
+- Flux préféré (D-53) : Claude écrit au propriétaire un prompt d'image (Nano Banana Pro) par vue (face, profil, 3/4, fond uni gris clair, éclairage studio neutre, objet entier) ; le propriétaire génère les images et les dépose dans `art/<asset>/ref/`.
 
 ## 2. Préparer la scène
 

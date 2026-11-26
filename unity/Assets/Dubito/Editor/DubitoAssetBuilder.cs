@@ -99,7 +99,7 @@ namespace Dubito.EditorTools
             {
                 ["M_TableFelt"] = Lit("M_TableFelt", Hex("#1F5A3A"), 0.05f),
                 ["M_TableWood"] = Lit("M_TableWood", Hex("#4A2E1C"), 0.35f),
-                ["M_Wood"] = Lit("M_Wood", Hex("#C08A55"), 0.3f),
+                ["M_Wood"] = ChairWood(),
                 ["M_LampShade"] = Lit("M_LampShade", Hex("#2A2A2A"), 0.5f, 0.6f),
                 ["M_Mannequin"] = Lit("M_Mannequin", Hex("#B8BCC4"), 0.35f),
                 ["M_MannequinJoints"] = Lit("M_MannequinJoints", Hex("#2E2E33"), 0.4f),
@@ -113,6 +113,19 @@ namespace Dubito.EditorTools
             m["Alpha_Body_MAT"] = m["M_Mannequin"];
             m["Alpha_Joints_MAT"] = m["M_MannequinJoints"];
             return m;
+        }
+
+        // Baked oak textures from Blender when present, plain oak colour otherwise.
+        static Material ChairWood()
+        {
+            const string folder = Art + "Props/Chair/";
+            var baseColor = AssetDatabase.LoadAssetAtPath<Texture2D>(folder + "T_Chair_BaseColor.png");
+            var normal = AssetDatabase.LoadAssetAtPath<Texture2D>(folder + "T_Chair_Normal.png");
+            var mat = Lit("M_Wood", baseColor != null ? Color.white : Hex("#C08A55"), 0.3f, 0f, baseColor);
+            mat.SetTexture("_BumpMap", normal);
+            if (normal != null) mat.EnableKeyword("_NORMALMAP");
+            else mat.DisableKeyword("_NORMALMAP");
+            return mat;
         }
 
         static Material FaceMaterial(CardRank rank, CardSuit suit)
@@ -368,8 +381,16 @@ namespace Dubito.EditorTools
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             RenderSettings.skybox = null;
             RenderSettings.ambientMode = AmbientMode.Flat;
-            RenderSettings.ambientLight = new Color(0.13f, 0.13f, 0.15f);
+            // Owner review 2026-11-27: "trop sombre". Readable room, the table stays the brightest place.
+            RenderSettings.ambientLight = new Color(0.32f, 0.31f, 0.33f);
             RenderSettings.defaultReflectionMode = DefaultReflectionMode.Custom;
+
+            var fill = new GameObject("FillLight").AddComponent<Light>();
+            fill.type = LightType.Directional;
+            fill.color = new Color(0.85f, 0.88f, 1f);
+            fill.intensity = 0.35f;
+            fill.shadows = LightShadows.None;
+            fill.transform.rotation = Quaternion.Euler(50f, 30f, 0f);
 
             BuildRoom();
             Spawn(table, "Table", Vector3.zero, Quaternion.identity);

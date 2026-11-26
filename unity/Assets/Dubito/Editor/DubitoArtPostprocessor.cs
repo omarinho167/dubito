@@ -20,9 +20,16 @@ namespace Dubito.EditorTools
 
         void OnPreprocessTexture()
         {
+            var importer = (TextureImporter)assetImporter;
+            if (assetPath.StartsWith(ArtRoot, StringComparison.Ordinal)
+                && Path.GetFileNameWithoutExtension(assetPath).EndsWith("_Normal", StringComparison.Ordinal))
+            {
+                importer.textureType = TextureImporterType.NormalMap; // baked OpenGL (Y+) like Unity expects
+                importer.sRGBTexture = false;
+                return;
+            }
             if (!assetPath.StartsWith(CardFacesFolder, StringComparison.Ordinal)) return;
 
-            var importer = (TextureImporter)assetImporter;
             importer.textureType = TextureImporterType.Default;
             importer.sRGBTexture = true;
             importer.alphaSource = TextureImporterAlphaSource.None;
