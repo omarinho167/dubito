@@ -34,4 +34,8 @@
 | D-24 | Un tour sauté rend le dernier coup **non doutable**. | Seul le joueur juste après le poseur peut douter. | C |
 | D-25 | Distribution en commençant par le **premier joueur** : il a donc parfois une carte de plus. | Cohérent avec D-04. À surveiller en playtest. | C |
 | D-27 | Pendant une révélation, **le doute est résolu avant** les conséquences d'un départ. La fenêtre de doute d'un coup se ferme définitivement au premier geste (ou absence de geste) de son répondant. | Supprime les contradictions relevées en relecture Codex. | C |
+| D-28 | Apprentissage : **un seul écran de Règles** (menu + salon). Pas de tutoriel, de bulles d'aide ni d'historique des coups en V1. | Périmètre minimal, le jeu de base est connu. | P |
+| D-29 | L'hôte règle la **durée du chrono** (30/45/60/90 s) et les **places max** (2–6). | Utile pour les débutants et les playtests. | P |
+| D-30 | Places autour de la table **tirées au hasard**, dans l'ordre du tour. | Simple et équitable. | P |
+| D-31 | Skills partagés Claude + Codex dans le dépôt : changer une règle, poser une question au propriétaire, faire relire par Codex. | Rendre les bonnes pratiques répétables. | P |
 | D-26 | Garder **Liar's Bar** en tête : pas de copie de sa présentation, la différence vient d'abord des mécaniques. | Risque de perception élevé (voir research/CONCURRENCE.md). | C |

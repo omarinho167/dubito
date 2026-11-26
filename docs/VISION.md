@@ -34,6 +34,8 @@ Détails et sources : [research/CONCURRENCE.md](research/CONCURRENCE.md).
 | Souris + clavier | Manette, Steam Deck |
 | Sons simples | Musique, ambiance dynamique, vocal intégré (Discord suffit) |
 | Revanche dans le même salon | Bots, mode solo |
+| Un écran de Règles illustré | Tutoriel, bulles d'aide, historique des coups |
+| Réglages de l'hôte : chrono, places max | Variantes de règles activables |
 | Interface en français (textes prêts à traduire) | Autres langues |
 
 ## Direction artistique

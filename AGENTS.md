@@ -29,6 +29,22 @@ Ordre de lecture pour une tâche : ROADMAP (étape en cours), puis le fichier co
 8. **Pas d'asset externe** (modèles, sons, packs) sans l'accord du propriétaire, avec la licence vérifiée.
 9. Ne pas mettre d'avancement, de compte rendu ou d'astuce d'outil dans les docs de conception. Ça va dans les commits ou dans ROADMAP (une ligne).
 
+## Skills partagés
+
+Une seule copie, dans `.agents/skills/` (lu par Codex). Claude Code les lit via la jonction `.claude/skills`, à créer une fois après chaque clone :
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools\setup-skills.ps1
+```
+
+| Skill | Quand |
+|---|---|
+| `dubito-rule-change` | Toute règle ajoutée, modifiée ou clarifiée |
+| `dubito-ask-owner` | Une décision appartient au propriétaire |
+| `dubito-cross-review` | Après un changement important : relecture par l'autre agent |
+
+Frontmatter portable seulement : `name` et `description`. Pas d'options propres à Claude ou à Codex.
+
 ## Commandes
 
 À compléter en phase 1 (création du projet Unity, tests `dotnet test` et Unity en batchmode).

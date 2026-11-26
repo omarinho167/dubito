@@ -39,7 +39,7 @@
 - [ ] 3.1 Protocol : commandes, vues, erreurs, version.
 - [ ] 3.2 Hôte + clients en `localhost` ; association connexion → siège.
 - [ ] 3.3 Chaque client ne reçoit que sa vue (vérification `C-PRV-*` sur les vrais messages).
-- [ ] 3.4 Salon local : Prêt, lancer, revanche, retour au menu.
+- [ ] 3.4 Salon local : Prêt, réglages de l'hôte (chrono, places max), lancer, revanche, retour au menu (`UX §6`).
 - [ ] 3.5 Déconnexions et départ de l'hôte (`RULES §7`).
 
 **Fin de phase** : partie complète à 3 instances sur un PC (éditeur + 2 builds).
@@ -54,7 +54,7 @@
 
 ## Phase 5 : V1 jouable
 
-- [ ] 5.1 Menus, options (volume, sensibilité, réduction des animations), messages d'erreur (`UX §6`).
+- [ ] 5.1 Menus, écran Règles, options (volume, sensibilité, réduction des animations), messages d'erreur (`UX §6`).
 - [ ] 5.2 Sons simples (`UX §7`).
 - [ ] 5.3 Personnages stylisés simples (placeholders) aux places.
 - [ ] 5.4 Playtests avec des amis, réglage des points `RULES §11`.

@@ -16,7 +16,7 @@
 | Valeur de manche | Choisie par celui qui ouvre sur un tas vide, imposée jusqu'à ce que le tas soit vidé. |
 | Douter | Seul le joueur suivant, avant de confirmer son action. |
 | Défausser | Le joueur actif retire le tas du jeu et passe son tour. |
-| Chrono | 45 s par tour. Si le temps est écoulé, le tour est sauté. |
+| Chrono | 45 s par tour par défaut (réglable par l'hôte, §5). Si le temps est écoulé, le tour est sauté. |
 | AFK | 2 tours sautés d'affilée : le joueur est exclu. |
 
 ## 2. Vocabulaire
@@ -39,7 +39,7 @@
 ## 3. Mise en place
 
 1. Mélanger les 52 cartes.
-2. Tirer au hasard l'ordre du tour. Le premier de l'ordre est le premier joueur.
+2. Tirer au hasard l'ordre du tour. Les joueurs sont placés autour de la table dans cet ordre (personne ne choisit sa place). Le premier de l'ordre est le premier joueur.
 3. Distribuer **toutes** les cartes une par une, en commençant par le premier joueur et dans l'ordre du tour.
    Avec 52 cartes et N joueurs, les `52 mod N` premiers joueurs ont une carte de plus.
    *(Exemple : 5 joueurs, les 2 premiers ont 11 cartes, les 3 autres 10.)*
@@ -96,8 +96,9 @@ Les autres joueurs ne peuvent rien faire. Pendant une révélation ou une fois l
 
 ## 5. Chrono et inactivité
 
-- Chaque tour dure **45 secondes**. Le chrono est en pause pendant une révélation.
-- Il repart à 45 s à chaque nouveau joueur actif, et pour le douteur après un doute juste.
+- Chaque tour dure **45 secondes** par défaut. L'hôte peut choisir **30, 45, 60 ou 90 s** dans le salon, avant le lancement. La durée ne change plus pendant la partie.
+- Le chrono est en pause pendant une révélation.
+- Il repart à la durée complète à chaque nouveau joueur actif, et pour le douteur après un doute juste.
 - **Temps écoulé** : le tour est **sauté**. Aucune carte n'est posée, aucun doute n'est fait, rien n'est défaussé.
   - Le tas et la valeur de manche ne changent pas.
   - Si le joueur sauté était le répondant du dernier coup, ce coup n'est plus doutable (§2).

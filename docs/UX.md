@@ -70,10 +70,15 @@ Message au survol d'une action grisée, exemples : « Ce n'est pas ton tour », 
 
 ## 6. Écrans hors partie
 
-1. **Menu principal** : Créer une partie, Rejoindre (invitation Steam), Options, Quitter.
-2. **Salon** : liste des joueurs (2 à 6), bouton **Prêt** pour chacun, l'hôte lance quand tout le monde est prêt et qu'il y a au moins 2 joueurs. Invitation via l'overlay Steam.
-3. **Options** : volume, sensibilité de la souris, réduction des animations.
-4. **Messages d'erreur** clairs : salon plein, partie déjà commencée, hôte parti, Steam non lancé.
+1. **Menu principal** : Créer une partie, Rejoindre (invitation Steam), **Règles**, Options, Quitter.
+2. **Salon** : liste des joueurs, bouton **Prêt** pour chacun, l'hôte lance quand tout le monde est prêt et qu'il y a au moins 2 joueurs. Invitation via l'overlay Steam. Le bouton **Règles** est aussi accessible ici.
+   - **Réglages de l'hôte** (modifiables tant que la partie n'est pas lancée) :
+     - **Durée du chrono** : 30 / 45 / 60 / 90 s, 45 s par défaut (`RULES §5`) ;
+     - **Places max** : de 2 à 6, 6 par défaut. On ne peut pas descendre sous le nombre de joueurs déjà présents.
+   - Les places autour de la table sont tirées au hasard au lancement (`RULES §3`).
+3. **Écran Règles** : une page illustrée qui résume `RULES §1, §4 et §6` en langage simple (schémas : poser, douter, défausser, dernier doute). C'est **la seule aide au jeu en V1** : pas de tutoriel, pas de bulles d'aide, pas d'historique des coups.
+4. **Options** : volume, sensibilité de la souris, réduction des animations.
+5. **Messages d'erreur** clairs : salon plein, partie déjà commencée, hôte parti, Steam non lancé.
 
 ## 7. Son (V1 minimal)
 

@@ -16,6 +16,8 @@ Notation : J1, J2, J3… dans l'ordre du tour. « Tas : 5 (valeur 7) » = 5 cart
 | C-SET-04 | Toute partie | Distribution | Total des mains = 52, aucune carte en double | §3 |
 | C-SET-05 | Début de partie | — | Tas vide, pas de valeur de manche, J1 actif, chrono 45 s | §3 |
 | C-SET-06 | 1 joueur ou 7 joueurs dans le salon | L'hôte lance | Refusé : 2 à 6 joueurs | §1 |
+| C-SET-07 | L'hôte a choisi 60 s | Lancement | Chaque tour dure 60 s ; la durée ne peut plus changer | §5 |
+| C-SET-08 | L'hôte propose un chrono de 50 s | — | Refusé : seulement 30, 45, 60 ou 90 s | §5 |
 
 ## Jouer (PLA)
 
