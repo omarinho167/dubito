@@ -3,7 +3,9 @@
     "rootNamespace": "Dubito.EditorTools",
     "references": [
         "Dubito.Core",
-        "Dubito.Presentation"
+        "Dubito.Presentation",
+        "Unity.RenderPipelines.Core.Runtime",
+        "Unity.RenderPipelines.Universal.Runtime"
     ],
     "includePlatforms": [
         "Editor"

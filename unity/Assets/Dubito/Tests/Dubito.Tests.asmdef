@@ -4,6 +4,7 @@
     "references": [
         "Dubito.Core",
         "Dubito.Protocol",
+        "Dubito.Presentation",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner"
     ],

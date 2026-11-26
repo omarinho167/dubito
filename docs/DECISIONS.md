@@ -72,3 +72,5 @@
 | D-52 | Calcul lourd sur le **GPU** (RTX 3070) : Blender en EEVEE ou Cycles GPU OptiX, jamais Cycles CPU (AGENTS règle 9). | Bien plus rapide que le processeur. | P |
 | D-53 | Flux validé pour les modèles 3D : Claude écrit le prompt d'image (Nano Banana Pro), le propriétaire génère les images de référence, Codex modélise dans Blender. Style visuel définitif à choisir plus tard (Meshy AI à évaluer alors, coûts compris). | Test de la chaise réussi (étape 2.0). | P |
 | D-54 | Scène plus claire : lumière d'ambiance relevée + lumière d'appoint douce ; la table reste l'endroit le plus éclairé. | « Trop sombre » à la revue de l'étape 2.0. | P |
+| D-55 | À la table, le **joueur suivant est à droite** (sens inverse des aiguilles d'une montre vu du dessus). | Habitude des jeux de cartes français (belote, tarot). | P |
+| D-56 | Debug en Play : touches **2 à 6** reconstruisent la table avec ce nombre de sièges. | Tester vite 2, 4 et 6 joueurs. | P |

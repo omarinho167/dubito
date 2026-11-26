@@ -21,8 +21,8 @@ namespace Dubito.EditorTools
         const string Art = DubitoArtPostprocessor.ArtRoot;
         const string MaterialsFolder = Art + "Materials";
         const string CardMaterialsFolder = Art + "Cards/Materials";
-        const string PrefabsFolder = "Assets/Dubito/Prefabs";
-        const string ScenesFolder = "Assets/Dubito/Scenes";
+        internal const string PrefabsFolder = "Assets/Dubito/Prefabs";
+        internal const string ScenesFolder = "Assets/Dubito/Scenes";
         const string ReviewScenePath = ScenesFolder + "/AssetReview.unity";
         const string ControllerPath = DubitoArtPostprocessor.MannequinFolder + "AC_SeatedOpponent.controller";
         const string AnimationsFolder = DubitoArtPostprocessor.MannequinFolder + "Animations";
@@ -40,14 +40,7 @@ namespace Dubito.EditorTools
         // Hip joint sits about 0.1 m above the seat surface, buttocks against the backrest.
         const float HipHeight = SeatHeight + 0.10f;
         const float ChairCenterRadius = 1.12f;
-        const float LampHangHeight = 2.9f; // cable top; shade bottom 1.25 m lower = 0.9 m above the table
-
-        // Placeholder seat colours (greybox, UX §2: each seat has a colour).
-        static readonly Color[] SeatColors =
-        {
-            Hex("#3B82F6"), Hex("#E5484D"), Hex("#30A46C"),
-            Hex("#F5A524"), Hex("#8E4EC6"), Hex("#12A594"),
-        };
+        internal const float LampHangHeight = 2.9f; // cable top; shade bottom 1.25 m lower = 0.9 m above the table
 
         static readonly (string state, string clip, OpponentReaction? reaction)[] OpponentStates =
         {
@@ -369,29 +362,10 @@ namespace Dubito.EditorTools
         static void BuildReviewScene(GameObject table, GameObject chair, GameObject lamp, GameObject card,
             GameObject opponent, CardMaterialLibrary library)
         {
-            for (int i = 0; i < SceneManager.sceneCount; i++)
-            {
-                if (SceneManager.GetSceneAt(i).isDirty)
-                {
-                    Debug.LogError("[Dubito] An open scene has unsaved changes; save it before building AssetReview.");
-                    return;
-                }
-            }
+            if (!NoDirtyScenes()) return;
 
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
-            RenderSettings.skybox = null;
-            RenderSettings.ambientMode = AmbientMode.Flat;
-            // Owner review 2026-11-27: "trop sombre". Readable room, the table stays the brightest place.
-            RenderSettings.ambientLight = new Color(0.32f, 0.31f, 0.33f);
-            RenderSettings.defaultReflectionMode = DefaultReflectionMode.Custom;
-
-            var fill = new GameObject("FillLight").AddComponent<Light>();
-            fill.type = LightType.Directional;
-            fill.color = new Color(0.85f, 0.88f, 1f);
-            fill.intensity = 0.35f;
-            fill.shadows = LightShadows.None;
-            fill.transform.rotation = Quaternion.Euler(50f, 30f, 0f);
-
+            ApplyRoomLighting(null);
             BuildRoom();
             Spawn(table, "Table", Vector3.zero, Quaternion.identity);
             Spawn(lamp, "Lamp", new Vector3(0f, LampHangHeight, 0f), Quaternion.identity);
@@ -406,7 +380,7 @@ namespace Dubito.EditorTools
                 Spawn(chair, "Chair", facing * new Vector3(0f, 0f, -ChairCenterRadius), facing, seat);
                 if (i == 0) continue; // seat 0 = the camera (the local player)
                 var opp = Spawn(opponent, "Opponent", seat.position, facing, seat);
-                opp.GetComponent<SeatedOpponentAppearance>().SeatColor = SeatColors[i];
+                opp.GetComponent<SeatedOpponentAppearance>().SeatColor = SeatPalette.Get(i);
             }
 
             // Cards: a row of faces in front of seat 0 and a small face-down pile in the centre.
@@ -459,7 +433,37 @@ namespace Dubito.EditorTools
             }
         }
 
-        static void BuildRoom()
+        internal static bool NoDirtyScenes()
+        {
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                if (SceneManager.GetSceneAt(i).isDirty)
+                {
+                    Debug.LogError("[Dubito] An open scene has unsaved changes; save it before rebuilding a scene.");
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // D-45 + owner review 2026-11-27 ("trop sombre"): readable room, the table stays the brightest place.
+        internal static void ApplyRoomLighting(Transform parent)
+        {
+            RenderSettings.skybox = null;
+            RenderSettings.ambientMode = AmbientMode.Flat;
+            RenderSettings.ambientLight = new Color(0.32f, 0.31f, 0.33f);
+            RenderSettings.defaultReflectionMode = DefaultReflectionMode.Custom;
+
+            var fill = new GameObject("FillLight").AddComponent<Light>();
+            fill.transform.SetParent(parent, false);
+            fill.type = LightType.Directional;
+            fill.color = new Color(0.85f, 0.88f, 1f);
+            fill.intensity = 0.35f;
+            fill.shadows = LightShadows.None;
+            fill.transform.rotation = Quaternion.Euler(50f, 30f, 0f);
+        }
+
+        internal static void BuildRoom()
         {
             var room = new GameObject("Room").transform;
             var floorMat = AssetDatabase.LoadAssetAtPath<Material>(MaterialsFolder + "/M_RoomFloor.mat");
@@ -483,7 +487,7 @@ namespace Dubito.EditorTools
             go.isStatic = true;
         }
 
-        static GameObject Spawn(GameObject prefab, string name, Vector3 pos, Quaternion rot, Transform parent = null)
+        internal static GameObject Spawn(GameObject prefab, string name, Vector3 pos, Quaternion rot, Transform parent = null)
         {
             var go = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
             go.name = name;

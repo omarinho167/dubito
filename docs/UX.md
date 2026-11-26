@@ -13,7 +13,7 @@
 ## 2. La scène
 
 - **Caméra** : à la 1re personne, assis à sa place. On tourne la tête en **maintenant le clic droit** et en bougeant la souris, dans une limite (environ ±60° à gauche/droite, un peu en haut/bas). Sans clic droit, le curseur est libre pour cliquer. Pas de déplacement.
-- **Table** : ronde, de 2 à 6 places réparties régulièrement. On est toujours placé face au centre.
+- **Table** : ronde, de 2 à 6 places réparties régulièrement. On est toujours placé face au centre. Le joueur suivant est assis à sa droite (D-55).
 - **Adversaires** : personnages stylisés simples assis (en phase 2 : mannequins neutres, `ASSETS.md`), avec **nom Steam** et **couleur** de siège.
 - **Main des adversaires** : leurs cartes sont visibles de dos, en éventail. On peut donc compter leurs cartes (`RULES §9`). Un petit chiffre au-dessus confirme le nombre.
 - **Sa propre main** : en éventail devant soi, cartes face visible, triées par valeur.
