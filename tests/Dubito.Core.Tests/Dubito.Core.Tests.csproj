@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <IsTestProject>true</IsTestProject>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.14.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <ProjectReference Include="../Dubito.Core.DotNet/Dubito.Core.DotNet.csproj" />
+    <Compile Include="../../unity/Assets/Dubito/Tests/Core/**/*.cs" Exclude="../../unity/Assets/Dubito/Tests/Core/**/ArchitectureTests.cs" />
+  </ItemGroup>
+</Project>

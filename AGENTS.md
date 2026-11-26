@@ -56,4 +56,12 @@ Frontmatter portable seulement : `name` et `description`. Pas d'options propres 
 
 ## Commandes
 
-À compléter en phase 1 (création du projet Unity, tests `dotnet test` et Unity en batchmode).
+Détails et verdict fiable : skill `dubito-core-tests` ; pilotage de l'éditeur : skill `dubito-unity-editor`.
+
+```powershell
+dotnet test                       # depuis la racine : tests des règles hors Unity (secondes)
+```
+
+```powershell
+unity command test run --mode editor --filter-type Assembly --filter Dubito.Tests   # depuis unity/, éditeur ouvert
+```
