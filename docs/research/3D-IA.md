@@ -39,8 +39,8 @@ Animations utiles : assis en permanence, respiration, regard vers un joueur, hoc
 
 | Outil | Choix |
 |---|---|
-| Blender | [Serveur MCP officiel de Blender](https://www.blender.org/lab/mcp-server/) (Blender 5.1+). Alternative communautaire : [ahujasid/mcp-for-blender](https://github.com/ahujasid/mcp-for-blender). |
-| Unity | Déjà configuré sur le PC : le relais officiel Unity (`~/.unity/relay`). Alternative communautaire : [CoplayDev/unity-mcp](https://github.com/CoplayDev/unity-mcp). À choisir en phase 1. |
+| Blender | **Installé (2026-11-26)** : [serveur MCP officiel de Blender Lab](https://projects.blender.org/lab/blender_mcp) (add-on « MCP » dans Blender 5.3 + programme `blender-mcp`, port local 9876), branché pour Claude Code et Codex. Alternative communautaire : [ahujasid/mcp-for-blender](https://github.com/ahujasid/mcp-for-blender). |
+| Unity | **Installé (2026-11-26)** : MCP officiel d'Unity, fourni par le paquet `com.unity.ai.assistant` du projet et le relais `~/.unity/relay`, branché pour Claude Code et Codex. Ne marche que si le projet est ouvert dans l'éditeur. Alternative communautaire : [CoplayDev/unity-mcp](https://github.com/CoplayDev/unity-mcp). |
 
 Ces connecteurs exécutent du code dans l'application : à utiliser sur un projet sauvegardé (git).
 
