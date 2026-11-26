@@ -34,15 +34,14 @@
 | **Suivant** | Le prochain joueur encore en jeu dans l'ordre du tour. |
 | **Victoire en attente** | État entre le moment où un joueur vide sa main et la résolution de la réponse du suivant (§6). |
 | **Retirer du jeu** | Les cartes sont mises de côté face cachée et ne reviennent jamais. Le retrait ne révèle rien de nouveau (des cartes déjà révélées lors d'un doute restent connues de ceux qui les ont vues). |
-| **Révélation** | Phase entre un doute accepté et sa résolution (§4.2). |
+| **Révélation** | Phase entre un doute accepté et sa résolution (§4.2). Aussi quand un joueur en victoire en attente quitte la partie (§7). |
 
 ## 3. Mise en place
 
 1. Mélanger les 52 cartes.
 2. Tirer au hasard l'ordre du tour. Les joueurs sont placés autour de la table dans cet ordre (personne ne choisit sa place). Le premier de l'ordre est le premier joueur.
-3. Distribuer **toutes** les cartes une par une, en commençant par le premier joueur et dans l'ordre du tour.
-   Avec 52 cartes et N joueurs, les `52 mod N` premiers joueurs ont une carte de plus.
-   *(Exemple : 5 joueurs, les 2 premiers ont 11 cartes, les 3 autres 10.)*
+3. Distribuer **toutes** les cartes. Avec 52 cartes et N joueurs, chacun reçoit `52 div N` cartes, puis les `52 mod N` cartes restantes vont chacune à un joueur différent **tiré au hasard**.
+   *(Exemple : 5 joueurs, 2 joueurs tirés au hasard ont 11 cartes, les 3 autres 10.)*
 4. Le tas est vide, il n'y a pas de valeur de manche.
 5. Le premier joueur commence.
 
@@ -115,7 +114,7 @@ Les autres joueurs ne peuvent rien faire. Pendant une révélation ou une fois l
   - **Il confirme Jouer** : la victoire est confirmée avant même que sa pose soit appliquée.
   - **Temps écoulé** ou **déconnexion** du répondant : la victoire est confirmée.
 - La partie s'arrête au premier vainqueur confirmé. En V1, il n'y a qu'un gagnant et pas de classement.
-- Si un seul joueur reste en jeu (les autres déconnectés ou exclus), il gagne immédiatement.
+- Si un seul joueur reste en jeu (les autres déconnectés ou exclus), il gagne immédiatement, sauf si le verdict d'une révélation en cours désigne un autre vainqueur (§7).
 - Il n'y a pas de durée maximale : une partie peut être longue.
 
 ## 7. Déconnexion et exclusion
@@ -126,20 +125,24 @@ Un joueur qui se déconnecte ou est exclu (§5) :
 - est retiré de l'ordre du tour ; le tas et la valeur de manche ne changent pas ;
 - si c'était le joueur actif, le tour passe au suivant, sans coup doutable ;
 - si son dernier coup était doutable, il ne l'est plus ;
-- s'il était en **victoire en attente**, il ne gagne pas : la victoire est annulée et la partie continue sans coup doutable ;
+- s'il était en **victoire en attente** (hors révélation), une **révélation** de son dernier coup s'ouvre pour toute la table (mêmes conditions qu'au §4.2 : seules ces cartes, chrono en pause, aucune action), puis :
+  - **cartes vraies** : la victoire est confirmée, il gagne ;
+  - **mensonge** : la victoire est annulée ; personne ne ramasse, le tas est retiré du jeu ; le répondant (ou son suivant s'il est parti entre-temps) est joueur actif avec un chrono complet et ouvre une nouvelle manche ;
 - s'il devait **répondre** à une victoire en attente, elle est confirmée.
 
-Pendant une révélation, **le doute est toujours résolu d'abord** (verdict, y compris pour une victoire en attente), puis on applique le départ :
+Pendant une révélation, **son verdict est toujours appliqué d'abord** (y compris pour une victoire en attente, et avant la règle du dernier joueur restant, §6), puis on applique les départs. Pour la révélation d'un doute :
 
 | Qui part | Doute juste | Doute faux |
 |---|---|---|
-| **Le poseur** (accusé) | Personne ne ramasse : le tas est retiré du jeu. Le douteur joue avec 45 s. | Si c'était une victoire en attente, elle est confirmée. Sinon le douteur ramasse et le tour passe à son suivant. |
-| **Le douteur** | Le poseur ramasse (victoire en attente annulée). Le tour passe au suivant du douteur, avec 45 s. | Personne ne ramasse : le tas est retiré du jeu. Si c'était une victoire en attente, elle est confirmée. Sinon le tour passe au suivant du douteur. |
+| **Le poseur** (accusé) | Personne ne ramasse : le tas est retiré du jeu. Le douteur joue avec un chrono complet. | Si c'était une victoire en attente, elle est confirmée. Sinon le douteur ramasse et le tour passe à son suivant. |
+| **Le douteur** | Le poseur ramasse (victoire en attente annulée). Le tour passe au suivant du douteur, avec un chrono complet. | Personne ne ramasse : le tas est retiré du jeu. Si c'était une victoire en attente, elle est confirmée. Sinon le tour passe au suivant du douteur. |
 | Un autre joueur | Résolution normale (§4.2), puis départ normal. | Idem. |
+
+Pour la révélation ouverte par le départ d'une victoire en attente, un autre départ pendant cette révélation (le répondant compris) est appliqué après le verdict, comme un départ normal. Le répondant parti ne confirme donc pas la victoire.
 
 Session :
 
-- **L'hôte part** : la partie s'arrête pour tout le monde, retour au menu. Pas de migration d'hôte.
+- **L'hôte part** : la partie s'arrête pour tout le monde, retour au menu, sans révélation ni vainqueur, même pendant une révélation ou une victoire en attente. Pas de migration d'hôte.
 - Pas de reconnexion à une partie en cours.
 - On ne peut pas rejoindre une partie déjà commencée.
 
@@ -161,7 +164,7 @@ L'hôte est l'arbitre : il traite les messages **un par un, dans l'ordre où il 
 | **Nombre** de cartes de chaque joueur | Tout le monde (vrai nombre, visible en 3D) |
 | **Nombre** de cartes du tas | Tout le monde |
 | Valeur de manche, annonce de chaque coup | Tout le monde |
-| Contenu du tas | Personne, sauf les cartes du coup contesté lors d'un doute (toute la table) |
+| Contenu du tas | Personne, sauf les cartes du coup révélé lors d'une révélation (toute la table) |
 | Cartes ramassées | Celui qui les ramasse. Les cartes révélées restent connues de ceux qui les ont vues. |
 | Cartes défaussées ou retirées du jeu | Aucune nouvelle information : rien n'est révélé au retrait |
 
@@ -178,6 +181,6 @@ Ces idées ne s'appliquent **pas** en V1, elles sont notées pour plus tard :
 
 - 45 s par tour, est-ce trop ou pas assez ?
 - La Défausse est-elle trop forte (si tout le monde brûle les gros tas, il n'y a plus de tension) ?
-- La carte en plus des premiers joueurs à la distribution est-elle gênante ?
+- La carte en plus de certains joueurs (tirés au hasard) à la distribution est-elle gênante ?
 - Le duel à 2 joueurs est-il intéressant ?
 - L'exclusion au 2e tour sauté est-elle trop sévère ?

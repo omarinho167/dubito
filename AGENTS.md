@@ -29,6 +29,17 @@ Ordre de lecture pour une tâche : ROADMAP (étape en cours), puis le fichier co
 8. **Pas d'asset externe** (modèles, sons, packs) sans l'accord du propriétaire, avec la licence vérifiée.
 9. Ne pas mettre d'avancement, de compte rendu ou d'astuce d'outil dans les docs de conception. Ça va dans les commits ou dans ROADMAP (une ligne).
 
+## Claude et Codex
+
+Le propriétaire parle à **Claude** (Claude Code). **Codex** est branché à Claude par le plugin Codex (agents `codex:*`), et le propriétaire a un abonnement aux deux : on l'exploite au maximum (DECISIONS D-35).
+
+- **Claude, chef d'équipe** : dialogue avec le propriétaire, conception, découpage en tâches, intégration, docs, vérification finale.
+- **Codex** : grosses tâches de code bien délimitées, recherches, travail mécanique, et relecture du travail de Claude (`dubito-cross-review`).
+- Une tâche confiée à Codex reçoit un brief complet (Codex ne voit pas la conversation) : fichiers, sections de RULES, critère de fin. Claude vérifie le résultat (tests, diff) avant de le déclarer fait.
+- Deux agents n'écrivent jamais dans les mêmes fichiers en même temps.
+- En cas de doute sur qui fait quoi, Claude pose la question au propriétaire (`dubito-ask-owner`).
+- Si Codex travaille seul (sans Claude), il suit ce même fichier et demande au propriétaire de faire relire par Claude.
+
 ## Skills partagés
 
 Une seule copie, dans `.agents/skills/` (lu par Codex). Claude Code les lit via la jonction `.claude/skills`, à créer une fois après chaque clone :

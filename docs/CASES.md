@@ -11,13 +11,14 @@ Notation : J1, J2, J3… dans l'ordre du tour. « Tas : 5 (valeur 7) » = 5 cart
 | ID | Situation | Action | Résultat attendu | Règle |
 |---|---|---|---|---|
 | C-SET-01 | 2 joueurs | Distribution | 26 et 26 cartes | §3 |
-| C-SET-02 | 5 joueurs, ordre J1…J5 | Distribution | J1 et J2 : 11 cartes. J3, J4, J5 : 10 cartes | §3 |
-| C-SET-03 | 6 joueurs | Distribution | J1 à J4 : 9 cartes. J5, J6 : 8 cartes | §3 |
+| C-SET-02 | 5 joueurs | Distribution | 2 joueurs ont 11 cartes, les 3 autres 10 | §3 |
+| C-SET-03 | 6 joueurs | Distribution | 4 joueurs ont 9 cartes, les 2 autres 8 | §3 |
 | C-SET-04 | Toute partie | Distribution | Total des mains = 52, aucune carte en double | §3 |
 | C-SET-05 | Début de partie | — | Tas vide, pas de valeur de manche, J1 actif, chrono 45 s | §3 |
 | C-SET-06 | 1 joueur ou 7 joueurs dans le salon | L'hôte lance | Refusé : 2 à 6 joueurs | §1 |
 | C-SET-07 | L'hôte a choisi 60 s | Lancement | Chaque tour dure 60 s ; la durée ne peut plus changer | §5 |
 | C-SET-08 | L'hôte propose un chrono de 50 s | — | Refusé : seulement 30, 45, 60 ou 90 s | §5 |
+| C-SET-09 | 5 joueurs, hasard contrôlé par le test qui désigne J3 et J5 | Distribution | J3 et J5 : 11 cartes, les autres 10. Les bénéficiaires sont distincts, pas forcément les premiers de l'ordre | §3 |
 
 ## Jouer (PLA)
 
@@ -85,7 +86,13 @@ Notation : J1, J2, J3… dans l'ordre du tour. « Tas : 5 (valeur 7) » = 5 cart
 | C-VIC-03 | Victoire en attente de J2 | J3 confirme Jouer | J2 gagne. La pose de J3 n'est pas appliquée | §6 |
 | C-VIC-04 | Victoire en attente de J2 | J3 laisse passer le temps | J2 gagne | §6 |
 | C-VIC-05 | Victoire en attente de J2 | J3 se déconnecte | J2 gagne | §6, §7 |
-| C-VIC-06 | Victoire en attente de J2 | J2 se déconnecte | Victoire annulée, J2 retiré, J3 actif sans coup doutable | §7 |
+| C-VIC-06 | Victoire en attente de J2 (il a menti), pas de révélation en cours | J2 se déconnecte | Dernier coup révélé à tous : mensonge. Victoire annulée, tas retiré du jeu, J3 reste actif avec un chrono complet et ouvre une manche | §7 |
+| C-VIC-09 | Victoire en attente de J2 (honnête), pas de révélation en cours | J2 se déconnecte | Dernier coup révélé à tous : vrai. J2 gagne | §7 |
+| C-VIC-10 | 2 joueurs, victoire en attente de J1 (il a menti) | J1 se déconnecte | Révélation : mensonge, victoire annulée. J2 seul en jeu : J2 gagne | §6, §7 |
+| C-VIC-11 | 2 joueurs, victoire en attente de J1 (honnête) | J1 se déconnecte | Révélation : vrai. J1 gagne, bien que J2 soit le seul restant | §6, §7 |
+| C-VIC-12 | 6 joueurs, victoire en attente de J1 (il a menti), J1 se déconnecte | J2 (répondant) part pendant la révélation | Verdict d'abord : victoire annulée, tas retiré du jeu. Puis départ de J2 : J3 actif avec un chrono complet, ouvre une manche | §7 |
+| C-VIC-13 | 6 joueurs, victoire en attente de J1 (honnête), J1 se déconnecte | J2 (répondant) part pendant la révélation | Verdict d'abord : J1 gagne | §7 |
+| C-VIC-14 | Victoire en attente de l'hôte | L'hôte part | Partie arrêtée pour tous, pas de révélation ni de vainqueur | §7 |
 | C-VIC-07 | 3 joueurs, deux partent | — | Le dernier gagne immédiatement | §6 |
 | C-VIC-08 | Partie terminée | N'importe quelle action de jeu | Refusée | §6 |
 
@@ -96,9 +103,9 @@ Notation : J1, J2, J3… dans l'ordre du tour. « Tas : 5 (valeur 7) » = 5 cart
 | C-DEC-01 | J2 actif | J2 se déconnecte | Main de J2 retirée du jeu, J3 actif, pas de coup doutable, tas inchangé | §7 |
 | C-DEC-02 | J1 a posé, J2 actif | J1 se déconnecte | Le coup de J1 n'est plus doutable. J2 peut Jouer ou Défausser | §7 |
 | C-DEC-03 | J3 pas actif, pas concerné | J3 se déconnecte | Main retirée, ordre du tour mis à jour, rien d'autre ne change | §7 |
-| C-DEC-04 | Révélation, doute juste, le menteur part | — | Tas retiré du jeu, le douteur joue avec 45 s | §7 |
+| C-DEC-04 | Révélation, doute juste, le menteur part | — | Tas retiré du jeu, le douteur joue avec un chrono complet | §7 |
 | C-DEC-05 | Révélation, doute faux, le douteur part | — | Tas retiré du jeu, le suivant du douteur actif | §7 |
-| C-DEC-08 | Révélation, doute juste, le douteur part | — | Le menteur ramasse, le suivant du douteur actif avec 45 s | §7 |
+| C-DEC-08 | Révélation, doute juste, le douteur part | — | Le menteur ramasse, le suivant du douteur actif avec un chrono complet | §7 |
 | C-DEC-09 | Victoire en attente de J1 (il a menti), J2 doute puis part pendant la révélation | — | Doute juste résolu d'abord : victoire annulée, J1 ramasse, J3 actif | §7 |
 | C-DEC-10 | Victoire en attente de J1 (honnête), J2 doute puis part pendant la révélation | — | Doute faux : J1 gagne | §7 |
 | C-DEC-06 | L'hôte part | — | Partie terminée pour tous, retour au menu avec un message | §7 |
@@ -110,11 +117,12 @@ Notation : J1, J2, J3… dans l'ordre du tour. « Tas : 5 (valeur 7) » = 5 cart
 
 | ID | Situation | Résultat attendu | Règle |
 |---|---|---|---|
-| C-PRV-01 | N'importe quel moment | Un client distant ne reçoit aucune valeur de carte, sauf celles de sa propre main et celles révélées par un doute | §9 |
+| C-PRV-01 | N'importe quel moment | Un client distant ne reçoit aucune valeur de carte, sauf celles de sa propre main et celles d'une révélation (§2) | §9 |
 | C-PRV-02 | Pose d'un coup | Les autres clients reçoivent le nombre de cartes et l'annonce, pas les valeurs | §9 |
 | C-PRV-03 | Doute | Seules les cartes du dernier coup sont envoyées, à tous | §9 |
 | C-PRV-04 | Ramassage du tas | Seul le joueur qui ramasse reçoit les valeurs des cartes ramassées | §9 |
-| C-PRV-05 | Défausse ou déconnexion | Les cartes retirées du jeu ne sont jamais envoyées | §9 |
+| C-PRV-05 | Défausse ou déconnexion | Le retrait du jeu n'envoie aucune nouvelle valeur de carte | §9 |
+| C-PRV-06 | Tas : 9 cartes, victoire en attente de J2 (2 cartes posées), J2 se déconnecte | Révélation | Seules les 2 cartes du dernier coup sont envoyées, à tous ; jamais les 7 autres du tas ni la main de J2 | §7, §9 |
 
 ## Invariants (à vérifier après chaque action)
 

@@ -39,3 +39,13 @@
 | D-30 | Places autour de la table **tirées au hasard**, dans l'ordre du tour. | Simple et équitable. | P |
 | D-31 | Skills partagés Claude + Codex dans le dépôt : changer une règle, poser une question au propriétaire, faire relire par Codex. | Rendre les bonnes pratiques répétables. | P |
 | D-26 | Garder **Liar's Bar** en tête : pas de copie de sa présentation, la différence vient d'abord des mécaniques. | Risque de perception élevé (voir research/CONCURRENCE.md). | C |
+
+## 2026-11-26 : relecture des décisions C par le propriétaire
+
+| ID | Décision | Pourquoi | Qui |
+|---|---|---|---|
+| D-32 | D-20, D-21, D-23, D-24, D-26 et D-27 sont **confirmées** telles quelles. | Relecture du propriétaire. | P |
+| D-33 | Un joueur en victoire en attente qui se déconnecte : **son dernier coup est révélé** avant de décider s'il gagne (`RULES §7`). Remplace D-22. | Plus juste : on juge le coup, pas le départ. | P |
+| D-34 | Les cartes en trop de la distribution vont à des **joueurs tirés au hasard** (`RULES §3`). Remplace D-25. | Choix du propriétaire : plus imprévisible. | P |
+| D-35 | Travail à deux IA : **Claude est le chef d'équipe** (parle au propriétaire, conçoit, découpe, intègre), **Codex** prend de grosses tâches de code, des recherches et les relectures. Chacun relit l'autre. | Le propriétaire a un abonnement aux deux ; chacun a ses points forts. | P |
+| D-36 | Précisions de D-33 après relecture Codex : le verdict de cette révélation passe avant tout autre départ et avant la règle du dernier joueur restant ; le départ de l'hôte arrête tout, sans révélation (`RULES §6–7`). | Étend D-27 (verdict d'abord) à la nouvelle révélation, sans cas contradictoire. | C |
