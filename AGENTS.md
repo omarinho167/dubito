@@ -1,0 +1,34 @@
+# Guide pour les agents IA (Claude, Codex…)
+
+Dubito est un jeu de bluff de cartes multijoueur (Unity + Mirror + Steam). Le propriétaire n'est pas développeur : il valide le jeu, l'IA écrit le code.
+
+## Où trouver quoi
+
+| Fichier | Contenu | Autorité |
+|---|---|---|
+| [docs/RULES.md](docs/RULES.md) | Règles du jeu | **Seule source de vérité pour les règles** |
+| [docs/CASES.md](docs/CASES.md) | Cas limites numérotés = tests | Dérivé de RULES |
+| [docs/UX.md](docs/UX.md) | Ce que le joueur voit et fait | Présentation |
+| [docs/VISION.md](docs/VISION.md) | Pitch, périmètre V1, concurrence | Périmètre |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Choix techniques et découpage du code | Technique |
+| [docs/ROADMAP.md](docs/ROADMAP.md) | Étapes et avancement | Ce qu'on fait maintenant |
+| [docs/DECISIONS.md](docs/DECISIONS.md) | Journal des décisions et leurs raisons | Historique |
+| `docs/research/` | Recherches datées | Contexte, pas des règles |
+
+Ordre de lecture pour une tâche : ROADMAP (étape en cours), puis le fichier concerné. Lire RULES dès qu'on touche au jeu.
+
+## Règles de travail
+
+1. **Une information n'est écrite qu'à un seul endroit.** Ailleurs, on fait un lien (`RULES §4.2`) au lieu de recopier.
+2. **Le code suit RULES.md.** S'ils se contredisent, on s'arrête et on demande au propriétaire. On ne « corrige » jamais une règle en silence.
+3. **Une étape de la ROADMAP à la fois**, avec son critère de fin. On coche l'étape et on met la date quand le propriétaire l'a validée.
+4. **Tests d'abord pour les règles** : chaque cas de CASES.md devient un test nommé par son identifiant (`C-DOU-03`).
+5. **Core reste du C# pur** : aucune référence à Unity, Mirror ou Steam dans `Dubito.Core` (ARCHITECTURE §2).
+6. **Questions au propriétaire** : sous forme de **choix multiples** (2 à 4 options, la recommandation en premier), jamais de questions ouvertes. Chaque réponse importante devient une entrée de DECISIONS.md.
+7. **Vérification visuelle** : c'est le propriétaire qui valide ce qui se voit à l'écran. Ne pas déclarer « ça marche » sur la seule base d'une capture.
+8. **Pas d'asset externe** (modèles, sons, packs) sans l'accord du propriétaire, avec la licence vérifiée.
+9. Ne pas mettre d'avancement, de compte rendu ou d'astuce d'outil dans les docs de conception. Ça va dans les commits ou dans ROADMAP (une ligne).
+
+## Commandes
+
+À compléter en phase 1 (création du projet Unity, tests `dotnet test` et Unity en batchmode).

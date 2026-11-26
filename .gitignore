@@ -1,18 +1,37 @@
-# Source assets staged outside the Unreal project.
-# Kept out of the repo until a phase imports them into Content/ (owner decision, Phase 1.0).
-/Assets/
+# Anciennes docs récupérées (Unreal juillet 2026 + Unity juin 2026), référence locale seulement.
+# Elles restent dans l'historique git et dans le dépôt Dubito-2026-06-13_13-44-54.
+/_legacy/
 
-# Large owner-supplied Fab asset packs (multi-GB). Kept out of the repo because they blow
-# past GitHub's free LFS quota; they are re-downloadable from the owner's Fab library and
-# re-imported into Content/ when needed (owner decision, Visual Track V).
-/unreal-project/Dubito/Content/MetaHumans/
-/unreal-project/Dubito/Content/Scifi_desert_city/
-# MetaHuman source package (~1.5 GB, not needed at runtime once assembled)
-*.mhpkg
-# Raw downloaded audio zips (staging only; extract to Content/Audio/SFX/*.wav later)
-/unreal-project/Dubito/Content/Audio/SFX/*.zip
+# Unity (le projet vivra dans /unity/ à partir de la phase 1)
+/unity/[Ll]ibrary/
+/unity/[Tt]emp/
+/unity/[Oo]bj/
+/unity/[Bb]uild/
+/unity/[Bb]uilds/
+/unity/[Ll]ogs/
+/unity/[Uu]ser[Ss]ettings/
+/unity/[Mm]emoryCaptures/
+/unity/[Rr]ecordings/
+/unity/*.csproj
+/unity/*.sln
+/unity/*.slnx
+/unity/*.user
+/unity/.vs/
+/unity/.idea/
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+crashlytics-buildid.txt
+sysinfo.txt
 
-# OS noise
+# Steam : steam_appid.txt ne doit jamais être distribué
+steam_appid.txt
+
+# Tests .NET hors Unity
+/tests/**/bin/
+/tests/**/obj/
+
+# OS
 Thumbs.db
 Desktop.ini
 .DS_Store
