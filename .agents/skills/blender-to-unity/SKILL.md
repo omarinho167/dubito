@@ -33,6 +33,8 @@ description: Prépare un modèle Blender pour Dubito puis l'exporte dans Unity U
 
 ## 5. Import Unity
 
+Personnage riggé (Humanoid, animations, assis) : suivre aussi `dubito-character-import`.
+
 - Type de rig : **None** pour les objets statiques (table, chaise, carte), **Generic** pour un rig non humain, **Humanoid** seulement pour un personnage : Create From This Model → Configure, vérifier chaque os, la T-pose, les doigts.
 - Matériaux recréés en **URP/Lit** : `smoothness = 1 − roughness`, normal map importée en type Normal Map. Peu de matériaux.
 - Prefab créé à côté, via Unity (`dubito-unity-editor`).

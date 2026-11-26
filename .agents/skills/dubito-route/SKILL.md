@@ -1,6 +1,6 @@
 ---
 name: dubito-route
-description: Point d'entrée de toute tâche Dubito (règles, docs, code Unity, réseau, 3D, Blender). Indique quel skill spécialisé charger selon la tâche, et dans quel ordre. À lire en premier dès qu'on commence une tâche dans ce dépôt ou qu'on hésite entre plusieurs skills.
+description: Point d'entrée de toute tâche Dubito (règles, docs, code Unity, scène 3D, cartes, personnages, réseau, Blender, validation visuelle). Indique quel skill spécialisé charger selon la tâche, et dans quel ordre. À lire en premier dès qu'on commence une tâche dans ce dépôt ou qu'on hésite entre plusieurs skills.
 ---
 
 # Choisir le bon skill Dubito
@@ -18,14 +18,18 @@ Ce skill ne fait qu'orienter. Il ne remplace ni `AGENTS.md` ni les docs.
 | 2 | ajoute, change ou clarifie une règle du jeu | `dubito-rule-change` |
 | 3 | crée ou modifie la structure Unity : asmdefs, dossiers, `.meta`, packages, `.gitignore`, LFS | `dubito-unity-foundation` |
 | 4 | écrit ou corrige du code de Core ou des tests, ou s'apprête à déclarer une étape de code finie | `dubito-core-tests` |
-| 5 | pilote l'éditeur Unity (MCP, Unity CLI, scènes, prefabs, console, captures) | `dubito-unity-editor` |
-| 6 | touche à la table 3D : caméra assise, sélection des cartes, entrées, interface en jeu | `dubito-table-interaction` |
-| 7 | touche au réseau : Mirror, protocole, vues privées, lobby ou invitations Steam | `dubito-mirror-steam` |
-| 8 | crée un modèle 3D à partir d'images de référence | `blender-model-from-reference` |
-| 9 | nettoie, rigge ou exporte un modèle de Blender vers Unity | `blender-to-unity` |
-| 10 | un changement important est fini (règles, étape de ROADMAP, réseau, confidentialité) | `dubito-cross-review` |
+| 5 | pilote l'éditeur Unity (Unity CLI, scènes, prefabs, console, captures) | `dubito-unity-editor` |
+| 6 | construit la scène 3D : pièce, table, sièges, lumière, matériaux, prefabs | `dubito-unity-scene` |
+| 7 | touche à la table jouable : caméra assise, sélection des cartes, entrées, interface en jeu | `dubito-table-interaction` |
+| 8 | crée ou modifie l'apparence des cartes (faces, dos) | `dubito-card-faces` |
+| 9 | importe un personnage ou des animations (Mixamo, Humanoid, assis) | `dubito-character-import` |
+| 10 | touche au réseau : Mirror, protocole, vues privées, lobby ou invitations Steam | `dubito-mirror-steam` |
+| 11 | crée un modèle 3D dans Blender, d'après photos ou non | `blender-model-from-reference` |
+| 12 | nettoie, rigge ou exporte un modèle de Blender vers Unity | `blender-to-unity` |
+| 13 | quelque chose qui se voit à l'écran est prêt à être validé | `dubito-visual-review` |
+| 14 | un changement important est fini (règles, étape de ROADMAP, réseau, confidentialité) | `dubito-cross-review` |
 
-Ordre quand plusieurs lignes s'appliquent : décision manquante (1) → changement (2, 3, 5 à 9) → tests (4) → relecture (10).
+Ordre quand plusieurs lignes s'appliquent : décision manquante (1) → changement (2, 3, 5 à 12) → tests (4) → validation visuelle (13) → relecture (14).
 Une validation déjà donnée par le propriétaire dans la conversation vaut pour l'étape 1.
 
 Répartition Claude / Codex : voir `AGENTS.md`, section « Claude et Codex ».

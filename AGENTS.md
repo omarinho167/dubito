@@ -9,6 +9,7 @@ Dubito est un jeu de bluff de cartes multijoueur (Unity + Mirror + Steam). Le pr
 | [docs/RULES.md](docs/RULES.md) | Règles du jeu | **Seule source de vérité pour les règles** |
 | [docs/CASES.md](docs/CASES.md) | Cas limites numérotés = tests | Dérivé de RULES |
 | [docs/UX.md](docs/UX.md) | Ce que le joueur voit et fait | Présentation |
+| [docs/ASSETS.md](docs/ASSETS.md) | Assets à l'écran : contenu, source, qui, dimensions | Contenu visuel |
 | [docs/VISION.md](docs/VISION.md) | Pitch, périmètre V1, concurrence | Périmètre |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Choix techniques et découpage du code | Technique |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Étapes et avancement | Ce qu'on fait maintenant |

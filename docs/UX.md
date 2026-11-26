@@ -12,9 +12,9 @@
 
 ## 2. La scène
 
-- **Caméra** : à la 1re personne, assis à sa place. On peut tourner la tête avec la souris dans une limite (environ ±60° à gauche/droite, un peu en haut/bas). Pas de déplacement.
+- **Caméra** : à la 1re personne, assis à sa place. On tourne la tête en **maintenant le clic droit** et en bougeant la souris, dans une limite (environ ±60° à gauche/droite, un peu en haut/bas). Sans clic droit, le curseur est libre pour cliquer. Pas de déplacement.
 - **Table** : ronde, de 2 à 6 places réparties régulièrement. On est toujours placé face au centre.
-- **Adversaires** : personnages stylisés simples assis (en V1 : silhouettes basiques), avec **nom Steam** et **couleur** de siège.
+- **Adversaires** : personnages stylisés simples assis (en phase 2 : mannequins neutres, `ASSETS.md`), avec **nom Steam** et **couleur** de siège.
 - **Main des adversaires** : leurs cartes sont visibles de dos, en éventail. On peut donc compter leurs cartes (`RULES §9`). Un petit chiffre au-dessus confirme le nombre.
 - **Sa propre main** : en éventail devant soi, cartes face visible, triées par valeur.
 - **Tas** : au centre, cartes de dos. Son nombre de cartes est affiché, ainsi que la **valeur de manche** en grand (ou « Ouverture libre » si le tas est vide).
@@ -89,3 +89,13 @@ Sons simples : poser, retourner, verdict du doute, ramasser, défausser, victoir
 - Option **Réduction des animations** : pas de zoom caméra, révélation instantanée mais lisible.
 - Le résultat ne repose jamais sur la couleur seule (texte + icône).
 - Textes lisibles en 1920×1080 et en 1280×720.
+
+## 9. Mode debug hot-seat (phase 2)
+
+Une seule instance, sans réseau ; une personne joue tous les sièges (D-47).
+
+- Après chaque action validée, la caméra et la main affichée passent **automatiquement** au siège du joueur actif ; la sélection de cartes est remise à zéro.
+- Pendant une révélation, on reste au siège du douteur (ou du répondant pour une révélation automatique) ; on bascule à sa résolution.
+- Après un tour sauté ou une exclusion, on bascule au nouveau joueur actif.
+- Noms locaux « Joueur 1 » à « Joueur 6 » (les noms Steam arrivent en phase 4).
+- Une touche de debug permet de simuler un départ (déconnexion) du siège affiché, pour tester `RULES §7`.

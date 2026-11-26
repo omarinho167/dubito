@@ -52,3 +52,16 @@
 | D-37 | Migrer **tout de suite** du MCP intégré à Unity (déprécié) vers **Unity CLI**, et installer **en plus** le plugin officiel de skills Unity pour Claude Code et Codex. | Choix du propriétaire. Les skills Unity visent parfois 6.7+ ou Netcode : nos skills Dubito priment (voir `dubito-unity-editor`). | P |
 | D-38 | **Pas de générateur IA image → 3D** pour l'instant : la 3D est modélisée par **Codex dans Blender** (scripts, MCP), à partir des références du propriétaire. | Choix du propriétaire. Recherche gardée dans `research/3D-IA.md`. | P |
 | D-39 | Le propriétaire **valide la doc de la phase 0** (RULES, CASES, UX, VISION, ARCHITECTURE) et **confirme D-36**. | Fin de phase 0 ; les règles pourront encore évoluer via `dubito-rule-change`. | P |
+
+## 2026-11-26 : définition de la phase 2
+
+| ID | Décision | Pourquoi | Qui |
+|---|---|---|---|
+| D-40 | Phase 2 en **greybox** (formes simples, couleurs unies), avec **un seul test 3D** réel. Liste des assets : `ASSETS.md`. | Le jeu marche avant d'être beau (D-11), mais on mesure tôt ce que Codex sait modéliser. | P |
+| D-41 | Test 3D : **Codex modélise une chaise dans Blender d'après des photos** du propriétaire. | Objet simple mais détaillé, utile autour de la table. | P |
+| D-42 | Faces des cartes **générées par script** (52 + dos), valeurs françaises. | Lisibilité maîtrisée, original, aucune licence. | P |
+| D-43 | Adversaires : mannequin **Mixamo Y Bot** assis (animations Mixamo), téléchargé par le propriétaire. | Placeholder neutre et animé, sans imposer de style. | P |
+| D-44 | Les fichiers Mixamo sont versionnés dans le dépôt public ; le propriétaire assume le risque vis-à-vis des conditions d'Adobe. | Choix du propriétaire. | P |
+| D-45 | Décor : **pièce neutre** sombre, une lampe au-dessus de la table. | Met la table en valeur sans thème. | P |
+| D-46 | Regarder autour : **clic droit maintenu** ; le curseur reste libre pour cliquer les cartes. | Pas de conflit entre regard et sélection. | P |
+| D-47 | Hot-seat : bascule **automatique** vers le joueur actif après chaque action (UX §9). | Le plus rapide pour tester les règles en 3D. | P |

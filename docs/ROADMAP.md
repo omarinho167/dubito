@@ -26,10 +26,11 @@
 
 ## Phase 2 : table 3D basique, en local sur une seule machine
 
+- [ ] 2.0 Assets de base (`ASSETS.md` §1) : faces de cartes générées, modèle de carte, table, test chaise d'après photos, mannequin Mixamo importé assis.
 - [ ] 2.1 Scène Table : table ronde, 2 à 6 sièges, caméra 1re personne avec regard limité (`UX §2`).
-- [ ] 2.2 Cartes 3D : sa main en éventail (face visible), mains adverses de dos, tas au centre.
+- [ ] 2.2 Session locale (ARCHITECTURE §3) + cartes 3D affichées depuis la `PlayerView` : sa main en éventail (face visible), mains adverses de dos, tas au centre.
 - [ ] 2.3 Sélection des cartes au clic, panneau d'action, Douter maintenu, Défausser confirmé (`UX §4`).
-- [ ] 2.4 Mode **debug « hot-seat »** : une seule instance, on contrôle chaque siège à tour de rôle (sans réseau) pour tester les règles en 3D.
+- [ ] 2.4 Mode **debug « hot-seat »** : une seule instance, on contrôle chaque siège à tour de rôle (sans réseau) pour tester les règles en 3D (UX §9).
 - [ ] 2.5 Révélation du doute, victoire en attente, fin de partie, tour sauté (`UX §5`).
 
 **Fin de phase** : le propriétaire joue une partie complète à 3 sièges en hot-seat.

@@ -1,6 +1,6 @@
 ---
 name: dubito-table-interaction
-description: Construit l'interaction à la table 3D de Dubito (caméra 1re personne assise, regard limité, sélection des cartes au clic par raycast, panneau d'action, Douter maintenu, Input System, interface uGUI). À utiliser pour la phase 2 de la ROADMAP et toute modification de ce que le joueur fait à la table.
+description: Code ce que le joueur fait à la table 3D de Dubito - caméra 1re personne assise (regard au clic droit), sélection des cartes au clic par raycast, panneau d'action, Douter maintenu, raccourcis, Input System, interface uGUI. À utiliser pour les entrées, la caméra et l'interface en jeu ; le décor, les cartes et les personnages ont leurs propres skills.
 ---
 
 # Interaction à la table
@@ -23,7 +23,7 @@ Ce que le joueur voit et fait est dans `docs/UX.md` (§2 caméra, §4 actions, �
 - **Input System** (package `com.unity.inputsystem` déjà présent) : actions nommées, une carte d'actions Jeu et une Menus.
 - Une action = une seule source : éviter qu'un clic ou Entrée confirme deux fois.
 - Douter maintenu : annuler le maintien si la fenêtre perd le focus ou si l'action devient impossible.
-- Regard et sélection utilisent la même souris : ne pas verrouiller le curseur en permanence ; le geste exact est une décision du propriétaire.
+- Regard au **clic droit maintenu** (UX §2, D-46) : curseur verrouillé seulement pendant le maintien, libre sinon pour cliquer les cartes ; relâcher ou perdre le focus rend le curseur.
 
 ## Sélection des cartes
 

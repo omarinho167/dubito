@@ -55,6 +55,11 @@ Règles qui en découlent :
 - L'aléatoire de Core vient d'une **source injectable** : graine fixe dans les tests, aléatoire côté hôte en partie.
 - Le chrono est géré par l'hôte. Core reçoit le temps écoulé, il ne lit pas l'horloge lui-même (testable).
 
+**Session de jeu.** La présentation ne parle jamais directement au moteur : elle passe par une interface de session (dans `Dubito.Networking`, sans Mirror) qui reçoit ses intentions et lui renvoie la `PlayerView` du siège qu'elle contrôle.
+
+- **Phase 2, hot-seat** : une session locale possède le `GameEngine`, appelle `Execute`, fait avancer le temps (`AdvanceTime`), appelle `ResolveRevelation` quand l'animation de révélation est finie, et publie la vue du siège contrôlé (comportement : UX §9).
+- **Phase 3+, réseau** : la même interface, implémentée par Mirror ; le moteur tourne sur l'hôte.
+
 Limite connue : l'hôte a toutes les mains en mémoire. Un hôte tricheur peut lire le jeu. Accepté en V1 (parties entre amis).
 
 ## 4. Tester vite
