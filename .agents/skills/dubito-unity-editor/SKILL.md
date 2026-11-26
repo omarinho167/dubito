@@ -43,6 +43,8 @@ Toujours chercher une commande avec `unity commands --grep` / `unity command --q
 
 ## Pièges
 
+- Liste détaillée de pièges connus d'Unity 6.3 : `references/scenario-unity-6.3-traps/unity-6.3-traps.md` (Scenario Labs, MIT).
+
 - Erreurs de compilation ⇒ l'éditeur garde les anciens assemblages : un test « vert » ne prouve rien.
 - Une opération du Package Manager est asynchrone : attendre sa fin avant d'enchaîner.
 - Le plugin officiel de skills Unity est installé en plus (D-37). Ses guides visent souvent Unity 6.7+ et Netcode/UGS : **les skills Dubito et ARCHITECTURE priment**. Vérifier la compatibilité 6.3 de toute API et ne jamais adopter leurs choix de services (comptes, cloud, Netcode).

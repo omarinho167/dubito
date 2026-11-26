@@ -34,6 +34,10 @@ Contenu et dimensions : `docs/ASSETS.md` (§1 liste, §2 dimensions). Ce que le 
 - Mesurer avec les commandes `diagnostics` de la CLI avant d'optimiser. Peu de lumières qui projettent des ombres (1 ou 2).
 - Les cartes 3D partagent un seul matériau par face (texture d'atlas ou matériaux partagés), pas un matériau unique par carte instanciée.
 
+## Pour aller plus loin
+
+Documentation Scenario Labs (MIT), à lire au besoin : `references/scenario-rendering-lighting/` (exposition, lightmaps, probes, ombres, comparaisons depuis les mêmes vues) et `references/scenario-performance/` (mesures avant/après dans un Player). Leurs scripts `ut_*.py` / AgentKit ne sont **pas** importés : refaire les procédures avec Unity CLI (`dubito-unity-editor`).
+
 ## Vérification
 
 - Console sans erreur, scène sauvegardée.

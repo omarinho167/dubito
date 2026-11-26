@@ -65,3 +65,5 @@
 | D-45 | Décor : **pièce neutre** sombre, une lampe au-dessus de la table. | Met la table en valeur sans thème. | P |
 | D-46 | Regarder autour : **clic droit maintenu** ; le curseur reste libre pour cliquer les cartes. | Pas de conflit entre regard et sélection. | P |
 | D-47 | Hot-seat : bascule **automatique** vers le joueur actif après chaque action (UX §9). | Le plus rapide pour tester les règles en 3D. | P |
+| D-48 | **Claude et Codex voient les mêmes skills**, pour Dubito (tout dans le dépôt) et pour tout le PC (dossier commun `~/.agents/skills` + jonctions), vérifié par `tools/sync-skills.ps1`. | Les deux agents travaillent sur le même sujet. | P |
+| D-49 | Skills tiers importés après audit (liste : `.agents/skills/THIRD_PARTY.md`) : Blender EL4CTEO 1.3.3, image→3D, game-feel, audio, assets 2D, Steam, débogage, game-designer ; documentation Scenario Labs sans ses scripts. | Choix du propriétaire ; scripts Scenario refusés à l'audit (pont permissif, incompatible Windows). | P |

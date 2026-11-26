@@ -29,7 +29,24 @@ Ce skill ne fait qu'orienter. Il ne remplace ni `AGENTS.md` ni les docs.
 | 13 | quelque chose qui se voit à l'écran est prêt à être validé | `dubito-visual-review` |
 | 14 | un changement important est fini (règles, étape de ROADMAP, réseau, confidentialité) | `dubito-cross-review` |
 
-Ordre quand plusieurs lignes s'appliquent : décision manquante (1) → changement (2, 3, 5 à 12) → tests (4) → validation visuelle (13) → relecture (14).
+Ordre quand plusieurs lignes s'appliquent : décision manquante (1) → pour une règle, écrire d'abord le test qui échoue (4) → changement (2, 3, 5 à 12) → lancer les tests (4) → validation visuelle (13) → relecture (14).
+## Skills d'outil (en complément des lignes ci-dessus)
+
+Charger en plus, seulement si la tâche le demande. Les notes « Dans Dubito » de ces skills et les skills `dubito-*` priment.
+
+| Domaine | Skills |
+|---|---|
+| Blender (toute tâche) | commencer par `blender-core`, qui oriente vers le `blender-*` spécialisé (modélisation, UV, rig, matériaux, éclairage, export…) ; `blender-asset-qa` avant de livrer un modèle |
+| Modèle d'après photos | `blender-model-from-reference` (méthode Dubito) + `blender-image-to-3d` (comparaison mesurée aux photos) |
+| Export Blender → Unity | `blender-to-unity` + `blender-export-pipelines`, `blender-game-optimization` |
+| Unity CLI officiel | `unity-cli`, `unity-pipeline` (et l'index `using-unity` du plugin Unity) |
+| Effets, sensations (poses, révélation) | `game-feel` |
+| Sons (phase 5) | `audio-design` |
+| Assets 2D, icônes, licences d'assets | `create-game-assets` (les cartes restent `dubito-card-faces`) |
+| Bug ou test qui échoue sans cause évidente | `systematic-debugging` |
+| Conception, playtests (phase 5) | `game-designer` |
+| Publication Steam (plus tard) | `steam-publish` |
+
 Une validation déjà donnée par le propriétaire dans la conversation vaut pour l'étape 1.
 
 Répartition Claude / Codex : voir `AGENTS.md`, section « Claude et Codex ».

@@ -30,6 +30,10 @@ Source phase 2 : Mixamo Y Bot + animations assises (D-43, `docs/ASSETS.md` §3).
 - Mains près du bord de table : si les mains traversent la table, corriger par la position du siège d'abord ; IK seulement si nécessaire.
 - Cartes de dos en éventail tenues près des mains (UX §2) : un point d'ancrage `HandFan` sur le prefab.
 
+## Pour aller plus loin
+
+Documentation Scenario Labs (MIT) : `references/scenario-animation/` (Animator, Timeline, Cinemachine 3, signaux ; utile pour la caméra de révélation). Scripts non importés : passer par Unity CLI.
+
 ## Vérification
 
 - Les 6 places occupées en mode Play : pas de traversée de la chaise ou de la table, animations décalées, couleurs de siège distinctes.

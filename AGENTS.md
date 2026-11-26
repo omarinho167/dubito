@@ -53,7 +53,17 @@ powershell -ExecutionPolicy Bypass -File tools\setup-skills.ps1
 
 Sources et choix des skills : [docs/research/SKILLS-ET-OUTILS.md](docs/research/SKILLS-ET-OUTILS.md).
 
-Frontmatter portable seulement : `name` et `description`. Pas d'options propres à Claude ou à Codex.
+Frontmatter portable seulement : `name` et `description`. Pas d'options propres à Claude ou à Codex. Les skills tiers gardent leur frontmatter d'origine ; ils sont listés dans [.agents/skills/THIRD_PARTY.md](.agents/skills/THIRD_PARTY.md) avec leur licence et leur version.
+
+**Claude et Codex voient toujours les mêmes skills** (D-48) :
+
+- **Projet** : tout skill propre à Dubito ou importé pour lui vit dans `.agents/skills/` (y compris les skills tiers). Exceptions : les skills installés et mis à jour par un outil (`unity-cli`, `unity-pipeline` par Unity CLI) et les plugins, qui restent au niveau du PC.
+- **PC** : `~\.agents\skills` est le dossier commun aux deux outils pour les autres projets ; `tools\sync-skills.ps1` relie chaque skill à Claude par une jonction, sans toucher aux dossiers gérés par un outil (`~\.claude\skills\synced`, `~\.codex\skills\.system`, skills synchronisés par d'autres projets).
+- Après avoir ajouté ou installé un skill, n'importe où : lancer le script ; sans option il vérifie, avec `-Apply` il corrige (sauvegarde d'abord).
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools\sync-skills.ps1
+```
 
 ## Commandes
 
