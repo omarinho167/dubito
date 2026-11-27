@@ -42,3 +42,4 @@ Desktop.ini
 # Résultats de tests locaux
 /TestResults/
 /unity/test-results.xml
+**/TestResults/
