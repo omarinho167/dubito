@@ -2,6 +2,28 @@
 
 But : comparer **4 directions** sur **les mêmes 3 images**, puis en choisir une (ou en mélanger deux). Rien n'est décidé tant que tu n'as pas choisi.
 
+## Étape 1 · Rendu graphique (`0-rendu`)
+
+Déjà choisi : ambiance comique entre amis (D-70), humains stylisés (D-71). On compare d'abord le **rendu**, sur une seule scène identique ; décor et couleurs viennent après (D-72). Format 16:9. Fichiers : `art/style/0-rendu/R<n>-<nom>.png`.
+
+**Scène commune** (à coller après la phrase du rendu)
+```text
+Video game screenshot, first-person view from a seated player at a round card table in a simple cozy room, one lamp hanging above the table. Three stylized human friends sit around the table, each holding a fan of face-down playing cards, exaggerated comedic reactions: one squints suspiciously, one grins nervously, one laughs. A face-down pile of cards in the center of the table. The player's own hand of cards fanned in the lower part of the frame. Original designs only, no text, no letters, no logos, no watermark, no existing characters or franchises. Simple chunky proportions, big expressive faces and hands, no fine hair strands, no loose flowing clothes.
+```
+
+| Rendu | Phrase à coller avant la scène |
+|---|---|
+| R1 cel-shading | `Cel-shaded 3D art style: flat color areas, two-tone hard shadows, bold black outlines around every shape, comic-book look.` |
+| R2 animation lisse | `Smooth stylized 3D animated-film look: soft rounded shapes, subtle realistic lighting and soft shadows, clean simple materials.` |
+| R3 peint à la main | `Hand-painted 3D art style: low-detail models with painted textures, visible brush strokes, lighting painted into the colors.` |
+| **R4 low-poly (choisi, D-73)** | `Low-poly 3D art style: simple geometric shapes with visible flat facets, flat shading, no textures, solid colors.` |
+
+---
+
+## Directions de décor (en attente, D-72)
+
+Les prompts ci-dessous ont servi au premier essai ; ils seront réécrits avec le rendu choisi.
+
 ## Mode d'emploi
 
 Claude ou Codex peuvent tout générer, analyser et classer eux-mêmes (skill `dubito-art-direction`, D-68) ; les étapes ci-dessous restent valables si tu génères à la main.
