@@ -6,7 +6,9 @@
         "Dubito.Presentation",
         "Unity.RenderPipelines.Core.Runtime",
         "Unity.RenderPipelines.Universal.Runtime",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "Unity.InputSystem",
+        "Unity.ugui"
     ],
     "includePlatforms": [
         "Editor"

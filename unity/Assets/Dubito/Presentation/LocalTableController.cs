@@ -16,6 +16,9 @@ namespace Dubito.Presentation
         [SerializeField] int seed = 0;
         [Tooltip("Run the turn timer (turns are skipped when it expires).")]
         [SerializeField] bool runTimer = true;
+        [SerializeField] bool debugShortTimer = true;
+        [SerializeField] TableActionPanel actionPanel = null;
+        float revelationElapsed;
         [SerializeField] bool debugNewGameHotkeys = true;
         [SerializeField] TableSeating seating = null;
         [SerializeField] TableCardsView cards = null;
@@ -26,6 +29,7 @@ namespace Dubito.Presentation
         int lastShownSecond = -1;
 
         public IGameSession Session => session;
+        float TimerScale => debugShortTimer ? turnSeconds / 10f : 1f;
 
         void Start() => NewGame(playerCount);
 
@@ -39,13 +43,21 @@ namespace Dubito.Presentation
             session.ViewChanged += OnViewChanged;
             localSeat = IndexOf(session.SeatOrder, session.ControlledPlayerId);
             seating.Build(players, localSeat);
+            hud.TimerDisplayScale = TimerScale;
             OnViewChanged(session.CurrentView);
+            actionPanel.Bind(session);
+            revelationElapsed = 0;
         }
 
         void Update()
         {
             if (session == null) return;
-            if (runTimer) session.Tick(Time.deltaTime);
+            if (session.CurrentView.Phase == GamePhase.Revelation)
+            {
+                revelationElapsed += Time.deltaTime;
+                if (revelationElapsed >= 2f) { revelationElapsed = 0; session.ResolveRevelation(); }
+            }
+            else { revelationElapsed = 0; if (runTimer) session.Tick(Time.deltaTime * TimerScale); }
 
             // Countdown ticks refresh CurrentView without a new revision: redraw the HUD once per second.
             var view = session.CurrentView;
@@ -69,7 +81,7 @@ namespace Dubito.Presentation
         void ReadHotkeys()
         {
             var keyboard = Keyboard.current;
-            if (keyboard == null) return;
+            if (keyboard == null || TableActionPanel.TextFieldFocused) return;
             for (int n = SeatLayout.MinSeats; n <= SeatLayout.MaxSeats; n++)
             {
                 if (keyboard[(Key)((int)Key.Digit2 + n - 2)].wasPressedThisFrame ||

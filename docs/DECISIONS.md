@@ -74,3 +74,5 @@
 | D-54 | Scène plus claire : lumière d'ambiance relevée + lumière d'appoint douce ; la table reste l'endroit le plus éclairé. | « Trop sombre » à la revue de l'étape 2.0. | P |
 | D-55 | À la table, le **joueur suivant est à droite** (sens inverse des aiguilles d'une montre vu du dessus). | Habitude des jeux de cartes français (belote, tarot). | P |
 | D-56 | Debug en Play : touches **2 à 6** reconstruisent la table avec ce nombre de sièges. | Tester vite 2, 4 et 6 joueurs. | P |
+| D-57 | Sélection des cartes **à la souris seulement** (clic gauche) ; pas de raccourci 1–9/0. Les touches 2 à 6 restent le debug « nouvelle partie » (D-56). | Choix du propriétaire ; évite le conflit de touches. | P |
+| D-58 | Debug phase 2 : option **chrono court** (10 s par tour) pour tester sans attendre. | Tant que le hot-seat (2.4) n'existe pas, les autres sièges laissent filer leur chrono. | P |

@@ -3,6 +3,8 @@ using Dubito.Presentation;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
@@ -19,7 +21,10 @@ namespace Dubito.EditorTools
         [MenuItem("Dubito/Build Table Scene")]
         public static void Build()
         {
-            if (!DubitoAssetBuilder.NoDirtyScenes()) return;
+            if (EditorApplication.isPlaying || !DubitoAssetBuilder.NoDirtyScenes()) return;
+
+            int selectableLayer = EnsureSelectableLayer();
+            if (selectableLayer < 0) return;
 
             var tablePrefab = LoadPrefab("PF_Table");
             var chairPrefab = LoadPrefab("PF_Chair");
@@ -81,8 +86,18 @@ namespace Dubito.EditorTools
             var hud = game.AddComponent<TableHud>();
             Assign(hud, ("seating", seating), ("viewCamera", cam),
                 ("font", AssetDatabase.LoadAssetAtPath<TMPro.TMP_FontAsset>("Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset")));
+            var eventSystem = new GameObject("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
+            var inputModule = eventSystem.GetComponent<InputSystemUIInputModule>();
+            inputModule.AssignDefaultActions();
+            inputModule.submit = null; // Enter belongs exclusively to Jouer (hold-only Douter).
+            var panel = game.AddComponent<TableActionPanel>();
+            Assign(panel, ("cards", cardsView), ("viewCamera", cam),
+                ("font", AssetDatabase.LoadAssetAtPath<TMPro.TMP_FontAsset>("Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset")));
+            var panelSettings = new SerializedObject(panel);
+            panelSettings.FindProperty("selectableMask").intValue = 1 << selectableLayer;
+            panelSettings.ApplyModifiedPropertiesWithoutUndo();
             var controller = game.AddComponent<LocalTableController>();
-            Assign(controller, ("seating", seating), ("cards", cardsView), ("hud", hud));
+            Assign(controller, ("seating", seating), ("cards", cardsView), ("hud", hud), ("actionPanel", panel));
 
             EditorSceneManager.SaveScene(scene, ScenePath);
             AddToBuildSettings(ScenePath);
@@ -116,6 +131,25 @@ namespace Dubito.EditorTools
             var volume = go.AddComponent<Volume>();
             volume.isGlobal = true;
             volume.sharedProfile = profile;
+        }
+
+        static int EnsureSelectableLayer()
+        {
+            int existing = LayerMask.NameToLayer("SelectableCards");
+            if (existing >= 0) return existing;
+            var settings = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
+            var layers = settings.FindProperty("layers");
+            for (int i = 8; i < layers.arraySize; i++)
+            {
+                var slot = layers.GetArrayElementAtIndex(i);
+                if (!string.IsNullOrEmpty(slot.stringValue)) continue;
+                slot.stringValue = "SelectableCards";
+                settings.ApplyModifiedPropertiesWithoutUndo();
+                AssetDatabase.SaveAssets();
+                return i;
+            }
+            Debug.LogError("[Dubito] No free user layer for SelectableCards.");
+            return -1;
         }
 
         static void AddToBuildSettings(string path)

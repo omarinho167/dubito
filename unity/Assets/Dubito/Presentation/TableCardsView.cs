@@ -7,6 +7,7 @@ namespace Dubito.Presentation
 {
     public sealed class TableCardsView : MonoBehaviour
     {
+        const float CardWidth = 0.063f, CardHeight = 0.088f; // ASSETS §2
         [SerializeField] GameObject cardPrefab = null;
         [SerializeField] CardMaterialLibrary materials = null;
         [SerializeField] TableSeating seating = null;
@@ -21,6 +22,9 @@ namespace Dubito.Presentation
         sealed class CardInstance
         {
             public Transform Transform;
+            public BoxCollider Hit;
+            public Card? LocalCard;
+            public Vector3 BasePosition;
             public Renderer[] Renderers;
             public Material[][] Slots;
             public bool[][] Faces;
@@ -29,6 +33,21 @@ namespace Dubito.Presentation
         readonly Card[] sortedHand = new Card[52];
         Transform poolRoot;
         int used;
+        readonly HashSet<Card> selected = new HashSet<Card>();
+        public void SetSelection(IReadOnlyList<Card> values)
+        {
+            selected.Clear();
+            foreach (var card in values) selected.Add(card);
+            foreach (var card in pool)
+                card.Transform.position = card.BasePosition + (card.LocalCard.HasValue && selected.Contains(card.LocalCard.Value) ? Vector3.up * .035f : Vector3.zero);
+        }
+        public bool TryGetLocalCard(Collider collider, out Card value)
+        {
+            foreach (var card in pool)
+                if (card.Hit == collider && card.LocalCard.HasValue && card.Transform.gameObject.activeInHierarchy)
+                { value = card.LocalCard.Value; return true; }
+            value = default; return false;
+        }
 
         public void Render(PlayerView view, IReadOnlyList<int> seatOrder, int localSeatIndex)
         {
@@ -57,7 +76,7 @@ namespace Dubito.Presentation
                 {
                     Pose pose = HandFanLayout.CardPose(i, count, fanRadius, fanMaxAngle, fanSpacing);
                     Place(origin + rotation * pose.position, rotation * pose.rotation,
-                        local ? materials.Face(sortedHand[i]) : materials.Back);
+                        local ? materials.Face(sortedHand[i]) : materials.Back, local ? sortedHand[i] : (Card?)null);
                 }
             }
             Vector3 pile = pileAnchor != null ? pileAnchor.position : new Vector3(0, SeatLayout.TableHeight, 0);
@@ -67,11 +86,15 @@ namespace Dubito.Presentation
             for (int i = used; i < pool.Count; i++) pool[i].Transform.gameObject.SetActive(false);
         }
 
-        void Place(Vector3 position, Quaternion rotation, Material face)
+        void Place(Vector3 position, Quaternion rotation, Material face, Card? localCard = null)
         {
             if (used == pool.Count) pool.Add(CreateCard());
             CardInstance card = pool[used++];
-            card.Transform.SetPositionAndRotation(position, rotation);
+            card.LocalCard = localCard;
+            card.BasePosition = position;
+            card.Hit.enabled = localCard.HasValue;
+            card.Transform.gameObject.layer = localCard.HasValue ? LayerMask.NameToLayer("SelectableCards") : 0;
+            card.Transform.SetPositionAndRotation(position + (localCard.HasValue && selected.Contains(localCard.Value) ? Vector3.up * .035f : Vector3.zero), rotation);
             for (int r = 0; r < card.Renderers.Length; r++)
             {
                 bool changed = false;
@@ -90,7 +113,14 @@ namespace Dubito.Presentation
         CardInstance CreateCard()
         {
             GameObject instance = Instantiate(cardPrefab, poolRoot);
-            var card = new CardInstance { Transform = instance.transform, Renderers = instance.GetComponentsInChildren<Renderer>(true) };
+            // Only this root collider is selectable. Other prefab colliders do not participate.
+            foreach (var collider in instance.GetComponentsInChildren<Collider>(true)) collider.enabled = false;
+            instance.layer = 0;
+            var hit = instance.AddComponent<BoxCollider>();
+            // Card size from ASSETS §2 (the imported mesh is not readable at runtime); a bit thicker to click easily.
+            hit.center = Vector3.zero;
+            hit.size = new Vector3(CardWidth, .002f, CardHeight);
+            var card = new CardInstance { Transform = instance.transform, Hit = hit, Renderers = instance.GetComponentsInChildren<Renderer>(true) };
             card.Slots = new Material[card.Renderers.Length][];
             card.Faces = new bool[card.Renderers.Length][];
             for (int r = 0; r < card.Renderers.Length; r++)

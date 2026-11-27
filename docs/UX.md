@@ -35,7 +35,7 @@ Message au survol d'une action grisée, exemples : « Ce n'est pas ton tour », 
 
 ### Jouer
 
-1. **Clic sur une carte** de sa main : elle se soulève (sélectionnée). Nouveau clic : elle redescend. Maximum 4 cartes ; la 5e est refusée avec un message.
+1. **Clic gauche sur une carte** de sa main (sélection à la souris uniquement, D-57) : elle se soulève (sélectionnée). Nouveau clic : elle redescend. Maximum 4 cartes ; la 5e est refusée avec un message.
 2. Le **panneau d'action** (petit, en bas de l'écran, seulement pendant son tour) affiche l'annonce :
    - **Ouverture** : choix de la valeur (A à R), le nombre suit la sélection : « 2 × [ Dame ▾ ] ».
    - **Manche en cours** : valeur fixe, le nombre suit la sélection : « 2 × Dame ».
@@ -53,7 +53,6 @@ Message au survol d'une action grisée, exemples : « Ce n'est pas ton tour », 
 
 | Touche | Action |
 |---|---|
-| 1 à 9, 0 | Sélectionner une carte de sa main par position |
 | Entrée | Confirmer Jouer |
 | D (maintenir) | Douter |
 | Échap | Annuler la sélection, ou fermer un panneau |

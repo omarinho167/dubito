@@ -15,6 +15,7 @@ namespace Dubito.Presentation
         [SerializeField] Vector3 opponentLabelOffset = new Vector3(0, 1.38f, 0f); // on the head: name, card count below (owner 2026-11-27)
         const float LabelReferenceDistance = 2f;
         static Material labelOverlayMaterial; // one shared material: labels draw over bodies and cards
+        public float TimerDisplayScale { get; set; } = 1f;
         Canvas canvas;
         TextMeshProUGUI round, pile, announcement, active, ownHand;
         enum Corner { Left, Right }
@@ -30,11 +31,12 @@ namespace Dubito.Presentation
             pile.text = view.PileCount == 0 ? "Tas au centre : vide" : "Tas au centre : " + CardNames.CardCount(view.PileCount);
             ownHand.text = "Ta main : " + CardNames.CardCount(view.Hand.Count);
             var last = view.LastAnnouncement;
-            announcement.text = last == null ? "" : $"{CardNames.PlayerName(last.PlayerId)} : {last.CardCount} × {CardNames.Rank(last.AnnouncedRank)}";
+            string author = last == null ? "" : last.PlayerId == view.PlayerId ? "Toi" : CardNames.PlayerName(last.PlayerId);
+            announcement.text = last == null ? "" : $"{author} : {last.CardCount} × {CardNames.Rank(last.AnnouncedRank)}";
             string who = view.ActivePlayerId == view.PlayerId ? "toi" : CardNames.PlayerName(view.ActivePlayerId);
             active.text = view.Phase == GamePhase.Finished ? "Partie terminée" :
                 view.IsTimerPaused ? $"Révélation · chrono en pause" :
-                $"À {who} de jouer · {Math.Max(0, (int)Math.Ceiling(view.RemainingTurnSeconds))} s";
+                $"À {who} de jouer · {Math.Max(0, (int)Math.Ceiling(view.RemainingTurnSeconds / TimerDisplayScale))} s";
             for (int i = 0; i < labels.Length; i++)
             {
                 bool visible = i < seatOrder.Count && i != localSeatIndex;
