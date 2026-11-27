@@ -80,3 +80,4 @@
 | D-60 | **Mirror 96.11.4** (MIT), copié dans `unity/Assets/Mirror` sans les exemples ni le module d'hébergement Edgegap. | Version rodée de la dernière branche ; on n'embarque que l'utile. | P |
 | D-61 | Tests à plusieurs instances avec **Multiplayer Play Mode** 2.0.2 (paquet Unity) plutôt qu'éditeur + builds. | Un clic sur Play lance hôte + clients, sans compiler. | P |
 | D-62 | Le protocole sérialise ses messages lui-même (C# pur, `Dubito.Protocol`) ; Mirror ne transporte qu'une enveloppe d'octets (ARCHITECTURE §3). | Confidentialité testable sur les vrais octets hors Unity ; Protocol reste sans dépendance à Mirror. | C |
+| D-63 | Salon : l'hôte n'a pas de bouton **Prêt** (cliquer sur Lancer vaut prêt) ; il peut lancer dès 2 joueurs quand tous les invités sont prêts. **Revanche** ramène tout le monde au même salon, prêts remis à zéro. | Lecture de UX §6.2 et §5 pour l'étape 3.4. | C |

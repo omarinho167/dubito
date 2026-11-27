@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Dubito.Core;
 using Dubito.Networking;
@@ -49,19 +50,27 @@ namespace Dubito.Presentation
         {
             if (initialized) return;
             initialized = true;
-            messages.RematchRequested += () => { if (LocalSession != null) NewGame(playerCount); };
-            messages.QuitRequested += Quit;
+            messages.RematchRequested += () =>
+            {
+                if (LocalSession != null) NewGame(playerCount);
+                else NetworkRematchRequested?.Invoke();
+            };
+            messages.QuitRequested += () => LeaveRequested?.Invoke();
         }
+
+        // End screen buttons outside a local game (handled by the lobby screen).
+        public event Action NetworkRematchRequested;
+        public event Action LeaveRequested;
 
         public void StartLocal() => NewGame(playerCount);
 
-        public void UseNetworkSession(NetworkGameSession value)
+        public void UseNetworkSession(NetworkGameSession value, bool allowRematch)
         {
             Suspend();
             Initialize();
             PlayerVoice.HotSeat = false;
             CardNames.PlayerNames = value.PlayerNames;
-            messages.AllowRematch = false;
+            messages.AllowRematch = allowRematch; // only the host can call a rematch
             session = value;
             timerScale = hud.TimerDisplayScale = 1f;
             session.ViewChanged += OnViewChanged;
@@ -157,15 +166,6 @@ namespace Dubito.Presentation
             revelation.Show(view, session.SeatOrder, () => LocalSession?.ResolveRevelation());
             lastView = view;
             if (firstView) actionPanel.Bind(session);
-        }
-
-        void Quit()
-        {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
         }
 
         void SwitchToActivePlayer()

@@ -25,6 +25,9 @@ namespace Dubito.Networking
         public event Action<int> VersionMismatch;
         public event Action<string> ProtocolError;
         public event Action<LobbyStateMessage> LobbyChanged;
+        public event Action<JoinRefusal> JoinRefused;
+        // Last lobby state received; null once the game has started.
+        public LobbyStateMessage Lobby { get; private set; }
 
         public NetworkGameSession(Action<byte[]> send, Func<double> clock = null)
         {
@@ -39,8 +42,10 @@ namespace Dubito.Networking
             switch (decoded.Message)
             {
                 case VersionMismatchMessage mismatch: VersionMismatch?.Invoke(mismatch.ExpectedVersion); return;
+                case JoinRefusedMessage refused: JoinRefused?.Invoke(refused.Reason); return;
                 case WelcomeMessage welcome when !welcomed:
                     if (welcome.ProtocolVersion != ProtocolInfo.Version) { VersionMismatch?.Invoke(welcome.ProtocolVersion); return; }
+                    Lobby = null;
                     ControlledPlayerId = welcome.PlayerId;
                     SeatOrder = welcome.SeatOrder;
                     PlayerNames = welcome.PlayerNames;
@@ -56,9 +61,24 @@ namespace Dubito.Networking
                     ViewChanged?.Invoke(view);
                     return;
                 case CommandRejectedMessage rejected when welcomed: CommandRejected?.Invoke(rejected.Error); return;
-                case LobbyStateMessage lobby when !welcomed: LobbyChanged?.Invoke(lobby); return;
+                case LobbyStateMessage lobby:
+                    // Also after a game: "Revanche" sends everyone back to the same lobby (UX §5).
+                    welcomed = false;
+                    CurrentView = null;
+                    ControlledPlayerId = -1;
+                    SeatOrder = Array.Empty<int>();
+                    Lobby = lobby;
+                    LobbyChanged?.Invoke(lobby);
+                    return;
                 default: ProtocolError?.Invoke("Message inattendu de l'hôte."); return;
             }
+        }
+
+        // Lobby "Prêt" toggle (UX §6.2).
+        public void SetReady(bool isReady)
+        {
+            if (Lobby == null) return;
+            send(ProtocolCodec.Encode(new ReadyMessage(isReady)));
         }
 
         public void Play(IReadOnlyList<Card> cards, CardRank announcedRank) => Send(CommandKind.Play, cards, announcedRank);

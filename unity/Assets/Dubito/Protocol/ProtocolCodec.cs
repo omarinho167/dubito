@@ -22,7 +22,7 @@ namespace Dubito.Protocol
         private enum MessageType : byte
         {
             Hello = 1, Command = 2, Ready = 3, Welcome = 4,
-            View = 5, CommandRejected = 6, VersionMismatch = 7, LobbyState = 8
+            View = 5, CommandRejected = 6, VersionMismatch = 7, LobbyState = 8, JoinRefused = 9
         }
 
         public static byte[] Encode(IProtocolMessage message)
@@ -71,6 +71,10 @@ namespace Dubito.Protocol
                     writer.Write((byte)lobby.Players.Count);
                     foreach (var player in lobby.Players)
                     { writer.Write((byte)player.PlayerId); Name(writer, player.PlayerName); writer.Write(player.IsReady); }
+                    writer.Write((byte)lobby.YourPlayerId); writer.Write((byte)lobby.HostPlayerId);
+                    break;
+                case JoinRefusedMessage refused:
+                    Header(writer, MessageType.JoinRefused); writer.Write((byte)refused.Reason);
                     break;
                 default: throw new ArgumentException("Unsupported protocol message.", nameof(message));
             }
@@ -119,7 +123,9 @@ namespace Dubito.Protocol
                         var players = new List<LobbyPlayer>(connected);
                         for (int i = 0; i < connected; i++)
                             players.Add(new LobbyPlayer(reader.ReadByte(), ReadName(reader), Bool(reader)));
-                        message = new LobbyStateMessage(players, duration, max); break;
+                        message = new LobbyStateMessage(players, duration, max, reader.ReadByte(), reader.ReadByte()); break;
+                    case MessageType.JoinRefused:
+                        message = new JoinRefusedMessage((JoinRefusal)reader.ReadByte()); break;
                     default: throw new ArgumentException("Unknown message type.");
                 }
                 Check.Require(stream.Position == stream.Length, "Trailing message bytes.");

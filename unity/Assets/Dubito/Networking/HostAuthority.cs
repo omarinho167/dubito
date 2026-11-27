@@ -23,10 +23,49 @@ namespace Dubito.Networking
         public const double RevelationDelaySeconds = 4;
         readonly List<(int ConnectionId, string Name)> players = new List<(int, string)>();
         readonly Dictionary<int, int> seats = new Dictionary<int, int>();
+        readonly HashSet<int> ready = new HashSet<int>(); // connection ids marked "Prêt" in the lobby
         GameEngine engine;
         double revelationElapsed;
+        int hostConnectionId = -1;
         public int PlayerCount => players.Count;
         public bool IsStarted => engine != null;
+        // Host settings (UX §6.2), editable until the game starts.
+        public int TurnSeconds { get; private set; } = 45;
+        public int MaxPlayers { get; private set; } = 6;
+        public bool IsFinished => engine != null && engine.State.Phase == GamePhase.Finished;
+        // UX §6.2: at least 2 players and everyone ready; the host's own "Lancer" counts as ready.
+        public bool CanStart => !IsStarted && PlayerCount >= 2 &&
+            players.All(p => p.ConnectionId == hostConnectionId || ready.Contains(p.ConnectionId));
+
+        // The host's own local connection: it never needs "Prêt" and is shown as the host.
+        public void SetHostConnection(int connectionId) => hostConnectionId = connectionId;
+
+        public IReadOnlyList<OutgoingPacket> SetSettings(int turnSeconds, int maxPlayers)
+        {
+            if (IsStarted) throw new InvalidOperationException("Settings are locked once the game started.");
+            if (turnSeconds != 30 && turnSeconds != 45 && turnSeconds != 60 && turnSeconds != 90)
+                throw new ArgumentOutOfRangeException(nameof(turnSeconds));
+            // UX §6.2: 2 to 6 seats, never below the players already present.
+            if (maxPlayers < Math.Max(2, PlayerCount) || maxPlayers > 6) throw new ArgumentOutOfRangeException(nameof(maxPlayers));
+            TurnSeconds = turnSeconds;
+            MaxPlayers = maxPlayers;
+            return LobbyPackets();
+        }
+
+        public IReadOnlyList<OutgoingPacket> StartGame(IRandomSource random) =>
+            StartGame(new GameConfig(PlayerCount, TurnSeconds), random);
+
+        // "Revanche" (UX §5): everyone goes back to the same lobby, readiness reset.
+        public IReadOnlyList<OutgoingPacket> ReturnToLobby()
+        {
+            if (!IsStarted) return Array.Empty<OutgoingPacket>();
+            engine = null;
+            revelationElapsed = 0;
+            ready.Clear();
+            // Players who left during the game are gone: make IDs dense again for GameSetup.
+            for (int i = 0; i < players.Count; i++) seats[players[i].ConnectionId] = i;
+            return LobbyPackets();
+        }
 
         public IReadOnlyList<OutgoingPacket> Join(int connectionId, HelloMessage hello)
         {
@@ -34,7 +73,9 @@ namespace Dubito.Networking
             if (hello.ProtocolVersion != ProtocolInfo.Version)
                 return new[] { new OutgoingPacket(connectionId,
                     ProtocolCodec.Encode(new VersionMismatchMessage(ProtocolInfo.Version)), true) };
-            if (IsStarted || players.Count == 6 || seats.ContainsKey(connectionId)) return Close(connectionId);
+            if (seats.ContainsKey(connectionId)) return Close(connectionId);
+            if (IsStarted) return Refuse(connectionId, JoinRefusal.GameStarted);
+            if (players.Count >= MaxPlayers) return Refuse(connectionId, JoinRefusal.LobbyFull);
             // IDs are provisional until launch. Lobby departures compact arrival order
             // to the dense IDs required by GameSetup; no client has a Welcome yet.
             seats.Add(connectionId, players.Count);
@@ -70,7 +111,14 @@ namespace Dubito.Networking
             if (!decoded.Success) return Close(connectionId);
             if (!seats.TryGetValue(connectionId, out int id))
                 return decoded.Message is HelloMessage hello ? Join(connectionId, hello) : Close(connectionId);
-            if (engine == null || !(decoded.Message is CommandMessage command)) return Close(connectionId);
+            if (engine == null)
+            {
+                if (!(decoded.Message is ReadyMessage readiness)) return Close(connectionId);
+                if (readiness.IsReady) ready.Add(connectionId); else ready.Remove(connectionId);
+                return LobbyPackets();
+            }
+            if (decoded.Message is ReadyMessage) return Array.Empty<OutgoingPacket>(); // late click, harmless
+            if (!(decoded.Message is CommandMessage command)) return Close(connectionId);
             long revision = engine.State.Revision;
             var result = engine.Execute(id, command.ToGameCommand());
             if (result.Status == CommandStatus.Rejected)
@@ -99,6 +147,7 @@ namespace Dubito.Networking
         {
             if (!seats.TryGetValue(connectionId, out int id)) return Array.Empty<OutgoingPacket>();
             seats.Remove(connectionId);
+            ready.Remove(connectionId);
             players.RemoveAll(p => p.ConnectionId == connectionId);
             if (engine == null)
             {
@@ -126,13 +175,22 @@ namespace Dubito.Networking
             new OutgoingPacket(connectionId, ProtocolCodec.Encode(message));
         static IReadOnlyList<OutgoingPacket> Close(int connectionId) =>
             new[] { new OutgoingPacket(connectionId, null, true) };
+        static IReadOnlyList<OutgoingPacket> Refuse(int connectionId, JoinRefusal reason) =>
+            new[] { new OutgoingPacket(connectionId, ProtocolCodec.Encode(new JoinRefusedMessage(reason)), true) };
         IReadOnlyList<OutgoingPacket> LobbyPackets()
         {
             var packets = new List<OutgoingPacket>();
             if (players.Count == 0) return packets;
-            var lobby = new LobbyStateMessage(players.Select(p => new LobbyPlayer(seats[p.ConnectionId], p.Name, false)), 45, 6);
-            foreach (var player in players) packets.Add(Packet(player.ConnectionId, lobby));
+            var entries = players.Select(p => new LobbyPlayer(seats[p.ConnectionId], DisplayName(p.Name, seats[p.ConnectionId]),
+                p.ConnectionId == hostConnectionId || ready.Contains(p.ConnectionId))).ToList();
+            int host = seats.TryGetValue(hostConnectionId, out int hostId) ? hostId : entries[0].PlayerId;
+            // One message per recipient: it says which entry is theirs.
+            foreach (var player in players)
+                packets.Add(Packet(player.ConnectionId, new LobbyStateMessage(entries, TurnSeconds, MaxPlayers,
+                    seats[player.ConnectionId], host)));
             return packets;
         }
+        static string DisplayName(string name, int playerId) =>
+            string.IsNullOrWhiteSpace(name) ? $"Joueur {playerId + 1}" : name;
     }
 }

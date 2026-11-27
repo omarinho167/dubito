@@ -121,8 +121,9 @@ namespace Dubito.EditorTools
             network.autoCreatePlayer = false;
             network.dontDestroyOnLoad = false;
             network.maxConnections = 6;
-            var connectionPanel = new GameObject("DebugConnectionPanel").AddComponent<DebugConnectionPanel>();
-            Assign(connectionPanel, ("network", network), ("table", controller), ("font", font));
+            // Step 3.4: start screen + local lobby (UX §6.2).
+            var lobbyScreen = new GameObject("LobbyScreen").AddComponent<LobbyScreen>();
+            Assign(lobbyScreen, ("network", network), ("table", controller), ("font", font));
 
             EditorSceneManager.SaveScene(scene, ScenePath);
             AddToBuildSettings(ScenePath);

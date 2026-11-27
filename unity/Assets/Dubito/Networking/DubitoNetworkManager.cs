@@ -21,7 +21,10 @@ namespace Dubito.Networking
         public bool IsHosting => NetworkServer.active;
         public bool IsConnectingOrConnected => NetworkClient.active;
         public int ConnectedPlayers => authority?.PlayerCount ?? 0;
-        public bool CanStartMatch => IsHosting && authority != null && !authority.IsStarted && ConnectedPlayers >= 2;
+        public bool CanStartMatch => IsHosting && authority != null && authority.CanStart;
+        public bool CanRematch => IsHosting && authority != null && authority.IsFinished;
+        public int TurnSeconds => authority?.TurnSeconds ?? 45;
+        public int MaxPlayers => authority?.MaxPlayers ?? 6;
         public string Status { get; private set; } = "Choisis un mode de jeu.";
         public event Action<NetworkGameSession> SessionCreated;
         public event Action<string> Disconnected;
@@ -59,7 +62,21 @@ namespace Dubito.Networking
         {
             if (!CanStartMatch) return;
             AdvanceHostClock();
-            SendPackets(authority.StartGame(new GameConfig(ConnectedPlayers, 45), new SystemRandomSource()));
+            SendPackets(authority.StartGame(new SystemRandomSource()));
+        }
+
+        // Host lobby settings (UX §6.2); invalid values are ignored.
+        public void SetLobbySettings(int turnSeconds, int maxPlayers)
+        {
+            if (!IsHosting || authority == null || authority.IsStarted) return;
+            try { SendPackets(authority.SetSettings(turnSeconds, maxPlayers)); }
+            catch (ArgumentOutOfRangeException) { }
+        }
+
+        // "Revanche": everyone back to the same lobby.
+        public void Rematch()
+        {
+            if (CanRematch) SendPackets(authority.ReturnToLobby());
         }
 
         public void StopSession()
@@ -74,6 +91,7 @@ namespace Dubito.Networking
         public override void OnStartServer()
         {
             authority = new HostAuthority();
+            authority.SetHostConnection(NetworkConnection.LocalConnectionId); // the host's own player
             closing.Clear();
             lastTick = Time.realtimeSinceStartupAsDouble;
             NetworkServer.RegisterHandler<DubitoPacket>(OnPacket);
@@ -84,6 +102,8 @@ namespace Dubito.Networking
             Session = new NetworkGameSession(bytes => NetworkClient.Send(new DubitoPacket { Payload = bytes }));
             Session.VersionMismatch += _ => Fail("Version différente : l'hôte et le client doivent utiliser la même version.");
             Session.ProtocolError += _ => Fail("Message réseau invalide reçu de l'hôte.");
+            Session.JoinRefused += reason => Fail(reason == JoinRefusal.LobbyFull
+                ? "Salon plein : toutes les places sont prises." : "La partie a déjà commencé.");
             NetworkClient.RegisterHandler<DubitoPacket>(packet => Session?.Receive(packet.Payload));
             SessionCreated?.Invoke(Session);
         }

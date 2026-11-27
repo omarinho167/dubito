@@ -159,7 +159,11 @@ namespace Dubito.Protocol
         public IReadOnlyList<LobbyPlayer> Players { get; }
         public int TurnDurationSeconds { get; }
         public int MaxPlayers { get; }
-        public LobbyStateMessage(IEnumerable<LobbyPlayer> players, int turnDurationSeconds, int maxPlayers)
+        // Step 3.4: each recipient learns which entry is theirs and which one is the host.
+        public int YourPlayerId { get; }
+        public int HostPlayerId { get; }
+        public LobbyStateMessage(IEnumerable<LobbyPlayer> players, int turnDurationSeconds, int maxPlayers,
+            int yourPlayerId, int hostPlayerId)
         {
             Check.Range(maxPlayers, 2, 6, "Maximum players");
             Check.Require(turnDurationSeconds == 30 || turnDurationSeconds == 45 ||
@@ -169,9 +173,26 @@ namespace Dubito.Protocol
             var seen = new HashSet<int>();
             foreach (var player in copy)
                 Check.Require(player != null && seen.Add(player.PlayerId), "Null or duplicate player.");
+            Check.Require(seen.Contains(yourPlayerId), "Recipient missing from the lobby.");
+            Check.Require(seen.Contains(hostPlayerId), "Host missing from the lobby.");
             Players = copy;
             TurnDurationSeconds = turnDurationSeconds;
             MaxPlayers = maxPlayers;
+            YourPlayerId = yourPlayerId;
+            HostPlayerId = hostPlayerId;
+        }
+    }
+
+    public enum JoinRefusal : byte { LobbyFull = 1, GameStarted = 2 }
+
+    // UX §6.5: clear reason when the host cannot take a new player.
+    public sealed class JoinRefusedMessage : IProtocolMessage
+    {
+        public JoinRefusal Reason { get; }
+        public JoinRefusedMessage(JoinRefusal reason)
+        {
+            Check.EnumValue(reason);
+            Reason = reason;
         }
     }
 }

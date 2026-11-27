@@ -146,6 +146,10 @@ namespace Dubito.Tests.Protocol
             yield return Bad("LobbyDuplicateId", Lobby(ids: new byte[] { 0, 0 }));
             yield return Bad("LobbyIdOutOfRange", Lobby(ids: new byte[] { 6 }));
             yield return Bad("LobbyReadyFlag", Lobby(ready: 2));
+            yield return Bad("LobbyRecipientMissing", Lobby(you: 3));
+            yield return Bad("LobbyHostMissing", Lobby(host: 4));
+            yield return Bad("JoinRefusedZeroReason", Packet(9, w => w.Write((byte)0)));
+            yield return Bad("JoinRefusedUnknownReason", Packet(9, w => w.Write((byte)3)));
             yield return Bad("WelcomeInvalidVersion", Welcome(version: 0));
             yield return Bad("WelcomeUnknownRecipient", Welcome(recipient: 2));
             yield return Bad("WelcomeTooFewPlayers", Welcome(ids: new byte[] { 0 }));
@@ -156,12 +160,14 @@ namespace Dubito.Tests.Protocol
             yield return Bad("WelcomeDuplicateSeat", Welcome(order: new byte[] { 0, 0 }));
             yield return Bad("WelcomeUnknownSeat", Welcome(order: new byte[] { 0, 2 }));
         }
-        private static byte[] Lobby(byte max = 2, byte duration = 45, byte[] ids = null, byte ready = 1)
+        private static byte[] Lobby(byte max = 2, byte duration = 45, byte[] ids = null, byte ready = 1,
+            byte you = 0, byte host = 0)
             => Packet(8, w =>
             {
                 w.Write(max); w.Write(duration); var players = ids ?? new byte[] { 0 };
                 w.Write((byte)players.Length);
                 foreach (byte id in players) { w.Write(id); Name(w, "A"); w.Write(ready); }
+                w.Write(you); w.Write(host);
             });
         private static byte[] Welcome(int version = 1, byte recipient = 0, byte[] ids = null, byte[] order = null)
             => Packet(4, w =>

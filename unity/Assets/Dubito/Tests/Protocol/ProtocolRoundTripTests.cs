@@ -72,7 +72,7 @@ namespace Dubito.Tests.Protocol
             Assert.Throws<NotSupportedException>(() => ((IDictionary<int, string>)welcome.PlayerNames).Clear());
             Assert.Throws<NotSupportedException>(() => ((IList<int>)welcome.SeatOrder).Clear());
             var players = new[] { new LobbyPlayer(0, "A", true) };
-            var lobby = new LobbyStateMessage(players, 45, 2); players[0] = null;
+            var lobby = new LobbyStateMessage(players, 45, 2, 0, 0); players[0] = null;
             Assert.That(lobby.Players[0].PlayerName, Is.EqualTo("A"));
             Assert.Throws<NotSupportedException>(() => ((IList<LobbyPlayer>)lobby.Players).Clear());
         }

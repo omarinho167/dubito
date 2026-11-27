@@ -100,7 +100,9 @@ namespace Dubito.Tests.Protocol
             yield return new VersionMismatchMessage(12);
             foreach (int duration in new[] { 30, 45, 60, 90 })
                 yield return new LobbyStateMessage(new[] { new LobbyPlayer(0, "Hôte", true),
-                    new LobbyPlayer(5, "Client", false) }, duration, 6);
+                    new LobbyPlayer(5, "Client", false) }, duration, 6, 5, 0);
+            yield return new JoinRefusedMessage(JoinRefusal.LobbyFull);
+            yield return new JoinRefusedMessage(JoinRefusal.GameStarted);
             var e = BeforeDoubt();
             yield return new ViewMessage(PlayerView.Create(e.State, e.State.ActivePlayerId));
             Send(e, CommandKind.Doubt);

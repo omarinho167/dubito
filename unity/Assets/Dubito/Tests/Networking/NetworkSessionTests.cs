@@ -177,7 +177,10 @@ namespace Dubito.Tests.Networking
             foreach (var bytes in samples)
                 Assert.That(host.Receive(55, bytes).Single().DisconnectAfterSend, Is.True);
             host.Join(55, new HelloMessage(ProtocolInfo.Version, "A"));
-            Assert.That(host.Receive(55, ProtocolCodec.Encode(new ReadyMessage(true))).Single().DisconnectAfterSend, Is.True);
+            // Step 3.4: "Prêt" is valid in the lobby; a game command before the launch is not.
+            Assert.That(host.Receive(55, ProtocolCodec.Encode(new ReadyMessage(true))).All(p => !p.DisconnectAfterSend), Is.True);
+            Assert.That(host.Receive(55, ProtocolCodec.Encode(new CommandMessage(Guid.NewGuid(), 0, CommandKind.Doubt)))
+                .Single().DisconnectAfterSend, Is.True);
             Assert.Throws<InvalidOperationException>(() => host.StartGame(new GameConfig(2), new SystemRandomSource(1)));
         }
 
