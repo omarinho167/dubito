@@ -41,9 +41,9 @@
 - [x] 3.2 Hôte + clients en `localhost` ; association connexion → siège. *(2026-11-27)*
 - [x] 3.3 Chaque client ne reçoit que sa vue (vérification `C-PRV-*` sur les vrais messages). *(2026-11-27)*
 - [x] 3.4 Salon local : Prêt, réglages de l'hôte (chrono, places max), lancer, revanche, retour au menu (`UX §6`). *(2026-11-27)*
-- [ ] 3.5 Déconnexions et départ de l'hôte (`RULES §7`).
+- [x] 3.5 Déconnexions et départ de l'hôte (`RULES §7`). *(2026-11-27)*
 
-**Fin de phase** : partie complète à 3 instances sur un PC (éditeur + 2 builds).
+**Fin de phase** : partie complète à 3 instances sur un PC (éditeur + 2 builds). *(validée le 2026-11-27, avec Multiplayer Play Mode : D-61)*
 
 ## Phase 4 : Steam
 
