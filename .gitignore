@@ -43,3 +43,6 @@ Desktop.ini
 /TestResults/
 /unity/test-results.xml
 **/TestResults/
+
+# Variantes brutes générées (Nano Banana Pro) : seules les images gardées sont versionnées (D-69)
+_gen/

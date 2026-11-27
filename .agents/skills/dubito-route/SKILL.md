@@ -27,9 +27,10 @@ Ce skill ne fait qu'orienter. Il ne remplace ni `AGENTS.md` ni les docs.
 | 11 | crée un modèle 3D dans Blender, d'après photos ou non | `blender-model-from-reference` |
 | 12 | nettoie, rigge ou exporte un modèle de Blender vers Unity | `blender-to-unity` |
 | 13 | quelque chose qui se voit à l'écran est prêt à être validé | `dubito-visual-review` |
+| 15 | génère, itère, classe ou fait valider des images de référence (style, personnages, objets, interface) avec Nano Banana Pro | `dubito-art-direction` |
 | 14 | un changement important est fini (règles, étape de ROADMAP, réseau, confidentialité) | `dubito-cross-review` |
 
-Ordre quand plusieurs lignes s'appliquent : décision manquante (1) → pour une règle, écrire d'abord le test qui échoue (4) → changement (2, 3, 5 à 12) → lancer les tests (4) → validation visuelle (13) → relecture (14).
+Ordre quand plusieurs lignes s'appliquent : décision manquante (1) → pour une règle, écrire d'abord le test qui échoue (4) → changement (2, 3, 5 à 12, 15) → lancer les tests (4) → validation visuelle (13) → relecture (14).
 ## Skills d'outil (en complément des lignes ci-dessus)
 
 Charger en plus, seulement si la tâche le demande. Les notes « Dans Dubito » de ces skills et les skills `dubito-*` priment.
@@ -43,6 +44,7 @@ Charger en plus, seulement si la tâche le demande. Les notes « Dans Dubito » 
 | Effets, sensations (poses, révélation) | `game-feel` |
 | Sons (phase 5) | `audio-design` |
 | Assets 2D, icônes, licences d'assets | `create-game-assets` (les cartes restent `dubito-card-faces`) |
+| Images Nano Banana Pro (MCP `google-flow`, skill du PC) | `google-flow-image` ; pour Dubito, `dubito-art-direction` prime |
 | Bug ou test qui échoue sans cause évidente | `systematic-debugging` |
 | Conception, playtests (phase 5) | `game-designer` |
 | Publication Steam (plus tard) | `steam-publish` |

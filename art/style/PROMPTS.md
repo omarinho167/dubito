@@ -4,6 +4,8 @@ But : comparer **4 directions** sur **les mêmes 3 images**, puis en choisir une
 
 ## Mode d'emploi
 
+Claude ou Codex peuvent tout générer, analyser et classer eux-mêmes (skill `dubito-art-direction`, D-68) ; les étapes ci-dessous restent valables si tu génères à la main.
+
 1. Dans Nano Banana Pro, colle **le bloc commun** puis **le prompt de l'image**. Garde le même bloc commun pour toutes les images, c'est ce qui rend la comparaison juste.
 2. Génère **2 ou 3 variantes** par prompt et garde la meilleure (ou deux si tu hésites).
 3. Dépose les images dans le dossier de la direction, avec ces noms :
