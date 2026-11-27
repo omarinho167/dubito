@@ -97,4 +97,5 @@ Une seule instance, sans réseau ; une personne joue tous les sièges (D-47).
 - Pendant une révélation, on reste au siège du douteur (ou du répondant pour une révélation automatique) ; on bascule à sa résolution.
 - Après un tour sauté ou une exclusion, on bascule au nouveau joueur actif.
 - Noms locaux « Joueur 1 » à « Joueur 6 » (les noms Steam arrivent en phase 4).
+- Les textes nomment le joueur au lieu de dire « tu » (« Joueur 2 annonce : 2 × Dame », « À Joueur 2 de jouer ») ; à chaque changement de siège, un message « Au tour de Joueur 2 » (D-59).
 - Une touche de debug permet de simuler un départ (déconnexion) du siège affiché, pour tester `RULES §7`.

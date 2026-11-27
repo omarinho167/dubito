@@ -85,6 +85,24 @@ namespace Dubito.Tests
         }
 
         [Test]
+        public void HotSeatNamesThePlayerInsteadOfTu()
+        {
+            var session = NewSession();
+            int first = session.ControlledPlayerId;
+            for (int i = 0; i < 3; i++) session.Tick(45);
+            var view = session.CurrentView;
+            try
+            {
+                PlayerVoice.HotSeat = true;
+                Assert.That(PlayerVoice.Addresses(view, first), Is.False);
+                Assert.That(TableMessageText.ExclusionWarning(view),
+                    Is.EqualTo($"Encore un tour sauté et {CardNames.PlayerName(first)} sera exclu"));
+            }
+            finally { PlayerVoice.HotSeat = false; }
+            Assert.That(PlayerVoice.Addresses(view, first), Is.True);
+        }
+
+        [Test]
         public void NoBannerOrWinnerAtTheStart()
         {
             var view = NewSession().CurrentView;

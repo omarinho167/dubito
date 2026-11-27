@@ -42,6 +42,13 @@ namespace Dubito.Presentation
             Refresh();
         }
 
+        // Shown only when no other message is on screen (a timeout message wins over "Au tour de…").
+        public void ShowTransientIfIdle(string message)
+        {
+            if (transient.Length > 0 && Time.unscaledTime < transientUntil) return;
+            ShowTransient(message);
+        }
+
         public void Clear()
         {
             persistent = transient = "";

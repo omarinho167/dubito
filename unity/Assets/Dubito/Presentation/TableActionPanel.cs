@@ -73,7 +73,9 @@ namespace Dubito.Presentation
             model = ActionPanelModel.From(view, selection.Count, chosenRank);
             root.SetActive(model.Visible);
             // The announcement is what the others will believe: say it plainly (owner feedback 2026-11-27).
-            announcement.text = (model.ChooseRank ? "Tu ouvres : " : "Tu annonces : ") + model.Announcement;
+            string speaker = PlayerVoice.HotSeat ? CardNames.PlayerName(view.PlayerId) : null;
+            announcement.text = (speaker == null ? (model.ChooseRank ? "Tu ouvres : " : "Tu annonces : ")
+                : $"{speaker} {(model.ChooseRank ? "ouvre" : "annonce")} : ") + model.Announcement;
             play.interactable = model.CanPlay && !pending && !confirm;
             doubt.interactable = model.CanDoubt && !pending && !confirm;
             discard.interactable = model.CanDiscard && !pending && !confirm;
@@ -81,7 +83,7 @@ namespace Dubito.Presentation
             next.gameObject.SetActive(model.ChooseRank);
             previous.interactable = next.interactable = !pending && !confirm;
             confirmation.SetActive(confirm);
-            confirmationText.text = $"Retirer {(view.PileCount > 1 ? "les " : "")}{CardNames.CardCount(view.PileCount)} du tas et passer ton tour ?";
+            confirmationText.text = $"Retirer {(view.PileCount > 1 ? "les " : "")}{CardNames.CardCount(view.PileCount)} du tas et passer le tour ?";
             cards.SetSelection(selection.Cards);
         }
 

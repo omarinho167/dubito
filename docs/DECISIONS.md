@@ -76,3 +76,4 @@
 | D-56 | Debug en Play : touches **2 à 6** reconstruisent la table avec ce nombre de sièges. | Tester vite 2, 4 et 6 joueurs. | P |
 | D-57 | Sélection des cartes **à la souris seulement** (clic gauche) ; pas de raccourci 1–9/0. Les touches 2 à 6 restent le debug « nouvelle partie » (D-56). | Choix du propriétaire ; évite le conflit de touches. | P |
 | D-58 | Debug phase 2 : option **chrono court** (10 s par tour) pour tester sans attendre. | Tant que le hot-seat (2.4) n'existe pas, les autres sièges laissent filer leur chrono. | P |
+| D-59 | En hot-seat, l'interface **nomme le joueur** (3e personne) au lieu de « tu », et annonce « Au tour de Joueur N » à chaque changement de siège. En réseau, « tu » reste. | Une seule personne joue tous les sièges : « tu » ne disait pas de qui il s'agissait. | P |

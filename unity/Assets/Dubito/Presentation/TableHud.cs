@@ -29,11 +29,13 @@ namespace Dubito.Presentation
             EnsureCanvas();
             round.text = view.RoundRank.HasValue ? CardNames.Rank(view.RoundRank.Value) : "Ouverture libre";
             pile.text = view.PileCount == 0 ? "Tas au centre : vide" : "Tas au centre : " + CardNames.CardCount(view.PileCount);
-            ownHand.text = $"{CardNames.PlayerName(view.PlayerId)} (toi) · ta main : {CardNames.CardCount(view.Hand.Count)}";
+            ownHand.text = PlayerVoice.HotSeat
+                ? $"Main de {CardNames.PlayerName(view.PlayerId)} : {CardNames.CardCount(view.Hand.Count)}"
+                : $"Ta main : {CardNames.CardCount(view.Hand.Count)}";
             var last = view.LastAnnouncement;
-            string author = last == null ? "" : last.PlayerId == view.PlayerId ? "Toi" : CardNames.PlayerName(last.PlayerId);
+            string author = last == null ? "" : PlayerVoice.Addresses(view, last.PlayerId) ? "Toi" : CardNames.PlayerName(last.PlayerId);
             announcement.text = last == null ? "" : $"{author} : {last.CardCount} × {CardNames.Rank(last.AnnouncedRank)}";
-            string who = view.ActivePlayerId == view.PlayerId ? "toi" : CardNames.PlayerName(view.ActivePlayerId);
+            string who = PlayerVoice.Addresses(view, view.ActivePlayerId) ? "toi" : CardNames.PlayerName(view.ActivePlayerId);
             active.text = view.Phase == GamePhase.Finished ? "Partie terminée" :
                 view.IsTimerPaused ? $"Révélation · chrono en pause" :
                 $"À {who} de jouer · {Math.Max(0, (int)Math.Ceiling(view.RemainingTurnSeconds / TimerDisplayScale))} s";

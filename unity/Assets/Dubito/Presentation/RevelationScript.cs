@@ -51,14 +51,14 @@ namespace Dubito.Presentation
         {
             if (!view.PendingWinnerId.HasValue || view.Phase != GamePhase.Playing) return "";
             string winner = CardNames.PlayerName(view.PendingWinnerId.Value);
-            string next = view.ActivePlayerId == view.PlayerId ? "Tu peux douter…" : $"{CardNames.PlayerName(view.ActivePlayerId)} peut douter…";
+            string next = PlayerVoice.Addresses(view, view.ActivePlayerId) ? "Tu peux douter…" : $"{CardNames.PlayerName(view.ActivePlayerId)} peut douter…";
             return $"{winner} n'a plus de cartes ! {next}";
         }
 
         // UX §5: after a first skipped turn, warn the player concerned when it is their turn again.
         public static string ExclusionWarning(PlayerView view) =>
             view.Phase == GamePhase.Playing && view.ActivePlayerId == view.PlayerId && view.OwnSkippedTurns == 1
-                ? "Encore un tour sauté et tu seras exclu" : "";
+                ? (PlayerVoice.HotSeat ? $"Encore un tour sauté et {CardNames.PlayerName(view.PlayerId)} sera exclu" : "Encore un tour sauté et tu seras exclu") : "";
 
         // What happened when a timer tick changed the game, comparing the view before and after.
         public static string AfterTimeout(PlayerView before, PlayerView after)

@@ -39,6 +39,7 @@ namespace Dubito.Presentation
 
         void Start()
         {
+            PlayerVoice.HotSeat = hotSeat;
             messages.RematchRequested += () => NewGame(playerCount); // hot-seat rematch: same table, new deal
             messages.QuitRequested += Quit;
             NewGame(playerCount);
@@ -123,6 +124,7 @@ namespace Dubito.Presentation
             localSeat = IndexOf(session.SeatOrder, view.ActivePlayerId);
             seating.Build(playerCount, localSeat);
             session.SetControlledPlayer(view.ActivePlayerId); // publishes the new seat's view
+            messages.ShowTransientIfIdle($"Au tour de {CardNames.PlayerName(view.ActivePlayerId)}");
         }
 
         void ReadHotkeys()
@@ -157,6 +159,7 @@ namespace Dubito.Presentation
 
         void OnDestroy()
         {
+            PlayerVoice.HotSeat = false; // static: never leak into another scene or into edit-mode tests
             if (session != null) session.ViewChanged -= OnViewChanged;
         }
     }
