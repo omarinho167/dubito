@@ -9,6 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="../Dubito.Core.DotNet/Dubito.Core.DotNet.csproj" />
     <ProjectReference Include="../Dubito.Protocol.DotNet/Dubito.Protocol.DotNet.csproj" />
-    <Compile Include="../../unity/Assets/Dubito/Networking/*.cs" Exclude="../../unity/Assets/Dubito/Networking/DubitoPacket.cs;../../unity/Assets/Dubito/Networking/DubitoNetworkManager.cs" />
+    <Compile Include="../../unity/Assets/Dubito/Networking/*.cs" Exclude="../../unity/Assets/Dubito/Networking/DubitoPacket.cs;../../unity/Assets/Dubito/Networking/DubitoNetworkManager.cs;../../unity/Assets/Dubito/Networking/SteamBootstrap.cs;../../unity/Assets/Dubito/Networking/SteamLobbyService.cs" />
   </ItemGroup>
 </Project>

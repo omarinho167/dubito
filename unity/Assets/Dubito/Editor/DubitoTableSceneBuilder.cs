@@ -2,6 +2,7 @@ using System.Linq;
 using Dubito.Presentation;
 using Dubito.Networking;
 using kcp2k;
+using Mirror.FizzySteam;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -115,13 +116,19 @@ namespace Dubito.EditorTools
             var networkGo = new GameObject("DubitoNetworkManager");
             var kcp = networkGo.AddComponent<KcpTransport>();
             kcp.Port = 7777;
+            var fizzy = networkGo.AddComponent<FizzySteamworks>();
+            fizzy.enabled = false; // Do not initialize Steam relay access in local mode.
+            var steam = networkGo.AddComponent<SteamBootstrap>();
+            var steamLobby = networkGo.AddComponent<SteamLobbyService>();
             var network = networkGo.AddComponent<DubitoNetworkManager>();
+            Assign(network, ("localTransport", kcp), ("steamTransport", fizzy), ("steamLobby", steamLobby));
+            Assign(steamLobby, ("bootstrap", steam), ("network", network));
             network.transport = kcp;
             network.networkAddress = "127.0.0.1";
             network.autoCreatePlayer = false;
             network.dontDestroyOnLoad = false;
             network.maxConnections = 6;
-            // Step 3.4: start screen + local lobby (UX §6.2).
+            // Steam and local lobbies (UX §6.2).
             var lobbyScreen = new GameObject("LobbyScreen").AddComponent<LobbyScreen>();
             Assign(lobbyScreen, ("network", network), ("table", controller), ("font", font));
 

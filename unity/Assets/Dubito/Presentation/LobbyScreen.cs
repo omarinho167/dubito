@@ -7,8 +7,7 @@ using UnityEngine.UI;
 
 namespace Dubito.Presentation
 {
-    // Step 3.4 (UX §6.2): start screen, local lobby (players, "Prêt", host settings, launch),
-    // and the way back after a game. The Steam invitation and the Rules screen come later (4.x, 5.1).
+    // UX §6: Steam/local start screen, lobby, and return after a game.
     public sealed class LobbyScreen : MonoBehaviour
     {
         static readonly int[] TimerChoices = { 30, 45, 60, 90 }; // RULES §5
@@ -17,10 +16,11 @@ namespace Dubito.Presentation
         [SerializeField] LocalTableController table = null;
         [SerializeField] TMP_FontAsset font = null;
 
-        GameObject canvas, startPage, lobbyPage, waitPage, hostSettings;
-        TextMeshProUGUI status, lobbyTitle, lobbyInfo, lobbyHint, timerLabel, seatsLabel, waitText;
+        GameObject canvas, startPage, lobbyPage, waitPage, hostSettings, steamActions;
+        TextMeshProUGUI status, lobbyTitle, lobbyInfo, lobbyHint, timerLabel, seatsLabel, waitText, steamHint, lobbyCode;
         readonly TextMeshProUGUI[] playerLines = new TextMeshProUGUI[6];
-        Button readyButton, launchButton;
+        Button readyButton, launchButton, steamHostButton, steamJoinButton, inviteButton;
+        TMP_InputField codeInput;
         TextMeshProUGUI readyLabel;
         bool localMode, tableBound;
         string failure;
@@ -55,13 +55,19 @@ namespace Dubito.Presentation
         {
             if (canvas == null) return;
             var session = network.Session;
+            // An invitation can replace a hot-seat game or an already bound online session.
+            if (localMode && network.IsBusy)
+            {
+                localMode = false;
+                table.Suspend();
+            }
             bool inGame = localMode || session?.IsReady == true;
             if (session?.IsReady == true && !tableBound)
             {
                 table.UseNetworkSession(session, network.IsHosting);
                 tableBound = true;
             }
-            else if (session?.Lobby != null && tableBound)
+            else if (session?.IsReady != true && tableBound)
             {
                 table.Suspend(); // "Revanche": back to the lobby
                 tableBound = false;
@@ -70,12 +76,14 @@ namespace Dubito.Presentation
             canvas.SetActive(!inGame);
             if (inGame) return;
 
-            bool busy = network.IsHosting || network.IsConnectingOrConnected;
+            bool busy = network.IsBusy;
             var lobby = session?.Lobby;
             startPage.SetActive(!busy);
             lobbyPage.SetActive(busy && lobby != null);
             waitPage.SetActive(busy && lobby == null);
-            if (!busy) status.text = failure ?? "Choisis un mode de jeu.";
+            steamHostButton.interactable = steamJoinButton.interactable = codeInput.interactable = network.IsSteamReady;
+            steamHint.text = network.IsSteamReady ? "" : "Steam n'est pas lancé";
+            if (!busy) status.text = failure ?? network.Status;
             else if (lobby == null) waitText.text = network.Status;
             else RenderLobby(lobby);
         }
@@ -83,7 +91,10 @@ namespace Dubito.Presentation
         void RenderLobby(LobbyStateMessage lobby)
         {
             bool host = network.IsHosting;
-            lobbyTitle.text = "Salon";
+            lobbyTitle.text = network.IsSteam ? "Salon Steam" : "Salon local";
+            steamActions.SetActive(network.IsSteam);
+            inviteButton.gameObject.SetActive(host);
+            lobbyCode.text = "Code du salon : " + network.SteamLobbyId;
             for (int i = 0; i < playerLines.Length; i++)
             {
                 bool used = i < lobby.Players.Count;
@@ -110,6 +121,7 @@ namespace Dubito.Presentation
                 ? lobby.Players.Count < 2 ? "Il faut au moins 2 joueurs." :
                   network.CanStartMatch ? "Tout le monde est prêt." : "En attente : tous les joueurs doivent être prêts."
                 : meReady ? "En attente du lancement par l'hôte…" : "Clique sur « Je suis prêt » quand tu es prêt.";
+            if (!string.IsNullOrEmpty(network.LobbyNotice)) lobbyHint.text = network.LobbyNotice;
         }
 
         void ChangeTimer(int direction)
@@ -155,10 +167,15 @@ namespace Dubito.Presentation
             startPage = Page("Start");
             Label(startPage.transform, "Dubito", new Vector2(0, 300), 80, FontStyles.Bold);
             status = Label(startPage.transform, "", new Vector2(0, 200), 30);
-            MakeButton(startPage.transform, "Créer une partie", new Vector2(0, 90), () => { failure = null; network.HostLocal(); });
-            MakeButton(startPage.transform, "Rejoindre (127.0.0.1)", new Vector2(0, 5), () => { failure = null; network.JoinLocal(); });
-            MakeButton(startPage.transform, "Jeu local (hot-seat)", new Vector2(0, -80), () => { failure = null; localMode = true; table.StartLocal(); });
-            MakeButton(startPage.transform, "Quitter", new Vector2(0, -165), QuitApplication);
+            steamHostButton = MakeButton(startPage.transform, "Créer une partie Steam", new Vector2(0, 100), () => { failure = null; network.HostSteam(); });
+            codeInput = MakeCodeInput(startPage.transform, new Vector2(-180, 15));
+            steamJoinButton = MakeButton(startPage.transform, "Rejoindre par code", new Vector2(330, 15), () => { failure = null; network.JoinSteamCode(codeInput.text); }, 390);
+            steamHint = Label(startPage.transform, "", new Vector2(0, -55), 26);
+            Label(startPage.transform, "Développement · modes locaux", new Vector2(0, -125), 24);
+            MakeButton(startPage.transform, "Créer en local", new Vector2(0, -190), () => { failure = null; network.HostLocal(); });
+            MakeButton(startPage.transform, "Rejoindre 127.0.0.1", new Vector2(0, -265), () => { failure = null; network.JoinLocal(); });
+            MakeButton(startPage.transform, "Jeu local (hot-seat)", new Vector2(0, -340), () => { failure = null; network.StopSession(); localMode = true; table.StartLocal(); });
+            MakeButton(startPage.transform, "Quitter", new Vector2(0, -415), QuitApplication);
 
             waitPage = Page("Wait");
             waitText = Label(waitPage.transform, "", new Vector2(0, 60), 34);
@@ -166,6 +183,12 @@ namespace Dubito.Presentation
 
             lobbyPage = Page("Lobby");
             lobbyTitle = Label(lobbyPage.transform, "Salon", new Vector2(0, 380), 60, FontStyles.Bold);
+            steamActions = Page("SteamActions", lobbyPage.transform);
+            lobbyCode = Label(steamActions.transform, "", new Vector2(0, 460), 25);
+            lobbyCode.rectTransform.sizeDelta = new Vector2(850, 45);
+            MakeButton(steamActions.transform, "Copier", new Vector2(560, 460),
+                () => GUIUtility.systemCopyBuffer = network.SteamLobbyId.ToString(System.Globalization.CultureInfo.InvariantCulture), 170);
+            inviteButton = MakeButton(steamActions.transform, "Inviter un ami", new Vector2(-650, 280), network.InviteSteamFriends, 320);
             for (int i = 0; i < playerLines.Length; i++)
                 playerLines[i] = Label(lobbyPage.transform, "", new Vector2(0, 280 - i * 50), 32);
             lobbyInfo = Label(lobbyPage.transform, "", new Vector2(0, -40), 28);
@@ -222,6 +245,7 @@ namespace Dubito.Presentation
             var text = go.GetComponent<TextMeshProUGUI>();
             text.font = font;
             text.text = value;
+            text.richText = false; // Steam persona names are untrusted text.
             text.fontSize = size;
             text.fontStyle = style;
             text.alignment = TextAlignmentOptions.Center;
@@ -231,6 +255,31 @@ namespace Dubito.Presentation
             rt.anchoredPosition = position;
             rt.sizeDelta = new Vector2(1300, size * 1.6f);
             return text;
+        }
+
+        TMP_InputField MakeCodeInput(Transform parent, Vector2 position)
+        {
+            var go = Panel("LobbyCodeInput", parent, position, new Vector2(550, 64), new Color(.12f, .17f, .2f));
+            var input = go.AddComponent<TMP_InputField>();
+            input.targetGraphic = go.GetComponent<Image>();
+            var viewport = new GameObject("Viewport", typeof(RectTransform), typeof(RectMask2D));
+            viewport.transform.SetParent(go.transform, false);
+            var rt = (RectTransform)viewport.transform;
+            rt.anchorMin = Vector2.zero; rt.anchorMax = Vector2.one;
+            rt.offsetMin = new Vector2(15, 0); rt.offsetMax = new Vector2(-15, 0);
+            input.textViewport = rt;
+            var text = Label(viewport.transform, "", Vector2.zero, 28);
+            text.rectTransform.sizeDelta = new Vector2(520, 64);
+            text.alignment = TextAlignmentOptions.MidlineLeft;
+            input.textComponent = text;
+            var placeholder = Label(viewport.transform, "Code du salon Steam", Vector2.zero, 28);
+            placeholder.rectTransform.sizeDelta = new Vector2(520, 64);
+            placeholder.color = new Color(.65f, .7f, .75f);
+            input.placeholder = placeholder;
+            input.contentType = TMP_InputField.ContentType.IntegerNumber;
+            input.characterLimit = 20; // ulong decimal, validated again before the Steam call
+            input.lineType = TMP_InputField.LineType.SingleLine;
+            return input;
         }
 
         Button MakeButton(Transform parent, string label, Vector2 position, Action clicked, float width = 550)

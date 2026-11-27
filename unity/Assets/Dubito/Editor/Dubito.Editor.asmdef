@@ -11,7 +11,8 @@
         "Unity.ugui",
         "Dubito.Networking",
         "Mirror",
-        "Mirror.Transports"
+        "Mirror.Transports",
+        "FizzySteamworks"
     ],
     "includePlatforms": [
         "Editor"
