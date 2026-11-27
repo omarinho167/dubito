@@ -18,6 +18,17 @@ Video game screenshot, first-person view from a seated player at a round card ta
 | R3 peint à la main | `Hand-painted 3D art style: low-detail models with painted textures, visible brush strokes, lighting painted into the colors.` |
 | R4 low-poly | `Low-poly 3D art style: simple geometric shapes with visible flat facets, flat shading, no textures, solid colors.` |
 
+## Étape 2 · Lumière et couleurs (`0-lumiere`)
+
+Rendu fixé : cel-shading (D-73). Prompt = phrase R1 + phrase d'éclairage + scène commune de l'étape 1, mot pour mot. Format 16:9. Fichiers : `art/style/0-lumiere/L<n>-<nom>.png`.
+
+| Éclairage | Phrase à coller entre R1 et la scène |
+|---|---|
+| **L1 spot (choisi, D-74)** | `Lighting and colors: a single strong warm spotlight from the lamp on the table and faces, the rest of the room falls into deep cool shadow, high contrast.` |
+| L2 chaud | `Lighting and colors: the whole room is evenly and brightly lit with warm golden light, soft warm palette of orange, honey and cream, no dark areas.` |
+| L3 pop | `Lighting and colors: bright, vivid, saturated pop colors, bold contrasting primary and complementary hues on clothes, walls and furniture, cheerful.` |
+| L4 pastel | `Lighting and colors: soft gentle daylight, light pastel palette of mint, peach, lavender and sky blue, low contrast, calm.` |
+
 ---
 
 ## Directions de décor (en attente, D-72)
