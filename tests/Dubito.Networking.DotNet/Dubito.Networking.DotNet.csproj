@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AssemblyName>Dubito.Networking</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Dubito.Core.DotNet/Dubito.Core.DotNet.csproj" />
+    <ProjectReference Include="../Dubito.Protocol.DotNet/Dubito.Protocol.DotNet.csproj" />
+    <Compile Include="../../unity/Assets/Dubito/Networking/*.cs" Exclude="../../unity/Assets/Dubito/Networking/DubitoPacket.cs;../../unity/Assets/Dubito/Networking/DubitoNetworkManager.cs" />
+  </ItemGroup>
+</Project>

@@ -179,7 +179,8 @@ namespace Dubito.Tests
             {
                 var properties = type.GetProperties();
                 Assert.That(properties.Select(p => p.Name), Is.EquivalentTo(new[]
-                    { "ControlledPlayerId", "SeatOrder", "CurrentView" }));
+                    // IsReady and RemainingTurnSeconds (step 3.2) are booleans/timers, never cards.
+                    { "ControlledPlayerId", "SeatOrder", "CurrentView", "IsReady", "RemainingTurnSeconds" }));
                 Assert.That(properties.All(p => p.GetIndexParameters().Length == 0 && p.GetSetMethod() == null), Is.True);
                 Assert.That(type.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static), Is.Empty);
                 var methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
@@ -188,8 +189,9 @@ namespace Dubito.Tests
                 Assert.That(type.GetEvents().Select(e => e.EventHandlerType), Is.EquivalentTo(new[]
                     { typeof(Action<PlayerView>), typeof(Action<CommandError>) }));
             }
-            Assert.That(typeof(LocalGameSession).Assembly.GetReferencedAssemblies()
-                .Select(a => a.Name).Where(n => n.StartsWith("Unity") || n.StartsWith("Mirror")), Is.Empty);
+            // Since step 3.2 the Networking assembly also holds the Mirror glue (ARCHITECTURE §2).
+            // The engine-free part (sessions, HostAuthority) is still compiled outside Unity by
+            // `dotnet test`, which is what guarantees it never depends on Unity or Mirror.
         }
     }
 }

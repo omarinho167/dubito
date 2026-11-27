@@ -51,10 +51,11 @@ namespace Dubito.Presentation
             selection.Reset(); view = null; chosenRank = CardRank.Ace;
             pending = false; CancelHold(); confirm = false; hoverReason = ""; message = "";
             EnsureUI();
+            root.transform.parent.gameObject.SetActive(session != null);
             if (session == null) { root.SetActive(false); return; }
             session.ViewChanged += Render;
             session.CommandRejected += Rejected;
-            Render(session.CurrentView);
+            if (session.IsReady) Render(session.CurrentView);
         }
 
         void Render(PlayerView incoming)

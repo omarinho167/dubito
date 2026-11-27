@@ -22,7 +22,7 @@ namespace Dubito.Presentation
         readonly TextMeshPro[] labels = new TextMeshPro[6];
         readonly Transform[] anchors = new Transform[6];
 
-        public void Render(PlayerView view, IReadOnlyList<int> seatOrder, int localSeatIndex)
+        public void Render(PlayerView view, IReadOnlyList<int> seatOrder, int localSeatIndex, double? remainingTurnSeconds = null)
         {
             ViewSeats.Validate(view, seatOrder, localSeatIndex);
             if (seating == null) throw new InvalidOperationException("Assign seating before Render.");
@@ -38,7 +38,7 @@ namespace Dubito.Presentation
             string who = PlayerVoice.Addresses(view, view.ActivePlayerId) ? "toi" : CardNames.PlayerName(view.ActivePlayerId);
             active.text = view.Phase == GamePhase.Finished ? "Partie terminée" :
                 view.IsTimerPaused ? $"Révélation · chrono en pause" :
-                $"À {who} de jouer · {Math.Max(0, (int)Math.Ceiling(view.RemainingTurnSeconds / TimerDisplayScale))} s";
+                $"À {who} de jouer · {Math.Max(0, (int)Math.Ceiling((remainingTurnSeconds ?? view.RemainingTurnSeconds) / TimerDisplayScale))} s";
             for (int i = 0; i < labels.Length; i++)
             {
                 bool visible = i < seatOrder.Count && i != localSeatIndex;

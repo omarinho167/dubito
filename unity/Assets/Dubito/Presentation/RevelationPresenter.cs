@@ -128,6 +128,10 @@ namespace Dubito.Presentation
             canvas.SetActive(elapsed >= RevelationScript.FlipsEnd(cardCount));
         }
 
+        public void Cancel() { if (IsPlaying) Stop(); }
+
+        void OnDisable() => Cancel();
+
         void Stop()
         {
             playingRevision = -1;

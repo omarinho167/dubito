@@ -6,8 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace Dubito.Presentation
 {
-    // Phase 2 (ARCHITECTURE §3, "Session de jeu"): owns a LocalGameSession and shows the controlled
-    // seat's PlayerView on the 3D table. Presentation only: every rule stays in Core.
+    // Both modes render IGameSession. Only Local drives time, hot-seat and revelation resolution.
     public sealed class LocalTableController : MonoBehaviour
     {
         [SerializeField, Range(SeatLayout.MinSeats, SeatLayout.MaxSeats)] int playerCount = 4;
@@ -20,6 +19,7 @@ namespace Dubito.Presentation
         [SerializeField] bool debugShortTimer = false;
         [Tooltip("Hot-seat (UX §9, D-47): after each change, show the active player's seat.")]
         [SerializeField] bool hotSeat = true;
+        [SerializeField] bool startLocalAutomatically = true;
         [SerializeField] TableActionPanel actionPanel = null;
         [SerializeField] RevelationPresenter revelation = null;
         [SerializeField] TableMessages messages = null;
@@ -28,7 +28,9 @@ namespace Dubito.Presentation
         [SerializeField] TableCardsView cards = null;
         [SerializeField] TableHud hud = null;
 
-        LocalGameSession session;
+        IGameSession session;
+        LocalGameSession LocalSession => session as LocalGameSession;
+        bool initialized, layoutReady;
         int localSeat;
         int lastShownSecond = -1;
         bool switchPending, ticking, removing;
@@ -39,16 +41,55 @@ namespace Dubito.Presentation
 
         void Start()
         {
-            PlayerVoice.HotSeat = hotSeat;
-            messages.RematchRequested += () => NewGame(playerCount); // hot-seat rematch: same table, new deal
+            Initialize();
+            if (startLocalAutomatically && session == null) NewGame(playerCount);
+        }
+
+        void Initialize()
+        {
+            if (initialized) return;
+            initialized = true;
+            messages.RematchRequested += () => { if (LocalSession != null) NewGame(playerCount); };
             messages.QuitRequested += Quit;
-            NewGame(playerCount);
+        }
+
+        public void StartLocal() => NewGame(playerCount);
+
+        public void UseNetworkSession(NetworkGameSession value)
+        {
+            Suspend();
+            Initialize();
+            PlayerVoice.HotSeat = false;
+            CardNames.PlayerNames = value.PlayerNames;
+            messages.AllowRematch = false;
+            session = value;
+            timerScale = hud.TimerDisplayScale = 1f;
+            session.ViewChanged += OnViewChanged;
+            if (session.IsReady) OnViewChanged(session.CurrentView);
+        }
+
+        public void Suspend()
+        {
+            if (session != null) session.ViewChanged -= OnViewChanged;
+            revelation.Cancel();
+            actionPanel.Bind(null);
+            messages.Clear();
+            session = null;
+            lastView = null;
+            layoutReady = switchPending = false;
+            CardNames.PlayerNames = null;
+            PlayerVoice.HotSeat = false;
+            gameObject.SetActive(false);
         }
 
         // Debug (D-56): keys 2-6 start a new game with that many players.
         public void NewGame(int players)
         {
-            if (session != null) session.ViewChanged -= OnViewChanged;
+            Suspend();
+            Initialize();
+            gameObject.SetActive(true);
+            PlayerVoice.HotSeat = hotSeat;
+            messages.AllowRematch = true;
             playerCount = players;
             lastView = null;
             messages.Clear();
@@ -57,6 +98,7 @@ namespace Dubito.Presentation
             session.ViewChanged += OnViewChanged;
             localSeat = IndexOf(session.SeatOrder, session.ControlledPlayerId);
             seating.Build(players, localSeat);
+            layoutReady = true;
             timerScale = debugShortTimer ? turnSeconds / 10f : 1f;
             hud.TimerDisplayScale = timerScale;
             OnViewChanged(session.CurrentView);
@@ -66,45 +108,55 @@ namespace Dubito.Presentation
 
         void Update()
         {
-            if (session == null) return;
-            if (switchPending) SwitchToActivePlayer();
+            if (session == null || !session.IsReady) return;
+            if (LocalSession != null && switchPending) SwitchToActivePlayer();
             // The chrono is paused during a revelation (RULES §5); RevelationPresenter ends it.
-            if (runTimer && session.CurrentView.Phase == GamePhase.Playing)
+            if (LocalSession != null && runTimer && session.CurrentView.Phase == GamePhase.Playing)
             {
                 ticking = true;
-                session.Tick(Time.deltaTime * timerScale);
+                LocalSession.Tick(Time.deltaTime * timerScale);
                 ticking = false;
             }
 
             // Countdown ticks refresh CurrentView without a new revision: redraw the HUD once per second.
             var view = session.CurrentView;
-            int second = Mathf.CeilToInt((float)view.RemainingTurnSeconds);
+            int second = Mathf.CeilToInt((float)session.RemainingTurnSeconds);
             if (second != lastShownSecond)
             {
                 lastShownSecond = second;
-                hud.Render(view, session.SeatOrder, localSeat);
+                hud.Render(view, session.SeatOrder, localSeat, session.RemainingTurnSeconds);
             }
 
-            if (debugNewGameHotkeys && (Application.isEditor || Debug.isDebugBuild)) ReadHotkeys();
+            if (LocalSession != null && debugNewGameHotkeys && (Application.isEditor || Debug.isDebugBuild)) ReadHotkeys();
         }
 
         void OnViewChanged(PlayerView view)
         {
+            bool firstView = !layoutReady;
+            if (firstView)
+            {
+                gameObject.SetActive(true);
+                localSeat = IndexOf(session.SeatOrder, session.ControlledPlayerId);
+                seating.Build(session.SeatOrder.Count, localSeat);
+                layoutReady = true;
+                if (session is NetworkGameSession network) CardNames.PlayerNames = network.PlayerNames;
+            }
             // UX §9: stay on the doubter's seat during a revelation, then follow the active player.
             // Switched on the next frame so every ViewChanged listener first finishes with this view.
-            if (hotSeat && view.Phase == GamePhase.Playing && view.ActivePlayerId != session.ControlledPlayerId)
+            if (LocalSession != null && hotSeat && view.Phase == GamePhase.Playing && view.ActivePlayerId != session.ControlledPlayerId)
                 switchPending = true;
             cards.Render(view, session.SeatOrder, localSeat);
-            hud.Render(view, session.SeatOrder, localSeat);
-            lastShownSecond = Mathf.CeilToInt((float)view.RemainingTurnSeconds);
+            hud.Render(view, session.SeatOrder, localSeat, session.RemainingTurnSeconds);
+            lastShownSecond = Mathf.CeilToInt((float)session.RemainingTurnSeconds);
 
             // UX §5 key moments.
             if (ticking) messages.ShowTransient(TableMessageText.AfterTimeout(lastView, view));
             if (removing && lastView != null)
                 messages.ShowTransient($"{CardNames.PlayerName(lastView.PlayerId)} a quitté la partie");
             messages.Render(view);
-            revelation.Show(view, session.SeatOrder, () => session.ResolveRevelation());
+            revelation.Show(view, session.SeatOrder, () => LocalSession?.ResolveRevelation());
             lastView = view;
+            if (firstView) actionPanel.Bind(session);
         }
 
         void Quit()
@@ -123,7 +175,7 @@ namespace Dubito.Presentation
             if (view.Phase != GamePhase.Playing || view.ActivePlayerId == session.ControlledPlayerId) return;
             localSeat = IndexOf(session.SeatOrder, view.ActivePlayerId);
             seating.Build(playerCount, localSeat);
-            session.SetControlledPlayer(view.ActivePlayerId); // publishes the new seat's view
+            LocalSession.SetControlledPlayer(view.ActivePlayerId); // publishes the new seat's view
             messages.ShowTransientIfIdle($"Au tour de {CardNames.PlayerName(view.ActivePlayerId)}");
         }
 
@@ -135,7 +187,7 @@ namespace Dubito.Presentation
             if (keyboard.deleteKey.wasPressedThisFrame)
             {
                 removing = true;
-                session.RemovePlayer(session.ControlledPlayerId);
+                LocalSession.RemovePlayer(session.ControlledPlayerId);
                 removing = false;
                 return;
             }
@@ -160,6 +212,7 @@ namespace Dubito.Presentation
         void OnDestroy()
         {
             PlayerVoice.HotSeat = false; // static: never leak into another scene or into edit-mode tests
+            CardNames.PlayerNames = null;
             if (session != null) session.ViewChanged -= OnViewChanged;
         }
     }

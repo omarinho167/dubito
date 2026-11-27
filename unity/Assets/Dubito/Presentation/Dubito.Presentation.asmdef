@@ -7,7 +7,8 @@
         "Dubito.Networking",
         "Unity.InputSystem",
         "Unity.TextMeshPro",
-        "Unity.ugui"
+        "Unity.ugui",
+        "Mirror"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,5 +1,7 @@
 using System.Linq;
 using Dubito.Presentation;
+using Dubito.Networking;
+using kcp2k;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -78,7 +80,7 @@ namespace Dubito.EditorTools
             seating.Build(PreviewSeatCount, 0); // edit-time preview; rebuilt in Awake when playing
 
             // Step 2.2: local session -> PlayerView -> 3D cards + basic HUD.
-            var game = new GameObject("LocalGame");
+            var game = new GameObject("TableGame");
             var cardsView = game.AddComponent<TableCardsView>();
             Assign(cardsView, ("cardPrefab", LoadPrefab("PF_Card")),
                 ("materials", AssetDatabase.LoadAssetAtPath<CardMaterialLibrary>("Assets/Dubito/Art/Cards/CardMaterialLibrary.asset")),
@@ -106,6 +108,21 @@ namespace Dubito.EditorTools
             var controller = game.AddComponent<LocalTableController>();
             Assign(controller, ("seating", seating), ("cards", cardsView), ("hud", hud), ("actionPanel", panel),
                 ("revelation", revelation), ("messages", messages));
+            var controllerSettings = new SerializedObject(controller);
+            controllerSettings.FindProperty("startLocalAutomatically").boolValue = false;
+            controllerSettings.ApplyModifiedPropertiesWithoutUndo();
+
+            var networkGo = new GameObject("DubitoNetworkManager");
+            var kcp = networkGo.AddComponent<KcpTransport>();
+            kcp.Port = 7777;
+            var network = networkGo.AddComponent<DubitoNetworkManager>();
+            network.transport = kcp;
+            network.networkAddress = "127.0.0.1";
+            network.autoCreatePlayer = false;
+            network.dontDestroyOnLoad = false;
+            network.maxConnections = 6;
+            var connectionPanel = new GameObject("DebugConnectionPanel").AddComponent<DebugConnectionPanel>();
+            Assign(connectionPanel, ("network", network), ("table", controller), ("font", font));
 
             EditorSceneManager.SaveScene(scene, ScenePath);
             AddToBuildSettings(ScenePath);

@@ -3,7 +3,9 @@
     "rootNamespace": "Dubito.Networking",
     "references": [
         "Dubito.Core",
-        "Dubito.Protocol"
+        "Dubito.Protocol",
+        "Mirror",
+        "Mirror.Transports"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

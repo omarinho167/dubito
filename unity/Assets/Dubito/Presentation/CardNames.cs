@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Dubito.Core;
 
 namespace Dubito.Presentation
@@ -13,7 +14,9 @@ namespace Dubito.Presentation
         }
         public static string RankPlural(CardRank rank, int count) =>
             Rank(rank) + (count > 1 && rank >= CardRank.Jack ? "s" : "");
-        public static string PlayerName(int playerId) => $"Joueur {playerId + 1}";
+        public static IReadOnlyDictionary<int, string> PlayerNames { get; set; }
+        public static string PlayerName(int playerId) =>
+            PlayerNames != null && PlayerNames.TryGetValue(playerId, out string name) ? name : $"Joueur {playerId + 1}";
         // French: 0 and 1 take the singular ("1 carte", "12 cartes").
         public static string CardCount(int count) => count <= 1 ? $"{count} carte" : $"{count} cartes";
     }

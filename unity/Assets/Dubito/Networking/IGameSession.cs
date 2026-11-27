@@ -10,6 +10,8 @@ namespace Dubito.Networking
         // Initial turn order: seats never move when a player leaves.
         IReadOnlyList<int> SeatOrder { get; }
         PlayerView CurrentView { get; }
+        bool IsReady { get; }
+        double RemainingTurnSeconds { get; }
         event Action<PlayerView> ViewChanged;
         event Action<CommandError> CommandRejected;
         void Play(IReadOnlyList<Card> cards, CardRank announcedRank);

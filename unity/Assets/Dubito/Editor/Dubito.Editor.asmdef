@@ -8,7 +8,10 @@
         "Unity.RenderPipelines.Universal.Runtime",
         "Unity.TextMeshPro",
         "Unity.InputSystem",
-        "Unity.ugui"
+        "Unity.ugui",
+        "Dubito.Networking",
+        "Mirror",
+        "Mirror.Transports"
     ],
     "includePlatforms": [
         "Editor"

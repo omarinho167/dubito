@@ -16,15 +16,18 @@ namespace Dubito.Presentation
 
         public event Action RematchRequested;
         public event Action QuitRequested;
+        public bool AllowRematch { get; set; } = true;
 
         GameObject canvas, banner, endScreen;
         TextMeshProUGUI bannerText, warningText, winnerText;
+        GameObject rematch;
         string persistent = "", transient = "";
         float transientUntil;
 
         public void Render(PlayerView view)
         {
             EnsureUI();
+            rematch.SetActive(AllowRematch);
             persistent = TableMessageText.PendingVictory(view);
             warningText.text = TableMessageText.ExclusionWarning(view);
             string winner = TableMessageText.Winner(view);
@@ -97,6 +100,7 @@ namespace Dubito.Presentation
             winnerText = Label(endScreen.transform, "", 64, new Vector2(0, 80), new Vector2(700, 90));
             winnerText.fontStyle = FontStyles.Bold;
             Button(endScreen.transform, "Revanche", new Vector2(-150, -70), () => RematchRequested?.Invoke());
+            rematch = endScreen.transform.Find("Revanche").gameObject;
             Button(endScreen.transform, "Quitter", new Vector2(150, -70), () => QuitRequested?.Invoke());
             banner.SetActive(false);
             endScreen.SetActive(false);

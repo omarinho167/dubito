@@ -13,6 +13,8 @@ namespace Dubito.Networking
         public int ControlledPlayerId { get; private set; }
         public IReadOnlyList<int> SeatOrder { get; }
         public PlayerView CurrentView { get; private set; }
+        public bool IsReady => CurrentView != null;
+        public double RemainingTurnSeconds => CurrentView.RemainingTurnSeconds;
         public event Action<PlayerView> ViewChanged;
         public event Action<CommandError> CommandRejected;
 
