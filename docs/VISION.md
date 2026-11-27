@@ -40,7 +40,7 @@ Détails et sources : [research/CONCURRENCE.md](research/CONCURRENCE.md).
 
 ## Direction artistique
 
-**Pas décidée volontairement.** On fait d'abord un jeu qui marche avec des formes simples (style « greybox »). La direction artistique sera choisie après les premiers playtests, en tenant compte de la section Concurrence.
+**En cours de définition** (phase DA de la ROADMAP, D-67) : le jeu marche en greybox, le style est choisi avant le contenu de la V1, en tenant compte de la section Concurrence.
 
 Pistes déjà évoquées, aucune n'est retenue : taverne infernale (trop proche de Liar's Bar), sci-fi désert (piste Unreal de juillet), tribunal infernal des serments, salon clandestin années 20.
 

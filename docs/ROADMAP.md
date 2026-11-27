@@ -53,6 +53,18 @@
 
 **Fin de phase** : partie complète entre deux PC via invitation Steam. *(validée le 2026-11-27, invitation par code de salon ; overlay : D-66)*
 
+## Phase DA : direction artistique (conception)
+
+Choisir le style avant le contenu de la V1 (D-67). Prompts et dépôt des images : `art/style/PROMPTS.md`.
+
+- [ ] DA.1 Exploration : 4 directions générées avec Nano Banana Pro (même scène pour chacune), planche de comparaison, choix du propriétaire.
+- [ ] DA.2 Charte : fiche de style (palette, matières, formes, lumière) dans ASSETS + charte d'interface (Claude Design).
+- [ ] DA.3 Pipeline personnage : un personnage du style choisi, image → Meshy AI → nettoyage et squelette dans Blender → Unity, assis à la table.
+- [ ] DA.4 Animation depuis une vidéo iPhone : une réaction assise filmée → outil vidéo vers animation → Blender → Unity.
+- [ ] DA.5 Outils et budget retenus (abonnements), d'après la recherche datée dans `docs/research/`.
+
+**Fin de phase** : style validé, et un personnage de ce style, animé, assis à la table dans Unity.
+
 ## Phase 5 : V1 jouable
 
 - [ ] 5.1 Menus, écran Règles, options (volume, sensibilité, réduction des animations), messages d'erreur (`UX §6`).
@@ -64,4 +76,4 @@
 
 ## Plus tard
 
-Direction artistique, puis les idées de `RULES §10` et `VISION` (« Pour plus tard »).
+Les idées de `RULES §10` et `VISION` (« Pour plus tard »).
