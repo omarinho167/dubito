@@ -83,3 +83,4 @@
 | D-63 | Salon : l'hôte n'a pas de bouton **Prêt** (cliquer sur Lancer vaut prêt) ; il peut lancer dès 2 joueurs quand tous les invités sont prêts. **Revanche** ramène tout le monde au même salon, prêts remis à zéro. | Lecture de UX §6.2 et §5 pour l'étape 3.4. | C |
 | D-64 | **Steamworks.NET 2025.165.0** et **FizzySteamworks 6.0.1** (MIT), installés depuis leurs releases officielles. | Transport Steam pour Mirror (ARCHITECTURE §1). | P |
 | D-65 | Test entre deux PC (étape 4.3) avec **un ami** et son compte Steam : on lui envoie une build. | Choix du propriétaire. | P |
+| D-66 | L'invitation par l'**overlay Steam** ne s'ouvre pas dans les builds de test (App ID 480, lancées hors de Steam, DirectX 12) ; on garde le **code du salon** comme moyen de rejoindre et on revoit l'invitation plus tard (liste d'amis dans le jeu ou overlay avec le vrai App ID). | Test à deux PC réussi par code ; le propriétaire reporte le sujet. | P |

@@ -47,11 +47,11 @@
 
 ## Phase 4 : Steam
 
-- [ ] 4.1 Steamworks.NET + FizzySteamworks, App ID 480, filtre de lobby Dubito.
-- [ ] 4.2 Créer un salon, inviter un ami via l'overlay, rejoindre, noms Steam.
-- [ ] 4.3 Test sur deux PC, deux comptes, deux réseaux différents.
+- [x] 4.1 Steamworks.NET + FizzySteamworks, App ID 480, filtre de lobby Dubito. *(2026-11-27)*
+- [x] 4.2 Créer un salon, inviter un ami via l'overlay, rejoindre, noms Steam. *(2026-11-27 ; overlay d'invitation à revoir, D-66)*
+- [x] 4.3 Test sur deux PC, deux comptes, deux réseaux différents. *(2026-11-27)*
 
-**Fin de phase** : partie complète entre deux PC via invitation Steam.
+**Fin de phase** : partie complète entre deux PC via invitation Steam. *(validée le 2026-11-27, invitation par code de salon ; overlay : D-66)*
 
 ## Phase 5 : V1 jouable
 
