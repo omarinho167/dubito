@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AssemblyName>Dubito.Protocol</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Dubito.Core.DotNet/Dubito.Core.DotNet.csproj" />
+    <Compile Include="../../unity/Assets/Dubito/Protocol/**/*.cs" />
+  </ItemGroup>
+</Project>

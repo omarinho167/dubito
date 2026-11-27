@@ -1,0 +1,1011 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="e74777cf-5eab-4e61-acdc-45f966c2d2f9" name="sleep@VENERE 2026-11-27 18:27:10" runUser="venere\CodexSandboxOffline" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-27T18:27:10.4462581+01:00" queuing="2026-11-27T18:27:10.4462582+01:00" start="2026-11-27T18:27:08.7996868+01:00" finish="2026-11-27T18:27:12.0149136+01:00" />
+  <TestSettings name="default" id="8ecdc404-6206-406f-a895-a8b8e2a5a973">
+    <Deployment runDeploymentRoot="sleep_VENERE_2026-11-27_18_27_10" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="d162bd31-1a43-4b09-854a-d13662d43d31" testId="9b60ff23-dc85-df67-7159-c009586e902f" testName="ViewRejectsUnknownIdentityAndNullState" computerName="VENERE" duration="00:00:00.0006390" startTime="2026-11-27T18:27:11.7085083+01:00" endTime="2026-11-27T18:27:11.7091468+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d162bd31-1a43-4b09-854a-d13662d43d31" />
+    <UnitTestResult executionId="7bfd1620-3139-4c4c-9df6-4e51a0fb70a1" testId="61d27397-7920-293d-d7b8-8c156ac9dbef" testName="DuelDoubtVerdictPrecedesSurvivor(True,0)" computerName="VENERE" duration="00:00:00.0005460" startTime="2026-11-27T18:27:10.4058074+01:00" endTime="2026-11-27T18:27:10.4063530+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7bfd1620-3139-4c4c-9df6-4e51a0fb70a1" />
+    <UnitTestResult executionId="197c6109-18ba-4adf-a78f-bad236146f17" testId="46e47ef2-23ac-4e63-bce5-60bf189a008a" testName="C-SET-02" computerName="VENERE" duration="00:00:00.0006770" startTime="2026-11-27T18:27:11.8570680+01:00" endTime="2026-11-27T18:27:11.8577445+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="197c6109-18ba-4adf-a78f-bad236146f17" />
+    <UnitTestResult executionId="b7be3e7a-7640-46bf-8dda-4b22567f9442" testId="8ad81de9-6646-6d42-55be-e22dad4b5c3e" testName="C-CHR-03" computerName="VENERE" duration="00:00:00.0015820" startTime="2026-11-27T18:27:11.6959402+01:00" endTime="2026-11-27T18:27:11.6975211+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b7be3e7a-7640-46bf-8dda-4b22567f9442" />
+    <UnitTestResult executionId="9782e582-01d6-4a21-89d6-a99ef5ccc287" testId="f4a6824d-bdaa-591d-bc83-582a0a0728a7" testName="C-VIC-04" computerName="VENERE" duration="00:00:00.0009570" startTime="2026-11-27T18:27:10.4560140+01:00" endTime="2026-11-27T18:27:10.4569705+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9782e582-01d6-4a21-89d6-a99ef5ccc287" />
+    <UnitTestResult executionId="d995e7db-9972-4299-9d35-7ac0b6959a1d" testId="4274f780-138c-f2b9-e680-19a2cacc605e" testName="C-PLA-04" computerName="VENERE" duration="00:00:00.0013400" startTime="2026-11-27T18:27:10.4459324+01:00" endTime="2026-11-27T18:27:10.4472719+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d995e7db-9972-4299-9d35-7ac0b6959a1d" />
+    <UnitTestResult executionId="36ec232d-596b-44a6-bc88-8be6ea6628cb" testId="a27a678b-84f5-91da-ecf6-6fc96c3576e8" testName="RevelationViewNamesWhoPicksUpTheFinalPile(True,2)" computerName="VENERE" duration="00:00:00.0009400" startTime="2026-11-27T18:27:11.6930101+01:00" endTime="2026-11-27T18:27:11.6939496+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="36ec232d-596b-44a6-bc88-8be6ea6628cb" />
+    <UnitTestResult executionId="506aedbb-fdef-442d-ab4c-b35f52a09b4b" testId="c7f6990e-d448-99db-7423-f2b312a33590" testName="C-DEF-03" computerName="VENERE" duration="00:00:00.0008060" startTime="2026-11-27T18:27:10.3972736+01:00" endTime="2026-11-27T18:27:10.3980789+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="506aedbb-fdef-442d-ab4c-b35f52a09b4b" />
+    <UnitTestResult executionId="d3487ac3-34b6-4e05-be33-35cd38329efd" testId="147b5fc5-5cef-0aa5-b697-d60d00c7a66a" testName="HostStopOverridesAutomaticRevelation" computerName="VENERE" duration="00:00:00.0005280" startTime="2026-11-27T18:27:10.4381330+01:00" endTime="2026-11-27T18:27:10.4386608+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d3487ac3-34b6-4e05-be33-35cd38329efd" />
+    <UnitTestResult executionId="0aa05e90-68c3-4c35-9c32-1f43afcdda65" testId="b5f3ea01-7044-f2dc-8428-2854274fe1a7" testName="ProtocolRoundTrip_WelcomeMessage_7" computerName="VENERE" duration="00:00:00.0016130" startTime="2026-11-27T18:27:11.8791480+01:00" endTime="2026-11-27T18:27:11.8807609+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0aa05e90-68c3-4c35-9c32-1f43afcdda65" />
+    <UnitTestResult executionId="de9b3374-fa40-466d-b702-5668ce92fb27" testId="e3f8d358-1314-7f24-2e91-984e993d1095" testName="C-VIC-07" computerName="VENERE" duration="00:00:00.0006190" startTime="2026-11-27T18:27:10.4439678+01:00" endTime="2026-11-27T18:27:10.4445869+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="de9b3374-fa40-466d-b702-5668ce92fb27" />
+    <UnitTestResult executionId="63829b11-fdf0-465d-966a-a25d19786711" testId="1ddcb932-2efe-2df1-f459-416afd801258" testName="ProtocolRoundTrip_CommandRejectedMessage_10" computerName="VENERE" duration="00:00:00.0000430" startTime="2026-11-27T18:27:11.8812886+01:00" endTime="2026-11-27T18:27:11.8813320+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="63829b11-fdf0-465d-966a-a25d19786711" />
+    <UnitTestResult executionId="431a9e42-6acd-473f-8f7d-fc98019d8059" testId="5195aecf-41f7-2259-cba3-2af153ad036b" testName="C-PLA-02" computerName="VENERE" duration="00:00:00.0017310" startTime="2026-11-27T18:27:10.4517924+01:00" endTime="2026-11-27T18:27:10.4535229+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="431a9e42-6acd-473f-8f7d-fc98019d8059" />
+    <UnitTestResult executionId="7a735c41-6857-494a-aae2-3b3e699cf154" testId="819e80c7-6c20-28f7-902b-7b2ce8fdb3ed" testName="CreateFieldsRestorePreservesEveryValue(2)" computerName="VENERE" duration="00:00:00.0045170" startTime="2026-11-27T18:27:11.7216347+01:00" endTime="2026-11-27T18:27:11.7261517+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7a735c41-6857-494a-aae2-3b3e699cf154" />
+    <UnitTestResult executionId="b31207c7-b4d5-4483-9a39-9c358d5a8b85" testId="6463be3c-1ce6-b043-8a9a-836cc4765324" testName="EveryDoubtDepartureTableCell(False,2)" computerName="VENERE" duration="00:00:00.0005830" startTime="2026-11-27T18:27:10.4238689+01:00" endTime="2026-11-27T18:27:10.4244517+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b31207c7-b4d5-4483-9a39-9c358d5a8b85" />
+    <UnitTestResult executionId="2d551135-20c4-48a7-bc76-53e3f50c0ec0" testId="74d8c731-5b8a-6c7a-fe29-f10ff045130b" testName="C-VIC-01" computerName="VENERE" duration="00:00:00.0014780" startTime="2026-11-27T18:27:10.4333696+01:00" endTime="2026-11-27T18:27:10.4348473+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2d551135-20c4-48a7-bc76-53e3f50c0ec0" />
+    <UnitTestResult executionId="8fae2537-65b2-4812-9414-4f1d33c8c9c7" testId="24c646cf-2d09-4f2e-6b33-739d99544a0c" testName="C-DEC-10" computerName="VENERE" duration="00:00:00.0008910" startTime="2026-11-27T18:27:10.4034732+01:00" endTime="2026-11-27T18:27:10.4043640+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8fae2537-65b2-4812-9414-4f1d33c8c9c7" />
+    <UnitTestResult executionId="7261d8ea-6eb4-4822-b393-ad86b76defc6" testId="c32de2df-55ad-aa19-439a-14b4ce5c75cd" testName="RevelationViewNamesWhoPicksUpTheFinalPile(True,0)" computerName="VENERE" duration="00:00:00.0003520" startTime="2026-11-27T18:27:11.6922929+01:00" endTime="2026-11-27T18:27:11.6926446+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7261d8ea-6eb4-4822-b393-ad86b76defc6" />
+    <UnitTestResult executionId="6de5ad32-805b-4b99-a2b6-ef5a15108bdc" testId="8d07d7af-f1fc-c8d7-46e2-64ab26791639" testName="C-PLA-03" computerName="VENERE" duration="00:00:00.0004270" startTime="2026-11-27T18:27:11.7202891+01:00" endTime="2026-11-27T18:27:11.7207162+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6de5ad32-805b-4b99-a2b6-ef5a15108bdc" />
+    <UnitTestResult executionId="8dbacc0c-6537-478a-8eff-f287f40375cf" testId="2f92bce2-3649-6818-f25e-cf74157be65c" testName="ProtocolRoundTrip_LobbyStateMessage_30" computerName="VENERE" duration="00:00:00.0000720" startTime="2026-11-27T18:27:11.8836601+01:00" endTime="2026-11-27T18:27:11.8837316+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8dbacc0c-6537-478a-8eff-f287f40375cf" />
+    <UnitTestResult executionId="a0b00ddd-adcb-40d2-9b98-44ff881a125a" testId="126acad8-dfdd-50b0-5caf-6a7f83c9f064" testName="C-CHR-08" computerName="VENERE" duration="00:00:00.0011810" startTime="2026-11-27T18:27:10.3453194+01:00" endTime="2026-11-27T18:27:10.3464999+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a0b00ddd-adcb-40d2-9b98-44ff881a125a" />
+    <UnitTestResult executionId="ff32c728-0071-4813-822f-cb835a33e196" testId="bd271b2f-9301-35ea-ae02-6ea89e771c57" testName="C-VIC-12" computerName="VENERE" duration="00:00:00.0007950" startTime="2026-11-27T18:27:11.6854150+01:00" endTime="2026-11-27T18:27:11.6862092+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ff32c728-0071-4813-822f-cb835a33e196" />
+    <UnitTestResult executionId="9330f80d-210e-427e-a143-d4d4309ec85e" testId="fc578d1a-e05a-e3c8-bfdb-70fecfbd69ef" testName="C-PLA-01" computerName="VENERE" duration="00:00:00.0005840" startTime="2026-11-27T18:27:10.4535753+01:00" endTime="2026-11-27T18:27:10.4541591+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9330f80d-210e-427e-a143-d4d4309ec85e" />
+    <UnitTestResult executionId="20e0851a-a1b0-451d-9e74-7907dd8abf9c" testId="4c1990a0-af03-e31d-3ca3-d80a6f0c034e" testName="C-DOU-01" computerName="VENERE" duration="00:00:00.0009240" startTime="2026-11-27T18:27:10.4263715+01:00" endTime="2026-11-27T18:27:10.4272952+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="20e0851a-a1b0-451d-9e74-7907dd8abf9c" />
+    <UnitTestResult executionId="ca48b664-16dd-464e-8743-a71856c5a47c" testId="f92fc4b5-a489-a1cd-30ba-00e0889751f4" testName="ElapsedTimeAndDepartureSnapshotsRemainFrozen" computerName="VENERE" duration="00:00:00.0053630" startTime="2026-11-27T18:27:10.4081319+01:00" endTime="2026-11-27T18:27:10.4134940+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ca48b664-16dd-464e-8743-a71856c5a47c" />
+    <UnitTestResult executionId="249ece50-9ed5-40bc-a80d-2ca2fbabd0d4" testId="cffdbd4c-425d-5a4b-543e-0a46db4e8608" testName="ProtocolRoundTrip_HelloMessage_1" computerName="VENERE" duration="00:00:00.0002520" startTime="2026-11-27T18:27:11.8772607+01:00" endTime="2026-11-27T18:27:11.8775122+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="249ece50-9ed5-40bc-a80d-2ca2fbabd0d4" />
+    <UnitTestResult executionId="845a01fe-2090-4fcf-b8c8-b71c5d12dff2" testId="ae2136ac-b0ed-8360-d43c-4787b740b671" testName="EveryDoubtDepartureTableCell(True,2)" computerName="VENERE" duration="00:00:00.0006410" startTime="2026-11-27T18:27:10.4256623+01:00" endTime="2026-11-27T18:27:10.4263034+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="845a01fe-2090-4fcf-b8c8-b71c5d12dff2" />
+    <UnitTestResult executionId="fb2be8de-fca6-4f2c-b1b7-5a088fe562a9" testId="db4ea39f-9e92-aef3-a362-ce9c1e2a8b54" testName="CountdownAloneDoesNotMakeCommandsStale" computerName="VENERE" duration="00:00:00.0049380" startTime="2026-11-27T18:27:10.3831166+01:00" endTime="2026-11-27T18:27:10.3880539+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fb2be8de-fca6-4f2c-b1b7-5a088fe562a9" />
+    <UnitTestResult executionId="e361db53-98d8-43b4-9a3b-37bd3f65b949" testId="69903355-0763-31cb-0259-458f13802ae4" testName="C-DOU-10" computerName="VENERE" duration="00:00:00.0015969" startTime="2026-11-27T18:27:11.6879320+01:00" endTime="2026-11-27T18:27:11.6895284+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e361db53-98d8-43b4-9a3b-37bd3f65b949" />
+    <UnitTestResult executionId="7bfca55e-2e7c-4896-9f93-140d65ff049d" testId="af0e2df4-33b6-7f6e-0571-6dc0bc32afab" testName="EveryDoubtDepartureTableCell(False,1)" computerName="VENERE" duration="00:00:00.0008750" startTime="2026-11-27T18:27:10.4229751+01:00" endTime="2026-11-27T18:27:10.4238501+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7bfca55e-2e7c-4896-9f93-140d65ff049d" />
+    <UnitTestResult executionId="c7d5a95e-b33c-4004-b444-a1cab2807828" testId="91bed804-7ff6-ae79-f578-b99f8f9f8008" testName="C-VIC-02" computerName="VENERE" duration="00:00:00.0012160" startTime="2026-11-27T18:27:10.4446475+01:00" endTime="2026-11-27T18:27:10.4458634+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c7d5a95e-b33c-4004-b444-a1cab2807828" />
+    <UnitTestResult executionId="993f654e-e70c-45e8-9477-78540ab9db2a" testId="998727b9-c21a-e038-132e-4783ebe688ef" testName="ProtocolRoundTrip_ReadyMessage_5" computerName="VENERE" duration="00:00:00.0004460" startTime="2026-11-27T18:27:11.8786193+01:00" endTime="2026-11-27T18:27:11.8790649+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="993f654e-e70c-45e8-9477-78540ab9db2a" />
+    <UnitTestResult executionId="b11963b1-c4c4-4eda-a67e-5a279bf6d7f5" testId="c65a7f7c-9117-31ce-2a26-8f1ba203d3ed" testName="C-DOU-08" computerName="VENERE" duration="00:00:00.0008000" startTime="2026-11-27T18:27:10.4010566+01:00" endTime="2026-11-27T18:27:10.4018564+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b11963b1-c4c4-4eda-a67e-5a279bf6d7f5" />
+    <UnitTestResult executionId="5061b6b7-db54-487b-a18b-89ba05cac2e0" testId="4528e1c4-406d-053e-032a-0657681523e7" testName="C-SET-06" computerName="VENERE" duration="00:00:00.0076230" startTime="2026-11-27T18:27:11.8588553+01:00" endTime="2026-11-27T18:27:11.8664771+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5061b6b7-db54-487b-a18b-89ba05cac2e0" />
+    <UnitTestResult executionId="6509dac0-bc6f-4f61-b517-a19dd85e81f2" testId="0c75f6e1-9070-fcbd-f9eb-8902965d2693" testName="ProtocolRoundTrip_CommandRejectedMessage_12" computerName="VENERE" duration="00:00:00.0000390" startTime="2026-11-27T18:27:11.8813851+01:00" endTime="2026-11-27T18:27:11.8814245+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6509dac0-bc6f-4f61-b517-a19dd85e81f2" />
+    <UnitTestResult executionId="64a4901f-d3e9-418e-afd8-fff27d7385cb" testId="bc571082-3251-1729-b391-b52933c87fd7" testName="C-VIC-14" computerName="VENERE" duration="00:00:00.0014820" startTime="2026-11-27T18:27:10.4349215+01:00" endTime="2026-11-27T18:27:10.4364036+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="64a4901f-d3e9-418e-afd8-fff27d7385cb" />
+    <UnitTestResult executionId="3ca280b3-15b3-4c56-9bc7-c1f782781029" testId="58572f97-a72d-25b8-d98e-5446f2e8ee93" testName="C-DOU-07" computerName="VENERE" duration="00:00:00.0005960" startTime="2026-11-27T18:27:10.4018939+01:00" endTime="2026-11-27T18:27:10.4024901+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3ca280b3-15b3-4c56-9bc7-c1f782781029" />
+    <UnitTestResult executionId="ca6e79da-2909-484e-a307-6c7b60da9111" testId="551af880-0a13-ec01-c9de-22871d2cb24f" testName="ProtocolRoundTrip_CommandRejectedMessage_24" computerName="VENERE" duration="00:00:00.0000510" startTime="2026-11-27T18:27:11.8819559+01:00" endTime="2026-11-27T18:27:11.8820067+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ca6e79da-2909-484e-a307-6c7b60da9111" />
+    <UnitTestResult executionId="06b061d4-a1a3-4bf9-ae97-d86f8e24ac1b" testId="d9d9d8f2-8259-01fe-debb-b10b4dc316fd" testName="C-DEC-01" computerName="VENERE" duration="00:00:00.0019650" startTime="2026-11-27T18:27:10.3481719+01:00" endTime="2026-11-27T18:27:10.3501361+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="06b061d4-a1a3-4bf9-ae97-d86f8e24ac1b" />
+    <UnitTestResult executionId="ed00341f-0304-4b05-bf15-d52d42fa856a" testId="64b8c093-2736-e0a4-4087-17c6e27d66a4" testName="RevelationAndDiscardDuplicatesCannotApplyTwice" computerName="VENERE" duration="00:00:00.0009680" startTime="2026-11-27T18:27:11.6869329+01:00" endTime="2026-11-27T18:27:11.6879007+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ed00341f-0304-4b05-bf15-d52d42fa856a" />
+    <UnitTestResult executionId="beecd3ae-fd93-4e46-a593-5061cf94d9c0" testId="22762121-fec6-f784-833f-293769297847" testName="CommandsConvertBothWaysWithoutIdentity(Doubt)" computerName="VENERE" duration="00:00:00.0010250" startTime="2026-11-27T18:27:11.8745770+01:00" endTime="2026-11-27T18:27:11.8756019+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="beecd3ae-fd93-4e46-a593-5061cf94d9c0" />
+    <UnitTestResult executionId="d5b41875-6311-48c4-b06a-dde050d5ffa8" testId="01dbfc35-a837-9392-e4d0-a237cb9f1279" testName="C-DOU-06" computerName="VENERE" duration="00:00:00.0005210" startTime="2026-11-27T18:27:10.4386969+01:00" endTime="2026-11-27T18:27:10.4392173+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d5b41875-6311-48c4-b06a-dde050d5ffa8" />
+    <UnitTestResult executionId="d924cb1f-df3e-46a8-ae91-9bdab1dbc763" testId="6557d403-85a8-d844-7e53-e3347bbbfe7b" testName="C-VIC-08" computerName="VENERE" duration="00:00:00.0040930" startTime="2026-11-27T18:27:10.4281408+01:00" endTime="2026-11-27T18:27:10.4322326+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d924cb1f-df3e-46a8-ae91-9bdab1dbc763" />
+    <UnitTestResult executionId="2cbf87c6-22b4-4952-9137-c26938e6a3a1" testId="23e9e957-4e2c-aece-f88f-8b62e4a6d9e8" testName="ProtocolRoundTrip_CommandRejectedMessage_9" computerName="VENERE" duration="00:00:00.0000720" startTime="2026-11-27T18:27:11.8812074+01:00" endTime="2026-11-27T18:27:11.8812792+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2cbf87c6-22b4-4952-9137-c26938e6a3a1" />
+    <UnitTestResult executionId="54f2ce4f-0e43-4839-a809-259339491749" testId="e3567000-4298-63e4-fedd-f6ad732eef72" testName="C-DOU-02" computerName="VENERE" duration="00:00:00.0006650" startTime="2026-11-27T18:27:10.3824326+01:00" endTime="2026-11-27T18:27:10.3830976+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="54f2ce4f-0e43-4839-a809-259339491749" />
+    <UnitTestResult executionId="92a171d9-3348-4bfe-86de-243ead3c4643" testId="2ceb60bf-5bc2-2a63-1457-17d416b9bc90" testName="CommandsConvertBothWaysWithoutIdentity(Play)" computerName="VENERE" duration="00:00:00.0044250" startTime="2026-11-27T18:27:11.8701277+01:00" endTime="2026-11-27T18:27:11.8745525+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="92a171d9-3348-4bfe-86de-243ead3c4643" />
+    <UnitTestResult executionId="5ce04a03-64b3-4416-854d-beb763ecc649" testId="b22f189a-d2dd-da16-8594-9fe8c31f9ab2" testName="C-DOU-05" computerName="VENERE" duration="00:00:00.0003230" startTime="2026-11-27T18:27:10.4152509+01:00" endTime="2026-11-27T18:27:10.4155741+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5ce04a03-64b3-4416-854d-beb763ecc649" />
+    <UnitTestResult executionId="ed934b61-410d-4790-8ea6-437ec6a7ab85" testId="c3667d42-5cb0-75c5-4cd0-38842f5b3cc2" testName="C-PLA-07" computerName="VENERE" duration="00:00:00.0009680" startTime="2026-11-27T18:27:10.4323224+01:00" endTime="2026-11-27T18:27:10.4332900+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ed934b61-410d-4790-8ea6-437ec6a7ab85" />
+    <UnitTestResult executionId="18b92dec-7ff9-4c53-8809-e4aec600465c" testId="0e37d9eb-65a0-77df-6b00-2e10867b4378" testName="RevelationViewNamesWhoPicksUpTheFinalPile(False,0)" computerName="VENERE" duration="00:00:00.0006089" startTime="2026-11-27T18:27:11.6906986+01:00" endTime="2026-11-27T18:27:11.6913064+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="18b92dec-7ff9-4c53-8809-e4aec600465c" />
+    <UnitTestResult executionId="3ad111a3-adde-4785-b219-6984c2473f15" testId="91c91fe3-7462-7003-e72e-254e479aef83" testName="ProtocolRoundTrip_CommandMessage_3" computerName="VENERE" duration="00:00:00.0001100" startTime="2026-11-27T18:27:11.8784039+01:00" endTime="2026-11-27T18:27:11.8785141+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3ad111a3-adde-4785-b219-6984c2473f15" />
+    <UnitTestResult executionId="36dfc36d-93e1-41ba-8f8b-fa229acdbf86" testId="45b37a97-679a-d085-6274-dc25f8152e0b" testName="C-PRV-02" computerName="VENERE" duration="00:00:00.0123590" startTime="2026-11-27T18:27:10.3501850+01:00" endTime="2026-11-27T18:27:10.3625433+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="36dfc36d-93e1-41ba-8f8b-fa229acdbf86" />
+    <UnitTestResult executionId="a2683df0-b76b-41c2-8f78-a9125f287258" testId="e24b1edd-b318-c6ca-3498-62a6d0355f9b" testName="C-SET-09" computerName="VENERE" duration="00:00:00.0033930" startTime="2026-11-27T18:27:11.8529910+01:00" endTime="2026-11-27T18:27:11.8563831+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a2683df0-b76b-41c2-8f78-a9125f287258" />
+    <UnitTestResult executionId="ec575027-71f9-4921-9d15-bd195f72b683" testId="1ef22d3f-b4b5-2382-da8f-5582ba492fff" testName="C-DEF-04" computerName="VENERE" duration="00:00:00.0007900" startTime="2026-11-27T18:27:10.4541949+01:00" endTime="2026-11-27T18:27:10.4549848+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ec575027-71f9-4921-9d15-bd195f72b683" />
+    <UnitTestResult executionId="347064ab-bdde-490e-b2a1-39c1a18df711" testId="e58022b8-3539-3056-d086-278cd9337980" testName="C-DEC-09" computerName="VENERE" duration="00:00:00.0009420" startTime="2026-11-27T18:27:10.4025201+01:00" endTime="2026-11-27T18:27:10.4034620+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="347064ab-bdde-490e-b2a1-39c1a18df711" />
+    <UnitTestResult executionId="b92ef0b6-9c20-43f1-bd6e-28a7e27a624c" testId="e98a4d5c-a796-9ef6-c168-0b0640dd917b" testName="C-PRV-01 (octets)" computerName="VENERE" duration="00:00:00.0259930" startTime="2026-11-27T18:27:11.8931117+01:00" endTime="2026-11-27T18:27:11.9191042+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b92ef0b6-9c20-43f1-bd6e-28a7e27a624c" />
+    <UnitTestResult executionId="4d468b8e-f2a2-4f78-999c-86e0675a54f2" testId="ac1e6ed2-f2ea-7cf5-e68c-028f174db9e9" testName="RevelationViewNoRecipientWhenVictoryIsConfirmedOrAutomatic(False)" computerName="VENERE" duration="00:00:00.0010460" startTime="2026-11-27T18:27:11.6948092+01:00" endTime="2026-11-27T18:27:11.6958545+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4d468b8e-f2a2-4f78-999c-86e0675a54f2" />
+    <UnitTestResult executionId="0be6c11f-c7d3-4cf0-8f96-360b5e234405" testId="c4ff7321-92a2-88d3-c577-b24bf8a5d536" testName="ProtocolRoundTrip_CommandRejectedMessage_19" computerName="VENERE" duration="00:00:00.0000420" startTime="2026-11-27T18:27:11.8817282+01:00" endTime="2026-11-27T18:27:11.8817704+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0be6c11f-c7d3-4cf0-8f96-360b5e234405" />
+    <UnitTestResult executionId="592416c5-e5aa-413c-b5c9-492a8fcaef6d" testId="106f0840-5be2-0b89-4701-04aebcd39d5a" testName="C-VIC-05" computerName="VENERE" duration="00:00:00.0009260" startTime="2026-11-27T18:27:10.4550231+01:00" endTime="2026-11-27T18:27:10.4559482+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="592416c5-e5aa-413c-b5c9-492a8fcaef6d" />
+    <UnitTestResult executionId="4d4ab85d-f8aa-4530-b3da-51c79a5cb239" testId="19a8adbd-fd61-3748-83c5-844eb7ce518b" testName="ProtocolRoundTrip_CommandRejectedMessage_23" computerName="VENERE" duration="00:00:00.0000380" startTime="2026-11-27T18:27:11.8819127+01:00" endTime="2026-11-27T18:27:11.8819503+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4d4ab85d-f8aa-4530-b3da-51c79a5cb239" />
+    <UnitTestResult executionId="217a8f12-b658-4c35-a4e8-e3f6ca3d42b9" testId="f4ea8d92-ec50-4117-316d-7fa6d22a729f" testName="ViewsCoverActionMatrixAndTerminalOutcomes" computerName="VENERE" duration="00:00:00.0085159" startTime="2026-11-27T18:27:11.7112340+01:00" endTime="2026-11-27T18:27:11.7197497+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="217a8f12-b658-4c35-a4e8-e3f6ca3d42b9" />
+    <UnitTestResult executionId="f9d04f03-1248-4238-85a3-c00e68adb338" testId="ed8bfd10-3fea-aa56-135b-e731a67af5da" testName="C-CHR-05" computerName="VENERE" duration="00:00:00.0006489" startTime="2026-11-27T18:27:10.4135331+01:00" endTime="2026-11-27T18:27:10.4141820+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f9d04f03-1248-4238-85a3-c00e68adb338" />
+    <UnitTestResult executionId="5b3729ad-db71-4eaf-ac22-4e8c0808f5bd" testId="3138257b-3730-6838-53cb-98e21dd2bd80" testName="C-DOU-09" computerName="VENERE" duration="00:00:00.0006370" startTime="2026-11-27T18:27:10.4494653+01:00" endTime="2026-11-27T18:27:10.4501024+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5b3729ad-db71-4eaf-ac22-4e8c0808f5bd" />
+    <UnitTestResult executionId="30fc17e6-de40-4238-8eae-cecdf3dd9b86" testId="1dec8429-7f15-811f-a08f-53ac10dc263b" testName="C-VIC-11" computerName="VENERE" duration="00:00:00.0005599" startTime="2026-11-27T18:27:10.3642805+01:00" endTime="2026-11-27T18:27:10.3648407+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="30fc17e6-de40-4238-8eae-cecdf3dd9b86" />
+    <UnitTestResult executionId="1af93cbf-27a6-45fd-8b37-f9454baf4d7c" testId="84194fa7-ba8b-19e1-14a4-c76d105cd5b6" testName="ProtocolRoundTrip_ViewMessage_32" computerName="VENERE" duration="00:00:00.0003020" startTime="2026-11-27T18:27:11.8852576+01:00" endTime="2026-11-27T18:27:11.8855590+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1af93cbf-27a6-45fd-8b37-f9454baf4d7c" />
+    <UnitTestResult executionId="90633541-3153-4bae-9533-1a89bd2b3d59" testId="3713a3b8-cf25-7039-0f44-4761ad178f84" testName="C-PRV-06 (octets)" computerName="VENERE" duration="00:00:00.0115760" startTime="2026-11-27T18:27:11.9191997+01:00" endTime="2026-11-27T18:27:11.9307748+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="90633541-3153-4bae-9533-1a89bd2b3d59" />
+    <UnitTestResult executionId="1c07c03b-ff26-42f4-9ef8-8f6327482897" testId="1e2a6f9e-69f3-1f4f-dcdd-5fa533e62ea9" testName="RevelationViewNoRecipientWhenVictoryIsConfirmedOrAutomatic(True)" computerName="VENERE" duration="00:00:00.0007970" startTime="2026-11-27T18:27:11.6939930+01:00" endTime="2026-11-27T18:27:11.6947897+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1c07c03b-ff26-42f4-9ef8-8f6327482897" />
+    <UnitTestResult executionId="db920271-e3f9-4fae-926f-b925e3a7a00c" testId="856eaee5-f5a3-834b-d675-dd423b1da5dd" testName="DuelDoubtVerdictPrecedesSurvivor(True,1)" computerName="VENERE" duration="00:00:00.0005620" startTime="2026-11-27T18:27:10.4063630+01:00" endTime="2026-11-27T18:27:10.4069244+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="db920271-e3f9-4fae-926f-b925e3a7a00c" />
+    <UnitTestResult executionId="668a12ba-ab8f-4267-b28e-fa1869fd09ac" testId="3df409f6-0454-1066-7b7b-fd60d211c982" testName="C-SET-07" computerName="VENERE" duration="00:00:00.0020690" startTime="2026-11-27T18:27:11.7358644+01:00" endTime="2026-11-27T18:27:11.7379330+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="668a12ba-ab8f-4267-b28e-fa1869fd09ac" />
+    <UnitTestResult executionId="544e1f10-5517-4979-9939-71f67e0272e0" testId="4693d718-45c5-2b99-5484-95692bc6954e" testName="C-PRV-03" computerName="VENERE" duration="00:00:00.0010920" startTime="2026-11-27T18:27:11.6895709+01:00" endTime="2026-11-27T18:27:11.6906629+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="544e1f10-5517-4979-9939-71f67e0272e0" />
+    <UnitTestResult executionId="ac8d1678-1cbe-4445-9c64-d40a45d3f3c7" testId="a901adcb-5ce3-27cf-dd19-fc6ec2ce966c" testName="C-SET-04" computerName="VENERE" duration="00:00:00.1149460" startTime="2026-11-27T18:27:11.7379856+01:00" endTime="2026-11-27T18:27:11.8529301+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ac8d1678-1cbe-4445-9c64-d40a45d3f3c7" />
+    <UnitTestResult executionId="100e51f3-746c-4877-99af-6025fbe3c08a" testId="45bb65ec-9c67-2069-7011-27d31e86d7f5" testName="WireHeaderAndGuidLayoutAreStableLittleEndian" computerName="VENERE" duration="00:00:00.0009910" startTime="2026-11-27T18:27:11.8855923+01:00" endTime="2026-11-27T18:27:11.8865832+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="100e51f3-746c-4877-99af-6025fbe3c08a" />
+    <UnitTestResult executionId="dd098816-ba9f-44fc-ace1-6e4ec883d899" testId="908ca657-2522-1629-01e7-d8ded2c611cf" testName="ProtocolRoundTrip_HelloMessage_0" computerName="VENERE" duration="00:00:00.0010810" startTime="2026-11-27T18:27:11.8761490+01:00" endTime="2026-11-27T18:27:11.8772294+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dd098816-ba9f-44fc-ace1-6e4ec883d899" />
+    <UnitTestResult executionId="f5de357b-106b-4273-9791-6d71dac0c5cd" testId="33bcd159-5b85-6869-1559-7ac59e74c2a5" testName="C-CHR-06" computerName="VENERE" duration="00:00:00.0010670" startTime="2026-11-27T18:27:10.3813252+01:00" endTime="2026-11-27T18:27:10.3823924+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f5de357b-106b-4273-9791-6d71dac0c5cd" />
+    <UnitTestResult executionId="f5028fdb-8e25-422d-bc72-4dc18603dda9" testId="b195310e-9ab0-0cdc-257e-82dca095e82e" testName="RejectedCommandIdCannotBeRetriedWithChangedPayload" computerName="VENERE" duration="00:00:00.0005580" startTime="2026-11-27T18:27:11.6829069+01:00" endTime="2026-11-27T18:27:11.6834651+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f5028fdb-8e25-422d-bc72-4dc18603dda9" />
+    <UnitTestResult executionId="6401ecac-07c1-403d-b743-75304c3031b0" testId="2f60d4a4-5def-d69d-4995-3c2aeaf871f9" testName="DuelDoubtVerdictPrecedesSurvivor(False,1)" computerName="VENERE" duration="00:00:00.0007200" startTime="2026-11-27T18:27:10.4050767+01:00" endTime="2026-11-27T18:27:10.4057966+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6401ecac-07c1-403d-b743-75304c3031b0" />
+    <UnitTestResult executionId="25a96dea-822d-4e89-a161-2a1968b177b1" testId="ab983c57-77a7-c01f-1e23-73e4742ff9ee" testName="C-PRV-06" computerName="VENERE" duration="00:00:00.0034140" startTime="2026-11-27T18:27:10.3902690+01:00" endTime="2026-11-27T18:27:10.3936826+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="25a96dea-822d-4e89-a161-2a1968b177b1" />
+    <UnitTestResult executionId="55a64189-921e-4c99-bd25-a936ed1d4580" testId="dbc07de0-f7c2-5ea4-e332-539fe4c91db8" testName="C-DOU-12" computerName="VENERE" duration="00:00:00.0004510" startTime="2026-11-27T18:27:11.7198005+01:00" endTime="2026-11-27T18:27:11.7202516+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="55a64189-921e-4c99-bd25-a936ed1d4580" />
+    <UnitTestResult executionId="75aa43be-858d-4168-9bc2-a32fba92af9b" testId="3fb16886-b58f-8d8f-a0ba-72e819c85051" testName="C-DOU-13" computerName="VENERE" duration="00:00:00.0005770" startTime="2026-11-27T18:27:10.3937470+01:00" endTime="2026-11-27T18:27:10.3943239+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="75aa43be-858d-4168-9bc2-a32fba92af9b" />
+    <UnitTestResult executionId="770a666d-29f8-4a64-860e-af7af3bbbad1" testId="b7599c0d-cf13-6104-52b9-6d5f0e2795e5" testName="ProtocolRoundTrip_CommandRejectedMessage_22" computerName="VENERE" duration="00:00:00.0000440" startTime="2026-11-27T18:27:11.8818624+01:00" endTime="2026-11-27T18:27:11.8819060+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="770a666d-29f8-4a64-860e-af7af3bbbad1" />
+    <UnitTestResult executionId="1b2ebd92-2eb5-47ed-a917-cd71dfed21e7" testId="bc55efb7-b42e-7846-6306-043293e56930" testName="CommandsConvertBothWaysWithoutIdentity(Discard)" computerName="VENERE" duration="00:00:00.0004660" startTime="2026-11-27T18:27:11.8756251+01:00" endTime="2026-11-27T18:27:11.8760908+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1b2ebd92-2eb5-47ed-a917-cd71dfed21e7" />
+    <UnitTestResult executionId="85e8d9bf-677a-44ac-8dff-610387ee7594" testId="18ddc7de-ab94-ec02-896b-ee8a6f70aa2e" testName="C-VIC-03" computerName="VENERE" duration="00:00:00.0016290" startTime="2026-11-27T18:27:10.3703633+01:00" endTime="2026-11-27T18:27:10.3719914+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="85e8d9bf-677a-44ac-8dff-610387ee7594" />
+    <UnitTestResult executionId="48374776-f68f-4a77-9a16-040c33817638" testId="a56bd6e2-036d-b0c8-91fb-4fd147231f1c" testName="EveryDoubtDepartureTableCell(False,0)" computerName="VENERE" duration="00:00:00.0041680" startTime="2026-11-27T18:27:10.4187799+01:00" endTime="2026-11-27T18:27:10.4229472+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="48374776-f68f-4a77-9a16-040c33817638" />
+    <UnitTestResult executionId="a2448fdc-deec-42c0-9b5a-8851971fccfe" testId="cbe429fd-74ef-aa58-cb57-77fa191ff480" testName="RevelationViewNamesWhoPicksUpTheFinalPile(False,1)" computerName="VENERE" duration="00:00:00.0006060" startTime="2026-11-27T18:27:11.6913209+01:00" endTime="2026-11-27T18:27:11.6919265+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a2448fdc-deec-42c0-9b5a-8851971fccfe" />
+    <UnitTestResult executionId="2a79a411-73ef-4424-8e85-3ee51d463b6b" testId="6641b2c6-f83a-12c3-ca0e-6fb39d3b3199" testName="ProtocolRoundTrip_CommandRejectedMessage_13" computerName="VENERE" duration="00:00:00.0000360" startTime="2026-11-27T18:27:11.8814304+01:00" endTime="2026-11-27T18:27:11.8814660+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2a79a411-73ef-4424-8e85-3ee51d463b6b" />
+    <UnitTestResult executionId="d500a190-3a54-471a-bbad-d6bc67545c92" testId="7b7e80ca-deba-a0c9-3eb2-a1eadb1b4b30" testName="LargeElapsedDeltaSpansTurnsAndStopsAtWinner" computerName="VENERE" duration="00:00:00.0009990" startTime="2026-11-27T18:27:10.4429170+01:00" endTime="2026-11-27T18:27:10.4439160+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d500a190-3a54-471a-bbad-d6bc67545c92" />
+    <UnitTestResult executionId="b231f61a-adba-4338-b9fa-0f1181a68bc0" testId="8188d0b1-0f29-88b3-61bb-3b6b83aaad2e" testName="C-VIC-13" computerName="VENERE" duration="00:00:00.0006800" startTime="2026-11-27T18:27:11.6862233+01:00" endTime="2026-11-27T18:27:11.6869033+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b231f61a-adba-4338-b9fa-0f1181a68bc0" />
+    <UnitTestResult executionId="61ca78b2-748a-4197-abfc-5400b8044fe7" testId="83c6d791-ca61-ce45-1323-73db3b5459bb" testName="C-PRV-02 (octets)" computerName="VENERE" duration="00:00:00.0024560" startTime="2026-11-27T18:27:11.9340215+01:00" endTime="2026-11-27T18:27:11.9364771+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="61ca78b2-748a-4197-abfc-5400b8044fe7" />
+    <UnitTestResult executionId="27957204-d525-4ed3-9851-02e2920c0065" testId="0aeca5cb-dd57-3f87-f18b-2a21a42a7ac7" testName="C-PLA-06" computerName="VENERE" duration="00:00:00.0003920" startTime="2026-11-27T18:27:10.4403120+01:00" endTime="2026-11-27T18:27:10.4407037+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="27957204-d525-4ed3-9851-02e2920c0065" />
+    <UnitTestResult executionId="69f0d9c8-6c2b-4d66-a7ff-efdd1176ee76" testId="b54eedac-019e-d73d-2b0a-5de49efe2346" testName="C-PRV-05 (octets)" computerName="VENERE" duration="00:00:00.0021030" startTime="2026-11-27T18:27:11.8867202+01:00" endTime="2026-11-27T18:27:11.8888221+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="69f0d9c8-6c2b-4d66-a7ff-efdd1176ee76" />
+    <UnitTestResult executionId="30312dd9-49f8-41d3-be16-79c5afea5469" testId="84a92128-89bd-b334-68de-a13cce5169f2" testName="ProtocolRoundTrip_CommandRejectedMessage_16" computerName="VENERE" duration="00:00:00.0000349" startTime="2026-11-27T18:27:11.8815525+01:00" endTime="2026-11-27T18:27:11.8815877+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="30312dd9-49f8-41d3-be16-79c5afea5469" />
+    <UnitTestResult executionId="a1b3a406-d5c2-442a-8abf-7e879cdf02ce" testId="85378b7e-7ac4-6e83-e03b-3a6734da682f" testName="CreateFieldsRestorePreservesEveryValue(3)" computerName="VENERE" duration="00:00:00.0037720" startTime="2026-11-27T18:27:11.7261804+01:00" endTime="2026-11-27T18:27:11.7299519+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a1b3a406-d5c2-442a-8abf-7e879cdf02ce" />
+    <UnitTestResult executionId="167a81db-8852-4e8e-9214-510812329fea" testId="7923badb-d665-99b7-b653-9d63e265fe58" testName="ViewExposesOwnSkippedTurnsForTheExclusionWarning" computerName="VENERE" duration="00:00:00.0003500" startTime="2026-11-27T18:27:11.7081436+01:00" endTime="2026-11-27T18:27:11.7084940+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="167a81db-8852-4e8e-9214-510812329fea" />
+    <UnitTestResult executionId="2ddfdaf9-579b-475e-b360-be6dd8e72b6d" testId="7e120d5f-2699-1a88-b3d3-76d78ddedd8d" testName="C-PRV-01" computerName="VENERE" duration="00:00:00.0020260" startTime="2026-11-27T18:27:11.7091759+01:00" endTime="2026-11-27T18:27:11.7112018+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2ddfdaf9-579b-475e-b360-be6dd8e72b6d" />
+    <UnitTestResult executionId="34d7dc93-388f-4639-98b4-99f1af50f720" testId="a4b48e12-cce2-526c-c516-8e80302049ed" testName="RevelationViewNamesWhoPicksUpTheFinalPile(False,2)" computerName="VENERE" duration="00:00:00.0003400" startTime="2026-11-27T18:27:11.6919413+01:00" endTime="2026-11-27T18:27:11.6922808+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="34d7dc93-388f-4639-98b4-99f1af50f720" />
+    <UnitTestResult executionId="e2a548ea-0294-4597-af90-9548aa61677c" testId="d1fd6d44-b003-7c0d-af2f-d49ee743597f" testName="ProtocolRoundTrip_CommandRejectedMessage_18" computerName="VENERE" duration="00:00:00.0000690" startTime="2026-11-27T18:27:11.8816485+01:00" endTime="2026-11-27T18:27:11.8817177+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e2a548ea-0294-4597-af90-9548aa61677c" />
+    <UnitTestResult executionId="7ae61b5e-a341-4dd4-9851-66e8fc7cf307" testId="26cd4a61-d913-cafa-aa5f-d42c4456c683" testName="C-VIC-09" computerName="VENERE" duration="00:00:00.0009840" startTime="2026-11-27T18:27:10.3892385+01:00" endTime="2026-11-27T18:27:10.3902227+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7ae61b5e-a341-4dd4-9851-66e8fc7cf307" />
+    <UnitTestResult executionId="57e39961-dc7c-4981-bba0-889e88b95031" testId="f74be326-30d5-518f-17b1-cd76ac541c6a" testName="C-SET-05" computerName="VENERE" duration="00:00:00.0005630" startTime="2026-11-27T18:27:11.8564423+01:00" endTime="2026-11-27T18:27:11.8570046+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="57e39961-dc7c-4981-bba0-889e88b95031" />
+    <UnitTestResult executionId="1da12abf-b84e-464a-9ea8-dcac3c377bbc" testId="3c772d8d-0244-db29-f287-39db041720c7" testName="C-PLA-11" computerName="VENERE" duration="00:00:00.0006290" startTime="2026-11-27T18:27:10.4142183+01:00" endTime="2026-11-27T18:27:10.4148469+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1da12abf-b84e-464a-9ea8-dcac3c377bbc" />
+    <UnitTestResult executionId="a54988a0-faf2-4b30-b725-b5c0e73f5306" testId="1589e195-1e99-0d54-6372-64fd9b97c95c" testName="C-PLA-09" computerName="VENERE" duration="00:00:00.0006120" startTime="2026-11-27T18:27:10.4392580+01:00" endTime="2026-11-27T18:27:10.4398694+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a54988a0-faf2-4b30-b725-b5c0e73f5306" />
+    <UnitTestResult executionId="da777d5f-28ab-4b6f-beef-3c8269b23653" testId="b721b4ba-fa4c-9c1a-2b8b-160bcf5bfeb0" testName="C-DEC-02" computerName="VENERE" duration="00:00:00.0199750" startTime="2026-11-27T18:27:10.3224794+01:00" endTime="2026-11-27T18:27:10.3423320+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="da777d5f-28ab-4b6f-beef-3c8269b23653" />
+    <UnitTestResult executionId="65deadef-0f64-4870-8dd7-024828c0b56b" testId="cd370ba9-2a69-2bbf-c28b-b4e2081e36d1" testName="ProtocolRoundTrip_CommandRejectedMessage_20" computerName="VENERE" duration="00:00:00.0000370" startTime="2026-11-27T18:27:11.8817771+01:00" endTime="2026-11-27T18:27:11.8818142+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="65deadef-0f64-4870-8dd7-024828c0b56b" />
+    <UnitTestResult executionId="3213599d-3c90-45f3-98eb-e50b80841e71" testId="01dd6578-b977-0d91-f4b9-ad7ca76c70d8" testName="C-CHR-04" computerName="VENERE" duration="00:00:00.0023190" startTime="2026-11-27T18:27:10.3679974+01:00" endTime="2026-11-27T18:27:10.3703158+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3213599d-3c90-45f3-98eb-e50b80841e71" />
+    <UnitTestResult executionId="92254c47-1c8e-4e01-b89f-14f96dabb578" testId="c3ae9754-4861-2f77-44e8-716c11ec25e1" testName="ProtocolRoundTrip_CommandRejectedMessage_11" computerName="VENERE" duration="00:00:00.0000410" startTime="2026-11-27T18:27:11.8813379+01:00" endTime="2026-11-27T18:27:11.8813783+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="92254c47-1c8e-4e01-b89f-14f96dabb578" />
+    <UnitTestResult executionId="938ef589-cb6c-4be5-895a-89f79883f4fe" testId="0456dba3-4405-1706-d861-eb6b44166b70" testName="HostResolutionIsGuardedAndCannotRunTwice" computerName="VENERE" duration="00:00:00.0008330" startTime="2026-11-27T18:27:10.4372822+01:00" endTime="2026-11-27T18:27:10.4381144+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="938ef589-cb6c-4be5-895a-89f79883f4fe" />
+    <UnitTestResult executionId="28d149f2-209a-49bb-9ac1-320abb870326" testId="adac60d8-5aa0-fc4a-0605-bab9fdd576f0" testName="C-PRV-04" computerName="VENERE" duration="00:00:00.0033470" startTime="2026-11-27T18:27:10.4570336+01:00" endTime="2026-11-27T18:27:10.4603800+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="28d149f2-209a-49bb-9ac1-320abb870326" />
+    <UnitTestResult executionId="b9bb9341-d187-4e2c-b623-11a09a4a6307" testId="b49619eb-160e-a439-ed17-ebb4b4f36273" testName="C-DEC-08" computerName="VENERE" duration="00:00:00.0005540" startTime="2026-11-27T18:27:10.3966818+01:00" endTime="2026-11-27T18:27:10.3972358+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b9bb9341-d187-4e2c-b623-11a09a4a6307" />
+    <UnitTestResult executionId="1e33a744-5b3d-4a41-a131-7ac7e5831029" testId="716f588b-d9bc-d5b3-a0a2-8ddf810ae9b8" testName="ProtocolRoundTrip_CommandRejectedMessage_17" computerName="VENERE" duration="00:00:00.0000400" startTime="2026-11-27T18:27:11.8816003+01:00" endTime="2026-11-27T18:27:11.8816406+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1e33a744-5b3d-4a41-a131-7ac7e5831029" />
+    <UnitTestResult executionId="a4940371-531d-45d7-94cc-72ddd916c71d" testId="22f5c3e1-79ee-eab5-2f7d-3987929519d3" testName="C-DEC-03" computerName="VENERE" duration="00:00:00.0008280" startTime="2026-11-27T18:27:11.7000629+01:00" endTime="2026-11-27T18:27:11.7008906+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a4940371-531d-45d7-94cc-72ddd916c71d" />
+    <UnitTestResult executionId="c5536fac-ffbc-482d-9891-74b062bfa418" testId="2e11fea3-7d9c-0e71-55fb-dd6dc2e8e969" testName="C-PLA-08" computerName="VENERE" duration="00:00:00.0004860" startTime="2026-11-27T18:27:11.6848577+01:00" endTime="2026-11-27T18:27:11.6853437+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c5536fac-ffbc-482d-9891-74b062bfa418" />
+    <UnitTestResult executionId="44fd9126-1771-40b5-99f3-9a0af363614d" testId="eef0c9f2-97e6-1b9e-52b0-5313a27eb404" testName="CommandIdsAreScopedToAuthenticatedPlayer" computerName="VENERE" duration="00:00:00.0009710" startTime="2026-11-27T18:27:10.3656954+01:00" endTime="2026-11-27T18:27:10.3666661+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="44fd9126-1771-40b5-99f3-9a0af363614d" />
+    <UnitTestResult executionId="ac1ca117-c7cd-4a04-ab6d-49de6db8a8bf" testId="1d47bec3-66e6-31ce-c247-a16141fa55a8" testName="CreateFieldsRestorePreservesEveryValue(6)" computerName="VENERE" duration="00:00:00.0047270" startTime="2026-11-27T18:27:11.7299784+01:00" endTime="2026-11-27T18:27:11.7347042+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ac1ca117-c7cd-4a04-ab6d-49de6db8a8bf" />
+    <UnitTestResult executionId="5ac3749f-474c-4fdf-b2bd-ec92ae8ac2aa" testId="912af536-0156-f8f0-bcb9-c3353a1fa378" testName="ClosedWindowCannotBeDoubtedEvenByOriginalRespondent" computerName="VENERE" duration="00:00:00.0008100" startTime="2026-11-27T18:27:10.3648705+01:00" endTime="2026-11-27T18:27:10.3656803+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5ac3749f-474c-4fdf-b2bd-ec92ae8ac2aa" />
+    <UnitTestResult executionId="7fc49b9e-6f0b-4621-9257-b4d6f0dbd44a" testId="26ef57e1-2e63-35a8-d8aa-9e6cf6e4dc6f" testName="C-CHR-01" computerName="VENERE" duration="00:00:00.0007440" startTime="2026-11-27T18:27:11.6992501+01:00" endTime="2026-11-27T18:27:11.6999931+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7fc49b9e-6f0b-4621-9257-b4d6f0dbd44a" />
+    <UnitTestResult executionId="db23b2a1-a4ab-43a9-8f30-9e9afe6eb70b" testId="f5c5ff01-7175-5e06-57a1-392df848a415" testName="InvalidOpeningAndMalformedCommandsAreRejected" computerName="VENERE" duration="00:00:00.0011570" startTime="2026-11-27T18:27:10.4417370+01:00" endTime="2026-11-27T18:27:10.4428936+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="db23b2a1-a4ab-43a9-8f30-9e9afe6eb70b" />
+    <UnitTestResult executionId="966fc4a6-2755-4c2f-aabe-0789399d8171" testId="48306dfe-d329-770d-7e10-d78ad502af7f" testName="RestoreCopiesInputsAndDoesNotRecomputeActionsOrVerdict" computerName="VENERE" duration="00:00:00.0009780" startTime="2026-11-27T18:27:11.7347478+01:00" endTime="2026-11-27T18:27:11.7357256+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="966fc4a6-2755-4c2f-aabe-0789399d8171" />
+    <UnitTestResult executionId="34ef28ee-bf40-4150-a497-94bb3a0337f7" testId="7645d324-5d5c-a197-dea4-3cefd9b85ae7" testName="ProtocolRoundTrip_ReadyMessage_6" computerName="VENERE" duration="00:00:00.0000540" startTime="2026-11-27T18:27:11.8790828+01:00" endTime="2026-11-27T18:27:11.8791369+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="34ef28ee-bf40-4150-a497-94bb3a0337f7" />
+    <UnitTestResult executionId="9e24493e-57ca-4f0c-9a42-fe9a4c7463d1" testId="d40b88cb-fffa-0323-a390-5e2c89d915c2" testName="EveryDoubtDepartureTableCell(True,0)" computerName="VENERE" duration="00:00:00.0006010" startTime="2026-11-27T18:27:10.4244664+01:00" endTime="2026-11-27T18:27:10.4250675+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9e24493e-57ca-4f0c-9a42-fe9a4c7463d1" />
+    <UnitTestResult executionId="8d635588-dc5a-42c5-919e-b5c92c62d375" testId="e1ce3201-d5d1-af10-bf08-844d6aa3261e" testName="DuelDoubtVerdictPrecedesSurvivor(False,0)" computerName="VENERE" duration="00:00:00.0006660" startTime="2026-11-27T18:27:10.4044007+01:00" endTime="2026-11-27T18:27:10.4050668+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8d635588-dc5a-42c5-919e-b5c92c62d375" />
+    <UnitTestResult executionId="4dc8c8e6-6502-4ec0-b0b1-02ab015c7921" testId="c029c297-db7f-a46c-9194-3ae80deb5703" testName="C-SET-01" computerName="VENERE" duration="00:00:00.0003810" startTime="2026-11-27T18:27:11.8584308+01:00" endTime="2026-11-27T18:27:11.8588118+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4dc8c8e6-6502-4ec0-b0b1-02ab015c7921" />
+    <UnitTestResult executionId="e19376e7-4c4f-4e99-a434-51a7485db0ff" testId="c84334ab-fb14-cc49-6abc-229d505861d8" testName="C-CHR-02" computerName="VENERE" duration="00:00:00.0003020" startTime="2026-11-27T18:27:11.6988861+01:00" endTime="2026-11-27T18:27:11.6991881+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e19376e7-4c4f-4e99-a434-51a7485db0ff" />
+    <UnitTestResult executionId="1508cf69-fa53-40b4-8ba2-3e5a2f622d5b" testId="c738e757-0afa-6738-a18b-90c894b2694d" testName="ProtocolRoundTrip_CommandRejectedMessage_25" computerName="VENERE" duration="00:00:00.0000540" startTime="2026-11-27T18:27:11.8820166+01:00" endTime="2026-11-27T18:27:11.8820709+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1508cf69-fa53-40b4-8ba2-3e5a2f622d5b" />
+    <UnitTestResult executionId="8a75a1d4-6f48-473c-b534-3ce7bd27614f" testId="4fb1eeb3-dec0-f74d-ee65-921b76bc5beb" testName="C-VIC-06" computerName="VENERE" duration="00:00:00.0011210" startTime="2026-11-27T18:27:10.3881023+01:00" endTime="2026-11-27T18:27:10.3892231+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8a75a1d4-6f48-473c-b534-3ce7bd27614f" />
+    <UnitTestResult executionId="619a0da3-0cc6-42ca-855e-70bc397cad13" testId="ee4062e8-5083-42bd-ecf6-bc0465e2a95b" testName="C-DEF-02" computerName="VENERE" duration="00:00:00.0003410" startTime="2026-11-27T18:27:10.4148796+01:00" endTime="2026-11-27T18:27:10.4152205+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="619a0da3-0cc6-42ca-855e-70bc397cad13" />
+    <UnitTestResult executionId="c88d1f0c-fa1e-4e14-9a11-3ac63cef9a1c" testId="ab1774a4-669b-9931-ded5-ad26836a3974" testName="StaleCommandsCannotChangeState" computerName="VENERE" duration="00:00:00.0012440" startTime="2026-11-27T18:27:11.6975728+01:00" endTime="2026-11-27T18:27:11.6988163+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c88d1f0c-fa1e-4e14-9a11-3ac63cef9a1c" />
+    <UnitTestResult executionId="4bc4aa13-fe3a-449d-82c9-8c6128207f18" testId="6be0ae5e-b204-18d8-9843-c9c618eb70b1" testName="C-DEF-01" computerName="VENERE" duration="00:00:00.0017240" startTime="2026-11-27T18:27:10.3992833+01:00" endTime="2026-11-27T18:27:10.4010065+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4bc4aa13-fe3a-449d-82c9-8c6128207f18" />
+    <UnitTestResult executionId="405be422-226f-4fa2-a9e9-ce4c704510df" testId="d23fdb5d-92a5-1bf6-22cc-01138962a0fb" testName="ProtocolRoundTrip_ViewMessage_31" computerName="VENERE" duration="00:00:00.0015020" startTime="2026-11-27T18:27:11.8837382+01:00" endTime="2026-11-27T18:27:11.8852392+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="405be422-226f-4fa2-a9e9-ce4c704510df" />
+    <UnitTestResult executionId="94ab4e87-dbb7-426f-8ddf-cd3a1eb43f16" testId="375eae85-204d-2201-ce83-2c15d16c754c" testName="C-PRV-03 (octets)" computerName="VENERE" duration="00:00:00.0041599" startTime="2026-11-27T18:27:11.8888930+01:00" endTime="2026-11-27T18:27:11.8930526+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="94ab4e87-dbb7-426f-8ddf-cd3a1eb43f16" />
+    <UnitTestResult executionId="6a97f29c-3716-4abb-aa76-2d379383e9e9" testId="4f3bab31-30bb-d0a7-7624-7c0dc008912c" testName="EveryDoubtDepartureTableCell(True,1)" computerName="VENERE" duration="00:00:00.0005700" startTime="2026-11-27T18:27:10.4250769+01:00" endTime="2026-11-27T18:27:10.4256462+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6a97f29c-3716-4abb-aa76-2d379383e9e9" />
+    <UnitTestResult executionId="22e3de69-dc3f-4725-82b9-5886938954b0" testId="fbdf908d-4b7a-452b-6517-be214975fb03" testName="ProtocolRoundTrip_CommandMessage_4" computerName="VENERE" duration="00:00:00.0000830" startTime="2026-11-27T18:27:11.8785267+01:00" endTime="2026-11-27T18:27:11.8786096+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="22e3de69-dc3f-4725-82b9-5886938954b0" />
+    <UnitTestResult executionId="bfc76de4-03c2-4a57-9b64-3a6cff3f6010" testId="591110ac-f2d0-873d-a1b6-bb540796a58b" testName="C-CHR-07" computerName="VENERE" duration="00:00:00.0015520" startTime="2026-11-27T18:27:10.3465733+01:00" endTime="2026-11-27T18:27:10.3481251+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bfc76de4-03c2-4a57-9b64-3a6cff3f6010" />
+    <UnitTestResult executionId="27928813-e7c8-47f0-bfd0-b566dab22fb0" testId="b0491fb6-3230-bbc2-17c5-54c9311d2c74" testName="EveryConfirmedActionResetsInactivity(Discard)" computerName="VENERE" duration="00:00:00.0016149" startTime="2026-11-27T18:27:10.4170742+01:00" endTime="2026-11-27T18:27:10.4186893+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="27928813-e7c8-47f0-bfd0-b566dab22fb0" />
+    <UnitTestResult executionId="755e6170-38f9-4a78-8876-2d30282c78e9" testId="ef978b44-b9f4-9b39-96e0-8f03110b64cc" testName="RevelationViewNamesWhoPicksUpTheFinalPile(True,1)" computerName="VENERE" duration="00:00:00.0003440" startTime="2026-11-27T18:27:11.6926577+01:00" endTime="2026-11-27T18:27:11.6930016+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="755e6170-38f9-4a78-8876-2d30282c78e9" />
+    <UnitTestResult executionId="dea1c1ea-e714-4327-8527-a4ce03837448" testId="c3f392f2-e11f-abb3-4a16-83ec034f1ec4" testName="C-PRV-04 (octets)" computerName="VENERE" duration="00:00:00.0031140" startTime="2026-11-27T18:27:11.9308404+01:00" endTime="2026-11-27T18:27:11.9339537+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dea1c1ea-e714-4327-8527-a4ce03837448" />
+    <UnitTestResult executionId="b29ac385-324a-455d-9ea7-7f5924455750" testId="a0331351-6ddf-4705-0b23-b95ff3e1eb58" testName="InvalidHostEventsAndDuplicateDeparturesHaveNoEffect" computerName="VENERE" duration="00:00:00.0009930" startTime="2026-11-27T18:27:10.4407290+01:00" endTime="2026-11-27T18:27:10.4417215+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b29ac385-324a-455d-9ea7-7f5924455750" />
+    <UnitTestResult executionId="fb56a1f8-0d2e-45bd-91fc-ba2af3e088be" testId="4dfa647f-03a3-f0b3-13b4-efcdefc64d01" testName="ProtocolRoundTrip_CommandRejectedMessage_21" computerName="VENERE" duration="00:00:00.0000370" startTime="2026-11-27T18:27:11.8818200+01:00" endTime="2026-11-27T18:27:11.8818568+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fb56a1f8-0d2e-45bd-91fc-ba2af3e088be" />
+    <UnitTestResult executionId="bfebfbb5-9a79-415c-ba49-7110b63b7118" testId="cab4f4e1-66fb-09d5-df1a-8e7dc8109d74" testName="ProtocolRoundTrip_VersionMismatchMessage_26" computerName="VENERE" duration="00:00:00.0002970" startTime="2026-11-27T18:27:11.8820797+01:00" endTime="2026-11-27T18:27:11.8823766+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bfebfbb5-9a79-415c-ba49-7110b63b7118" />
+    <UnitTestResult executionId="58a06f7a-1b53-4088-b1e2-03be1287b13a" testId="bc45ea43-0b2d-c8e7-2108-a9c8a8c9b374" testName="ProtocolRoundTrip_CommandRejectedMessage_15" computerName="VENERE" duration="00:00:00.0000349" startTime="2026-11-27T18:27:11.8815126+01:00" endTime="2026-11-27T18:27:11.8815473+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="58a06f7a-1b53-4088-b1e2-03be1287b13a" />
+    <UnitTestResult executionId="5cec3d42-2812-4271-9275-62b06ec26736" testId="0aafd1e4-e496-9464-7001-ab9aa1515e06" testName="ProtocolRoundTrip_LobbyStateMessage_28" computerName="VENERE" duration="00:00:00.0000940" startTime="2026-11-27T18:27:11.8834770+01:00" endTime="2026-11-27T18:27:11.8835704+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5cec3d42-2812-4271-9275-62b06ec26736" />
+    <UnitTestResult executionId="a6996475-0ab6-4d88-954f-684ee6ba6b0a" testId="e9c1dd38-1183-45a3-6cdf-da9d27cf03ae" testName="ProtocolRoundTrip_CommandRejectedMessage_14" computerName="VENERE" duration="00:00:00.0000349" startTime="2026-11-27T18:27:11.8814717+01:00" endTime="2026-11-27T18:27:11.8815065+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a6996475-0ab6-4d88-954f-684ee6ba6b0a" />
+    <UnitTestResult executionId="80ffe49b-ae62-497b-a28e-bf87d7dfd4ec" testId="29a67b7b-e1e2-415a-2d97-1f2b440cb615" testName="EveryConfirmedActionResetsInactivity(Doubt)" computerName="VENERE" duration="00:00:00.0014470" startTime="2026-11-27T18:27:10.4156030+01:00" endTime="2026-11-27T18:27:10.4170499+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="80ffe49b-ae62-497b-a28e-bf87d7dfd4ec" />
+    <UnitTestResult executionId="9e926595-acf2-428c-8932-d7f0d813ca19" testId="25fbfd94-f280-9adb-1797-62d406069f6e" testName="ProtocolRoundTrip_CommandRejectedMessage_8" computerName="VENERE" duration="00:00:00.0004070" startTime="2026-11-27T18:27:11.8807817+01:00" endTime="2026-11-27T18:27:11.8811886+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9e926595-acf2-428c-8932-d7f0d813ca19" />
+    <UnitTestResult executionId="48c2b263-9bea-4db1-b65d-61eb094603bb" testId="97b799e4-b6a6-1aba-cecd-d75b49a3de96" testName="ProtocolRoundTrip_LobbyStateMessage_27" computerName="VENERE" duration="00:00:00.0010740" startTime="2026-11-27T18:27:11.8823889+01:00" endTime="2026-11-27T18:27:11.8834628+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="48c2b263-9bea-4db1-b65d-61eb094603bb" />
+    <UnitTestResult executionId="2c08749e-1761-41c1-8ffa-58a97ceedc84" testId="3528d581-d0ed-ea1d-a289-df6bbf68c173" testName="C-DEC-05" computerName="VENERE" duration="00:00:00.0007760" startTime="2026-11-27T18:27:10.3958946+01:00" endTime="2026-11-27T18:27:10.3966706+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2c08749e-1761-41c1-8ffa-58a97ceedc84" />
+    <UnitTestResult executionId="b37d65c2-dc79-4e07-9cfa-b782ec6d34ae" testId="8064c8ee-5cf3-2a3c-6cfb-2e0e2374f637" testName="MultipleDeparturesDuringDoubtAreAppliedAfterVerdict(True)" computerName="VENERE" duration="00:00:00.0009850" startTime="2026-11-27T18:27:10.4484017+01:00" endTime="2026-11-27T18:27:10.4493867+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b37d65c2-dc79-4e07-9cfa-b782ec6d34ae" />
+    <UnitTestResult executionId="17547864-b568-4b55-bd19-1f31d87ebb85" testId="9e8cb454-5da9-d9a9-f707-a9c6293aa23c" testName="ViewMessageExposesOnlyAPlayerViewConstructionPath" computerName="VENERE" duration="00:00:00.0009010" startTime="2026-11-27T18:27:11.9365286+01:00" endTime="2026-11-27T18:27:11.9374287+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="17547864-b568-4b55-bd19-1f31d87ebb85" />
+    <UnitTestResult executionId="b55d47bb-bd26-4864-b175-5bd43f637160" testId="c7082f51-60d3-e3d3-6a82-45584acd7b35" testName="ViewCopiesAreImmutableAndDetached" computerName="VENERE" duration="00:00:00.0071900" startTime="2026-11-27T18:27:11.7009319+01:00" endTime="2026-11-27T18:27:11.7081212+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b55d47bb-bd26-4864-b175-5bd43f637160" />
+    <UnitTestResult executionId="82588f7c-2875-4464-a502-ef5d9d0b2539" testId="8911ca7f-f0c6-06d5-6ae2-de6ad6dd1065" testName="C-VIC-10" computerName="VENERE" duration="00:00:00.0016520" startTime="2026-11-27T18:27:10.3626082+01:00" endTime="2026-11-27T18:27:10.3642595+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="82588f7c-2875-4464-a502-ef5d9d0b2539" />
+    <UnitTestResult executionId="135cc3ef-fcdd-45b3-9d33-f144abb531fe" testId="0ce78fd6-8116-178e-f8ab-c25b5cb67485" testName="ConfiguredFullTimerIsRestoredOnEveryNewTurnAndCorrectDoubt" computerName="VENERE" duration="00:00:00.0012820" startTime="2026-11-27T18:27:10.3666821+01:00" endTime="2026-11-27T18:27:10.3679638+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="135cc3ef-fcdd-45b3-9d33-f144abb531fe" />
+    <UnitTestResult executionId="46644775-1d54-48aa-bb90-61a23a7639fa" testId="46cb8ecd-8517-691e-1eee-b8c80e26995a" testName="MultipleDeparturesDuringDoubtAreAppliedAfterVerdict(False)" computerName="VENERE" duration="00:00:00.0010320" startTime="2026-11-27T18:27:10.4473444+01:00" endTime="2026-11-27T18:27:10.4483764+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="46644775-1d54-48aa-bb90-61a23a7639fa" />
+    <UnitTestResult executionId="a8f4b114-0362-433e-a992-3a259b6098c7" testId="18675df2-b734-e597-8d66-e6e76aa64c9d" testName="C-PLA-05" computerName="VENERE" duration="00:00:00.0003890" startTime="2026-11-27T18:27:10.4399083+01:00" endTime="2026-11-27T18:27:10.4402966+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a8f4b114-0362-433e-a992-3a259b6098c7" />
+    <UnitTestResult executionId="66766aee-6f06-4ede-b407-0d35f9de7aad" testId="c4381cde-d609-c7b5-7ba4-ed841fa33563" testName="C-SET-08" computerName="VENERE" duration="00:00:00.0007260" startTime="2026-11-27T18:27:11.8665472+01:00" endTime="2026-11-27T18:27:11.8672733+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="66766aee-6f06-4ede-b407-0d35f9de7aad" />
+    <UnitTestResult executionId="84184209-7473-4612-80eb-acdad4e5f541" testId="678a2776-86c6-3d1d-2df5-d6435189e06b" testName="C-DOU-04" computerName="VENERE" duration="00:00:00.0007280" startTime="2026-11-27T18:27:10.4273518+01:00" endTime="2026-11-27T18:27:10.4280793+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="84184209-7473-4612-80eb-acdad4e5f541" />
+    <UnitTestResult executionId="00789059-7bba-4eb2-8984-740fea0cfc6f" testId="3d5a4161-1a85-6e19-133c-075198497e79" testName="C-DEF-05" computerName="VENERE" duration="00:00:00.0011400" startTime="2026-11-27T18:27:10.3981097+01:00" endTime="2026-11-27T18:27:10.3992496+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="00789059-7bba-4eb2-8984-740fea0cfc6f" />
+    <UnitTestResult executionId="284998e5-1eb5-4d15-9825-47b35c620e1c" testId="1b4c2e9e-0e06-0b9c-e75e-f46e4abf6a85" testName="C-SET-03" computerName="VENERE" duration="00:00:00.0004710" startTime="2026-11-27T18:27:11.8579059+01:00" endTime="2026-11-27T18:27:11.8583766+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="284998e5-1eb5-4d15-9825-47b35c620e1c" />
+    <UnitTestResult executionId="0a453e0d-0a47-4e4e-be5b-2849c409cce4" testId="bc04c485-9be6-d290-d1a9-3750793bdb1b" testName="C-DEC-04" computerName="VENERE" duration="00:00:00.0015230" startTime="2026-11-27T18:27:10.3943582+01:00" endTime="2026-11-27T18:27:10.3958802+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0a453e0d-0a47-4e4e-be5b-2849c409cce4" />
+    <UnitTestResult executionId="0b1eb746-464f-4804-8975-be0b5d9e4dd7" testId="4159781c-620b-45b6-ec9d-eb354a1eeafb" testName="ProtocolRoundTrip_LobbyStateMessage_29" computerName="VENERE" duration="00:00:00.0000749" startTime="2026-11-27T18:27:11.8835786+01:00" endTime="2026-11-27T18:27:11.8836536+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0b1eb746-464f-4804-8975-be0b5d9e4dd7" />
+    <UnitTestResult executionId="b57b32e2-3cd1-4fcc-8c13-9f86b4ca4cbf" testId="82b39a13-2b32-009a-d9a6-6d5d9eb47cc8" testName="ProtocolRoundTrip_CommandMessage_2" computerName="VENERE" duration="00:00:00.0007919" startTime="2026-11-27T18:27:11.8775834+01:00" endTime="2026-11-27T18:27:11.8783745+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b57b32e2-3cd1-4fcc-8c13-9f86b4ca4cbf" />
+    <UnitTestResult executionId="64437833-0c06-49a3-a5b2-3c71113be45f" testId="d499252d-5758-d728-c466-ede879388199" testName="C-PLA-10" computerName="VENERE" duration="00:00:00.0011490" startTime="2026-11-27T18:27:10.4069624+01:00" endTime="2026-11-27T18:27:10.4081111+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="64437833-0c06-49a3-a5b2-3c71113be45f" />
+    <UnitTestResult executionId="5ba43c07-de00-45d7-8886-7a2a37fd2d36" testId="dc4a154f-4258-b912-c214-8429fed389ff" testName="C-PRV-05" computerName="VENERE" duration="00:00:00.0013070" startTime="2026-11-27T18:27:11.6835065+01:00" endTime="2026-11-27T18:27:11.6848131+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5ba43c07-de00-45d7-8886-7a2a37fd2d36" />
+    <UnitTestResult executionId="2d478791-53a4-40c4-976b-35439d81ced8" testId="dc612b7b-df8a-0dc5-37b1-a5a530db6f90" testName="C-DOU-03" computerName="VENERE" duration="00:00:00.0015530" startTime="2026-11-27T18:27:10.4501585+01:00" endTime="2026-11-27T18:27:10.4517110+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2d478791-53a4-40c4-976b-35439d81ced8" />
+    <UnitTestResult executionId="5f0d01dd-1854-4afe-9b4f-a3f47cd6698a" testId="1e8774bd-9cb4-b988-d847-d9d15474e102" testName="C-DOU-11" computerName="VENERE" duration="00:00:00.0092200" startTime="2026-11-27T18:27:10.3720446+01:00" endTime="2026-11-27T18:27:10.3812638+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5f0d01dd-1854-4afe-9b4f-a3f47cd6698a" />
+    <UnitTestResult executionId="4f98ddb1-ecab-4e5f-8a35-1a5b7dfef0bf" testId="c3e8b34e-6bd5-9621-b45d-2599cf4a04fc" testName="C-DEC-06" computerName="VENERE" duration="00:00:00.0008280" startTime="2026-11-27T18:27:10.4364278+01:00" endTime="2026-11-27T18:27:10.4372551+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4f98ddb1-ecab-4e5f-8a35-1a5b7dfef0bf" />
+    <UnitTestResult executionId="360512d5-0d8b-42e5-b7ee-b17741d49242" testId="a2434a04-f248-5f41-e9a0-a75bcd8b7cd4" testName="RandomGamesPreserveViewPrivacyAndActionAgreement" computerName="VENERE" duration="00:00:01.2224569" startTime="2026-11-27T18:27:10.4604187+01:00" endTime="2026-11-27T18:27:11.6828750+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="360512d5-0d8b-42e5-b7ee-b17741d49242" />
+    <UnitTestResult executionId="a6017ea2-c90a-4d71-b176-3c2845e45b9b" testId="a1ed8bd5-0ac7-62ce-491c-c3b1b6b45d15" testName="CollectionsAreCopiedAndImmutable" computerName="VENERE" duration="00:00:00.0026790" startTime="2026-11-27T18:27:11.8674072+01:00" endTime="2026-11-27T18:27:11.8700856+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a6017ea2-c90a-4d71-b176-3c2845e45b9b" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="C-PLA-10" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="d499252d-5758-d728-c466-ede879388199">
+      <Execution id="64437833-0c06-49a3-a5b2-3c71113be45f" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-PLA-10" />
+    </UnitTest>
+    <UnitTest name="C-DEC-08" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="b49619eb-160e-a439-ed17-ebb4b4f36273">
+      <Execution id="b9bb9341-d187-4e2c-b623-11a09a4a6307" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DEC-08" />
+    </UnitTest>
+    <UnitTest name="C-PRV-06" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="ab983c57-77a7-c01f-1e23-73e4742ff9ee">
+      <Execution id="25a96dea-822d-4e89-a161-2a1968b177b1" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-PRV-06" />
+    </UnitTest>
+    <UnitTest name="RevelationAndDiscardDuplicatesCannotApplyTwice" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="64b8c093-2736-e0a4-4087-17c6e27d66a4">
+      <Execution id="ed00341f-0304-4b05-bf15-d52d42fa856a" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="RevelationAndDiscardDuplicatesCannotApplyTwice" />
+    </UnitTest>
+    <UnitTest name="C-DEF-02" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="ee4062e8-5083-42bd-ecf6-bc0465e2a95b">
+      <Execution id="619a0da3-0cc6-42ca-855e-70bc397cad13" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DEF-02" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandMessage_2" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="82b39a13-2b32-009a-d9a6-6d5d9eb47cc8">
+      <Execution id="b57b32e2-3cd1-4fcc-8c13-9f86b4ca4cbf" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandMessage_2" />
+    </UnitTest>
+    <UnitTest name="C-PRV-05" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="dc4a154f-4258-b912-c214-8429fed389ff">
+      <Execution id="5ba43c07-de00-45d7-8886-7a2a37fd2d36" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-PRV-05" />
+    </UnitTest>
+    <UnitTest name="C-DOU-11" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="1e8774bd-9cb4-b988-d847-d9d15474e102">
+      <Execution id="5f0d01dd-1854-4afe-9b4f-a3f47cd6698a" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DOU-11" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandMessage_4" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="fbdf908d-4b7a-452b-6517-be214975fb03">
+      <Execution id="22e3de69-dc3f-4725-82b9-5886938954b0" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandMessage_4" />
+    </UnitTest>
+    <UnitTest name="ViewRejectsUnknownIdentityAndNullState" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="9b60ff23-dc85-df67-7159-c009586e902f">
+      <Execution id="d162bd31-1a43-4b09-854a-d13662d43d31" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="ViewRejectsUnknownIdentityAndNullState" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandRejectedMessage_13" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="6641b2c6-f83a-12c3-ca0e-6fb39d3b3199">
+      <Execution id="2a79a411-73ef-4424-8e85-3ee51d463b6b" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandRejectedMessage_13" />
+    </UnitTest>
+    <UnitTest name="CommandsConvertBothWaysWithoutIdentity(Discard)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="bc55efb7-b42e-7846-6306-043293e56930">
+      <Execution id="1b2ebd92-2eb5-47ed-a917-cd71dfed21e7" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="CommandsConvertBothWaysWithoutIdentity(Discard)" />
+    </UnitTest>
+    <UnitTest name="C-CHR-08" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="126acad8-dfdd-50b0-5caf-6a7f83c9f064">
+      <Execution id="a0b00ddd-adcb-40d2-9b98-44ff881a125a" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-CHR-08" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_LobbyStateMessage_29" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="4159781c-620b-45b6-ec9d-eb354a1eeafb">
+      <Execution id="0b1eb746-464f-4804-8975-be0b5d9e4dd7" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_LobbyStateMessage_29" />
+    </UnitTest>
+    <UnitTest name="C-SET-08" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="c4381cde-d609-c7b5-7ba4-ed841fa33563">
+      <Execution id="66766aee-6f06-4ede-b407-0d35f9de7aad" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.SetupTests" name="C-SET-08" />
+    </UnitTest>
+    <UnitTest name="MultipleDeparturesDuringDoubtAreAppliedAfterVerdict(False)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="46cb8ecd-8517-691e-1eee-b8c80e26995a">
+      <Execution id="46644775-1d54-48aa-bb90-61a23a7639fa" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="MultipleDeparturesDuringDoubtAreAppliedAfterVerdict(False)" />
+    </UnitTest>
+    <UnitTest name="C-VIC-03" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="18ddc7de-ab94-ec02-896b-ee8a6f70aa2e">
+      <Execution id="85e8d9bf-677a-44ac-8dff-610387ee7594" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-VIC-03" />
+    </UnitTest>
+    <UnitTest name="C-DOU-06" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="01dbfc35-a837-9392-e4d0-a237cb9f1279">
+      <Execution id="d5b41875-6311-48c4-b06a-dde050d5ffa8" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DOU-06" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_HelloMessage_0" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="908ca657-2522-1629-01e7-d8ded2c611cf">
+      <Execution id="dd098816-ba9f-44fc-ace1-6e4ec883d899" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_HelloMessage_0" />
+    </UnitTest>
+    <UnitTest name="C-SET-03" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="1b4c2e9e-0e06-0b9c-e75e-f46e4abf6a85">
+      <Execution id="284998e5-1eb5-4d15-9825-47b35c620e1c" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.SetupTests" name="C-SET-03" />
+    </UnitTest>
+    <UnitTest name="CreateFieldsRestorePreservesEveryValue(3)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="85378b7e-7ac4-6e83-e03b-3a6734da682f">
+      <Execution id="a1b3a406-d5c2-442a-8abf-7e879cdf02ce" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.PlayerViewRestoreTests" name="CreateFieldsRestorePreservesEveryValue(3)" />
+    </UnitTest>
+    <UnitTest name="C-DEC-01" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="d9d9d8f2-8259-01fe-debb-b10b4dc316fd">
+      <Execution id="06b061d4-a1a3-4bf9-ae97-d86f8e24ac1b" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DEC-01" />
+    </UnitTest>
+    <UnitTest name="RevelationViewNamesWhoPicksUpTheFinalPile(False,2)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="a4b48e12-cce2-526c-c516-8e80302049ed">
+      <Execution id="34d7dc93-388f-4639-98b4-99f1af50f720" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="RevelationViewNamesWhoPicksUpTheFinalPile(False,2)" />
+    </UnitTest>
+    <UnitTest name="C-DEF-05" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="3d5a4161-1a85-6e19-133c-075198497e79">
+      <Execution id="00789059-7bba-4eb2-8984-740fea0cfc6f" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DEF-05" />
+    </UnitTest>
+    <UnitTest name="C-SET-02" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="46e47ef2-23ac-4e63-bce5-60bf189a008a">
+      <Execution id="197c6109-18ba-4adf-a78f-bad236146f17" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.SetupTests" name="C-SET-02" />
+    </UnitTest>
+    <UnitTest name="C-VIC-10" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="8911ca7f-f0c6-06d5-6ae2-de6ad6dd1065">
+      <Execution id="82588f7c-2875-4464-a502-ef5d9d0b2539" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-VIC-10" />
+    </UnitTest>
+    <UnitTest name="ConfiguredFullTimerIsRestoredOnEveryNewTurnAndCorrectDoubt" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="0ce78fd6-8116-178e-f8ab-c25b5cb67485">
+      <Execution id="135cc3ef-fcdd-45b3-9d33-f144abb531fe" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="ConfiguredFullTimerIsRestoredOnEveryNewTurnAndCorrectDoubt" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_VersionMismatchMessage_26" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="cab4f4e1-66fb-09d5-df1a-8e7dc8109d74">
+      <Execution id="bfebfbb5-9a79-415c-ba49-7110b63b7118" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_VersionMismatchMessage_26" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandRejectedMessage_14" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="e9c1dd38-1183-45a3-6cdf-da9d27cf03ae">
+      <Execution id="a6996475-0ab6-4d88-954f-684ee6ba6b0a" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandRejectedMessage_14" />
+    </UnitTest>
+    <UnitTest name="C-PLA-02" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="5195aecf-41f7-2259-cba3-2af153ad036b">
+      <Execution id="431a9e42-6acd-473f-8f7d-fc98019d8059" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-PLA-02" />
+    </UnitTest>
+    <UnitTest name="HostStopOverridesAutomaticRevelation" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="147b5fc5-5cef-0aa5-b697-d60d00c7a66a">
+      <Execution id="d3487ac3-34b6-4e05-be33-35cd38329efd" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="HostStopOverridesAutomaticRevelation" />
+    </UnitTest>
+    <UnitTest name="RejectedCommandIdCannotBeRetriedWithChangedPayload" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="b195310e-9ab0-0cdc-257e-82dca095e82e">
+      <Execution id="f5028fdb-8e25-422d-bc72-4dc18603dda9" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="RejectedCommandIdCannotBeRetriedWithChangedPayload" />
+    </UnitTest>
+    <UnitTest name="EveryDoubtDepartureTableCell(True,2)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="ae2136ac-b0ed-8360-d43c-4787b740b671">
+      <Execution id="845a01fe-2090-4fcf-b8c8-b71c5d12dff2" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="EveryDoubtDepartureTableCell(True,2)" />
+    </UnitTest>
+    <UnitTest name="C-VIC-06" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="4fb1eeb3-dec0-f74d-ee65-921b76bc5beb">
+      <Execution id="8a75a1d4-6f48-473c-b534-3ce7bd27614f" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-VIC-06" />
+    </UnitTest>
+    <UnitTest name="C-PLA-03" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="8d07d7af-f1fc-c8d7-46e2-64ab26791639">
+      <Execution id="6de5ad32-805b-4b99-a2b6-ef5a15108bdc" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-PLA-03" />
+    </UnitTest>
+    <UnitTest name="C-SET-07" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="3df409f6-0454-1066-7b7b-fd60d211c982">
+      <Execution id="668a12ba-ab8f-4267-b28e-fa1869fd09ac" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.SetupTests" name="C-SET-07" />
+    </UnitTest>
+    <UnitTest name="C-DEC-03" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="22f5c3e1-79ee-eab5-2f7d-3987929519d3">
+      <Execution id="a4940371-531d-45d7-94cc-72ddd916c71d" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DEC-03" />
+    </UnitTest>
+    <UnitTest name="C-PLA-04" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="4274f780-138c-f2b9-e680-19a2cacc605e">
+      <Execution id="d995e7db-9972-4299-9d35-7ac0b6959a1d" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-PLA-04" />
+    </UnitTest>
+    <UnitTest name="C-PRV-05 (octets)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="b54eedac-019e-d73d-2b0a-5de49efe2346">
+      <Execution id="69f0d9c8-6c2b-4d66-a7ff-efdd1176ee76" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.SerializedPrivacyTests" name="C-PRV-05 (octets)" />
+    </UnitTest>
+    <UnitTest name="C-DOU-07" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="58572f97-a72d-25b8-d98e-5446f2e8ee93">
+      <Execution id="3ca280b3-15b3-4c56-9bc7-c1f782781029" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DOU-07" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandRejectedMessage_10" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="1ddcb932-2efe-2df1-f459-416afd801258">
+      <Execution id="63829b11-fdf0-465d-966a-a25d19786711" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandRejectedMessage_10" />
+    </UnitTest>
+    <UnitTest name="RevelationViewNamesWhoPicksUpTheFinalPile(False,1)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="cbe429fd-74ef-aa58-cb57-77fa191ff480">
+      <Execution id="a2448fdc-deec-42c0-9b5a-8851971fccfe" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="RevelationViewNamesWhoPicksUpTheFinalPile(False,1)" />
+    </UnitTest>
+    <UnitTest name="CreateFieldsRestorePreservesEveryValue(2)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="819e80c7-6c20-28f7-902b-7b2ce8fdb3ed">
+      <Execution id="7a735c41-6857-494a-aae2-3b3e699cf154" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.PlayerViewRestoreTests" name="CreateFieldsRestorePreservesEveryValue(2)" />
+    </UnitTest>
+    <UnitTest name="RevelationViewNamesWhoPicksUpTheFinalPile(False,0)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="0e37d9eb-65a0-77df-6b00-2e10867b4378">
+      <Execution id="18b92dec-7ff9-4c53-8809-e4aec600465c" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="RevelationViewNamesWhoPicksUpTheFinalPile(False,0)" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_LobbyStateMessage_28" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="0aafd1e4-e496-9464-7001-ab9aa1515e06">
+      <Execution id="5cec3d42-2812-4271-9275-62b06ec26736" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_LobbyStateMessage_28" />
+    </UnitTest>
+    <UnitTest name="C-VIC-12" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="bd271b2f-9301-35ea-ae02-6ea89e771c57">
+      <Execution id="ff32c728-0071-4813-822f-cb835a33e196" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-VIC-12" />
+    </UnitTest>
+    <UnitTest name="C-VIC-02" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="91bed804-7ff6-ae79-f578-b99f8f9f8008">
+      <Execution id="c7d5a95e-b33c-4004-b444-a1cab2807828" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-VIC-02" />
+    </UnitTest>
+    <UnitTest name="C-PRV-02 (octets)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="83c6d791-ca61-ce45-1323-73db3b5459bb">
+      <Execution id="61ca78b2-748a-4197-abfc-5400b8044fe7" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.SerializedPrivacyTests" name="C-PRV-02 (octets)" />
+    </UnitTest>
+    <UnitTest name="C-DEC-04" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="bc04c485-9be6-d290-d1a9-3750793bdb1b">
+      <Execution id="0a453e0d-0a47-4e4e-be5b-2849c409cce4" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DEC-04" />
+    </UnitTest>
+    <UnitTest name="C-PRV-03" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="4693d718-45c5-2b99-5484-95692bc6954e">
+      <Execution id="544e1f10-5517-4979-9939-71f67e0272e0" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-PRV-03" />
+    </UnitTest>
+    <UnitTest name="CommandIdsAreScopedToAuthenticatedPlayer" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="eef0c9f2-97e6-1b9e-52b0-5313a27eb404">
+      <Execution id="44fd9126-1771-40b5-99f3-9a0af363614d" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="CommandIdsAreScopedToAuthenticatedPlayer" />
+    </UnitTest>
+    <UnitTest name="C-VIC-11" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="1dec8429-7f15-811f-a08f-53ac10dc263b">
+      <Execution id="30fc17e6-de40-4238-8eae-cecdf3dd9b86" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-VIC-11" />
+    </UnitTest>
+    <UnitTest name="C-SET-06" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="4528e1c4-406d-053e-032a-0657681523e7">
+      <Execution id="5061b6b7-db54-487b-a18b-89ba05cac2e0" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.SetupTests" name="C-SET-06" />
+    </UnitTest>
+    <UnitTest name="C-DEC-02" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="b721b4ba-fa4c-9c1a-2b8b-160bcf5bfeb0">
+      <Execution id="da777d5f-28ab-4b6f-beef-3c8269b23653" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DEC-02" />
+    </UnitTest>
+    <UnitTest name="StaleCommandsCannotChangeState" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="ab1774a4-669b-9931-ded5-ad26836a3974">
+      <Execution id="c88d1f0c-fa1e-4e14-9a11-3ac63cef9a1c" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="StaleCommandsCannotChangeState" />
+    </UnitTest>
+    <UnitTest name="ElapsedTimeAndDepartureSnapshotsRemainFrozen" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="f92fc4b5-a489-a1cd-30ba-00e0889751f4">
+      <Execution id="ca48b664-16dd-464e-8743-a71856c5a47c" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="ElapsedTimeAndDepartureSnapshotsRemainFrozen" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandRejectedMessage_19" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="c4ff7321-92a2-88d3-c577-b24bf8a5d536">
+      <Execution id="0be6c11f-c7d3-4cf0-8f96-360b5e234405" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandRejectedMessage_19" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandRejectedMessage_17" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="716f588b-d9bc-d5b3-a0a2-8ddf810ae9b8">
+      <Execution id="1e33a744-5b3d-4a41-a131-7ac7e5831029" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandRejectedMessage_17" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_HelloMessage_1" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="cffdbd4c-425d-5a4b-543e-0a46db4e8608">
+      <Execution id="249ece50-9ed5-40bc-a80d-2ca2fbabd0d4" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_HelloMessage_1" />
+    </UnitTest>
+    <UnitTest name="C-CHR-01" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="26ef57e1-2e63-35a8-d8aa-9e6cf6e4dc6f">
+      <Execution id="7fc49b9e-6f0b-4621-9257-b4d6f0dbd44a" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-CHR-01" />
+    </UnitTest>
+    <UnitTest name="InvalidOpeningAndMalformedCommandsAreRejected" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="f5c5ff01-7175-5e06-57a1-392df848a415">
+      <Execution id="db23b2a1-a4ab-43a9-8f30-9e9afe6eb70b" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="InvalidOpeningAndMalformedCommandsAreRejected" />
+    </UnitTest>
+    <UnitTest name="C-CHR-05" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="ed8bfd10-3fea-aa56-135b-e731a67af5da">
+      <Execution id="f9d04f03-1248-4238-85a3-c00e68adb338" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-CHR-05" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandRejectedMessage_8" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="25fbfd94-f280-9adb-1797-62d406069f6e">
+      <Execution id="9e926595-acf2-428c-8932-d7f0d813ca19" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandRejectedMessage_8" />
+    </UnitTest>
+    <UnitTest name="C-DOU-02" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="e3567000-4298-63e4-fedd-f6ad732eef72">
+      <Execution id="54f2ce4f-0e43-4839-a809-259339491749" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DOU-02" />
+    </UnitTest>
+    <UnitTest name="DuelDoubtVerdictPrecedesSurvivor(False,0)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="e1ce3201-d5d1-af10-bf08-844d6aa3261e">
+      <Execution id="8d635588-dc5a-42c5-919e-b5c92c62d375" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="DuelDoubtVerdictPrecedesSurvivor(False,0)" />
+    </UnitTest>
+    <UnitTest name="C-PLA-09" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="1589e195-1e99-0d54-6372-64fd9b97c95c">
+      <Execution id="a54988a0-faf2-4b30-b725-b5c0e73f5306" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-PLA-09" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandRejectedMessage_21" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="4dfa647f-03a3-f0b3-13b4-efcdefc64d01">
+      <Execution id="fb56a1f8-0d2e-45bd-91fc-ba2af3e088be" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandRejectedMessage_21" />
+    </UnitTest>
+    <UnitTest name="DuelDoubtVerdictPrecedesSurvivor(False,1)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="2f60d4a4-5def-d69d-4995-3c2aeaf871f9">
+      <Execution id="6401ecac-07c1-403d-b743-75304c3031b0" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="DuelDoubtVerdictPrecedesSurvivor(False,1)" />
+    </UnitTest>
+    <UnitTest name="C-DOU-01" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="4c1990a0-af03-e31d-3ca3-d80a6f0c034e">
+      <Execution id="20e0851a-a1b0-451d-9e74-7907dd8abf9c" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DOU-01" />
+    </UnitTest>
+    <UnitTest name="LargeElapsedDeltaSpansTurnsAndStopsAtWinner" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="7b7e80ca-deba-a0c9-3eb2-a1eadb1b4b30">
+      <Execution id="d500a190-3a54-471a-bbad-d6bc67545c92" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="LargeElapsedDeltaSpansTurnsAndStopsAtWinner" />
+    </UnitTest>
+    <UnitTest name="C-PLA-05" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="18675df2-b734-e597-8d66-e6e76aa64c9d">
+      <Execution id="a8f4b114-0362-433e-a992-3a259b6098c7" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-PLA-05" />
+    </UnitTest>
+    <UnitTest name="RevelationViewNamesWhoPicksUpTheFinalPile(True,2)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="a27a678b-84f5-91da-ecf6-6fc96c3576e8">
+      <Execution id="36ec232d-596b-44a6-bc88-8be6ea6628cb" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="RevelationViewNamesWhoPicksUpTheFinalPile(True,2)" />
+    </UnitTest>
+    <UnitTest name="C-DEC-09" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="e58022b8-3539-3056-d086-278cd9337980">
+      <Execution id="347064ab-bdde-490e-b2a1-39c1a18df711" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DEC-09" />
+    </UnitTest>
+    <UnitTest name="C-DOU-08" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="c65a7f7c-9117-31ce-2a26-8f1ba203d3ed">
+      <Execution id="b11963b1-c4c4-4eda-a67e-5a279bf6d7f5" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DOU-08" />
+    </UnitTest>
+    <UnitTest name="C-PLA-06" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="0aeca5cb-dd57-3f87-f18b-2a21a42a7ac7">
+      <Execution id="27957204-d525-4ed3-9851-02e2920c0065" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-PLA-06" />
+    </UnitTest>
+    <UnitTest name="C-PRV-06 (octets)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="3713a3b8-cf25-7039-0f44-4761ad178f84">
+      <Execution id="90633541-3153-4bae-9533-1a89bd2b3d59" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.SerializedPrivacyTests" name="C-PRV-06 (octets)" />
+    </UnitTest>
+    <UnitTest name="C-CHR-02" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="c84334ab-fb14-cc49-6abc-229d505861d8">
+      <Execution id="e19376e7-4c4f-4e99-a434-51a7485db0ff" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-CHR-02" />
+    </UnitTest>
+    <UnitTest name="C-CHR-04" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="01dd6578-b977-0d91-f4b9-ad7ca76c70d8">
+      <Execution id="3213599d-3c90-45f3-98eb-e50b80841e71" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-CHR-04" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandRejectedMessage_23" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="19a8adbd-fd61-3748-83c5-844eb7ce518b">
+      <Execution id="4d4ab85d-f8aa-4530-b3da-51c79a5cb239" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandRejectedMessage_23" />
+    </UnitTest>
+    <UnitTest name="C-CHR-06" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="33bcd159-5b85-6869-1559-7ac59e74c2a5">
+      <Execution id="f5de357b-106b-4273-9791-6d71dac0c5cd" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-CHR-06" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandRejectedMessage_18" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="d1fd6d44-b003-7c0d-af2f-d49ee743597f">
+      <Execution id="e2a548ea-0294-4597-af90-9548aa61677c" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandRejectedMessage_18" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_LobbyStateMessage_30" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="2f92bce2-3649-6818-f25e-cf74157be65c">
+      <Execution id="8dbacc0c-6537-478a-8eff-f287f40375cf" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_LobbyStateMessage_30" />
+    </UnitTest>
+    <UnitTest name="RevelationViewNamesWhoPicksUpTheFinalPile(True,0)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="c32de2df-55ad-aa19-439a-14b4ce5c75cd">
+      <Execution id="7261d8ea-6eb4-4822-b393-ad86b76defc6" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="RevelationViewNamesWhoPicksUpTheFinalPile(True,0)" />
+    </UnitTest>
+    <UnitTest name="C-VIC-07" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="e3f8d358-1314-7f24-2e91-984e993d1095">
+      <Execution id="de9b3374-fa40-466d-b702-5668ce92fb27" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-VIC-07" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_ReadyMessage_5" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="998727b9-c21a-e038-132e-4783ebe688ef">
+      <Execution id="993f654e-e70c-45e8-9477-78540ab9db2a" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_ReadyMessage_5" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_WelcomeMessage_7" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="b5f3ea01-7044-f2dc-8428-2854274fe1a7">
+      <Execution id="0aa05e90-68c3-4c35-9c32-1f43afcdda65" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_WelcomeMessage_7" />
+    </UnitTest>
+    <UnitTest name="HostResolutionIsGuardedAndCannotRunTwice" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="0456dba3-4405-1706-d861-eb6b44166b70">
+      <Execution id="938ef589-cb6c-4be5-895a-89f79883f4fe" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="HostResolutionIsGuardedAndCannotRunTwice" />
+    </UnitTest>
+    <UnitTest name="C-SET-04" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="a901adcb-5ce3-27cf-dd19-fc6ec2ce966c">
+      <Execution id="ac8d1678-1cbe-4445-9c64-d40a45d3f3c7" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.SetupTests" name="C-SET-04" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandRejectedMessage_16" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="84a92128-89bd-b334-68de-a13cce5169f2">
+      <Execution id="30312dd9-49f8-41d3-be16-79c5afea5469" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandRejectedMessage_16" />
+    </UnitTest>
+    <UnitTest name="EveryDoubtDepartureTableCell(False,1)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="af0e2df4-33b6-7f6e-0571-6dc0bc32afab">
+      <Execution id="7bfca55e-2e7c-4896-9f93-140d65ff049d" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="EveryDoubtDepartureTableCell(False,1)" />
+    </UnitTest>
+    <UnitTest name="C-SET-01" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="c029c297-db7f-a46c-9194-3ae80deb5703">
+      <Execution id="4dc8c8e6-6502-4ec0-b0b1-02ab015c7921" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.SetupTests" name="C-SET-01" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandRejectedMessage_25" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="c738e757-0afa-6738-a18b-90c894b2694d">
+      <Execution id="1508cf69-fa53-40b4-8ba2-3e5a2f622d5b" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandRejectedMessage_25" />
+    </UnitTest>
+    <UnitTest name="RevelationViewNamesWhoPicksUpTheFinalPile(True,1)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="ef978b44-b9f4-9b39-96e0-8f03110b64cc">
+      <Execution id="755e6170-38f9-4a78-8876-2d30282c78e9" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="RevelationViewNamesWhoPicksUpTheFinalPile(True,1)" />
+    </UnitTest>
+    <UnitTest name="EveryDoubtDepartureTableCell(False,0)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="a56bd6e2-036d-b0c8-91fb-4fd147231f1c">
+      <Execution id="48374776-f68f-4a77-9a16-040c33817638" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="EveryDoubtDepartureTableCell(False,0)" />
+    </UnitTest>
+    <UnitTest name="CommandsConvertBothWaysWithoutIdentity(Play)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="2ceb60bf-5bc2-2a63-1457-17d416b9bc90">
+      <Execution id="92a171d9-3348-4bfe-86de-243ead3c4643" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="CommandsConvertBothWaysWithoutIdentity(Play)" />
+    </UnitTest>
+    <UnitTest name="CommandsConvertBothWaysWithoutIdentity(Doubt)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="22762121-fec6-f784-833f-293769297847">
+      <Execution id="beecd3ae-fd93-4e46-a593-5061cf94d9c0" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="CommandsConvertBothWaysWithoutIdentity(Doubt)" />
+    </UnitTest>
+    <UnitTest name="C-PLA-11" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="3c772d8d-0244-db29-f287-39db041720c7">
+      <Execution id="1da12abf-b84e-464a-9ea8-dcac3c377bbc" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-PLA-11" />
+    </UnitTest>
+    <UnitTest name="RevelationViewNoRecipientWhenVictoryIsConfirmedOrAutomatic(False)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="ac1e6ed2-f2ea-7cf5-e68c-028f174db9e9">
+      <Execution id="4d468b8e-f2a2-4f78-999c-86e0675a54f2" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="RevelationViewNoRecipientWhenVictoryIsConfirmedOrAutomatic(False)" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_ViewMessage_31" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="d23fdb5d-92a5-1bf6-22cc-01138962a0fb">
+      <Execution id="405be422-226f-4fa2-a9e9-ce4c704510df" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_ViewMessage_31" />
+    </UnitTest>
+    <UnitTest name="EveryDoubtDepartureTableCell(True,1)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="4f3bab31-30bb-d0a7-7624-7c0dc008912c">
+      <Execution id="6a97f29c-3716-4abb-aa76-2d379383e9e9" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="EveryDoubtDepartureTableCell(True,1)" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_LobbyStateMessage_27" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="97b799e4-b6a6-1aba-cecd-d75b49a3de96">
+      <Execution id="48c2b263-9bea-4db1-b65d-61eb094603bb" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_LobbyStateMessage_27" />
+    </UnitTest>
+    <UnitTest name="C-DEF-01" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="6be0ae5e-b204-18d8-9843-c9c618eb70b1">
+      <Execution id="4bc4aa13-fe3a-449d-82c9-8c6128207f18" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DEF-01" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandRejectedMessage_12" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="0c75f6e1-9070-fcbd-f9eb-8902965d2693">
+      <Execution id="6509dac0-bc6f-4f61-b517-a19dd85e81f2" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandRejectedMessage_12" />
+    </UnitTest>
+    <UnitTest name="C-DEC-06" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="c3e8b34e-6bd5-9621-b45d-2599cf4a04fc">
+      <Execution id="4f98ddb1-ecab-4e5f-8a35-1a5b7dfef0bf" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DEC-06" />
+    </UnitTest>
+    <UnitTest name="C-PRV-02" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="45b37a97-679a-d085-6274-dc25f8152e0b">
+      <Execution id="36dfc36d-93e1-41ba-8f8b-fa229acdbf86" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-PRV-02" />
+    </UnitTest>
+    <UnitTest name="ViewExposesOwnSkippedTurnsForTheExclusionWarning" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="7923badb-d665-99b7-b653-9d63e265fe58">
+      <Execution id="167a81db-8852-4e8e-9214-510812329fea" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="ViewExposesOwnSkippedTurnsForTheExclusionWarning" />
+    </UnitTest>
+    <UnitTest name="C-DOU-09" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="3138257b-3730-6838-53cb-98e21dd2bd80">
+      <Execution id="5b3729ad-db71-4eaf-ac22-4e8c0808f5bd" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DOU-09" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandRejectedMessage_22" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="b7599c0d-cf13-6104-52b9-6d5f0e2795e5">
+      <Execution id="770a666d-29f8-4a64-860e-af7af3bbbad1" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandRejectedMessage_22" />
+    </UnitTest>
+    <UnitTest name="C-VIC-13" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="8188d0b1-0f29-88b3-61bb-3b6b83aaad2e">
+      <Execution id="b231f61a-adba-4338-b9fa-0f1181a68bc0" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-VIC-13" />
+    </UnitTest>
+    <UnitTest name="InvalidHostEventsAndDuplicateDeparturesHaveNoEffect" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="a0331351-6ddf-4705-0b23-b95ff3e1eb58">
+      <Execution id="b29ac385-324a-455d-9ea7-7f5924455750" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="InvalidHostEventsAndDuplicateDeparturesHaveNoEffect" />
+    </UnitTest>
+    <UnitTest name="C-PLA-01" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="fc578d1a-e05a-e3c8-bfdb-70fecfbd69ef">
+      <Execution id="9330f80d-210e-427e-a143-d4d4309ec85e" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-PLA-01" />
+    </UnitTest>
+    <UnitTest name="C-VIC-01" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="74d8c731-5b8a-6c7a-fe29-f10ff045130b">
+      <Execution id="2d551135-20c4-48a7-bc76-53e3f50c0ec0" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-VIC-01" />
+    </UnitTest>
+    <UnitTest name="C-DEC-10" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="24c646cf-2d09-4f2e-6b33-739d99544a0c">
+      <Execution id="8fae2537-65b2-4812-9414-4f1d33c8c9c7" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DEC-10" />
+    </UnitTest>
+    <UnitTest name="C-PRV-01" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="7e120d5f-2699-1a88-b3d3-76d78ddedd8d">
+      <Execution id="2ddfdaf9-579b-475e-b360-be6dd8e72b6d" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-PRV-01" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_ViewMessage_32" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="84194fa7-ba8b-19e1-14a4-c76d105cd5b6">
+      <Execution id="1af93cbf-27a6-45fd-8b37-f9454baf4d7c" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_ViewMessage_32" />
+    </UnitTest>
+    <UnitTest name="C-DOU-05" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="b22f189a-d2dd-da16-8594-9fe8c31f9ab2">
+      <Execution id="5ce04a03-64b3-4416-854d-beb763ecc649" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DOU-05" />
+    </UnitTest>
+    <UnitTest name="CollectionsAreCopiedAndImmutable" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="a1ed8bd5-0ac7-62ce-491c-c3b1b6b45d15">
+      <Execution id="a6017ea2-c90a-4d71-b176-3c2845e45b9b" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="CollectionsAreCopiedAndImmutable" />
+    </UnitTest>
+    <UnitTest name="C-DOU-13" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="3fb16886-b58f-8d8f-a0ba-72e819c85051">
+      <Execution id="75aa43be-858d-4168-9bc2-a32fba92af9b" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DOU-13" />
+    </UnitTest>
+    <UnitTest name="C-VIC-04" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="f4a6824d-bdaa-591d-bc83-582a0a0728a7">
+      <Execution id="9782e582-01d6-4a21-89d6-a99ef5ccc287" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-VIC-04" />
+    </UnitTest>
+    <UnitTest name="RandomGamesPreserveViewPrivacyAndActionAgreement" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="a2434a04-f248-5f41-e9a0-a75bcd8b7cd4">
+      <Execution id="360512d5-0d8b-42e5-b7ee-b17741d49242" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="RandomGamesPreserveViewPrivacyAndActionAgreement" />
+    </UnitTest>
+    <UnitTest name="C-DOU-03" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="dc612b7b-df8a-0dc5-37b1-a5a530db6f90">
+      <Execution id="2d478791-53a4-40c4-976b-35439d81ced8" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DOU-03" />
+    </UnitTest>
+    <UnitTest name="ViewsCoverActionMatrixAndTerminalOutcomes" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="f4ea8d92-ec50-4117-316d-7fa6d22a729f">
+      <Execution id="217a8f12-b658-4c35-a4e8-e3f6ca3d42b9" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="ViewsCoverActionMatrixAndTerminalOutcomes" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandRejectedMessage_24" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="551af880-0a13-ec01-c9de-22871d2cb24f">
+      <Execution id="ca6e79da-2909-484e-a307-6c7b60da9111" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandRejectedMessage_24" />
+    </UnitTest>
+    <UnitTest name="C-PRV-04" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="adac60d8-5aa0-fc4a-0605-bab9fdd576f0">
+      <Execution id="28d149f2-209a-49bb-9ac1-320abb870326" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-PRV-04" />
+    </UnitTest>
+    <UnitTest name="DuelDoubtVerdictPrecedesSurvivor(True,0)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="61d27397-7920-293d-d7b8-8c156ac9dbef">
+      <Execution id="7bfd1620-3139-4c4c-9df6-4e51a0fb70a1" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="DuelDoubtVerdictPrecedesSurvivor(True,0)" />
+    </UnitTest>
+    <UnitTest name="ViewCopiesAreImmutableAndDetached" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="c7082f51-60d3-e3d3-6a82-45584acd7b35">
+      <Execution id="b55d47bb-bd26-4864-b175-5bd43f637160" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="ViewCopiesAreImmutableAndDetached" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandMessage_3" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="91c91fe3-7462-7003-e72e-254e479aef83">
+      <Execution id="3ad111a3-adde-4785-b219-6984c2473f15" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandMessage_3" />
+    </UnitTest>
+    <UnitTest name="C-DEF-03" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="c7f6990e-d448-99db-7423-f2b312a33590">
+      <Execution id="506aedbb-fdef-442d-ab4c-b35f52a09b4b" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DEF-03" />
+    </UnitTest>
+    <UnitTest name="C-DOU-10" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="69903355-0763-31cb-0259-458f13802ae4">
+      <Execution id="e361db53-98d8-43b4-9a3b-37bd3f65b949" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DOU-10" />
+    </UnitTest>
+    <UnitTest name="C-CHR-07" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="591110ac-f2d0-873d-a1b6-bb540796a58b">
+      <Execution id="bfc76de4-03c2-4a57-9b64-3a6cff3f6010" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-CHR-07" />
+    </UnitTest>
+    <UnitTest name="CreateFieldsRestorePreservesEveryValue(6)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="1d47bec3-66e6-31ce-c247-a16141fa55a8">
+      <Execution id="ac1ca117-c7cd-4a04-ab6d-49de6db8a8bf" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.PlayerViewRestoreTests" name="CreateFieldsRestorePreservesEveryValue(6)" />
+    </UnitTest>
+    <UnitTest name="ClosedWindowCannotBeDoubtedEvenByOriginalRespondent" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="912af536-0156-f8f0-bcb9-c3353a1fa378">
+      <Execution id="5ac3749f-474c-4fdf-b2bd-ec92ae8ac2aa" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="ClosedWindowCannotBeDoubtedEvenByOriginalRespondent" />
+    </UnitTest>
+    <UnitTest name="C-PLA-08" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="2e11fea3-7d9c-0e71-55fb-dd6dc2e8e969">
+      <Execution id="c5536fac-ffbc-482d-9891-74b062bfa418" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-PLA-08" />
+    </UnitTest>
+    <UnitTest name="ViewMessageExposesOnlyAPlayerViewConstructionPath" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="9e8cb454-5da9-d9a9-f707-a9c6293aa23c">
+      <Execution id="17547864-b568-4b55-bd19-1f31d87ebb85" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.SerializedPrivacyTests" name="ViewMessageExposesOnlyAPlayerViewConstructionPath" />
+    </UnitTest>
+    <UnitTest name="C-DOU-04" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="678a2776-86c6-3d1d-2df5-d6435189e06b">
+      <Execution id="84184209-7473-4612-80eb-acdad4e5f541" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DOU-04" />
+    </UnitTest>
+    <UnitTest name="C-CHR-03" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="8ad81de9-6646-6d42-55be-e22dad4b5c3e">
+      <Execution id="b7be3e7a-7640-46bf-8dda-4b22567f9442" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-CHR-03" />
+    </UnitTest>
+    <UnitTest name="C-VIC-08" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="6557d403-85a8-d844-7e53-e3347bbbfe7b">
+      <Execution id="d924cb1f-df3e-46a8-ae91-9bdab1dbc763" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-VIC-08" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandRejectedMessage_15" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="bc45ea43-0b2d-c8e7-2108-a9c8a8c9b374">
+      <Execution id="58a06f7a-1b53-4088-b1e2-03be1287b13a" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandRejectedMessage_15" />
+    </UnitTest>
+    <UnitTest name="EveryConfirmedActionResetsInactivity(Doubt)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="29a67b7b-e1e2-415a-2d97-1f2b440cb615">
+      <Execution id="80ffe49b-ae62-497b-a28e-bf87d7dfd4ec" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="EveryConfirmedActionResetsInactivity(Doubt)" />
+    </UnitTest>
+    <UnitTest name="C-PRV-03 (octets)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="375eae85-204d-2201-ce83-2c15d16c754c">
+      <Execution id="94ab4e87-dbb7-426f-8ddf-cd3a1eb43f16" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.SerializedPrivacyTests" name="C-PRV-03 (octets)" />
+    </UnitTest>
+    <UnitTest name="RestoreCopiesInputsAndDoesNotRecomputeActionsOrVerdict" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="48306dfe-d329-770d-7e10-d78ad502af7f">
+      <Execution id="966fc4a6-2755-4c2f-aabe-0789399d8171" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.PlayerViewRestoreTests" name="RestoreCopiesInputsAndDoesNotRecomputeActionsOrVerdict" />
+    </UnitTest>
+    <UnitTest name="EveryDoubtDepartureTableCell(False,2)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="6463be3c-1ce6-b043-8a9a-836cc4765324">
+      <Execution id="b31207c7-b4d5-4483-9a39-9c358d5a8b85" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="EveryDoubtDepartureTableCell(False,2)" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandRejectedMessage_20" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="cd370ba9-2a69-2bbf-c28b-b4e2081e36d1">
+      <Execution id="65deadef-0f64-4870-8dd7-024828c0b56b" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandRejectedMessage_20" />
+    </UnitTest>
+    <UnitTest name="WireHeaderAndGuidLayoutAreStableLittleEndian" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="45bb65ec-9c67-2069-7011-27d31e86d7f5">
+      <Execution id="100e51f3-746c-4877-99af-6025fbe3c08a" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="WireHeaderAndGuidLayoutAreStableLittleEndian" />
+    </UnitTest>
+    <UnitTest name="C-DEF-04" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="1ef22d3f-b4b5-2382-da8f-5582ba492fff">
+      <Execution id="ec575027-71f9-4921-9d15-bd195f72b683" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DEF-04" />
+    </UnitTest>
+    <UnitTest name="C-PLA-07" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="c3667d42-5cb0-75c5-4cd0-38842f5b3cc2">
+      <Execution id="ed934b61-410d-4790-8ea6-437ec6a7ab85" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-PLA-07" />
+    </UnitTest>
+    <UnitTest name="C-DEC-05" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="3528d581-d0ed-ea1d-a289-df6bbf68c173">
+      <Execution id="2c08749e-1761-41c1-8ffa-58a97ceedc84" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DEC-05" />
+    </UnitTest>
+    <UnitTest name="MultipleDeparturesDuringDoubtAreAppliedAfterVerdict(True)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="8064c8ee-5cf3-2a3c-6cfb-2e0e2374f637">
+      <Execution id="b37d65c2-dc79-4e07-9cfa-b782ec6d34ae" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="MultipleDeparturesDuringDoubtAreAppliedAfterVerdict(True)" />
+    </UnitTest>
+    <UnitTest name="EveryConfirmedActionResetsInactivity(Discard)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="b0491fb6-3230-bbc2-17c5-54c9311d2c74">
+      <Execution id="27928813-e7c8-47f0-bfd0-b566dab22fb0" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="EveryConfirmedActionResetsInactivity(Discard)" />
+    </UnitTest>
+    <UnitTest name="C-SET-05" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="f74be326-30d5-518f-17b1-cd76ac541c6a">
+      <Execution id="57e39961-dc7c-4981-bba0-889e88b95031" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.SetupTests" name="C-SET-05" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandRejectedMessage_9" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="23e9e957-4e2c-aece-f88f-8b62e4a6d9e8">
+      <Execution id="2cbf87c6-22b4-4952-9137-c26938e6a3a1" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandRejectedMessage_9" />
+    </UnitTest>
+    <UnitTest name="C-DOU-12" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="dbc07de0-f7c2-5ea4-e332-539fe4c91db8">
+      <Execution id="55a64189-921e-4c99-bd25-a936ed1d4580" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-DOU-12" />
+    </UnitTest>
+    <UnitTest name="C-VIC-05" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="106f0840-5be2-0b89-4701-04aebcd39d5a">
+      <Execution id="592416c5-e5aa-413c-b5c9-492a8fcaef6d" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-VIC-05" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_CommandRejectedMessage_11" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="c3ae9754-4861-2f77-44e8-716c11ec25e1">
+      <Execution id="92254c47-1c8e-4e01-b89f-14f96dabb578" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_CommandRejectedMessage_11" />
+    </UnitTest>
+    <UnitTest name="DuelDoubtVerdictPrecedesSurvivor(True,1)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="856eaee5-f5a3-834b-d675-dd423b1da5dd">
+      <Execution id="db920271-e3f9-4fae-926f-b925e3a7a00c" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="DuelDoubtVerdictPrecedesSurvivor(True,1)" />
+    </UnitTest>
+    <UnitTest name="C-SET-09" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="e24b1edd-b318-c6ca-3498-62a6d0355f9b">
+      <Execution id="a2683df0-b76b-41c2-8f78-a9125f287258" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.SetupTests" name="C-SET-09" />
+    </UnitTest>
+    <UnitTest name="CountdownAloneDoesNotMakeCommandsStale" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="db4ea39f-9e92-aef3-a362-ce9c1e2a8b54">
+      <Execution id="fb2be8de-fca6-4f2c-b1b7-5a088fe562a9" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="CountdownAloneDoesNotMakeCommandsStale" />
+    </UnitTest>
+    <UnitTest name="EveryDoubtDepartureTableCell(True,0)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="d40b88cb-fffa-0323-a390-5e2c89d915c2">
+      <Execution id="9e24493e-57ca-4f0c-9a42-fe9a4c7463d1" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="EveryDoubtDepartureTableCell(True,0)" />
+    </UnitTest>
+    <UnitTest name="ProtocolRoundTrip_ReadyMessage_6" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="7645d324-5d5c-a197-dea4-3cefd9b85ae7">
+      <Execution id="34ef28ee-bf40-4150-a497-94bb3a0337f7" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.ProtocolRoundTripTests" name="ProtocolRoundTrip_ReadyMessage_6" />
+    </UnitTest>
+    <UnitTest name="C-PRV-01 (octets)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="e98a4d5c-a796-9ef6-c168-0b0640dd917b">
+      <Execution id="b92ef0b6-9c20-43f1-bd6e-28a7e27a624c" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.SerializedPrivacyTests" name="C-PRV-01 (octets)" />
+    </UnitTest>
+    <UnitTest name="RevelationViewNoRecipientWhenVictoryIsConfirmedOrAutomatic(True)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="1e2a6f9e-69f3-1f4f-dcdd-5fa533e62ea9">
+      <Execution id="1c07c03b-ff26-42f4-9ef8-8f6327482897" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="RevelationViewNoRecipientWhenVictoryIsConfirmedOrAutomatic(True)" />
+    </UnitTest>
+    <UnitTest name="C-PRV-04 (octets)" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="c3f392f2-e11f-abb3-4a16-83ec034f1ec4">
+      <Execution id="dea1c1ea-e714-4327-8527-a4ce03837448" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Protocol.SerializedPrivacyTests" name="C-PRV-04 (octets)" />
+    </UnitTest>
+    <UnitTest name="C-VIC-14" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="bc571082-3251-1729-b391-b52933c87fd7">
+      <Execution id="64a4901f-d3e9-418e-afd8-fff27d7385cb" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-VIC-14" />
+    </UnitTest>
+    <UnitTest name="C-VIC-09" storage="c:\users\sleep\desktop\dubito\tests\dubito.core.tests\bin\debug\net10.0\dubito.core.tests.dll" id="26cd4a61-d913-cafa-aa5f-d42c4456c683">
+      <Execution id="7ae61b5e-a341-4dd4-9851-66e8fc7cf307" />
+      <TestMethod codeBase="C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="Dubito.Tests.Core.ActionTests" name="C-VIC-09" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="9b60ff23-dc85-df67-7159-c009586e902f" executionId="d162bd31-1a43-4b09-854a-d13662d43d31" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="61d27397-7920-293d-d7b8-8c156ac9dbef" executionId="7bfd1620-3139-4c4c-9df6-4e51a0fb70a1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="46e47ef2-23ac-4e63-bce5-60bf189a008a" executionId="197c6109-18ba-4adf-a78f-bad236146f17" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8ad81de9-6646-6d42-55be-e22dad4b5c3e" executionId="b7be3e7a-7640-46bf-8dda-4b22567f9442" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f4a6824d-bdaa-591d-bc83-582a0a0728a7" executionId="9782e582-01d6-4a21-89d6-a99ef5ccc287" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4274f780-138c-f2b9-e680-19a2cacc605e" executionId="d995e7db-9972-4299-9d35-7ac0b6959a1d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a27a678b-84f5-91da-ecf6-6fc96c3576e8" executionId="36ec232d-596b-44a6-bc88-8be6ea6628cb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c7f6990e-d448-99db-7423-f2b312a33590" executionId="506aedbb-fdef-442d-ab4c-b35f52a09b4b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="147b5fc5-5cef-0aa5-b697-d60d00c7a66a" executionId="d3487ac3-34b6-4e05-be33-35cd38329efd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b5f3ea01-7044-f2dc-8428-2854274fe1a7" executionId="0aa05e90-68c3-4c35-9c32-1f43afcdda65" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e3f8d358-1314-7f24-2e91-984e993d1095" executionId="de9b3374-fa40-466d-b702-5668ce92fb27" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ddcb932-2efe-2df1-f459-416afd801258" executionId="63829b11-fdf0-465d-966a-a25d19786711" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5195aecf-41f7-2259-cba3-2af153ad036b" executionId="431a9e42-6acd-473f-8f7d-fc98019d8059" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="819e80c7-6c20-28f7-902b-7b2ce8fdb3ed" executionId="7a735c41-6857-494a-aae2-3b3e699cf154" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6463be3c-1ce6-b043-8a9a-836cc4765324" executionId="b31207c7-b4d5-4483-9a39-9c358d5a8b85" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="74d8c731-5b8a-6c7a-fe29-f10ff045130b" executionId="2d551135-20c4-48a7-bc76-53e3f50c0ec0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="24c646cf-2d09-4f2e-6b33-739d99544a0c" executionId="8fae2537-65b2-4812-9414-4f1d33c8c9c7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c32de2df-55ad-aa19-439a-14b4ce5c75cd" executionId="7261d8ea-6eb4-4822-b393-ad86b76defc6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8d07d7af-f1fc-c8d7-46e2-64ab26791639" executionId="6de5ad32-805b-4b99-a2b6-ef5a15108bdc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2f92bce2-3649-6818-f25e-cf74157be65c" executionId="8dbacc0c-6537-478a-8eff-f287f40375cf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="126acad8-dfdd-50b0-5caf-6a7f83c9f064" executionId="a0b00ddd-adcb-40d2-9b98-44ff881a125a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bd271b2f-9301-35ea-ae02-6ea89e771c57" executionId="ff32c728-0071-4813-822f-cb835a33e196" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fc578d1a-e05a-e3c8-bfdb-70fecfbd69ef" executionId="9330f80d-210e-427e-a143-d4d4309ec85e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4c1990a0-af03-e31d-3ca3-d80a6f0c034e" executionId="20e0851a-a1b0-451d-9e74-7907dd8abf9c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f92fc4b5-a489-a1cd-30ba-00e0889751f4" executionId="ca48b664-16dd-464e-8743-a71856c5a47c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cffdbd4c-425d-5a4b-543e-0a46db4e8608" executionId="249ece50-9ed5-40bc-a80d-2ca2fbabd0d4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ae2136ac-b0ed-8360-d43c-4787b740b671" executionId="845a01fe-2090-4fcf-b8c8-b71c5d12dff2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="db4ea39f-9e92-aef3-a362-ce9c1e2a8b54" executionId="fb2be8de-fca6-4f2c-b1b7-5a088fe562a9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="69903355-0763-31cb-0259-458f13802ae4" executionId="e361db53-98d8-43b4-9a3b-37bd3f65b949" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="af0e2df4-33b6-7f6e-0571-6dc0bc32afab" executionId="7bfca55e-2e7c-4896-9f93-140d65ff049d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="91bed804-7ff6-ae79-f578-b99f8f9f8008" executionId="c7d5a95e-b33c-4004-b444-a1cab2807828" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="998727b9-c21a-e038-132e-4783ebe688ef" executionId="993f654e-e70c-45e8-9477-78540ab9db2a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c65a7f7c-9117-31ce-2a26-8f1ba203d3ed" executionId="b11963b1-c4c4-4eda-a67e-5a279bf6d7f5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4528e1c4-406d-053e-032a-0657681523e7" executionId="5061b6b7-db54-487b-a18b-89ba05cac2e0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0c75f6e1-9070-fcbd-f9eb-8902965d2693" executionId="6509dac0-bc6f-4f61-b517-a19dd85e81f2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bc571082-3251-1729-b391-b52933c87fd7" executionId="64a4901f-d3e9-418e-afd8-fff27d7385cb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="58572f97-a72d-25b8-d98e-5446f2e8ee93" executionId="3ca280b3-15b3-4c56-9bc7-c1f782781029" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="551af880-0a13-ec01-c9de-22871d2cb24f" executionId="ca6e79da-2909-484e-a307-6c7b60da9111" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d9d9d8f2-8259-01fe-debb-b10b4dc316fd" executionId="06b061d4-a1a3-4bf9-ae97-d86f8e24ac1b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="64b8c093-2736-e0a4-4087-17c6e27d66a4" executionId="ed00341f-0304-4b05-bf15-d52d42fa856a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="22762121-fec6-f784-833f-293769297847" executionId="beecd3ae-fd93-4e46-a593-5061cf94d9c0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="01dbfc35-a837-9392-e4d0-a237cb9f1279" executionId="d5b41875-6311-48c4-b06a-dde050d5ffa8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6557d403-85a8-d844-7e53-e3347bbbfe7b" executionId="d924cb1f-df3e-46a8-ae91-9bdab1dbc763" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="23e9e957-4e2c-aece-f88f-8b62e4a6d9e8" executionId="2cbf87c6-22b4-4952-9137-c26938e6a3a1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e3567000-4298-63e4-fedd-f6ad732eef72" executionId="54f2ce4f-0e43-4839-a809-259339491749" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2ceb60bf-5bc2-2a63-1457-17d416b9bc90" executionId="92a171d9-3348-4bfe-86de-243ead3c4643" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b22f189a-d2dd-da16-8594-9fe8c31f9ab2" executionId="5ce04a03-64b3-4416-854d-beb763ecc649" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c3667d42-5cb0-75c5-4cd0-38842f5b3cc2" executionId="ed934b61-410d-4790-8ea6-437ec6a7ab85" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0e37d9eb-65a0-77df-6b00-2e10867b4378" executionId="18b92dec-7ff9-4c53-8809-e4aec600465c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="91c91fe3-7462-7003-e72e-254e479aef83" executionId="3ad111a3-adde-4785-b219-6984c2473f15" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="45b37a97-679a-d085-6274-dc25f8152e0b" executionId="36dfc36d-93e1-41ba-8f8b-fa229acdbf86" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e24b1edd-b318-c6ca-3498-62a6d0355f9b" executionId="a2683df0-b76b-41c2-8f78-a9125f287258" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1ef22d3f-b4b5-2382-da8f-5582ba492fff" executionId="ec575027-71f9-4921-9d15-bd195f72b683" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e58022b8-3539-3056-d086-278cd9337980" executionId="347064ab-bdde-490e-b2a1-39c1a18df711" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e98a4d5c-a796-9ef6-c168-0b0640dd917b" executionId="b92ef0b6-9c20-43f1-bd6e-28a7e27a624c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ac1e6ed2-f2ea-7cf5-e68c-028f174db9e9" executionId="4d468b8e-f2a2-4f78-999c-86e0675a54f2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c4ff7321-92a2-88d3-c577-b24bf8a5d536" executionId="0be6c11f-c7d3-4cf0-8f96-360b5e234405" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="106f0840-5be2-0b89-4701-04aebcd39d5a" executionId="592416c5-e5aa-413c-b5c9-492a8fcaef6d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="19a8adbd-fd61-3748-83c5-844eb7ce518b" executionId="4d4ab85d-f8aa-4530-b3da-51c79a5cb239" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f4ea8d92-ec50-4117-316d-7fa6d22a729f" executionId="217a8f12-b658-4c35-a4e8-e3f6ca3d42b9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ed8bfd10-3fea-aa56-135b-e731a67af5da" executionId="f9d04f03-1248-4238-85a3-c00e68adb338" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3138257b-3730-6838-53cb-98e21dd2bd80" executionId="5b3729ad-db71-4eaf-ac22-4e8c0808f5bd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1dec8429-7f15-811f-a08f-53ac10dc263b" executionId="30fc17e6-de40-4238-8eae-cecdf3dd9b86" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="84194fa7-ba8b-19e1-14a4-c76d105cd5b6" executionId="1af93cbf-27a6-45fd-8b37-f9454baf4d7c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3713a3b8-cf25-7039-0f44-4761ad178f84" executionId="90633541-3153-4bae-9533-1a89bd2b3d59" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1e2a6f9e-69f3-1f4f-dcdd-5fa533e62ea9" executionId="1c07c03b-ff26-42f4-9ef8-8f6327482897" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="856eaee5-f5a3-834b-d675-dd423b1da5dd" executionId="db920271-e3f9-4fae-926f-b925e3a7a00c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3df409f6-0454-1066-7b7b-fd60d211c982" executionId="668a12ba-ab8f-4267-b28e-fa1869fd09ac" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4693d718-45c5-2b99-5484-95692bc6954e" executionId="544e1f10-5517-4979-9939-71f67e0272e0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a901adcb-5ce3-27cf-dd19-fc6ec2ce966c" executionId="ac8d1678-1cbe-4445-9c64-d40a45d3f3c7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="45bb65ec-9c67-2069-7011-27d31e86d7f5" executionId="100e51f3-746c-4877-99af-6025fbe3c08a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="908ca657-2522-1629-01e7-d8ded2c611cf" executionId="dd098816-ba9f-44fc-ace1-6e4ec883d899" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="33bcd159-5b85-6869-1559-7ac59e74c2a5" executionId="f5de357b-106b-4273-9791-6d71dac0c5cd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b195310e-9ab0-0cdc-257e-82dca095e82e" executionId="f5028fdb-8e25-422d-bc72-4dc18603dda9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2f60d4a4-5def-d69d-4995-3c2aeaf871f9" executionId="6401ecac-07c1-403d-b743-75304c3031b0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ab983c57-77a7-c01f-1e23-73e4742ff9ee" executionId="25a96dea-822d-4e89-a161-2a1968b177b1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dbc07de0-f7c2-5ea4-e332-539fe4c91db8" executionId="55a64189-921e-4c99-bd25-a936ed1d4580" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3fb16886-b58f-8d8f-a0ba-72e819c85051" executionId="75aa43be-858d-4168-9bc2-a32fba92af9b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b7599c0d-cf13-6104-52b9-6d5f0e2795e5" executionId="770a666d-29f8-4a64-860e-af7af3bbbad1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bc55efb7-b42e-7846-6306-043293e56930" executionId="1b2ebd92-2eb5-47ed-a917-cd71dfed21e7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="18ddc7de-ab94-ec02-896b-ee8a6f70aa2e" executionId="85e8d9bf-677a-44ac-8dff-610387ee7594" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a56bd6e2-036d-b0c8-91fb-4fd147231f1c" executionId="48374776-f68f-4a77-9a16-040c33817638" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cbe429fd-74ef-aa58-cb57-77fa191ff480" executionId="a2448fdc-deec-42c0-9b5a-8851971fccfe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6641b2c6-f83a-12c3-ca0e-6fb39d3b3199" executionId="2a79a411-73ef-4424-8e85-3ee51d463b6b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7b7e80ca-deba-a0c9-3eb2-a1eadb1b4b30" executionId="d500a190-3a54-471a-bbad-d6bc67545c92" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8188d0b1-0f29-88b3-61bb-3b6b83aaad2e" executionId="b231f61a-adba-4338-b9fa-0f1181a68bc0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="83c6d791-ca61-ce45-1323-73db3b5459bb" executionId="61ca78b2-748a-4197-abfc-5400b8044fe7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0aeca5cb-dd57-3f87-f18b-2a21a42a7ac7" executionId="27957204-d525-4ed3-9851-02e2920c0065" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b54eedac-019e-d73d-2b0a-5de49efe2346" executionId="69f0d9c8-6c2b-4d66-a7ff-efdd1176ee76" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="84a92128-89bd-b334-68de-a13cce5169f2" executionId="30312dd9-49f8-41d3-be16-79c5afea5469" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="85378b7e-7ac4-6e83-e03b-3a6734da682f" executionId="a1b3a406-d5c2-442a-8abf-7e879cdf02ce" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7923badb-d665-99b7-b653-9d63e265fe58" executionId="167a81db-8852-4e8e-9214-510812329fea" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7e120d5f-2699-1a88-b3d3-76d78ddedd8d" executionId="2ddfdaf9-579b-475e-b360-be6dd8e72b6d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a4b48e12-cce2-526c-c516-8e80302049ed" executionId="34d7dc93-388f-4639-98b4-99f1af50f720" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d1fd6d44-b003-7c0d-af2f-d49ee743597f" executionId="e2a548ea-0294-4597-af90-9548aa61677c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="26cd4a61-d913-cafa-aa5f-d42c4456c683" executionId="7ae61b5e-a341-4dd4-9851-66e8fc7cf307" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f74be326-30d5-518f-17b1-cd76ac541c6a" executionId="57e39961-dc7c-4981-bba0-889e88b95031" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3c772d8d-0244-db29-f287-39db041720c7" executionId="1da12abf-b84e-464a-9ea8-dcac3c377bbc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1589e195-1e99-0d54-6372-64fd9b97c95c" executionId="a54988a0-faf2-4b30-b725-b5c0e73f5306" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b721b4ba-fa4c-9c1a-2b8b-160bcf5bfeb0" executionId="da777d5f-28ab-4b6f-beef-3c8269b23653" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cd370ba9-2a69-2bbf-c28b-b4e2081e36d1" executionId="65deadef-0f64-4870-8dd7-024828c0b56b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="01dd6578-b977-0d91-f4b9-ad7ca76c70d8" executionId="3213599d-3c90-45f3-98eb-e50b80841e71" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c3ae9754-4861-2f77-44e8-716c11ec25e1" executionId="92254c47-1c8e-4e01-b89f-14f96dabb578" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0456dba3-4405-1706-d861-eb6b44166b70" executionId="938ef589-cb6c-4be5-895a-89f79883f4fe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="adac60d8-5aa0-fc4a-0605-bab9fdd576f0" executionId="28d149f2-209a-49bb-9ac1-320abb870326" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b49619eb-160e-a439-ed17-ebb4b4f36273" executionId="b9bb9341-d187-4e2c-b623-11a09a4a6307" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="716f588b-d9bc-d5b3-a0a2-8ddf810ae9b8" executionId="1e33a744-5b3d-4a41-a131-7ac7e5831029" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="22f5c3e1-79ee-eab5-2f7d-3987929519d3" executionId="a4940371-531d-45d7-94cc-72ddd916c71d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2e11fea3-7d9c-0e71-55fb-dd6dc2e8e969" executionId="c5536fac-ffbc-482d-9891-74b062bfa418" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="eef0c9f2-97e6-1b9e-52b0-5313a27eb404" executionId="44fd9126-1771-40b5-99f3-9a0af363614d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d47bec3-66e6-31ce-c247-a16141fa55a8" executionId="ac1ca117-c7cd-4a04-ab6d-49de6db8a8bf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="912af536-0156-f8f0-bcb9-c3353a1fa378" executionId="5ac3749f-474c-4fdf-b2bd-ec92ae8ac2aa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="26ef57e1-2e63-35a8-d8aa-9e6cf6e4dc6f" executionId="7fc49b9e-6f0b-4621-9257-b4d6f0dbd44a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f5c5ff01-7175-5e06-57a1-392df848a415" executionId="db23b2a1-a4ab-43a9-8f30-9e9afe6eb70b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="48306dfe-d329-770d-7e10-d78ad502af7f" executionId="966fc4a6-2755-4c2f-aabe-0789399d8171" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7645d324-5d5c-a197-dea4-3cefd9b85ae7" executionId="34ef28ee-bf40-4150-a497-94bb3a0337f7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d40b88cb-fffa-0323-a390-5e2c89d915c2" executionId="9e24493e-57ca-4f0c-9a42-fe9a4c7463d1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e1ce3201-d5d1-af10-bf08-844d6aa3261e" executionId="8d635588-dc5a-42c5-919e-b5c92c62d375" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c029c297-db7f-a46c-9194-3ae80deb5703" executionId="4dc8c8e6-6502-4ec0-b0b1-02ab015c7921" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c84334ab-fb14-cc49-6abc-229d505861d8" executionId="e19376e7-4c4f-4e99-a434-51a7485db0ff" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c738e757-0afa-6738-a18b-90c894b2694d" executionId="1508cf69-fa53-40b4-8ba2-3e5a2f622d5b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4fb1eeb3-dec0-f74d-ee65-921b76bc5beb" executionId="8a75a1d4-6f48-473c-b534-3ce7bd27614f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ee4062e8-5083-42bd-ecf6-bc0465e2a95b" executionId="619a0da3-0cc6-42ca-855e-70bc397cad13" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ab1774a4-669b-9931-ded5-ad26836a3974" executionId="c88d1f0c-fa1e-4e14-9a11-3ac63cef9a1c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6be0ae5e-b204-18d8-9843-c9c618eb70b1" executionId="4bc4aa13-fe3a-449d-82c9-8c6128207f18" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d23fdb5d-92a5-1bf6-22cc-01138962a0fb" executionId="405be422-226f-4fa2-a9e9-ce4c704510df" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="375eae85-204d-2201-ce83-2c15d16c754c" executionId="94ab4e87-dbb7-426f-8ddf-cd3a1eb43f16" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4f3bab31-30bb-d0a7-7624-7c0dc008912c" executionId="6a97f29c-3716-4abb-aa76-2d379383e9e9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fbdf908d-4b7a-452b-6517-be214975fb03" executionId="22e3de69-dc3f-4725-82b9-5886938954b0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="591110ac-f2d0-873d-a1b6-bb540796a58b" executionId="bfc76de4-03c2-4a57-9b64-3a6cff3f6010" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b0491fb6-3230-bbc2-17c5-54c9311d2c74" executionId="27928813-e7c8-47f0-bfd0-b566dab22fb0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ef978b44-b9f4-9b39-96e0-8f03110b64cc" executionId="755e6170-38f9-4a78-8876-2d30282c78e9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c3f392f2-e11f-abb3-4a16-83ec034f1ec4" executionId="dea1c1ea-e714-4327-8527-a4ce03837448" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a0331351-6ddf-4705-0b23-b95ff3e1eb58" executionId="b29ac385-324a-455d-9ea7-7f5924455750" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4dfa647f-03a3-f0b3-13b4-efcdefc64d01" executionId="fb56a1f8-0d2e-45bd-91fc-ba2af3e088be" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cab4f4e1-66fb-09d5-df1a-8e7dc8109d74" executionId="bfebfbb5-9a79-415c-ba49-7110b63b7118" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bc45ea43-0b2d-c8e7-2108-a9c8a8c9b374" executionId="58a06f7a-1b53-4088-b1e2-03be1287b13a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0aafd1e4-e496-9464-7001-ab9aa1515e06" executionId="5cec3d42-2812-4271-9275-62b06ec26736" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e9c1dd38-1183-45a3-6cdf-da9d27cf03ae" executionId="a6996475-0ab6-4d88-954f-684ee6ba6b0a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="29a67b7b-e1e2-415a-2d97-1f2b440cb615" executionId="80ffe49b-ae62-497b-a28e-bf87d7dfd4ec" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="25fbfd94-f280-9adb-1797-62d406069f6e" executionId="9e926595-acf2-428c-8932-d7f0d813ca19" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="97b799e4-b6a6-1aba-cecd-d75b49a3de96" executionId="48c2b263-9bea-4db1-b65d-61eb094603bb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3528d581-d0ed-ea1d-a289-df6bbf68c173" executionId="2c08749e-1761-41c1-8ffa-58a97ceedc84" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8064c8ee-5cf3-2a3c-6cfb-2e0e2374f637" executionId="b37d65c2-dc79-4e07-9cfa-b782ec6d34ae" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9e8cb454-5da9-d9a9-f707-a9c6293aa23c" executionId="17547864-b568-4b55-bd19-1f31d87ebb85" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c7082f51-60d3-e3d3-6a82-45584acd7b35" executionId="b55d47bb-bd26-4864-b175-5bd43f637160" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8911ca7f-f0c6-06d5-6ae2-de6ad6dd1065" executionId="82588f7c-2875-4464-a502-ef5d9d0b2539" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0ce78fd6-8116-178e-f8ab-c25b5cb67485" executionId="135cc3ef-fcdd-45b3-9d33-f144abb531fe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="46cb8ecd-8517-691e-1eee-b8c80e26995a" executionId="46644775-1d54-48aa-bb90-61a23a7639fa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="18675df2-b734-e597-8d66-e6e76aa64c9d" executionId="a8f4b114-0362-433e-a992-3a259b6098c7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c4381cde-d609-c7b5-7ba4-ed841fa33563" executionId="66766aee-6f06-4ede-b407-0d35f9de7aad" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="678a2776-86c6-3d1d-2df5-d6435189e06b" executionId="84184209-7473-4612-80eb-acdad4e5f541" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3d5a4161-1a85-6e19-133c-075198497e79" executionId="00789059-7bba-4eb2-8984-740fea0cfc6f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b4c2e9e-0e06-0b9c-e75e-f46e4abf6a85" executionId="284998e5-1eb5-4d15-9825-47b35c620e1c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bc04c485-9be6-d290-d1a9-3750793bdb1b" executionId="0a453e0d-0a47-4e4e-be5b-2849c409cce4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4159781c-620b-45b6-ec9d-eb354a1eeafb" executionId="0b1eb746-464f-4804-8975-be0b5d9e4dd7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="82b39a13-2b32-009a-d9a6-6d5d9eb47cc8" executionId="b57b32e2-3cd1-4fcc-8c13-9f86b4ca4cbf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d499252d-5758-d728-c466-ede879388199" executionId="64437833-0c06-49a3-a5b2-3c71113be45f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dc4a154f-4258-b912-c214-8429fed389ff" executionId="5ba43c07-de00-45d7-8886-7a2a37fd2d36" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dc612b7b-df8a-0dc5-37b1-a5a530db6f90" executionId="2d478791-53a4-40c4-976b-35439d81ced8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1e8774bd-9cb4-b988-d847-d9d15474e102" executionId="5f0d01dd-1854-4afe-9b4f-a3f47cd6698a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c3e8b34e-6bd5-9621-b45d-2599cf4a04fc" executionId="4f98ddb1-ecab-4e5f-8a35-1a5b7dfef0bf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a2434a04-f248-5f41-e9a0-a75bcd8b7cd4" executionId="360512d5-0d8b-42e5-b7ee-b17741d49242" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a1ed8bd5-0ac7-62ce-491c-c3b1b6b45d15" executionId="a6017ea2-c90a-4d71-b176-3c2845e45b9b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Les résultats ne figurent pas dans une liste" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="Tous les résultats chargés" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="164" executed="164" passed="164" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.6.0.0: Test execution started&#xD;
+Running all tests in C:\Users\sleep\Desktop\Dubito\tests\Dubito.Core.Tests\bin\Debug\net10.0\Dubito.Core.Tests.dll&#xD;
+   NUnit3TestExecutor discovered 164 of 164 NUnit test cases using Current Discovery mode, Non-Explicit run&#xD;
+NUnit Adapter 4.6.0.0: Test execution complete&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

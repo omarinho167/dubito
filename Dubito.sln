@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dubito.Core.DotNet", "tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dubito.Core.Tests", "tests\Dubito.Core.Tests\Dubito.Core.Tests.csproj", "{44BEDE49-1DA0-4F3F-A73B-D772185EE463}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dubito.Protocol.DotNet", "tests\Dubito.Protocol.DotNet\Dubito.Protocol.DotNet.csproj", "{E024EFA9-4796-49E7-9C3F-B4BA9D7DA1C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,18 @@ Global
 		{44BEDE49-1DA0-4F3F-A73B-D772185EE463}.Release|x64.Build.0 = Release|Any CPU
 		{44BEDE49-1DA0-4F3F-A73B-D772185EE463}.Release|x86.ActiveCfg = Release|Any CPU
 		{44BEDE49-1DA0-4F3F-A73B-D772185EE463}.Release|x86.Build.0 = Release|Any CPU
+		{E024EFA9-4796-49E7-9C3F-B4BA9D7DA1C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E024EFA9-4796-49E7-9C3F-B4BA9D7DA1C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E024EFA9-4796-49E7-9C3F-B4BA9D7DA1C5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E024EFA9-4796-49E7-9C3F-B4BA9D7DA1C5}.Debug|x64.Build.0 = Debug|Any CPU
+		{E024EFA9-4796-49E7-9C3F-B4BA9D7DA1C5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E024EFA9-4796-49E7-9C3F-B4BA9D7DA1C5}.Debug|x86.Build.0 = Debug|Any CPU
+		{E024EFA9-4796-49E7-9C3F-B4BA9D7DA1C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E024EFA9-4796-49E7-9C3F-B4BA9D7DA1C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E024EFA9-4796-49E7-9C3F-B4BA9D7DA1C5}.Release|x64.ActiveCfg = Release|Any CPU
+		{E024EFA9-4796-49E7-9C3F-B4BA9D7DA1C5}.Release|x64.Build.0 = Release|Any CPU
+		{E024EFA9-4796-49E7-9C3F-B4BA9D7DA1C5}.Release|x86.ActiveCfg = Release|Any CPU
+		{E024EFA9-4796-49E7-9C3F-B4BA9D7DA1C5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +64,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{592B1F21-BF36-4906-BE7B-50BA278F4F8B} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 		{44BEDE49-1DA0-4F3F-A73B-D772185EE463} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
+		{E024EFA9-4796-49E7-9C3F-B4BA9D7DA1C5} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 	EndGlobalSection
 EndGlobal

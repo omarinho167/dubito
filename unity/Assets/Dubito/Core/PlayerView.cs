@@ -35,6 +35,46 @@ namespace Dubito.Core
             return new PlayerView(state, playerId);
         }
 
+        // Rehydrate a detached snapshot on a client. This copies data only; it neither
+        // infers allowed actions nor evaluates any game rule. Validate untrusted input
+        // at the protocol boundary before calling this factory.
+        public static PlayerView Restore(int playerId, IEnumerable<Card> hand,
+            IEnumerable<int> cardCounts, IEnumerable<int> turnOrder, int pileCount,
+            CardRank? roundRank, PlayAnnouncement lastAnnouncement, int activePlayerId,
+            double remainingTurnSeconds, bool isTimerPaused, GamePhase phase,
+            RevelationView revelation, int? pendingWinnerId, int? winnerId,
+            int ownSkippedTurns, long revision, IEnumerable<CommandKind> allowedActions)
+            => new PlayerView(playerId, hand, cardCounts, turnOrder, pileCount,
+                roundRank, lastAnnouncement, activePlayerId, remainingTurnSeconds,
+                isTimerPaused, phase, revelation, pendingWinnerId, winnerId,
+                ownSkippedTurns, revision, allowedActions);
+
+        private PlayerView(int playerId, IEnumerable<Card> hand,
+            IEnumerable<int> cardCounts, IEnumerable<int> turnOrder, int pileCount,
+            CardRank? roundRank, PlayAnnouncement lastAnnouncement, int activePlayerId,
+            double remainingTurnSeconds, bool isTimerPaused, GamePhase phase,
+            RevelationView revelation, int? pendingWinnerId, int? winnerId,
+            int ownSkippedTurns, long revision, IEnumerable<CommandKind> allowedActions)
+        {
+            PlayerId = playerId;
+            Hand = new List<Card>(hand).AsReadOnly();
+            CardCounts = new List<int>(cardCounts).AsReadOnly();
+            TurnOrder = new List<int>(turnOrder).AsReadOnly();
+            PileCount = pileCount;
+            RoundRank = roundRank;
+            LastAnnouncement = lastAnnouncement;
+            ActivePlayerId = activePlayerId;
+            RemainingTurnSeconds = remainingTurnSeconds;
+            IsTimerPaused = isTimerPaused;
+            Phase = phase;
+            Revelation = revelation;
+            PendingWinnerId = pendingWinnerId;
+            WinnerId = winnerId;
+            OwnSkippedTurns = ownSkippedTurns;
+            Revision = revision;
+            AllowedActions = new List<CommandKind>(allowedActions).AsReadOnly();
+        }
+
         private PlayerView(GameState state, int playerId)
         {
             PlayerId = playerId;
@@ -75,6 +115,16 @@ namespace Dubito.Core
         public int CardCount { get; }
         public CardRank AnnouncedRank { get; }
 
+        public static PlayAnnouncement Restore(int playerId, int cardCount, CardRank announcedRank)
+            => new PlayAnnouncement(playerId, cardCount, announcedRank);
+
+        private PlayAnnouncement(int playerId, int cardCount, CardRank announcedRank)
+        {
+            PlayerId = playerId;
+            CardCount = cardCount;
+            AnnouncedRank = announcedRank;
+        }
+
         internal PlayAnnouncement(LastPlay play)
         {
             PlayerId = play.PlayerId;
@@ -95,6 +145,22 @@ namespace Dubito.Core
         // Who will pick up the pile when the verdict is applied (RULES §4.2, §6, §7); null when nobody
         // does: automatic revelation, departure of the player who should pick up, or confirmed victory.
         public int? PileRecipientId { get; }
+
+        public static RevelationView Restore(int accusedPlayerId, int doubterId,
+            bool isAutomatic, IEnumerable<Card> cards, bool isDoubtCorrect, int? pileRecipientId)
+            => new RevelationView(accusedPlayerId, doubterId, isAutomatic, cards,
+                isDoubtCorrect, pileRecipientId);
+
+        private RevelationView(int accusedPlayerId, int doubterId, bool isAutomatic,
+            IEnumerable<Card> cards, bool isDoubtCorrect, int? pileRecipientId)
+        {
+            AccusedPlayerId = accusedPlayerId;
+            DoubterId = doubterId;
+            IsAutomatic = isAutomatic;
+            Cards = new List<Card>(cards).AsReadOnly();
+            IsDoubtCorrect = isDoubtCorrect;
+            PileRecipientId = pileRecipientId;
+        }
 
         internal RevelationView(DoubtRevelation revelation, GameState state)
         {

@@ -11,6 +11,8 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <ProjectReference Include="../Dubito.Core.DotNet/Dubito.Core.DotNet.csproj" />
+    <ProjectReference Include="../Dubito.Protocol.DotNet/Dubito.Protocol.DotNet.csproj" />
     <Compile Include="../../unity/Assets/Dubito/Tests/Core/**/*.cs" Exclude="../../unity/Assets/Dubito/Tests/Core/**/ArchitectureTests.cs" />
+    <Compile Include="../../unity/Assets/Dubito/Tests/Protocol/**/*.cs" />
   </ItemGroup>
 </Project>
