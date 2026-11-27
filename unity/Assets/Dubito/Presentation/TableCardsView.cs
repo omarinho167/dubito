@@ -35,7 +35,8 @@ namespace Dubito.Presentation
         readonly List<CardInstance> pool = new List<CardInstance>(52);
         readonly Card[] sortedHand = new Card[52];
         Transform poolRoot;
-        int used;
+        int used, pileStart, pileEnd;
+        Vector3 pileOffset;
         readonly HashSet<Card> selected = new HashSet<Card>();
         public void SetSelection(IReadOnlyList<Card> values)
         {
@@ -83,10 +84,23 @@ namespace Dubito.Presentation
                 }
             }
             Vector3 pile = pileAnchor != null ? pileAnchor.position : new Vector3(0, SeatLayout.TableHeight, 0);
+            pileStart = used;
             for (int i = 0; i < view.PileCount; i++)
                 Place(pile + Vector3.up * (cardHalfThickness + i * .0008f),
                     Quaternion.Euler(0, ((i * 37) % 17) - 8, 0), materials.Back);
+            pileEnd = used;
+            pileOffset = Vector3.zero;
             for (int i = used; i < pool.Count; i++) pool[i].Transform.gameObject.SetActive(false);
+        }
+
+        public Vector3 PileCenter => pileAnchor != null ? pileAnchor.position : new Vector3(0, SeatLayout.TableHeight, 0);
+
+        // Revelation (UX §5): the whole pile slides towards the player who picks it up.
+        public void SetPileOffset(Vector3 offset)
+        {
+            pileOffset = offset;
+            for (int i = pileStart; i < pileEnd && i < pool.Count; i++)
+                pool[i].Transform.position = pool[i].BasePosition + offset;
         }
 
         void Place(Vector3 position, Quaternion rotation, Material face, Card? localCard = null)

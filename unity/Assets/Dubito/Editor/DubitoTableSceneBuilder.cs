@@ -96,8 +96,16 @@ namespace Dubito.EditorTools
             var panelSettings = new SerializedObject(panel);
             panelSettings.FindProperty("selectableMask").intValue = 1 << selectableLayer;
             panelSettings.ApplyModifiedPropertiesWithoutUndo();
+            // Step 2.5: revelation animation and key-moment messages (UX §5).
+            var font = AssetDatabase.LoadAssetAtPath<TMPro.TMP_FontAsset>("Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset");
+            var revelation = game.AddComponent<RevelationPresenter>();
+            Assign(revelation, ("cards", cardsView), ("seating", seating), ("viewCamera", cam), ("cardPrefab", LoadPrefab("PF_Card")),
+                ("materials", AssetDatabase.LoadAssetAtPath<CardMaterialLibrary>("Assets/Dubito/Art/Cards/CardMaterialLibrary.asset")), ("font", font));
+            var messages = game.AddComponent<TableMessages>();
+            Assign(messages, ("font", font));
             var controller = game.AddComponent<LocalTableController>();
-            Assign(controller, ("seating", seating), ("cards", cardsView), ("hud", hud), ("actionPanel", panel));
+            Assign(controller, ("seating", seating), ("cards", cardsView), ("hud", hud), ("actionPanel", panel),
+                ("revelation", revelation), ("messages", messages));
 
             EditorSceneManager.SaveScene(scene, ScenePath);
             AddToBuildSettings(ScenePath);

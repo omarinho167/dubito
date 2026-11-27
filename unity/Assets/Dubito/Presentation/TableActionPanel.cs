@@ -25,7 +25,7 @@ namespace Dubito.Presentation
         PlayerView view;
         ActionPanelModel model;
         CardRank chosenRank = CardRank.Ace;
-        bool pending, pointerHeld, confirm;
+        bool pending, pointerHeld, confirm, doubtKeyArmed;
         string hoverReason = "", message = "";
         float messageUntil;
         GameObject root, confirmation;
@@ -62,6 +62,7 @@ namespace Dubito.Presentation
             bool handChanged = view == null || incoming.PlayerId != view.PlayerId ||
                 !new HashSet<Card>(incoming.Hand).SetEquals(view.Hand);
             if (handChanged || incoming.Phase != GamePhase.Playing || incoming.ActivePlayerId != incoming.PlayerId) selection.Reset();
+            if (view != null && incoming.PlayerId != view.PlayerId) chosenRank = CardRank.Ace; // a new seat never inherits the previous choice
             view = incoming; pending = false; confirm = false; hoverReason = ""; CancelHold();
             Refresh();
         }
@@ -101,7 +102,8 @@ namespace Dubito.Presentation
             if (root != null) root.transform.parent.gameObject.SetActive(false);
         }
         void OnApplicationFocus(bool focused) { if (!focused) CancelHold(); }
-        void CancelHold() { pointerHeld = false; hold.Reset(); if (gauge != null) gauge.fillAmount = 0; }
+        // A cancelled hold needs a fresh press: a D held across a seat switch must not doubt for the next player.
+        void CancelHold() { pointerHeld = false; doubtKeyArmed = false; hold.Reset(); if (gauge != null) gauge.fillAmount = 0; }
 
         void Update()
         {
@@ -114,7 +116,9 @@ namespace Dubito.Presentation
             bool keyboardAllowed = !TextFieldFocused && Application.isFocused;
             if (keyboardAllowed && !confirm && playInput.WasPressedThisFrame()) Play();
             bool allowed = model.CanDoubt && !pending && !confirm && Application.isFocused;
-            if (hold.Tick(Time.unscaledDeltaTime, pointerHeld || (keyboardAllowed && doubtInput.IsPressed()), allowed)) Send(() => session.Doubt());
+            if (keyboardAllowed && allowed && doubtInput.WasPressedThisFrame()) doubtKeyArmed = true;
+            if (!doubtInput.IsPressed()) doubtKeyArmed = false;
+            if (hold.Tick(Time.unscaledDeltaTime, pointerHeld || (keyboardAllowed && doubtKeyArmed), allowed)) Send(() => session.Doubt());
             gauge.fillAmount = hold.Progress;
             if (model.HighlightDoubt && !pending)
             {

@@ -34,6 +34,13 @@ namespace Dubito.Tests.Core
             Assert.That(e.State.SkippedTurns[1], Is.EqualTo(1));
             Assert.That(e.State.LastPlay.IsDoubtWindowOpen, Is.False);
         }
+        [Test]
+        public void ViewExposesOwnSkippedTurnsForTheExclusionWarning()
+        {
+            var e = Open(); Tick(e, 45);
+            Assert.That(PlayerView.Create(e.State, 1).OwnSkippedTurns, Is.EqualTo(1));
+            Assert.That(PlayerView.Create(e.State, 2).OwnSkippedTurns, Is.EqualTo(0));
+        }
         [TestCase(TestName = "C-CHR-02")]
         public void TimeoutOnEmptyPile() { var e = Game(); Tick(e, 45); AssertEmptyRound(e, 1); }
         [TestCase(TestName = "C-CHR-03")]

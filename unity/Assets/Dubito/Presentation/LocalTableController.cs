@@ -21,7 +21,8 @@ namespace Dubito.Presentation
         [Tooltip("Hot-seat (UX §9, D-47): after each change, show the active player's seat.")]
         [SerializeField] bool hotSeat = true;
         [SerializeField] TableActionPanel actionPanel = null;
-        float revelationElapsed;
+        [SerializeField] RevelationPresenter revelation = null;
+        [SerializeField] TableMessages messages = null;
         [SerializeField] bool debugNewGameHotkeys = true;
         [SerializeField] TableSeating seating = null;
         [SerializeField] TableCardsView cards = null;
@@ -30,27 +31,35 @@ namespace Dubito.Presentation
         LocalGameSession session;
         int localSeat;
         int lastShownSecond = -1;
-        bool switchPending;
+        bool switchPending, ticking, removing;
+        PlayerView lastView;
 
         public IGameSession Session => session;
-        float TimerScale => debugShortTimer ? turnSeconds / 10f : 1f;
+        float timerScale = 1f; // fixed per game so the countdown shown always matches the one ticked
 
-        void Start() => NewGame(playerCount);
+        void Start()
+        {
+            messages.RematchRequested += () => NewGame(playerCount); // hot-seat rematch: same table, new deal
+            messages.QuitRequested += Quit;
+            NewGame(playerCount);
+        }
 
         // Debug (D-56): keys 2-6 start a new game with that many players.
         public void NewGame(int players)
         {
             if (session != null) session.ViewChanged -= OnViewChanged;
             playerCount = players;
+            lastView = null;
+            messages.Clear();
             var random = seed == 0 ? new SystemRandomSource() : new SystemRandomSource(seed);
             session = new LocalGameSession(new GameConfig(players, turnSeconds), random);
             session.ViewChanged += OnViewChanged;
             localSeat = IndexOf(session.SeatOrder, session.ControlledPlayerId);
             seating.Build(players, localSeat);
-            hud.TimerDisplayScale = TimerScale;
+            timerScale = debugShortTimer ? turnSeconds / 10f : 1f;
+            hud.TimerDisplayScale = timerScale;
             OnViewChanged(session.CurrentView);
             actionPanel.Bind(session);
-            revelationElapsed = 0;
             switchPending = false;
         }
 
@@ -58,12 +67,13 @@ namespace Dubito.Presentation
         {
             if (session == null) return;
             if (switchPending) SwitchToActivePlayer();
-            if (session.CurrentView.Phase == GamePhase.Revelation)
+            // The chrono is paused during a revelation (RULES §5); RevelationPresenter ends it.
+            if (runTimer && session.CurrentView.Phase == GamePhase.Playing)
             {
-                revelationElapsed += Time.deltaTime;
-                if (revelationElapsed >= 2f) { revelationElapsed = 0; session.ResolveRevelation(); }
+                ticking = true;
+                session.Tick(Time.deltaTime * timerScale);
+                ticking = false;
             }
-            else { revelationElapsed = 0; if (runTimer) session.Tick(Time.deltaTime * TimerScale); }
 
             // Countdown ticks refresh CurrentView without a new revision: redraw the HUD once per second.
             var view = session.CurrentView;
@@ -86,6 +96,23 @@ namespace Dubito.Presentation
             cards.Render(view, session.SeatOrder, localSeat);
             hud.Render(view, session.SeatOrder, localSeat);
             lastShownSecond = Mathf.CeilToInt((float)view.RemainingTurnSeconds);
+
+            // UX §5 key moments.
+            if (ticking) messages.ShowTransient(TableMessageText.AfterTimeout(lastView, view));
+            if (removing && lastView != null)
+                messages.ShowTransient($"{CardNames.PlayerName(lastView.PlayerId)} a quitté la partie");
+            messages.Render(view);
+            revelation.Show(view, session.SeatOrder, () => session.ResolveRevelation());
+            lastView = view;
+        }
+
+        void Quit()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
         }
 
         void SwitchToActivePlayer()
@@ -105,7 +132,9 @@ namespace Dubito.Presentation
             // UX §9: simulate the departure (disconnection) of the displayed seat, to test RULES §7.
             if (keyboard.deleteKey.wasPressedThisFrame)
             {
+                removing = true;
                 session.RemovePlayer(session.ControlledPlayerId);
+                removing = false;
                 return;
             }
             for (int n = SeatLayout.MinSeats; n <= SeatLayout.MaxSeats; n++)

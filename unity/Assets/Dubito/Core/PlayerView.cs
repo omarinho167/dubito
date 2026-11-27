@@ -21,6 +21,8 @@ namespace Dubito.Core
         public RevelationView Revelation { get; }
         public int? PendingWinnerId { get; }
         public int? WinnerId { get; }
+        // This player's consecutive skipped turns (RULES §5), for the exclusion warning (UX §5).
+        public int OwnSkippedTurns { get; }
         // Finished with WinnerId == null represents a session stopped without winner.
         public long Revision { get; }
         public IReadOnlyList<CommandKind> AllowedActions { get; }
@@ -52,6 +54,7 @@ namespace Dubito.Core
                 ? new RevelationView(state.Revelation) : null;
             PendingWinnerId = state.PendingWinnerId;
             WinnerId = state.WinnerId;
+            OwnSkippedTurns = state.SkippedTurns[playerId];
             Revision = state.Revision;
             var actions = new List<CommandKind>();
             if (state.Phase == GamePhase.Playing && state.ActivePlayerId == playerId)
