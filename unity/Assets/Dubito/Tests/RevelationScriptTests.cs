@@ -35,7 +35,7 @@ namespace Dubito.Tests
 
             Assert.That(RevelationScript.Verdict(view.Revelation), Is.EqualTo("MENSONGE"));
             Assert.That(RevelationScript.PickerId(view.Revelation), Is.EqualTo(liar));
-            Assert.That(RevelationScript.Outcome(view.Revelation, view.PileCount),
+            Assert.That(RevelationScript.Outcome(view.Revelation, view.PileCount, view.PendingWinnerId),
                 Is.EqualTo($"{CardNames.PlayerName(liar)} a menti et ramasse le tas (1 carte)"));
         }
 
@@ -48,7 +48,7 @@ namespace Dubito.Tests
 
             Assert.That(RevelationScript.Verdict(view.Revelation), Is.EqualTo("VÉRITÉ"));
             Assert.That(RevelationScript.PickerId(view.Revelation), Is.EqualTo(view.Revelation.DoubterId));
-            StringAssert.Contains("ramasse le tas", RevelationScript.Outcome(view.Revelation, view.PileCount));
+            StringAssert.Contains("ramasse le tas", RevelationScript.Outcome(view.Revelation, view.PileCount, view.PendingWinnerId));
         }
 
         [Test]
@@ -65,8 +65,10 @@ namespace Dubito.Tests
             var before = session.CurrentView;
             session.Tick(45);
             var after = session.CurrentView;
+            string name = CardNames.PlayerName(before.ActivePlayerId);
+            // First skipped turn of the player shown: the warning comes with the message (UX §5).
             Assert.That(TableMessageText.AfterTimeout(before, after),
-                Is.EqualTo($"Temps écoulé : tour de {CardNames.PlayerName(before.ActivePlayerId)} sauté"));
+                Is.EqualTo($"Temps écoulé : tour de {name} sauté. Encore un et {name} sera exclu"));
         }
 
         [Test]

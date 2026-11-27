@@ -188,6 +188,33 @@ namespace Dubito.Tests.Core
         [TestCase(true, 0)]
         [TestCase(true, 1)]
         [TestCase(true, 2)]
+        public void RevelationViewNamesWhoPicksUpTheFinalPile(bool honest, int departing)
+        {
+            var e = Open(honest, 4);
+            Doubt(e, 1);
+            int expected = honest ? 1 : 0;
+            Assert.That(PlayerView.Create(e.State, 2).Revelation.PileRecipientId, Is.EqualTo(expected));
+            Leave(e, departing);
+            int? after = departing == expected ? (int?)null : expected;
+            Assert.That(PlayerView.Create(e.State, 3).Revelation.PileRecipientId, Is.EqualTo(after));
+            int before = honest ? e.State.Hands[1].Count : e.State.Hands[0].Count;
+            Resolve(e);
+            if (after.HasValue) Assert.That(e.State.Hands[after.Value].Count, Is.GreaterThan(before));
+        }
+        [TestCase(true)]
+        [TestCase(false)]
+        public void RevelationViewNoRecipientWhenVictoryIsConfirmedOrAutomatic(bool honest)
+        {
+            var e = Pending(honest); Doubt(e, 2);
+            Assert.That(PlayerView.Create(e.State, 0).Revelation.PileRecipientId, Is.EqualTo(honest ? (int?)null : 1));
+        }
+
+        [TestCase(false, 0)]
+        [TestCase(false, 1)]
+        [TestCase(false, 2)]
+        [TestCase(true, 0)]
+        [TestCase(true, 1)]
+        [TestCase(true, 2)]
         public void EveryDoubtDepartureTableCell(bool honest, int departing)
         {
             var e = Open(honest, 4); var before = e.State;

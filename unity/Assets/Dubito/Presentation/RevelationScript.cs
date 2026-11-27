@@ -21,14 +21,10 @@ namespace Dubito.Presentation
         // "MENSONGE" when at least one revealed card is not the round rank (RULES §4.2).
         public static string Verdict(RevelationView revelation) => revelation.IsDoubtCorrect ? "MENSONGE" : "VÉRITÉ";
 
-        // Who picks up the pile; null when nobody does (departure of a pending winner, RULES §7).
-        public static int? PickerId(RevelationView revelation)
-        {
-            if (revelation.IsAutomatic) return null;
-            return revelation.IsDoubtCorrect ? revelation.AccusedPlayerId : revelation.DoubterId;
-        }
+        // Who picks up the pile, as computed by Core (departures and confirmed victory included).
+        public static int? PickerId(RevelationView revelation) => revelation.PileRecipientId;
 
-        public static string Outcome(RevelationView revelation, int pileCount)
+        public static string Outcome(RevelationView revelation, int pileCount, int? pendingWinnerId)
         {
             string accused = CardNames.PlayerName(revelation.AccusedPlayerId);
             if (revelation.IsAutomatic)
@@ -36,9 +32,15 @@ namespace Dubito.Presentation
                     ? $"{accused} avait menti : sa victoire est annulée, le tas est retiré"
                     : $"{accused} avait dit vrai : victoire confirmée";
             string pile = CardNames.CardCount(pileCount);
-            return revelation.IsDoubtCorrect
-                ? $"{accused} a menti et ramasse le tas ({pile})"
-                : $"{accused} a dit vrai : {CardNames.PlayerName(revelation.DoubterId)} ramasse le tas ({pile})";
+            string doubter = CardNames.PlayerName(revelation.DoubterId);
+            if (revelation.IsDoubtCorrect)
+                return revelation.PileRecipientId.HasValue
+                    ? $"{accused} a menti et ramasse le tas ({pile})"
+                    : $"{accused} a menti et est parti : le tas est retiré";
+            if (revelation.PileRecipientId.HasValue) return $"{accused} a dit vrai : {doubter} ramasse le tas ({pile})";
+            return pendingWinnerId != revelation.AccusedPlayerId
+                ? $"{accused} a dit vrai et {doubter} est parti : le tas est retiré"
+                : $"{accused} a dit vrai : victoire confirmée";
         }
     }
 
@@ -62,10 +64,17 @@ namespace Dubito.Presentation
         public static string AfterTimeout(PlayerView before, PlayerView after)
         {
             if (before == null || before.Phase != GamePhase.Playing) return "";
+            // Only time passes in a tick: a new revision while playing is always a timeout (RULES §5),
+            // even when it confirms a pending victory and ends the game.
             int skipped = before.ActivePlayerId;
+            string name = CardNames.PlayerName(skipped);
             if (!Contains(after.TurnOrder, skipped))
-                return $"Temps écoulé : {CardNames.PlayerName(skipped)} est exclu (2 tours sautés)";
-            return after.ActivePlayerId != skipped ? $"Temps écoulé : tour de {CardNames.PlayerName(skipped)} sauté" : "";
+                return $"Temps écoulé : {name} est exclu (2 tours sautés)";
+            string message = $"Temps écoulé : tour de {name} sauté";
+            // UX §5: warn at the first skipped turn, by name (the seat shown may change right after).
+            if (after.PlayerId == skipped && after.OwnSkippedTurns == 1 && after.Phase != GamePhase.Finished)
+                message += $". Encore un et {name} sera exclu";
+            return message;
         }
 
         public static string Winner(PlayerView view) =>

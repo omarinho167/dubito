@@ -51,7 +51,7 @@ namespace Dubito.Core
             IsTimerPaused = state.IsTimerPaused;
             Phase = state.Phase;
             Revelation = state.Phase == GamePhase.Revelation && state.Revelation != null
-                ? new RevelationView(state.Revelation) : null;
+                ? new RevelationView(state.Revelation, state) : null;
             PendingWinnerId = state.PendingWinnerId;
             WinnerId = state.WinnerId;
             OwnSkippedTurns = state.SkippedTurns[playerId];
@@ -92,14 +92,27 @@ namespace Dubito.Core
         // All revealed cards and their verdict are public (RULES §4.2, UX §5).
         // Core knows the verdict when revelation starts; presentation controls its timing.
         public bool IsDoubtCorrect { get; }
+        // Who will pick up the pile when the verdict is applied (RULES §4.2, §6, §7); null when nobody
+        // does: automatic revelation, departure of the player who should pick up, or confirmed victory.
+        public int? PileRecipientId { get; }
 
-        internal RevelationView(DoubtRevelation revelation)
+        internal RevelationView(DoubtRevelation revelation, GameState state)
         {
             AccusedPlayerId = revelation.AccusedPlayerId;
             DoubterId = revelation.DoubterId;
             IsAutomatic = revelation.IsAutomatic;
             Cards = new List<Card>(revelation.Cards).AsReadOnly();
             IsDoubtCorrect = revelation.IsDoubtCorrect;
+            PileRecipientId = Recipient(revelation, state);
+        }
+
+        private static int? Recipient(DoubtRevelation revelation, GameState state)
+        {
+            if (revelation.IsAutomatic) return null;
+            if (revelation.IsDoubtCorrect)
+                return state.MutablePendingDepartures.Contains(revelation.AccusedPlayerId) ? (int?)null : revelation.AccusedPlayerId;
+            if (state.PendingWinnerId == revelation.AccusedPlayerId) return null; // false doubt: victory confirmed
+            return state.MutablePendingDepartures.Contains(revelation.DoubterId) ? (int?)null : revelation.DoubterId;
         }
     }
 }

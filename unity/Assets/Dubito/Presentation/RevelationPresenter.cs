@@ -43,7 +43,14 @@ namespace Dubito.Presentation
                 if (IsPlaying) Stop();
                 return;
             }
-            if (IsPlaying) return; // one animation per revelation, even if a view is republished meanwhile
+            if (IsPlaying)
+            {
+                // Same revelation republished (e.g. a departure, RULES §7): keep the timing, update
+                // who picks up the pile and the wording; the verdict itself never changes.
+                revelation = view.Revelation;
+                ApplyOutcome(view, seatOrder);
+                return;
+            }
 
             finished = onFinished;
             revelation = view.Revelation;
@@ -68,16 +75,22 @@ namespace Dubito.Presentation
                 if (used) SetFace(shown[i], materials.Face(revelation.Cards[i]));
             }
 
-            int? picker = RevelationScript.PickerId(revelation);
-            Vector3 target = picker.HasValue ? SeatPosition(seatOrder, picker.Value) : pile + seatYaw * new Vector3(1.2f, 0f, 0f);
-            slideOffset = Vector3.ProjectOnPlane(target - pile, Vector3.up) * 0.65f;
-
             EnsureCanvas();
             verdict.text = RevelationScript.Verdict(revelation);
             verdict.color = revelation.IsDoubtCorrect ? new Color(1f, .42f, .36f) : new Color(.55f, .95f, .6f);
-            outcome.text = RevelationScript.Outcome(revelation, pileCount);
+            ApplyOutcome(view, seatOrder);
             canvas.SetActive(false);
             Animate();
+        }
+
+        // Pile destination and outcome text come from Core's RevelationView.PileRecipientId.
+        void ApplyOutcome(PlayerView view, IReadOnlyList<int> seatOrder)
+        {
+            Vector3 pile = cards.PileCenter;
+            int? picker = RevelationScript.PickerId(revelation);
+            Vector3 target = picker.HasValue ? SeatPosition(seatOrder, picker.Value) : pile + faceUp * new Vector3(1.2f, 0f, 0f);
+            slideOffset = Vector3.ProjectOnPlane(target - pile, Vector3.up) * 0.65f;
+            outcome.text = RevelationScript.Outcome(revelation, pileCount, view.PendingWinnerId);
         }
 
         void Update()
