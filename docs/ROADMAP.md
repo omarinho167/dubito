@@ -31,9 +31,9 @@
 - [x] 2.2 Session locale (ARCHITECTURE §3) + cartes 3D affichées depuis la `PlayerView` : sa main en éventail (face visible), mains adverses de dos, tas au centre. *(2026-11-27)*
 - [x] 2.3 Sélection des cartes au clic, panneau d'action, Douter maintenu, Défausser confirmé (`UX §4`). *(2026-11-27)*
 - [x] 2.4 Mode **debug « hot-seat »** : une seule instance, on contrôle chaque siège à tour de rôle (sans réseau) pour tester les règles en 3D (UX §9). *(2026-11-27)*
-- [ ] 2.5 Révélation du doute, victoire en attente, fin de partie, tour sauté (`UX §5`).
+- [x] 2.5 Révélation du doute, victoire en attente, fin de partie, tour sauté (`UX §5`). *(2026-11-27)*
 
-**Fin de phase** : le propriétaire joue une partie complète à 3 sièges en hot-seat.
+**Fin de phase** : le propriétaire joue une partie complète à 3 sièges en hot-seat. *(validée le 2026-11-27)*
 
 ## Phase 3 : réseau local (Mirror, sans Steam)
 
