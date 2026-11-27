@@ -21,7 +21,8 @@ Les versions exactes de Mirror, FizzySteamworks et Steamworks.NET sont **figées
 |---|---|---|
 | Mirror | **96.11.4** (MIT) | `unity/Assets/Mirror`, depuis la release GitHub officielle, sans `Examples` ni `Hosting` |
 | Multiplayer Play Mode | **2.0.2** (Unity) | paquet UPM `com.unity.multiplayer.playmode`, tests à plusieurs joueurs dans l'éditeur |
-| FizzySteamworks, Steamworks.NET | — | phase 4 |
+| Steamworks.NET | **2025.165.0** (MIT ; DLL Steam de Valve incluse) | `unity/Assets/com.rlabrecque.steamworks.net`, release GitHub officielle |
+| FizzySteamworks | **6.0.1** (MIT) | `unity/Assets/Mirror/Transports/FizzySteamworks`, release GitHub officielle |
 
 ## 2. Découpage du code
 

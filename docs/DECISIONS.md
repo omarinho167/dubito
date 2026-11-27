@@ -81,3 +81,5 @@
 | D-61 | Tests à plusieurs instances avec **Multiplayer Play Mode** 2.0.2 (paquet Unity) plutôt qu'éditeur + builds. | Un clic sur Play lance hôte + clients, sans compiler. | P |
 | D-62 | Le protocole sérialise ses messages lui-même (C# pur, `Dubito.Protocol`) ; Mirror ne transporte qu'une enveloppe d'octets (ARCHITECTURE §3). | Confidentialité testable sur les vrais octets hors Unity ; Protocol reste sans dépendance à Mirror. | C |
 | D-63 | Salon : l'hôte n'a pas de bouton **Prêt** (cliquer sur Lancer vaut prêt) ; il peut lancer dès 2 joueurs quand tous les invités sont prêts. **Revanche** ramène tout le monde au même salon, prêts remis à zéro. | Lecture de UX §6.2 et §5 pour l'étape 3.4. | C |
+| D-64 | **Steamworks.NET 2025.165.0** et **FizzySteamworks 6.0.1** (MIT), installés depuis leurs releases officielles. | Transport Steam pour Mirror (ARCHITECTURE §1). | P |
+| D-65 | Test entre deux PC (étape 4.3) avec **un ami** et son compte Steam : on lui envoie une build. | Choix du propriétaire. | P |
