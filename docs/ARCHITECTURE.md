@@ -57,6 +57,7 @@ Règles qui en découlent :
 - Chaque commande a un **identifiant** (doublons ignorés) et la **révision** d'état qu'elle vise (actions périmées refusées).
 - Après chaque changement, on envoie un **petit instantané filtré** à chaque joueur. Pas d'optimisation par différences en V1.
 - **Pas un objet réseau par carte.** Les cartes 3D sont créées localement à partir de la vue reçue.
+- **Le protocole encode lui-même ses messages** (C# pur dans `Dubito.Protocol`, versionné, validé à la lecture) ; Mirror ne transporte qu'une enveloppe d'octets. La confidentialité se teste ainsi sur les octets réellement envoyés, avec `dotnet test`.
 - **Confidentialité** (`RULES §9`) : une vue est construite par joueur ; les cartes adverses n'y figurent jamais. On ne « cache pas les meshes », on n'envoie pas les données.
 - L'aléatoire de Core vient d'une **source injectable** : graine fixe dans les tests, aléatoire côté hôte en partie.
 - Le chrono est géré par l'hôte. Core reçoit le temps écoulé, il ne lit pas l'horloge lui-même (testable).

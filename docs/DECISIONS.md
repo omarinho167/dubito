@@ -79,3 +79,4 @@
 | D-59 | En hot-seat, l'interface **nomme le joueur** (3e personne) au lieu de « tu », et annonce « Au tour de Joueur N » à chaque changement de siège. En réseau, « tu » reste. | Une seule personne joue tous les sièges : « tu » ne disait pas de qui il s'agissait. | P |
 | D-60 | **Mirror 96.11.4** (MIT), copié dans `unity/Assets/Mirror` sans les exemples ni le module d'hébergement Edgegap. | Version rodée de la dernière branche ; on n'embarque que l'utile. | P |
 | D-61 | Tests à plusieurs instances avec **Multiplayer Play Mode** 2.0.2 (paquet Unity) plutôt qu'éditeur + builds. | Un clic sur Play lance hôte + clients, sans compiler. | P |
+| D-62 | Le protocole sérialise ses messages lui-même (C# pur, `Dubito.Protocol`) ; Mirror ne transporte qu'une enveloppe d'octets (ARCHITECTURE §3). | Confidentialité testable sur les vrais octets hors Unity ; Protocol reste sans dépendance à Mirror. | C |
