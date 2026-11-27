@@ -17,6 +17,12 @@
 
 Les versions exactes de Mirror, FizzySteamworks et Steamworks.NET sont **figées** dans le dépôt dès l'installation et notées ici.
 
+| Dépendance | Version figée | Installation |
+|---|---|---|
+| Mirror | **96.11.4** (MIT) | `unity/Assets/Mirror`, depuis la release GitHub officielle, sans `Examples` ni `Hosting` |
+| Multiplayer Play Mode | **2.0.2** (Unity) | paquet UPM `com.unity.multiplayer.playmode`, tests à plusieurs joueurs dans l'éditeur |
+| FizzySteamworks, Steamworks.NET | — | phase 4 |
+
 ## 2. Découpage du code
 
 Le projet Unity vit dans `unity/`. Le code est découpé en assemblages (asmdef) qui ne peuvent dépendre que vers le bas :
