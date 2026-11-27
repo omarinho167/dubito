@@ -13,10 +13,10 @@ Video game screenshot, first-person view from a seated player at a round card ta
 
 | Rendu | Phrase à coller avant la scène |
 |---|---|
-| R1 cel-shading | `Cel-shaded 3D art style: flat color areas, two-tone hard shadows, bold black outlines around every shape, comic-book look.` |
+| **R1 cel-shading (choisi, D-73)** | `Cel-shaded 3D art style: flat color areas, two-tone hard shadows, bold black outlines around every shape, comic-book look.` |
 | R2 animation lisse | `Smooth stylized 3D animated-film look: soft rounded shapes, subtle realistic lighting and soft shadows, clean simple materials.` |
 | R3 peint à la main | `Hand-painted 3D art style: low-detail models with painted textures, visible brush strokes, lighting painted into the colors.` |
-| **R4 low-poly (choisi, D-73)** | `Low-poly 3D art style: simple geometric shapes with visible flat facets, flat shading, no textures, solid colors.` |
+| R4 low-poly | `Low-poly 3D art style: simple geometric shapes with visible flat facets, flat shading, no textures, solid colors.` |
 
 ---
 
