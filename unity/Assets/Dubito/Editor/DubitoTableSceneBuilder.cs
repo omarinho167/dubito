@@ -68,8 +68,21 @@ namespace Dubito.EditorTools
             so.FindProperty("opponentPrefab").objectReferenceValue = opponentPrefab;
             so.FindProperty("seatsRoot").objectReferenceValue = seats;
             so.FindProperty("seatCamera").objectReferenceValue = look;
+            so.FindProperty("debugSeatHotkeys").boolValue = false; // LocalTableController owns keys 2-6 (new game)
             so.ApplyModifiedPropertiesWithoutUndo();
             seating.Build(PreviewSeatCount, 0); // edit-time preview; rebuilt in Awake when playing
+
+            // Step 2.2: local session -> PlayerView -> 3D cards + basic HUD.
+            var game = new GameObject("LocalGame");
+            var cardsView = game.AddComponent<TableCardsView>();
+            Assign(cardsView, ("cardPrefab", LoadPrefab("PF_Card")),
+                ("materials", AssetDatabase.LoadAssetAtPath<CardMaterialLibrary>("Assets/Dubito/Art/Cards/CardMaterialLibrary.asset")),
+                ("seating", seating), ("pileAnchor", pile));
+            var hud = game.AddComponent<TableHud>();
+            Assign(hud, ("seating", seating), ("viewCamera", cam),
+                ("font", AssetDatabase.LoadAssetAtPath<TMPro.TMP_FontAsset>("Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset")));
+            var controller = game.AddComponent<LocalTableController>();
+            Assign(controller, ("seating", seating), ("cards", cardsView), ("hud", hud));
 
             EditorSceneManager.SaveScene(scene, ScenePath);
             AddToBuildSettings(ScenePath);
@@ -111,6 +124,17 @@ namespace Dubito.EditorTools
             if (scenes.Any(s => s.path == path)) return;
             scenes.Insert(0, new EditorBuildSettingsScene(path, true));
             EditorBuildSettings.scenes = scenes.ToArray();
+        }
+
+        static void Assign(Object target, params (string field, Object value)[] values)
+        {
+            var so = new SerializedObject(target);
+            foreach (var (field, value) in values)
+            {
+                if (value == null) Debug.LogError($"[Dubito] {target.GetType().Name}.{field}: missing asset");
+                so.FindProperty(field).objectReferenceValue = value;
+            }
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         static GameObject LoadPrefab(string name) =>

@@ -5,7 +5,9 @@
         "Dubito.Core",
         "Dubito.Protocol",
         "Dubito.Networking",
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "Unity.TextMeshPro",
+        "Unity.ugui"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

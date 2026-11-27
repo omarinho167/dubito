@@ -20,6 +20,12 @@ namespace Dubito.Presentation
         public int SeatCount => seatCount;
         public int LocalSeat => localSeat;
 
+        public Transform SeatAnchor(int seat)
+        {
+            if (seat < 0 || seat >= seatCount) throw new ArgumentOutOfRangeException(nameof(seat));
+            return seatsRoot == null ? null : seatsRoot.Find($"Seat_{seat}");
+        }
+
         public void Build(int seatCount, int localSeat)
         {
             // Validate before touching the existing layout.
