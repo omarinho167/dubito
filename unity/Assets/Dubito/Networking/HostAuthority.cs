@@ -138,9 +138,15 @@ namespace Dubito.Networking
                 if (revelationElapsed >= RevelationDelaySeconds)
                     engine.ResolveRevelation(revision);
                 // Time spent presenting a revelation is never banked into the next turn.
+                return Changed(revision);
             }
-            else engine.AdvanceTime(seconds);
-            return Changed(revision);
+            if (engine.State.Phase != GamePhase.Playing) return Array.Empty<OutgoingPacket>();
+            // Only time passes here: a new revision is always a timeout of the active player (RULES §5).
+            int active = engine.State.ActivePlayerId;
+            engine.AdvanceTime(seconds);
+            if (engine.State.Revision == revision) return Array.Empty<OutgoingPacket>();
+            var kind = engine.State.TurnOrder.Contains(active) ? TableEventKind.TurnSkipped : TableEventKind.Excluded;
+            return Announce(new TableEventMessage(kind, active), Changed(revision));
         }
 
         public IReadOnlyList<OutgoingPacket> Disconnect(int connectionId)
@@ -156,7 +162,18 @@ namespace Dubito.Networking
             }
             long revision = engine.State.Revision;
             engine.RemovePlayer(id);
-            return Changed(revision);
+            // RULES §7: everyone still at the table is told who left, then gets the new views.
+            return Announce(new TableEventMessage(TableEventKind.Left, id), Changed(revision));
+        }
+
+        // The event goes to every connected player first, so it is shown with the view that follows.
+        IReadOnlyList<OutgoingPacket> Announce(TableEventMessage tableEvent, IReadOnlyList<OutgoingPacket> views)
+        {
+            var packets = new List<OutgoingPacket>();
+            byte[] bytes = ProtocolCodec.Encode(tableEvent);
+            foreach (var player in players) packets.Add(new OutgoingPacket(player.ConnectionId, bytes));
+            packets.AddRange(views);
+            return packets;
         }
 
         IReadOnlyList<OutgoingPacket> Changed(long previousRevision)

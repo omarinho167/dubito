@@ -98,4 +98,4 @@ Une seule instance, sans réseau ; une personne joue tous les sièges (D-47).
 - Après un tour sauté ou une exclusion, on bascule au nouveau joueur actif.
 - Noms locaux « Joueur 1 » à « Joueur 6 » (les noms Steam arrivent en phase 4).
 - Les textes nomment le joueur au lieu de dire « tu » (« Joueur 2 annonce : 2 × Dame », « À Joueur 2 de jouer ») ; à chaque changement de siège, un message « Au tour de Joueur 2 » (D-59).
-- Une touche de debug permet de simuler un départ (déconnexion) du siège affiché, pour tester `RULES §7`.
+- Une touche de debug permet de simuler un départ (déconnexion) du siège affiché, pour tester `RULES §7`. En réseau (phase 3), la même touche (Suppr) fait quitter la partie à ce joueur ; pour l'hôte, la partie s'arrête pour tous.

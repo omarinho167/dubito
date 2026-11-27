@@ -150,6 +150,9 @@ namespace Dubito.Tests.Protocol
             yield return Bad("LobbyHostMissing", Lobby(host: 4));
             yield return Bad("JoinRefusedZeroReason", Packet(9, w => w.Write((byte)0)));
             yield return Bad("JoinRefusedUnknownReason", Packet(9, w => w.Write((byte)3)));
+            yield return Bad("TableEventUnknownKind", Packet(10, w => { w.Write((byte)4); w.Write((byte)0); }));
+            yield return Bad("TableEventZeroKind", Packet(10, w => { w.Write((byte)0); w.Write((byte)0); }));
+            yield return Bad("TableEventPlayerOutOfRange", Packet(10, w => { w.Write((byte)1); w.Write((byte)6); }));
             yield return Bad("WelcomeInvalidVersion", Welcome(version: 0));
             yield return Bad("WelcomeUnknownRecipient", Welcome(recipient: 2));
             yield return Bad("WelcomeTooFewPlayers", Welcome(ids: new byte[] { 0 }));

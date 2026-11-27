@@ -168,7 +168,8 @@ namespace Dubito.Networking
         {
             Session = null;
             if (stopping) return;
-            Status = error ?? (connected ? "L'hôte est parti. Retour au panneau de connexion." : "Connexion impossible à 127.0.0.1:7777.");
+            // C-DEC-06: the host left, the game is over for everyone (RULES §7).
+            Status = error ?? (connected ? "L'hôte a quitté la partie." : "Connexion impossible à 127.0.0.1:7777.");
             Disconnected?.Invoke(Status);
         }
 

@@ -77,6 +77,25 @@ namespace Dubito.Presentation
             return message;
         }
 
+        // Online (step 3.5): events announced by the host. `me` is the reader's player id.
+        public static string ForEvent(Dubito.Protocol.TableEventKind kind, int playerId, int me)
+        {
+            bool mine = playerId == me && !PlayerVoice.HotSeat;
+            string name = CardNames.PlayerName(playerId);
+            switch (kind)
+            {
+                // A skipped turn that does not exclude is always the first one in a row (RULES §5).
+                case Dubito.Protocol.TableEventKind.TurnSkipped:
+                    return mine ? "Temps écoulé : ton tour est sauté. Encore un et tu seras exclu"
+                        : $"Temps écoulé : tour de {name} sauté";
+                case Dubito.Protocol.TableEventKind.Excluded:
+                    return mine ? "Temps écoulé : tu es exclu (2 tours sautés)" : $"Temps écoulé : {name} est exclu (2 tours sautés)";
+                case Dubito.Protocol.TableEventKind.Left:
+                    return $"{name} a quitté la partie";
+                default: return "";
+            }
+        }
+
         public static string Winner(PlayerView view) =>
             view.Phase == GamePhase.Finished && view.WinnerId.HasValue
                 ? $"{CardNames.PlayerName(view.WinnerId.Value)} gagne !" : view.Phase == GamePhase.Finished ? "Partie terminée" : "";

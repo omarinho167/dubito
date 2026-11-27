@@ -31,6 +31,7 @@ namespace Dubito.Presentation
 
         IGameSession session;
         LocalGameSession LocalSession => session as LocalGameSession;
+        NetworkGameSession networkSession;
         bool initialized, layoutReady;
         int localSeat;
         int lastShownSecond = -1;
@@ -72,14 +73,21 @@ namespace Dubito.Presentation
             CardNames.PlayerNames = value.PlayerNames;
             messages.AllowRematch = allowRematch; // only the host can call a rematch
             session = value;
+            networkSession = value;
+            networkSession.TableEvent += OnTableEvent;
             timerScale = hud.TimerDisplayScale = 1f;
             session.ViewChanged += OnViewChanged;
             if (session.IsReady) OnViewChanged(session.CurrentView);
         }
 
+        void OnTableEvent(Dubito.Protocol.TableEventMessage tableEvent) =>
+            messages.ShowTransient(TableMessageText.ForEvent(tableEvent.Kind, tableEvent.PlayerId, session.ControlledPlayerId));
+
         public void Suspend()
         {
             if (session != null) session.ViewChanged -= OnViewChanged;
+            if (networkSession != null) networkSession.TableEvent -= OnTableEvent;
+            networkSession = null;
             revelation.Cancel();
             actionPanel.Bind(null);
             messages.Clear();
@@ -137,6 +145,11 @@ namespace Dubito.Presentation
             }
 
             if (LocalSession != null && debugNewGameHotkeys && (Application.isEditor || Debug.isDebugBuild)) ReadHotkeys();
+            // Debug (step 3.5): Suppr leaves the online game, to test departures (RULES §7);
+            // for the host this ends the game for everyone (C-DEC-06).
+            else if (networkSession != null && (Application.isEditor || Debug.isDebugBuild) &&
+                     Keyboard.current != null && Keyboard.current.deleteKey.wasPressedThisFrame && !TableActionPanel.TextFieldFocused)
+                LeaveRequested?.Invoke();
         }
 
         void OnViewChanged(PlayerView view)

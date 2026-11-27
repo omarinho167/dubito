@@ -22,7 +22,7 @@ namespace Dubito.Protocol
         private enum MessageType : byte
         {
             Hello = 1, Command = 2, Ready = 3, Welcome = 4,
-            View = 5, CommandRejected = 6, VersionMismatch = 7, LobbyState = 8, JoinRefused = 9
+            View = 5, CommandRejected = 6, VersionMismatch = 7, LobbyState = 8, JoinRefused = 9, TableEvent = 10
         }
 
         public static byte[] Encode(IProtocolMessage message)
@@ -76,6 +76,10 @@ namespace Dubito.Protocol
                 case JoinRefusedMessage refused:
                     Header(writer, MessageType.JoinRefused); writer.Write((byte)refused.Reason);
                     break;
+                case TableEventMessage tableEvent:
+                    Header(writer, MessageType.TableEvent);
+                    writer.Write((byte)tableEvent.Kind); writer.Write((byte)tableEvent.PlayerId);
+                    break;
                 default: throw new ArgumentException("Unsupported protocol message.", nameof(message));
             }
             writer.Flush();
@@ -126,6 +130,8 @@ namespace Dubito.Protocol
                         message = new LobbyStateMessage(players, duration, max, reader.ReadByte(), reader.ReadByte()); break;
                     case MessageType.JoinRefused:
                         message = new JoinRefusedMessage((JoinRefusal)reader.ReadByte()); break;
+                    case MessageType.TableEvent:
+                        message = new TableEventMessage((TableEventKind)reader.ReadByte(), reader.ReadByte()); break;
                     default: throw new ArgumentException("Unknown message type.");
                 }
                 Check.Require(stream.Position == stream.Length, "Trailing message bytes.");

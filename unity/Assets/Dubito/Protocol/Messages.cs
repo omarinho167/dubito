@@ -185,6 +185,22 @@ namespace Dubito.Protocol
 
     public enum JoinRefusal : byte { LobbyFull = 1, GameStarted = 2 }
 
+    // Step 3.5 (UX §5, RULES §5 and §7): what happened at the table, announced by the host to everyone.
+    public enum TableEventKind : byte { TurnSkipped = 1, Excluded = 2, Left = 3 }
+
+    public sealed class TableEventMessage : IProtocolMessage
+    {
+        public TableEventKind Kind { get; }
+        public int PlayerId { get; }
+        public TableEventMessage(TableEventKind kind, int playerId)
+        {
+            Check.EnumValue(kind);
+            Check.Id(playerId);
+            Kind = kind;
+            PlayerId = playerId;
+        }
+    }
+
     // UX §6.5: clear reason when the host cannot take a new player.
     public sealed class JoinRefusedMessage : IProtocolMessage
     {

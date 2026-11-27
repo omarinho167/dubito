@@ -26,6 +26,7 @@ namespace Dubito.Networking
         public event Action<string> ProtocolError;
         public event Action<LobbyStateMessage> LobbyChanged;
         public event Action<JoinRefusal> JoinRefused;
+        public event Action<TableEventMessage> TableEvent;
         // Last lobby state received; null once the game has started.
         public LobbyStateMessage Lobby { get; private set; }
 
@@ -61,6 +62,7 @@ namespace Dubito.Networking
                     ViewChanged?.Invoke(view);
                     return;
                 case CommandRejectedMessage rejected when welcomed: CommandRejected?.Invoke(rejected.Error); return;
+                case TableEventMessage tableEvent when welcomed: TableEvent?.Invoke(tableEvent); return;
                 case LobbyStateMessage lobby:
                     // Also after a game: "Revanche" sends everyone back to the same lobby (UX §5).
                     welcomed = false;

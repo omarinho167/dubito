@@ -103,6 +103,8 @@ namespace Dubito.Tests.Protocol
                     new LobbyPlayer(5, "Client", false) }, duration, 6, 5, 0);
             yield return new JoinRefusedMessage(JoinRefusal.LobbyFull);
             yield return new JoinRefusedMessage(JoinRefusal.GameStarted);
+            foreach (TableEventKind kind in Enum.GetValues(typeof(TableEventKind)))
+                yield return new TableEventMessage(kind, 5);
             var e = BeforeDoubt();
             yield return new ViewMessage(PlayerView.Create(e.State, e.State.ActivePlayerId));
             Send(e, CommandKind.Doubt);
