@@ -8,6 +8,9 @@ namespace Dubito.Presentation
     public sealed class TableCardsView : MonoBehaviour
     {
         const float CardWidth = 0.063f, CardHeight = 0.088f; // ASSETS §2
+        // Selected card slides up in its own plane (towards the top of the image), keeping its depth layer:
+        // it no longer comes in front of its neighbours (owner 2026-11-27).
+        const float SelectedLift = 0.03f;
         [SerializeField] GameObject cardPrefab = null;
         [SerializeField] CardMaterialLibrary materials = null;
         [SerializeField] TableSeating seating = null;
@@ -39,7 +42,7 @@ namespace Dubito.Presentation
             selected.Clear();
             foreach (var card in values) selected.Add(card);
             foreach (var card in pool)
-                card.Transform.position = card.BasePosition + (card.LocalCard.HasValue && selected.Contains(card.LocalCard.Value) ? Vector3.up * .035f : Vector3.zero);
+                card.Transform.position = card.BasePosition + (card.LocalCard.HasValue && selected.Contains(card.LocalCard.Value) ? card.Transform.forward * SelectedLift : Vector3.zero);
         }
         public bool TryGetLocalCard(Collider collider, out Card value)
         {
@@ -94,7 +97,7 @@ namespace Dubito.Presentation
             card.BasePosition = position;
             card.Hit.enabled = localCard.HasValue;
             card.Transform.gameObject.layer = localCard.HasValue ? LayerMask.NameToLayer("SelectableCards") : 0;
-            card.Transform.SetPositionAndRotation(position + (localCard.HasValue && selected.Contains(localCard.Value) ? Vector3.up * .035f : Vector3.zero), rotation);
+            card.Transform.SetPositionAndRotation(position + (localCard.HasValue && selected.Contains(localCard.Value) ? rotation * Vector3.forward * SelectedLift : Vector3.zero), rotation);
             for (int r = 0; r < card.Renderers.Length; r++)
             {
                 bool changed = false;

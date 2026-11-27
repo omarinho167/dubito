@@ -16,7 +16,10 @@ namespace Dubito.Presentation
         [SerializeField] int seed = 0;
         [Tooltip("Run the turn timer (turns are skipped when it expires).")]
         [SerializeField] bool runTimer = true;
-        [SerializeField] bool debugShortTimer = true;
+        [Tooltip("Debug (D-58): 10 real seconds per turn. Off by default since the hot-seat exists.")]
+        [SerializeField] bool debugShortTimer = false;
+        [Tooltip("Hot-seat (UX §9, D-47): after each change, show the active player's seat.")]
+        [SerializeField] bool hotSeat = true;
         [SerializeField] TableActionPanel actionPanel = null;
         float revelationElapsed;
         [SerializeField] bool debugNewGameHotkeys = true;
@@ -27,6 +30,7 @@ namespace Dubito.Presentation
         LocalGameSession session;
         int localSeat;
         int lastShownSecond = -1;
+        bool switchPending;
 
         public IGameSession Session => session;
         float TimerScale => debugShortTimer ? turnSeconds / 10f : 1f;
@@ -47,11 +51,13 @@ namespace Dubito.Presentation
             OnViewChanged(session.CurrentView);
             actionPanel.Bind(session);
             revelationElapsed = 0;
+            switchPending = false;
         }
 
         void Update()
         {
             if (session == null) return;
+            if (switchPending) SwitchToActivePlayer();
             if (session.CurrentView.Phase == GamePhase.Revelation)
             {
                 revelationElapsed += Time.deltaTime;
@@ -73,15 +79,35 @@ namespace Dubito.Presentation
 
         void OnViewChanged(PlayerView view)
         {
+            // UX §9: stay on the doubter's seat during a revelation, then follow the active player.
+            // Switched on the next frame so every ViewChanged listener first finishes with this view.
+            if (hotSeat && view.Phase == GamePhase.Playing && view.ActivePlayerId != session.ControlledPlayerId)
+                switchPending = true;
             cards.Render(view, session.SeatOrder, localSeat);
             hud.Render(view, session.SeatOrder, localSeat);
             lastShownSecond = Mathf.CeilToInt((float)view.RemainingTurnSeconds);
+        }
+
+        void SwitchToActivePlayer()
+        {
+            switchPending = false;
+            var view = session.CurrentView;
+            if (view.Phase != GamePhase.Playing || view.ActivePlayerId == session.ControlledPlayerId) return;
+            localSeat = IndexOf(session.SeatOrder, view.ActivePlayerId);
+            seating.Build(playerCount, localSeat);
+            session.SetControlledPlayer(view.ActivePlayerId); // publishes the new seat's view
         }
 
         void ReadHotkeys()
         {
             var keyboard = Keyboard.current;
             if (keyboard == null || TableActionPanel.TextFieldFocused) return;
+            // UX §9: simulate the departure (disconnection) of the displayed seat, to test RULES §7.
+            if (keyboard.deleteKey.wasPressedThisFrame)
+            {
+                session.RemovePlayer(session.ControlledPlayerId);
+                return;
+            }
             for (int n = SeatLayout.MinSeats; n <= SeatLayout.MaxSeats; n++)
             {
                 if (keyboard[(Key)((int)Key.Digit2 + n - 2)].wasPressedThisFrame ||

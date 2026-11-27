@@ -40,6 +40,9 @@ namespace Dubito.Networking
         public void ResolveRevelation() =>
             Complete(engine.ResolveRevelation(CurrentView.Revision));
 
+        // Debug hot-seat (UX §9): a seat leaves the game, as on a disconnection (RULES §7).
+        public void RemovePlayer(int playerId) => Complete(engine.RemovePlayer(playerId));
+
         public void SetControlledPlayer(int playerId)
         {
             // Validate before changing either property; departed seats remain valid.

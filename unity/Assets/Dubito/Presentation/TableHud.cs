@@ -29,7 +29,7 @@ namespace Dubito.Presentation
             EnsureCanvas();
             round.text = view.RoundRank.HasValue ? CardNames.Rank(view.RoundRank.Value) : "Ouverture libre";
             pile.text = view.PileCount == 0 ? "Tas au centre : vide" : "Tas au centre : " + CardNames.CardCount(view.PileCount);
-            ownHand.text = "Ta main : " + CardNames.CardCount(view.Hand.Count);
+            ownHand.text = $"{CardNames.PlayerName(view.PlayerId)} (toi) · ta main : {CardNames.CardCount(view.Hand.Count)}";
             var last = view.LastAnnouncement;
             string author = last == null ? "" : last.PlayerId == view.PlayerId ? "Toi" : CardNames.PlayerName(last.PlayerId);
             announcement.text = last == null ? "" : $"{author} : {last.CardCount} × {CardNames.Rank(last.AnnouncedRank)}";

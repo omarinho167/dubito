@@ -71,7 +71,8 @@ namespace Dubito.Presentation
             if (view == null || root == null) return;
             model = ActionPanelModel.From(view, selection.Count, chosenRank);
             root.SetActive(model.Visible);
-            announcement.text = model.Announcement;
+            // The announcement is what the others will believe: say it plainly (owner feedback 2026-11-27).
+            announcement.text = (model.ChooseRank ? "Tu ouvres : " : "Tu annonces : ") + model.Announcement;
             play.interactable = model.CanPlay && !pending && !confirm;
             doubt.interactable = model.CanDoubt && !pending && !confirm;
             discard.interactable = model.CanDiscard && !pending && !confirm;
@@ -196,9 +197,9 @@ namespace Dubito.Presentation
             var rootRect = (RectTransform)root.transform;
             rootRect.anchorMin = rootRect.anchorMax = rootRect.pivot = new Vector2(1, 0);
             root.AddComponent<Image>().color = new Color(.035f, .045f, .06f, .95f);
-            announcement = Text("Announcement", root.transform, "", new Vector2(0, 160), new Vector2(320, 38), 28);
-            previous = MakeButton("‹", root.transform, new Vector2(-200, 155), new Vector2(60, 44), () => ChangeRank(-1));
-            next = MakeButton("›", root.transform, new Vector2(200, 155), new Vector2(60, 44), () => ChangeRank(1));
+            announcement = Text("Announcement", root.transform, "", new Vector2(0, 160), new Vector2(370, 38), 25);
+            previous = MakeButton("‹", root.transform, new Vector2(-220, 155), new Vector2(52, 44), () => ChangeRank(-1));
+            next = MakeButton("›", root.transform, new Vector2(220, 155), new Vector2(52, 44), () => ChangeRank(1));
             play = MakeButton("Jouer", root.transform, new Vector2(-165, 85), new Vector2(155, 56), Play);
             doubt = MakeButton("Douter", root.transform, new Vector2(0, 85), new Vector2(155, 56), null);
             discard = MakeButton("Défausser", root.transform, new Vector2(165, 85), new Vector2(155, 56), () => { if (model.CanDiscard && !pending) { confirm = true; CancelHold(); Refresh(); } });
