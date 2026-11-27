@@ -67,7 +67,7 @@ namespace Dubito.Presentation
 
             Vector3 eye = SeatLayout.SeatPosition(localSeat, seatCount, localSeat, SeatLayout.PelvisRadius);
             eye.y = SeatLayout.EyeHeight;
-            seatCamera.SetSeat(eye, Quaternion.LookRotation(new Vector3(0f, SeatLayout.TableHeight, 0f) - eye));
+            seatCamera.SetSeat(eye, Quaternion.LookRotation(new Vector3(0f, SeatLayout.LookTargetHeight, 0f) - eye));
         }
 
         static GameObject CreateInstance(GameObject prefab, Transform parent, string instanceName)

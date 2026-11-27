@@ -9,6 +9,8 @@ namespace Dubito.Presentation
         public const float EyeHeight = 1.15f;
         public const float ChairCenterRadius = 1.12f;
         public const float TableHeight = 0.75f;
+        // Resting gaze: a bit above the table centre so opponents' heads and names stay in view.
+        public const float LookTargetHeight = 0.85f;
         public const int MinSeats = 2;
         public const int MaxSeats = 6;
 
