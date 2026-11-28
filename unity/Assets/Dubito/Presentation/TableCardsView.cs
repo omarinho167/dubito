@@ -73,9 +73,14 @@ namespace Dubito.Presentation
                 Transform hand = local ? anchor : anchor.Find("Opponent/HandFan");
                 if (hand == null) throw new InvalidOperationException("Opponent requires HandFan anchor.");
                 int count = local ? view.Hand.Count : view.CardCounts[seatOrder[seat]];
+                if (!local)
+                {
+                    var hands = hand.parent.GetComponentInChildren<SeatedOpponentHands>();
+                    if (hands != null) hands.HoldingCards = count > 0;
+                }
                 Vector3 origin = local ? anchor.TransformPoint(localHandOffset) : hand.position;
                 Quaternion rotation = local ? anchor.rotation * Quaternion.Euler(localHandTilt, 0, 0)
-                    : hand.rotation * Quaternion.Euler(-70, 0, 0);
+                    : hand.rotation * Quaternion.Euler(HandFanLayout.OpponentFanTilt, 0, 0);
                 for (int i = 0; i < count; i++)
                 {
                     Pose pose = HandFanLayout.CardPose(i, count, fanRadius, fanMaxAngle, fanSpacing);

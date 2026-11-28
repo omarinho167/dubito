@@ -9,7 +9,9 @@ namespace Dubito.Presentation
         public const float DefaultMaxAngle = 42f;
         public const float DefaultSpacing = .018f;
         public const float LayerSpacing = .0008f;
-
+        // Opponent fans lean back from their HandFan anchor (TableCardsView).
+        public const float OpponentFanTilt = -70f;
+        public const float CardHalfHeight = .044f;
         // XZ is the card plane, +Y is its face. Increasing layers expose the left corners.
         // Saturating the total arc compresses spacing after about 14 cards.
         public static Pose CardPose(int index, int count, float radius = DefaultRadius,

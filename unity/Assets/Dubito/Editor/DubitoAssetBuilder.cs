@@ -260,6 +260,10 @@ namespace Dubito.EditorTools
                 back.exitTime = 0.9f;
                 back.duration = 0.3f;
             }
+            // SeatedOpponentHands puts the hands on the cards with IK.
+            var layers = controller.layers;
+            layers[0].iKPass = true;
+            controller.layers = layers;
             EditorUtility.SetDirty(controller);
             return controller;
         }
@@ -286,6 +290,19 @@ namespace Dubito.EditorTools
             fan.SetParent(root.transform, false);
             fan.localPosition = new Vector3(0f, 0.85f, 0.32f);
             fan.localRotation = Quaternion.Euler(-60f, 0f, 0f);
+
+            // Hands hold the bottom of the fan (SeatedOpponentHands); elbows stay low and out to the sides.
+            Transform Marker(string name, Transform parent, Vector3 local)
+            {
+                var t = new GameObject(name).transform;
+                t.SetParent(parent, false);
+                t.localPosition = local;
+                return t;
+            }
+            var hands = body.AddComponent<SeatedOpponentHands>();
+            hands.EditorSetup(fan,
+                Marker("ElbowHintL", root.transform, new Vector3(-0.35f, 0.7f, 0.05f)),
+                Marker("ElbowHintR", root.transform, new Vector3(0.35f, 0.7f, 0.05f)));
 
             // Tint only the placeholder. The judge keeps its original texture (D-80).
             var renderers = body.GetComponentsInChildren<SkinnedMeshRenderer>()
