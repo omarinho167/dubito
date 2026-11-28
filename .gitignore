@@ -46,3 +46,6 @@ Desktop.ini
 
 # Variantes brutes générées (Nano Banana Pro) : seules les images gardées sont versionnées (D-69)
 _gen/
+
+# Captures and videos of other games: study only, never published (D-87)
+art/references/
