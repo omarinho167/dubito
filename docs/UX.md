@@ -15,7 +15,7 @@
 - **Caméra** : à la 1re personne, assis à sa place. On tourne la tête en **maintenant le clic droit** et en bougeant la souris, dans une limite (environ ±60° à gauche/droite, un peu en haut/bas). Sans clic droit, le curseur est libre pour cliquer. Pas de déplacement.
 - **Table** : ronde, de 2 à 6 places réparties régulièrement. On est toujours placé face au centre. Le joueur suivant est assis à sa droite (D-55).
 - **Adversaires** : personnages stylisés simples assis (en phase 2 : mannequins neutres, `ASSETS.md`), avec **nom Steam** et **couleur** de siège.
-- **Main des adversaires** : leurs cartes sont visibles de dos, en éventail. On peut donc compter leurs cartes (`RULES §9`). Un petit chiffre au-dessus confirme le nombre.
+- **Main des adversaires** : chacun tient ses cartes de dos en **paquet serré dans une main** (D-92), dont l'épaisseur suit le nombre ; l'autre main reste libre pour les gestes. Le nombre exact est affiché en 3D au-dessus du joueur (`RULES §9`).
 - **Sa propre main** : tenue par **ses mains visibles** en bas de l'écran (D-88), cartes face visible, triées par valeur, en éventail serré. **Effet loupe** (D-91) : quand la souris passe sur l'éventail, les cartes proches du curseur s'écartent, montent et grossissent ; les autres restent serrées. Clic gauche pour sélectionner, comme avant.
 - **Tas** : au centre, cartes de dos. Son nombre de cartes est affiché, ainsi que la **valeur de manche** en grand (ou « Ouverture libre » si le tas est vide).
 - **Dernière annonce** : affichée près du tas : « Léa : 3 × Dame ».
