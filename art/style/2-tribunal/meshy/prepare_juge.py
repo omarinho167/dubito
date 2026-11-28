@@ -66,11 +66,22 @@ contacts=[e for e in bm.edges if len(e.link_faces)>2]
 bmesh.ops.split_edges(bm,edges=contacts)
 report['split_nonmanifold_contacts']=len(contacts)
 bm.to_mesh(mesh.data);bm.free();mesh.data.update()
-uv=mesh.data.uv_layers.active.data
-restored=[normals[corner_key(mesh.data.vertices[l.vertex_index].co,uv[l.index].uv)] for l in mesh.data.loops]
-for p in mesh.data.polygons: p.use_smooth=True
-mesh.data.normals_split_custom_set(restored)
 report['welded_exact_seam_vertices']=old_count-len(mesh.data.vertices)
+# D-86: Meshy's fused hands are replaced by modelled hands with three bones per finger.
+sys.path.insert(0, str(HERE))
+import juge_hands
+hand_normals=juge_hands.replace_hands(rig,mesh,image,report)
+uv=mesh.data.uv_layers.active.data
+flat=mesh.data.attributes['dub_flat'].data
+restored=[None]*len(mesh.data.loops)
+for p in mesh.data.polygons:
+    p.use_smooth=not flat[p.index].value
+    for li in p.loop_indices:
+        co=mesh.data.vertices[mesh.data.loops[li].vertex_index].co
+        n=normals.get(corner_key(co,uv[li].uv)) or hand_normals.get(tuple(round(x,6) for x in co))
+        restored[li]=n if n and not flat[p.index].value else tuple(p.normal)
+mesh.data.attributes.remove(mesh.data.attributes['dub_flat'])
+mesh.data.normals_split_custom_set(restored)
 if report['weights_before']['max_influences'] > 4:
     bpy.context.view_layer.objects.active = mesh
     bpy.ops.object.vertex_group_limit_total(limit=4)
@@ -107,6 +118,7 @@ for side in ('Left','Right'):
     rotate(side+'Leg','X',95)
     rotate(side+'Arm','Y',75 if side=='Left' else -75)
     rotate(side+'ForeArm','X',-95)
+juge_hands.curl(rig,1.0)
 report['qa_stress'] = qa_check.run(objects=[mesh.name],profile='game',eps=0.00001)
 deps = bpy.context.evaluated_depsgraph_get()
 ev=mesh.evaluated_get(deps); deformed=ev.to_mesh()
@@ -147,11 +159,23 @@ for p in rig.pose.bones: p.matrix_basis=Matrix.Identity(4)
 bpy.context.view_layer.update()
 render('blender-rest-front',(0,-4,1),(0,0,0.9))
 render('blender-rest-back',(0,4,1),(0,0,0.9))
+# Hand close-ups (left hand; the right one is its mirror): rest wire, palm, half curl, fist.
+camdata.ortho_scale=0.34
+render('blender-hands-rest-wire',(0.78,-0.6,3.0),(0.78,0.035,1.26),True)
+render('blender-hands-rest-palm',(0.78,-0.6,-0.5),(0.78,0.035,1.26))
+juge_hands.curl(rig,0.45)
+render('blender-hands-half',(1.6,-1.2,1.9),(0.76,0.035,1.25))
+juge_hands.curl(rig,1.0)
+render('blender-hands-fist',(1.6,-1.2,1.9),(0.76,0.035,1.25))
+render('blender-hands-fist-wire',(0.5,-1.8,1.0),(0.74,0.035,1.25),True)
+for p in rig.pose.bones: p.matrix_basis=Matrix.Identity(4)
+camdata.ortho_scale=2.15
 
 # Round-trip the deliverable independently and compare evaluated world bounds.
 bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.ops.import_scene.fbx(filepath=str(OUT/'CHR_Juge.fbx'))
 bpy.context.view_layer.update()
-report['roundtrip']=[{'name':o.name,'type':o.type,'scale':list(o.scale),'dimensions_m':list(o.dimensions)} for o in bpy.context.scene.objects]
+report['roundtrip']=[{'name':o.name,'type':o.type,'scale':list(o.scale),'dimensions_m':list(o.dimensions),
+    'bones':len(o.data.bones) if o.type=='ARMATURE' else None} for o in bpy.context.scene.objects]
 (REVIEW/'blender-qa.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
 print('QA_SUMMARY '+json.dumps(report))

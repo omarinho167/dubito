@@ -8,21 +8,61 @@
   "source_has_custom_normals": true,
   "split_nonmanifold_contacts": 1,
   "welded_exact_seam_vertices": 7750,
+  "hand_skin_uv": [
+    0.03932533413171768,
+    0.8207616806030273
+  ],
+  "hand_skin_rgb": [
+    0.745,
+    0.573,
+    0.525
+  ],
+  "cuff_cap_uv": [
+    0.18364167213439941,
+    0.5916673541069031
+  ],
+  "removed_hand_faces": {
+    "Left": 2518,
+    "Right": 2521
+  },
+  "cuff_opening": {
+    "Left": {
+      "centre": [
+        0.6614785194396973,
+        0.035330306738615036,
+        1.2621186971664429
+      ],
+      "vertices": 23
+    },
+    "Right": {
+      "centre": [
+        -0.6577191352844238,
+        0.03541127219796181,
+        1.2620782852172852
+      ],
+      "vertices": 23
+    }
+  },
+  "hand_triangles": {
+    "Left": 1900,
+    "Right": 1900
+  },
+  "finger_bones": 30,
   "weights_after": {
     "unweighted": 0,
     "max_influences": 4,
     "max_normalization_error": 1.434236764907837e-07
   },
   "geometry": {
-    "vertices": 15782,
-    "faces": 31491,
-    "triangles": 31491,
+    "vertices": 15194,
+    "faces": 28398,
+    "triangles": 30298,
     "dimensions_m": [
-      1.8083527088165283,
+      1.7987861633300781,
       0.4425622224807739,
-      1.8000048398971558
+      1.8000047206878662
     ],
-    "bones": 24,
+    "bones": 54,
     "material": "M_Juge",
     "texture": [
       2048,
@@ -44,11 +84,11 @@
     "enclosed": [],
     "objects": {
       "CHR_Juge": {
-        "verts": 15782,
-        "faces": 31491,
-        "tris": 31491,
+        "verts": 15194,
+        "faces": 28398,
+        "tris": 30298,
         "ngons": 0,
-        "boundary_edges": 473,
+        "boundary_edges": 446,
         "nonmanifold_edges": 0,
         "wire_edges": 0,
         "loose_verts": 0,
@@ -56,7 +96,7 @@
         "zero_length_edges": 0,
         "inconsistent_normals_edges": 0,
         "duplicate_verts": 2,
-        "islands": 7,
+        "islands": 9,
         "inside_out_islands": 0,
         "scale": [
           1.0,
@@ -70,7 +110,7 @@
         "uv_oob_pct": 0.0,
         "uv_zero_area_faces": 0,
         "uv_overlap_pct": 0.05,
-        "uv_coverage_pct": 70.1
+        "uv_coverage_pct": 66.7
       }
     }
   },
@@ -95,11 +135,11 @@
     "enclosed": [],
     "objects": {
       "CHR_Juge": {
-        "verts": 15782,
-        "faces": 31491,
-        "tris": 31491,
+        "verts": 15194,
+        "faces": 28398,
+        "tris": 30298,
         "ngons": 0,
-        "boundary_edges": 473,
+        "boundary_edges": 446,
         "nonmanifold_edges": 0,
         "wire_edges": 0,
         "loose_verts": 0,
@@ -107,7 +147,7 @@
         "zero_length_edges": 0,
         "inconsistent_normals_edges": 0,
         "duplicate_verts": 2,
-        "islands": 7,
+        "islands": 9,
         "inside_out_islands": 0,
         "scale": [
           1.0,
@@ -121,15 +161,15 @@
         "uv_oob_pct": 0.0,
         "uv_zero_area_faces": 0,
         "uv_overlap_pct": 0.05,
-        "uv_coverage_pct": 70.1
+        "uv_coverage_pct": 66.7
       }
     }
   },
   "stress_edge_ratios": {
     "max": [
-      2.0507648009777824,
-      3677,
-      3679
+      2.551311587927064,
+      13610,
+      13662
     ],
     "over_3x": 0
   },
@@ -143,10 +183,11 @@
         1.0
       ],
       "dimensions_m": [
-        1.8417141437530518,
-        0.5274047255516052,
-        2.0384061336517334
-      ]
+        1.8095945119857788,
+        0.5411864519119263,
+        2.038405656814575
+      ],
+      "bones": 54
     },
     {
       "name": "CHR_Juge",
@@ -157,10 +198,11 @@
         1.0
       ],
       "dimensions_m": [
-        1.8083529472351074,
-        0.4425622820854187,
-        1.800005316734314
-      ]
+        1.7987864017486572,
+        0.4425623416900635,
+        1.8000049591064453
+      ],
+      "bones": null
     }
   ]
 }

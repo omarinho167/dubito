@@ -236,10 +236,31 @@ MonoBehaviour:
   maxWeight: 1
   rotationWeight: 1
   fadeSpeed: 4
-  wristSpread: 0.06
-  wristBelowEdge: 0
-  wristTowardsHolder: 0.07
-  palmTwist: 0
+  minGripAngle: 6
+  maxGripAngle: 20
+  wristInCard: {x: 0.06, y: -0.07, z: -0.12}
+  fingersInCard: {x: -0.6, y: 0.12, z: 0.78}
+  backInCard: {x: 0, y: -1, z: 0.15}
+  thumb:
+    proximal: {x: 52, y: 25, z: 0}
+    intermediate: {x: 22, y: 0, z: 0}
+    distal: {x: 12, y: 0, z: 0}
+  index:
+    proximal: {x: 14, y: 0, z: 0}
+    intermediate: {x: 22, y: 0, z: 0}
+    distal: {x: 10, y: 0, z: 0}
+  middle:
+    proximal: {x: 16, y: 0, z: 0}
+    intermediate: {x: 22, y: 0, z: 0}
+    distal: {x: 10, y: 0, z: 0}
+  ring:
+    proximal: {x: 22, y: 0, z: 0}
+    intermediate: {x: 24, y: 0, z: 0}
+    distal: {x: 12, y: 0, z: 0}
+  little:
+    proximal: {x: 28, y: 0, z: 0}
+    intermediate: {x: 26, y: 0, z: 0}
+    distal: {x: 14, y: 0, z: 0}
 --- !u!4 &3118727680090147396 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: df53630cd1dd3af48bcc1cdadc53a02f, type: 3}

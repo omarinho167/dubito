@@ -36,10 +36,20 @@ Hauteur 1,800 m, 31 491 triangles, 15 782 sommets géométriques, 24 os, un mat�
 
 ## Défauts et limites à regarder
 
-- Pas d'os de doigts : mains ouvertes figées, doigts irréguliers issus de Meshy. Les poignets bougent avec l'animation, les doigts ne saisissent pas les cartes.
+- ~~Pas d'os de doigts~~ : corrigé, voir « Mains riggées » ci-dessous.
 - Les mains reposent bas, près des genoux (environ 0,46–0,49 m). Les éventails de cartes restent sur l'ancrage existant et flottent au-dessus : conservé expressément pour ce test.
 - Petites irrégularités des rouleaux de perruque et des sourcils ; une petite marque sombre est visible sur un rouleau latéral. Lunettes fines, contour assez grossier en gros plan. Pas de déchirure majeure observée sur veste/perruque dans les vues et poses contrôlées.
 - Ombres du visage et de la veste très marquées, mains/jambes sombres sous la table. Éclairage existant, non retouché.
 - Pas de traversée importante de la chaise ou du plateau observée dans ces vues. Les réactions autres que Sitting Idle, le jeu réseau et les performances à six joueurs ne sont pas validés par ce contrôle.
 
 DA.3 reste non cochée. Le propriétaire doit encore regarder le personnage en mouvement dans Unity : « Valider ce test » / « Corriger la pose » / « Revoir l'éclairage ». Cette revue n'enregistre aucune validation visuelle à sa place.
+
+## Mains riggées (D-86)
+
+Les mains Meshy (doigts collés, sans os) sont supprimées au bord de la manchette et remplacées par deux mains modélisées par script (`../meshy/juge_hands.py`, appelé par `prepare_juge.py`) : doigts longs et fins séparés, boucles d'arêtes à chaque articulation, 1 900 triangles par main (modèle complet 30 298 triangles), peau prise dans une zone unie de la texture existante (un seul matériau `M_Juge`). Un cône sombre ferme l'ouverture de chaque manchette.
+
+- Squelette : 54 os (24 + 15 par main, noms `LeftHandThumb1`…`RightHandPinky3`), poids lissés aux articulations, 4 influences max. QA Blender réussie au repos et en pose de stress (poings fermés) ; rendus `blender-hands-rest-wire.png`, `blender-hands-rest-palm.png`, `blender-hands-half.png`, `blender-hands-fist.png`, `blender-hands-fist-wire.png`.
+- Unity : Avatar Humanoid valide, 52 os mappés (doigts compris, dos inchangé : Spine02 → Spine…). Le mapping se refait par le menu `Dubito/Map Judge Fingers` après un nouvel export.
+- Prise de l'éventail (`SeatedOpponentHands`) : chaque main tient un coin bas de l'éventail, doigts repliés sur le dos des cartes, pouce côté visage des cartes ; lâche en 0,25 s pendant une réaction puis reprend.
+- Captures mode Play (partie hot-seat, 4 joueurs) : `hands-rig-seat.png` (siège du joueur, 3200×1800), `hands-rig-seat-zoom-far.png` et `hands-rig-seat-zoom-left.png` (recadrages), `hands-rig-close-front.png`, `hands-rig-close-side.png`, `hands-rig-close-low.png` (caméra de revue rapprochée), `hands-rig-holder-side.png` (côté du juge, sous l'éventail).
+- Limites : les mains restent grandes par rapport aux cartes (0,24 m contre 0,088 m) et couvrent le bas de l'éventail ; vu du côté du juge, un bout de doigt peut traverser une carte ; les poignets frôlent le bord de la table. Le propriétaire valide l'apparence en jeu.

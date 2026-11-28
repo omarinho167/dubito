@@ -76,7 +76,7 @@ namespace Dubito.Presentation
                 if (!local)
                 {
                     var hands = hand.parent.GetComponentInChildren<SeatedOpponentHands>();
-                    if (hands != null) hands.HoldingCards = count > 0;
+                    if (hands != null) hands.SetFan(count, fanRadius, fanMaxAngle, fanSpacing);
                 }
                 Vector3 origin = local ? anchor.TransformPoint(localHandOffset) : hand.position;
                 Quaternion rotation = local ? anchor.rotation * Quaternion.Euler(localHandTilt, 0, 0)
