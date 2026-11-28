@@ -108,3 +108,4 @@
 | D-88 | **Tes mains sont visibles** à l'écran et tiennent tes cartes (UX à mettre à jour avec la solution de main dynamique, D-91). | Choix du propriétaire après l'étude `docs/research/2026-11-28-ETUDE-LIARS-BAR.md`. | P |
 | D-89 | On **garde la silhouette du juge actuel** (D-83) ; seules ses mains et sa façon de tenir les cartes sont repensées. | Choix du propriétaire (DA.6). | P |
 | D-90 | Caméra **plus large** et table **plus intime** (adversaires plus proches), à essayer dans Unity avant de changer ASSETS §2. | Choix du propriétaire (DA.6) : voisins grands et lisibles comme dans la référence. | P |
+| D-91 | Main du joueur : **effet loupe** (les cartes proches du curseur s'écartent et grossissent, les autres restent serrées), choisi sur un prototype parmi trois (loupe, survol qui soulève, main qui se lève). Règles inchangées (13 cartes à 4 joueurs). | Choix du propriétaire : 13 cartes en éventail complet étaient illisibles. | P |
