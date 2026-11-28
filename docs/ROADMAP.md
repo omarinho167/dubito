@@ -59,7 +59,7 @@ Choisir le style avant le contenu de la V1 (D-67). Prompts et dépôt des images
 
 - [ ] DA.1 Exploration : 4 directions générées avec Nano Banana Pro (même scène pour chacune), planche de comparaison, choix du propriétaire.
 - [ ] DA.2 Charte : fiche de style (palette, matières, formes, lumière) dans ASSETS + charte d'interface (Claude Design).
-- [ ] DA.3 Pipeline personnage : un personnage du style choisi, image → Meshy AI → nettoyage et squelette dans Blender → Unity, assis à la table.
+- [ ] DA.3 Pipeline personnage : le juge (D-79), image → Meshy AI → nettoyage et squelette dans Blender → Unity, assis à la table.
 - [ ] DA.4 Animation depuis une vidéo iPhone : une réaction assise filmée → outil vidéo vers animation → Blender → Unity.
 - [ ] DA.5 Outils et budget retenus (abonnements), d'après la recherche datée dans `docs/research/`.
 

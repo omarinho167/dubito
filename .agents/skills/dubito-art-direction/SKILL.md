@@ -67,6 +67,18 @@ python .agents/skills/dubito-art-direction/scripts/planche.py art/style/_planche
 
 Même boucle pour : la charte d'interface (DA.2, maquettes d'écrans en 16:9), les fiches personnage pour Meshy (DA.3, 3:4, face/profil en A), les dos de cartes ou textures (1:1). Dépôt dans `art/<asset>/ref/` comme indiqué par `docs/ASSETS.md`. Les faces de cartes restent générées par script (`dubito-card-faces`).
 
+## 6. Passer en 3D avec Meshy (après validation de l'image)
+
+Outil : MCP `meshy` hébergé (`https://mcp.meshy.ai/mcp`, connexion OAuth au compte Pro du propriétaire, D-82), pour Claude et Codex. Coûts : [doc officielle](https://docs.meshy.ai/en/api/pricing) ; budget et règles : D-81.
+
+- **Jamais de crédit Meshy sans image validée par le propriétaire.** Images : toujours Nano Banana (Flow, gratuit), jamais la génération d'images de Meshy.
+- Avant un lot : `meshy_check_balance`, annoncer le coût prévu (multi-vues texturé 30, remesh 5, rig 5, retexture 10, animation 3 par action).
+- Personnage : fiche face/profil/dos découpée en 3 vues carrées (`B-meshy-*.png`) → `meshy_multi_image_to_3d` avec texture ; objets : une image propre sur fond uni → `meshy_image_to_3d`.
+- Résultat raté : utiliser d'abord les **relances gratuites** de la tâche (4 sur Pro) avant une nouvelle tâche payante.
+- **Télécharger tout de suite** (`meshy_download_model`, FBX + GLB) dans `art/<asset>/meshy/` : Meshy ne garde les fichiers que 3 jours sur Pro.
+- Ne pas payer le remesh si Codex peut réduire le modèle dans Blender ; ne pas animer dans Meshy ce que Mixamo fait gratuitement.
+- Ensuite : `blender-to-unity` (nettoyage, rig, export) puis `dubito-character-import`.
+
 ## Claude et Codex
 
 Les deux peuvent appeler le MCP ; le serveur fait passer les générations une par une. Pour un gros lot, le confier à Codex avec un brief complet (directions, prompts, dossier, nombre d'images, budget du jour) et vérifier les images avant de les présenter.
