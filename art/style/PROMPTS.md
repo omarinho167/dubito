@@ -59,12 +59,18 @@ Video game screenshot, first-person view from a seated player at a round card ta
 
 Le premier essai (direction 1 en 3D lisse, avant D-72) reste dans `_gen/flow-manifest.jsonl` et l'historique git.
 
-## Étape 4 · Fiche personnage pour le test 3D (`2-tribunal`, D-77)
+## Étape 4 · Personnage pour le test 3D (`2-tribunal`, D-77, D-78)
 
-Pour Meshy : pas de contours ni d'ombres peints (Meshy les copierait dans la texture), lumière neutre, couleurs unies. Format 3:4. Fichier gardé : `art/style/2-tribunal/B-personnage.png`.
+Deux images : un **concept** (pour le charme et les détails) puis la **fiche 3D** faite avec le concept gardé en référence (pour Meshy). Le premier essai « flat lighting, simple solid colors » donnait une poupée sans détail : ne pas réduire le personnage pour le rendre modélisable, c'est la fiche qui l'est.
 
+**Concept** (3:4, `B-concept.png`)
 ```text
-Character turnaround sheet for a 3D game model, stylized 3D render, clean simple shapes, flat even studio lighting, no outlines, no cast shadows, plain light grey background. One stylized human card player from a whimsical courtroom: a judge-like character wearing a simple dark red robe with a white collar and a short rounded judge hat, chunky proportions, slightly big head, big expressive hands with clearly separated fingers, expressive face with a mischievous suspicious look. Front view and side view side by side, identical proportions, standing in a neutral A-pose, arms away from the body, legs slightly apart. Simple solid colors, chunky modeled hair, no fine hair strands, no loose flowing cloth, robe ends above the knees so the legs are visible. Original design, no text, no letters, no logos, no watermark.
+Premium stylized 3D character concept render for a comedic multiplayer card game, high-end real-time game quality, appealing and charming shape language. A plump, charismatic courtroom card player: a pompous old judge with a big round nose, thick bushy grey eyebrows, a curled grey moustache, rosy cheeks and a sly half-smile, one eyebrow raised in suspicion. He wears a deep crimson velvet judge's robe with gold embroidered trims and a row of brass buttons, a crisp white pleated jabot collar, and a small black velvet cap with a gold tassel. Big expressive hands with chunky fingers, one hand holding a fan of three face-down playing cards close to his chest. Three-quarter view, waist up, soft warm key light with a gentle rim light, smooth stylized skin with subtle subsurface scattering, visible fabric texture, dark warm gradient background. Original design, no text, no letters, no logos, no watermark.
+```
+
+**Fiche 3D** (16:9, `B-personnage.png`, référence : le concept gardé)
+```text
+Character turnaround model sheet of the exact same character as the reference image, same face, same outfit, same colors and materials, premium stylized 3D game character render. Full body visible from head to shoes, three views side by side with identical proportions and height: front view, side view, back view. Neutral A-pose, arms straight and away from the body at 45 degrees, hands open with fingers slightly apart, legs slightly apart, feet flat, nothing held in the hands. The robe stops at the knees, showing dark trousers and black leather shoes. Soft neutral studio lighting, no dramatic shadows, plain uniform light grey background, no floor shadow, no props. Original design, no text, no letters, no logos, no watermark.
 ```
 
 ## Après le choix
