@@ -59,18 +59,13 @@ Video game screenshot, first-person view from a seated player at a round card ta
 
 Le premier essai (direction 1 en 3D lisse, avant D-72) reste dans `_gen/flow-manifest.jsonl` et l'historique git.
 
-## Étape 4 · Personnage pour le test 3D (`2-tribunal`, D-77, D-78)
+## Étape 4 · Personnage pour Meshy (`2-tribunal`, D-83)
 
-Deux images : un **concept** (pour le charme et les détails) puis la **fiche 3D** faite avec le concept gardé en référence (pour Meshy). Le premier essai « flat lighting, simple solid colors » donnait une poupée sans détail : ne pas réduire le personnage pour le rendre modélisable, c'est la fiche qui l'est.
+Meshy (personnage de jeu : géométrie `meshy-t2.5`, texture `meshy-n1`) part d'**une seule image de face** et recopie sa lumière dans la texture. D'où : pose A symétrique, lumière plate, fond gris uni, pièces pleines et attachées (perruque en volumes, pas de mèches), vêtements qui s'arrêtent au-dessus des genoux pour pouvoir s'asseoir. Le personnage est décrit **sans image de référence** : une référence recopiait l'ancien dessin (robe longue) au lieu du prompt. Format 3:4, version 2K gardée : `B-meshy.png`.
 
-**Concept** (3:4, `B-concept.png`)
+Pour un autre personnage, garder tout sauf les deux premières phrases de description (corps, visage, tenue).
 ```text
-Premium stylized 3D character concept render for a comedic multiplayer card game, high-end real-time game quality, appealing and charming shape language. A plump, charismatic courtroom card player: a pompous old judge with a big round nose, thick bushy grey eyebrows, a curled grey moustache, rosy cheeks and a sly half-smile, one eyebrow raised in suspicion. He wears a deep crimson velvet judge's robe with gold embroidered trims and a row of brass buttons, a crisp white pleated jabot collar, and a small black velvet cap with a gold tassel. Big expressive hands with chunky fingers, one hand holding a fan of three face-down playing cards close to his chest. Three-quarter view, waist up, soft warm key light with a gentle rim light, smooth stylized skin with subtle subsurface scattering, visible fabric texture, dark warm gradient background. Original design, no text, no letters, no logos, no watermark.
-```
-
-**Fiche 3D** (16:9, `B-personnage.png`, référence : le concept gardé)
-```text
-Character turnaround model sheet of the exact same character as the reference image, same face, same outfit, same colors and materials, premium stylized 3D game character render. Full body visible from head to shoes, three views side by side with identical proportions and height: front view, side view, back view. Neutral A-pose, arms straight and away from the body at 45 degrees, hands open with fingers slightly apart, legs slightly apart, feet flat, nothing held in the hands. The robe stops at the knees, showing dark trousers and black leather shoes. Soft neutral studio lighting, no dramatic shadows, plain uniform light grey background, no floor shadow, no props. Original design, no text, no letters, no logos, no watermark.
+Single full-body character reference image for AI image-to-3D modeling. A comedic old courtroom judge: lanky and slightly hunched, a long face with a long pointy chin, a long thin nose with small half-moon spectacles, huge bushy white eyebrows, and a big white judge's wig sculpted as large solid curled rolls on both sides of the head, one solid chunky shape, no thin strands. He wears a fitted short black judge's jacket ending at the hips with a wide red sash belt, a white jabot made of two short thick fabric tabs, white shirt cuffs, grey striped trousers and black shoes with square silver buckles. Strict front view facing the camera, centered, the whole body from wig to shoes with a margin around it, symmetrical A-pose: arms straight and held 45 degrees away from the body, open hands with all five long fingers slightly spread, legs straight and slightly apart, feet flat. Neutral relaxed face, eyes open looking straight ahead, mouth closed. Clothes fitted and solid, nothing below mid-thigh except trousers, no long robe, no cape, no loose cloth, no thin dangling parts. Premium stylized 3D game character render, appealing exaggerated cartoon proportions, slightly big head and big hands, rich texture detail in the fabrics. Flat, even, shadowless lighting from the front, no rim light, no strong specular highlights. Plain uniform light grey background, no floor shadow, no props, nothing in the hands. Original design, no text, no letters, no logos, no watermark.
 ```
 
 ## Après le choix

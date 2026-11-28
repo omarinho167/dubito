@@ -73,7 +73,7 @@ Outil : MCP `meshy` hébergé (`https://mcp.meshy.ai/mcp`, connexion OAuth au co
 
 - **Jamais de crédit Meshy sans image validée par le propriétaire.** Images : toujours Nano Banana (Flow, gratuit), jamais la génération d'images de Meshy.
 - Avant un lot : `meshy_check_balance`, annoncer le coût prévu (multi-vues texturé 30, remesh 5, rig 5, retexture 10, animation 3 par action).
-- Personnage : fiche face/profil/dos découpée en 3 vues carrées (`B-meshy-*.png`) → `meshy_multi_image_to_3d` avec texture ; objets : une image propre sur fond uni → `meshy_image_to_3d`.
+- Personnage : **une image de face**, pose A, lumière plate (`B-meshy.png`, PROMPTS étape 4) → `image_to_3d` avec géométrie `meshy-t2.5` (`target_polycount` 30000), `pose_mode` `t-pose`, texture `meshy-n1`, puis `rig_model`. Objets : une image propre sur fond uni → `image_to_3d` avec `meshy-t2` + `meshy-n1`. Vérifier les prix avec `get_balance` (ils dépendent du modèle choisi).
 - Résultat raté : utiliser d'abord les **relances gratuites** de la tâche (4 sur Pro) avant une nouvelle tâche payante.
 - **Télécharger tout de suite** (`meshy_download_model`, FBX + GLB) dans `art/<asset>/meshy/` : Meshy ne garde les fichiers que 3 jours sur Pro.
 - Ne pas payer le remesh si Codex peut réduire le modèle dans Blender ; ne pas animer dans Meshy ce que Mixamo fait gratuitement.
