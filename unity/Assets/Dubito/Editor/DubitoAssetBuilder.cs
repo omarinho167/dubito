@@ -266,7 +266,8 @@ namespace Dubito.EditorTools
 
         static GameObject BuildOpponentPrefab(AnimatorController controller)
         {
-            var model = AssetDatabase.LoadAssetAtPath<GameObject>(DubitoArtPostprocessor.MannequinModelPath);
+            var model = AssetDatabase.LoadAssetAtPath<GameObject>(DubitoArtPostprocessor.JudgeModelPath)
+                        ?? AssetDatabase.LoadAssetAtPath<GameObject>(DubitoArtPostprocessor.MannequinModelPath);
             var root = new GameObject("PF_Opponent");
             var body = (GameObject)PrefabUtility.InstantiatePrefab(model);
             body.name = "Body";
@@ -286,6 +287,7 @@ namespace Dubito.EditorTools
             fan.localPosition = new Vector3(0f, 0.85f, 0.32f);
             fan.localRotation = Quaternion.Euler(-60f, 0f, 0f);
 
+            // Tint only the placeholder. The judge keeps its original texture (D-80).
             var renderers = body.GetComponentsInChildren<SkinnedMeshRenderer>()
                 .Where(r => r.sharedMaterial != null && r.sharedMaterial.name == "M_Mannequin")
                 .Cast<Renderer>().ToArray();

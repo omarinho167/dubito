@@ -14,6 +14,7 @@ namespace Dubito.EditorTools
         public const string CardFacesFolder = ArtRoot + "Cards/Faces/";
         public const string MannequinFolder = ArtRoot + "Characters/Mannequin/";
         public const string MannequinModelPath = MannequinFolder + "Y Bot.fbx";
+        public const string JudgeModelPath = ArtRoot + "Characters/Juge/CHR_Juge.fbx";
 
         // Clips that loop while seated; the others are one-shot reactions that return to idle.
         static readonly string[] LoopingClips = { "Sitting Idle", "Sitting Talking" };
@@ -57,6 +58,19 @@ namespace Dubito.EditorTools
             if (assetPath.StartsWith(MannequinFolder, StringComparison.Ordinal))
             {
                 PreprocessMannequin(importer);
+                return;
+            }
+
+            if (assetPath == JudgeModelPath)
+            {
+                importer.animationType = ModelImporterAnimationType.Human;
+                importer.avatarSetup = ModelImporterAvatarSetup.CreateFromThisModel;
+                importer.importAnimation = false;
+                importer.importBlendShapes = false;
+                importer.bakeAxisConversion = true;
+                importer.importNormals = ModelImporterNormals.Import;
+                importer.materialImportMode = ModelImporterMaterialImportMode.ImportViaMaterialDescription;
+                importer.materialLocation = ModelImporterMaterialLocation.InPrefab;
                 return;
             }
 

@@ -1,0 +1,106 @@
+Judge Humanoid Sitting Idle samples; positions in metres; no seat tint.
+seats=2 normalizedTime=0
+Opponent valid=True state=2081823275 time=0,000 minY=0,002 maxY=1,372 Hips=(0.000, 0.550, 1.050) LeftFoot=(0.123, 0.141, 0.658) RightFoot=(-0.089, 0.141, 0.675) LeftHand=(0.152, 0.493, 0.730) RightHand=(-0.128, 0.461, 0.702)
+max posed triangle edge=0,1569
+seats=2 normalizedTime=0,25
+Opponent valid=True state=2081823275 time=0,250 minY=0,002 maxY=1,361 Hips=(0.000, 0.550, 1.049) LeftFoot=(0.123, 0.141, 0.658) RightFoot=(-0.089, 0.141, 0.675) LeftHand=(0.153, 0.493, 0.730) RightHand=(-0.129, 0.461, 0.702)
+max posed triangle edge=0,1568
+seats=2 normalizedTime=0,5
+Opponent valid=True state=2081823275 time=0,500 minY=0,003 maxY=1,367 Hips=(0.000, 0.550, 1.050) LeftFoot=(0.123, 0.142, 0.657) RightFoot=(-0.089, 0.142, 0.674) LeftHand=(0.151, 0.493, 0.729) RightHand=(-0.129, 0.461, 0.701)
+max posed triangle edge=0,1569
+seats=2 normalizedTime=0,75
+Opponent valid=True state=2081823275 time=0,750 minY=0,000 maxY=1,360 Hips=(0.000, 0.552, 1.052) LeftFoot=(0.123, 0.140, 0.661) RightFoot=(-0.088, 0.140, 0.678) LeftHand=(0.153, 0.488, 0.737) RightHand=(-0.129, 0.456, 0.709)
+max posed triangle edge=0,1569
+seats=2 normalizedTime=0,99
+Opponent valid=True state=2081823275 time=0,990 minY=0,002 maxY=1,371 Hips=(0.000, 0.550, 1.050) LeftFoot=(0.123, 0.141, 0.658) RightFoot=(-0.089, 0.141, 0.675) LeftHand=(0.152, 0.493, 0.730) RightHand=(-0.128, 0.461, 0.702)
+max posed triangle edge=0,1569
+seats=4 normalizedTime=0
+Opponent valid=True state=2081823275 time=0,000 minY=0,002 maxY=1,372 Hips=(1.050, 0.550, 0.000) LeftFoot=(0.658, 0.141, -0.123) RightFoot=(0.675, 0.141, 0.089) LeftHand=(0.730, 0.493, -0.152) RightHand=(0.702, 0.461, 0.128)
+Opponent valid=True state=2081823275 time=0,000 minY=0,002 maxY=1,372 Hips=(0.000, 0.550, 1.050) LeftFoot=(0.123, 0.141, 0.658) RightFoot=(-0.089, 0.141, 0.675) LeftHand=(0.152, 0.493, 0.730) RightHand=(-0.128, 0.461, 0.702)
+Opponent valid=True state=2081823275 time=0,000 minY=0,002 maxY=1,372 Hips=(-1.050, 0.550, 0.000) LeftFoot=(-0.658, 0.141, 0.123) RightFoot=(-0.675, 0.141, -0.089) LeftHand=(-0.730, 0.493, 0.152) RightHand=(-0.702, 0.461, -0.128)
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+seats=4 normalizedTime=0,25
+Opponent valid=True state=2081823275 time=0,250 minY=0,002 maxY=1,361 Hips=(1.049, 0.550, 0.000) LeftFoot=(0.658, 0.141, -0.123) RightFoot=(0.675, 0.141, 0.089) LeftHand=(0.730, 0.493, -0.153) RightHand=(0.702, 0.461, 0.129)
+Opponent valid=True state=2081823275 time=0,250 minY=0,002 maxY=1,361 Hips=(0.000, 0.550, 1.049) LeftFoot=(0.123, 0.141, 0.658) RightFoot=(-0.089, 0.141, 0.675) LeftHand=(0.153, 0.493, 0.730) RightHand=(-0.129, 0.461, 0.702)
+Opponent valid=True state=2081823275 time=0,250 minY=0,002 maxY=1,361 Hips=(-1.049, 0.550, 0.000) LeftFoot=(-0.658, 0.141, 0.123) RightFoot=(-0.675, 0.141, -0.089) LeftHand=(-0.730, 0.493, 0.153) RightHand=(-0.702, 0.461, -0.129)
+max posed triangle edge=0,1568
+max posed triangle edge=0,1568
+max posed triangle edge=0,1568
+seats=4 normalizedTime=0,5
+Opponent valid=True state=2081823275 time=0,500 minY=0,003 maxY=1,367 Hips=(1.050, 0.550, 0.000) LeftFoot=(0.657, 0.142, -0.123) RightFoot=(0.674, 0.142, 0.089) LeftHand=(0.729, 0.493, -0.151) RightHand=(0.701, 0.461, 0.129)
+Opponent valid=True state=2081823275 time=0,500 minY=0,003 maxY=1,367 Hips=(0.000, 0.550, 1.050) LeftFoot=(0.123, 0.142, 0.657) RightFoot=(-0.089, 0.142, 0.674) LeftHand=(0.151, 0.493, 0.729) RightHand=(-0.129, 0.461, 0.701)
+Opponent valid=True state=2081823275 time=0,500 minY=0,003 maxY=1,367 Hips=(-1.050, 0.550, 0.000) LeftFoot=(-0.657, 0.142, 0.123) RightFoot=(-0.674, 0.142, -0.089) LeftHand=(-0.729, 0.493, 0.151) RightHand=(-0.701, 0.461, -0.129)
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+seats=4 normalizedTime=0,75
+Opponent valid=True state=2081823275 time=0,750 minY=0,000 maxY=1,360 Hips=(1.052, 0.552, 0.000) LeftFoot=(0.661, 0.140, -0.123) RightFoot=(0.678, 0.140, 0.088) LeftHand=(0.737, 0.488, -0.153) RightHand=(0.709, 0.456, 0.129)
+Opponent valid=True state=2081823275 time=0,750 minY=0,000 maxY=1,360 Hips=(0.000, 0.552, 1.052) LeftFoot=(0.123, 0.140, 0.661) RightFoot=(-0.088, 0.140, 0.678) LeftHand=(0.153, 0.488, 0.737) RightHand=(-0.129, 0.456, 0.709)
+Opponent valid=True state=2081823275 time=0,750 minY=0,000 maxY=1,360 Hips=(-1.052, 0.552, 0.000) LeftFoot=(-0.661, 0.140, 0.123) RightFoot=(-0.678, 0.140, -0.088) LeftHand=(-0.737, 0.488, 0.153) RightHand=(-0.709, 0.456, -0.129)
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+seats=4 normalizedTime=0,99
+Opponent valid=True state=2081823275 time=0,990 minY=0,002 maxY=1,371 Hips=(1.050, 0.550, 0.000) LeftFoot=(0.658, 0.141, -0.123) RightFoot=(0.675, 0.141, 0.089) LeftHand=(0.730, 0.493, -0.152) RightHand=(0.702, 0.461, 0.128)
+Opponent valid=True state=2081823275 time=0,990 minY=0,002 maxY=1,371 Hips=(0.000, 0.550, 1.050) LeftFoot=(0.123, 0.141, 0.658) RightFoot=(-0.089, 0.141, 0.675) LeftHand=(0.152, 0.493, 0.730) RightHand=(-0.128, 0.461, 0.702)
+Opponent valid=True state=2081823275 time=0,990 minY=0,002 maxY=1,371 Hips=(-1.050, 0.550, 0.000) LeftFoot=(-0.658, 0.141, 0.123) RightFoot=(-0.675, 0.141, -0.089) LeftHand=(-0.730, 0.493, 0.152) RightHand=(-0.702, 0.461, -0.128)
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+seats=6 normalizedTime=0
+Opponent valid=True state=2081823275 time=0,000 minY=0,002 maxY=1,372 Hips=(0.909, 0.550, 0.525) LeftFoot=(0.631, 0.141, 0.223) RightFoot=(0.540, 0.141, 0.414) LeftHand=(0.709, 0.493, 0.233) RightHand=(0.544, 0.461, 0.462)
+Opponent valid=True state=2081823275 time=0,000 minY=0,002 maxY=1,372 Hips=(-0.909, 0.550, 0.525) LeftFoot=(-0.508, 0.141, 0.435) RightFoot=(-0.629, 0.141, 0.261) LeftHand=(-0.556, 0.493, 0.497) RightHand=(-0.672, 0.461, 0.240)
+Opponent valid=True state=2081823275 time=0,000 minY=0,002 maxY=1,372 Hips=(-0.909, 0.550, -0.525) LeftFoot=(-0.631, 0.141, -0.223) RightFoot=(-0.540, 0.141, -0.414) LeftHand=(-0.709, 0.493, -0.233) RightHand=(-0.544, 0.461, -0.462)
+Opponent valid=True state=2081823275 time=0,000 minY=0,002 maxY=1,372 Hips=(0.000, 0.550, 1.050) LeftFoot=(0.123, 0.141, 0.658) RightFoot=(-0.089, 0.141, 0.675) LeftHand=(0.152, 0.493, 0.730) RightHand=(-0.128, 0.461, 0.702)
+Opponent valid=True state=2081823275 time=0,000 minY=0,002 maxY=1,372 Hips=(0.909, 0.550, -0.525) LeftFoot=(0.508, 0.141, -0.435) RightFoot=(0.629, 0.141, -0.261) LeftHand=(0.556, 0.493, -0.497) RightHand=(0.672, 0.461, -0.240)
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+seats=6 normalizedTime=0,25
+Opponent valid=True state=2081823275 time=0,250 minY=0,002 maxY=1,361 Hips=(0.908, 0.550, 0.524) LeftFoot=(0.631, 0.141, 0.223) RightFoot=(0.540, 0.141, 0.415) LeftHand=(0.709, 0.493, 0.232) RightHand=(0.543, 0.461, 0.463)
+Opponent valid=True state=2081823275 time=0,250 minY=0,002 maxY=1,361 Hips=(-0.908, 0.550, 0.524) LeftFoot=(-0.508, 0.141, 0.435) RightFoot=(-0.629, 0.141, 0.261) LeftHand=(-0.555, 0.493, 0.498) RightHand=(-0.672, 0.461, 0.239)
+Opponent valid=True state=2081823275 time=0,250 minY=0,002 maxY=1,361 Hips=(-0.908, 0.550, -0.524) LeftFoot=(-0.631, 0.141, -0.223) RightFoot=(-0.540, 0.141, -0.415) LeftHand=(-0.709, 0.493, -0.232) RightHand=(-0.543, 0.461, -0.463)
+Opponent valid=True state=2081823275 time=0,250 minY=0,002 maxY=1,361 Hips=(0.000, 0.550, 1.049) LeftFoot=(0.123, 0.141, 0.658) RightFoot=(-0.089, 0.141, 0.675) LeftHand=(0.153, 0.493, 0.730) RightHand=(-0.129, 0.461, 0.702)
+Opponent valid=True state=2081823275 time=0,250 minY=0,002 maxY=1,361 Hips=(0.908, 0.550, -0.524) LeftFoot=(0.508, 0.141, -0.435) RightFoot=(0.629, 0.141, -0.261) LeftHand=(0.555, 0.493, -0.498) RightHand=(0.672, 0.461, -0.239)
+max posed triangle edge=0,1568
+max posed triangle edge=0,1568
+max posed triangle edge=0,1568
+max posed triangle edge=0,1568
+max posed triangle edge=0,1568
+seats=6 normalizedTime=0,5
+Opponent valid=True state=2081823275 time=0,500 minY=0,003 maxY=1,367 Hips=(0.909, 0.550, 0.525) LeftFoot=(0.631, 0.142, 0.222) RightFoot=(0.539, 0.142, 0.414) LeftHand=(0.707, 0.493, 0.233) RightHand=(0.543, 0.461, 0.462)
+Opponent valid=True state=2081823275 time=0,500 minY=0,003 maxY=1,367 Hips=(-0.909, 0.550, 0.525) LeftFoot=(-0.508, 0.142, 0.435) RightFoot=(-0.628, 0.142, 0.260) LeftHand=(-0.556, 0.493, 0.496) RightHand=(-0.671, 0.461, 0.239)
+Opponent valid=True state=2081823275 time=0,500 minY=0,003 maxY=1,367 Hips=(-0.909, 0.550, -0.525) LeftFoot=(-0.631, 0.142, -0.222) RightFoot=(-0.539, 0.142, -0.414) LeftHand=(-0.707, 0.493, -0.233) RightHand=(-0.543, 0.461, -0.462)
+Opponent valid=True state=2081823275 time=0,500 minY=0,003 maxY=1,367 Hips=(0.000, 0.550, 1.050) LeftFoot=(0.123, 0.142, 0.657) RightFoot=(-0.089, 0.142, 0.674) LeftHand=(0.151, 0.493, 0.729) RightHand=(-0.129, 0.461, 0.701)
+Opponent valid=True state=2081823275 time=0,500 minY=0,003 maxY=1,367 Hips=(0.909, 0.550, -0.525) LeftFoot=(0.508, 0.142, -0.435) RightFoot=(0.628, 0.142, -0.260) LeftHand=(0.556, 0.493, -0.496) RightHand=(0.671, 0.461, -0.239)
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+seats=6 normalizedTime=0,75
+Opponent valid=True state=2081823275 time=0,750 minY=0,000 maxY=1,360 Hips=(0.911, 0.552, 0.526) LeftFoot=(0.634, 0.140, 0.223) RightFoot=(0.543, 0.140, 0.415) LeftHand=(0.715, 0.488, 0.236) RightHand=(0.550, 0.456, 0.466)
+Opponent valid=True state=2081823275 time=0,750 minY=0,000 maxY=1,360 Hips=(-0.911, 0.552, 0.526) LeftFoot=(-0.510, 0.140, 0.437) RightFoot=(-0.631, 0.140, 0.262) LeftHand=(-0.562, 0.488, 0.501) RightHand=(-0.679, 0.456, 0.243)
+Opponent valid=True state=2081823275 time=0,750 minY=0,000 maxY=1,360 Hips=(-0.911, 0.552, -0.526) LeftFoot=(-0.634, 0.140, -0.223) RightFoot=(-0.543, 0.140, -0.415) LeftHand=(-0.715, 0.488, -0.236) RightHand=(-0.550, 0.456, -0.466)
+Opponent valid=True state=2081823275 time=0,750 minY=0,000 maxY=1,360 Hips=(0.000, 0.552, 1.052) LeftFoot=(0.123, 0.140, 0.661) RightFoot=(-0.088, 0.140, 0.678) LeftHand=(0.153, 0.488, 0.737) RightHand=(-0.129, 0.456, 0.709)
+Opponent valid=True state=2081823275 time=0,750 minY=0,000 maxY=1,360 Hips=(0.911, 0.552, -0.526) LeftFoot=(0.510, 0.140, -0.437) RightFoot=(0.631, 0.140, -0.262) LeftHand=(0.562, 0.488, -0.501) RightHand=(0.679, 0.456, -0.243)
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+seats=6 normalizedTime=0,99
+Opponent valid=True state=2081823275 time=0,990 minY=0,002 maxY=1,371 Hips=(0.909, 0.550, 0.525) LeftFoot=(0.631, 0.141, 0.223) RightFoot=(0.540, 0.141, 0.414) LeftHand=(0.709, 0.493, 0.233) RightHand=(0.544, 0.461, 0.462)
+Opponent valid=True state=2081823275 time=0,990 minY=0,002 maxY=1,371 Hips=(-0.909, 0.550, 0.525) LeftFoot=(-0.508, 0.141, 0.435) RightFoot=(-0.629, 0.141, 0.261) LeftHand=(-0.556, 0.493, 0.497) RightHand=(-0.672, 0.461, 0.241)
+Opponent valid=True state=2081823275 time=0,990 minY=0,002 maxY=1,371 Hips=(-0.909, 0.550, -0.525) LeftFoot=(-0.631, 0.141, -0.223) RightFoot=(-0.540, 0.141, -0.414) LeftHand=(-0.709, 0.493, -0.233) RightHand=(-0.544, 0.461, -0.462)
+Opponent valid=True state=2081823275 time=0,990 minY=0,002 maxY=1,371 Hips=(0.000, 0.550, 1.050) LeftFoot=(0.123, 0.141, 0.658) RightFoot=(-0.089, 0.141, 0.675) LeftHand=(0.152, 0.493, 0.730) RightHand=(-0.128, 0.461, 0.702)
+Opponent valid=True state=2081823275 time=0,990 minY=0,002 maxY=1,371 Hips=(0.909, 0.550, -0.525) LeftFoot=(0.508, 0.141, -0.435) RightFoot=(0.629, 0.141, -0.261) LeftHand=(0.556, 0.493, -0.497) RightHand=(0.672, 0.461, -0.241)
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569
+max posed triangle edge=0,1569

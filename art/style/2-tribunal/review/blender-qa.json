@@ -1,0 +1,166 @@
+{
+  "transform_max_drift_m": 6.007572048481605e-08,
+  "weights_before": {
+    "unweighted": 0,
+    "max_influences": 4,
+    "max_normalization_error": 1.434236764907837e-07
+  },
+  "source_has_custom_normals": true,
+  "split_nonmanifold_contacts": 1,
+  "welded_exact_seam_vertices": 7750,
+  "weights_after": {
+    "unweighted": 0,
+    "max_influences": 4,
+    "max_normalization_error": 1.434236764907837e-07
+  },
+  "geometry": {
+    "vertices": 15782,
+    "faces": 31491,
+    "triangles": 31491,
+    "dimensions_m": [
+      1.8083527088165283,
+      0.4425622224807739,
+      1.8000048398971558
+    ],
+    "bones": 24,
+    "material": "M_Juge",
+    "texture": [
+      2048,
+      2048
+    ]
+  },
+  "qa_tolerance_note": "10 micrometres: the default 1 mm flags nearby spectacle rims and wig folds as coplanar overlaps; these are distinct detail surfaces.",
+  "qa_rest": {
+    "ok": true,
+    "pass": true,
+    "errors": [],
+    "warnings": [
+      "CHR_Juge: duplicate verts=2 loose verts=0"
+    ],
+    "ground_z": 0.0,
+    "zfighting": [],
+    "floating": [],
+    "back_to_back": [],
+    "enclosed": [],
+    "objects": {
+      "CHR_Juge": {
+        "verts": 15782,
+        "faces": 31491,
+        "tris": 31491,
+        "ngons": 0,
+        "boundary_edges": 473,
+        "nonmanifold_edges": 0,
+        "wire_edges": 0,
+        "loose_verts": 0,
+        "degenerate_faces": 0,
+        "zero_length_edges": 0,
+        "inconsistent_normals_edges": 0,
+        "duplicate_verts": 2,
+        "islands": 7,
+        "inside_out_islands": 0,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "materials": 1,
+        "unweighted_verts": 0,
+        "verts_over_4_influences": 0,
+        "uv_maps": 1,
+        "uv_oob_pct": 0.0,
+        "uv_zero_area_faces": 0,
+        "uv_overlap_pct": 0.05,
+        "uv_coverage_pct": 70.1
+      }
+    }
+  },
+  "qa_stress": {
+    "ok": true,
+    "pass": true,
+    "errors": [],
+    "warnings": [
+      "CHR_Juge: duplicate verts=2 loose verts=0",
+      "hidden back-to-back faces: CHR_Juge (1 pairs) - delete to save tris",
+      "asset lowest point z=0.3575 (not resting on ground plane z=0)"
+    ],
+    "ground_z": 0.3575,
+    "zfighting": [],
+    "floating": [],
+    "back_to_back": [
+      {
+        "where": "CHR_Juge",
+        "tri_pairs": 1
+      }
+    ],
+    "enclosed": [],
+    "objects": {
+      "CHR_Juge": {
+        "verts": 15782,
+        "faces": 31491,
+        "tris": 31491,
+        "ngons": 0,
+        "boundary_edges": 473,
+        "nonmanifold_edges": 0,
+        "wire_edges": 0,
+        "loose_verts": 0,
+        "degenerate_faces": 0,
+        "zero_length_edges": 0,
+        "inconsistent_normals_edges": 0,
+        "duplicate_verts": 2,
+        "islands": 7,
+        "inside_out_islands": 0,
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "materials": 1,
+        "unweighted_verts": 0,
+        "verts_over_4_influences": 0,
+        "uv_maps": 1,
+        "uv_oob_pct": 0.0,
+        "uv_zero_area_faces": 0,
+        "uv_overlap_pct": 0.05,
+        "uv_coverage_pct": 70.1
+      }
+    }
+  },
+  "stress_edge_ratios": {
+    "max": [
+      2.0507648009777824,
+      3677,
+      3679
+    ],
+    "over_3x": 0
+  },
+  "roundtrip": [
+    {
+      "name": "RIG_Juge",
+      "type": "ARMATURE",
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_m": [
+        1.8417141437530518,
+        0.5274047255516052,
+        2.0384061336517334
+      ]
+    },
+    {
+      "name": "CHR_Juge",
+      "type": "MESH",
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_m": [
+        1.8083529472351074,
+        0.4425622820854187,
+        1.800005316734314
+      ]
+    }
+  ]
+}
