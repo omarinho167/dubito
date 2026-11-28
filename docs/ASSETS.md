@@ -44,14 +44,16 @@ Licence Mixamo : libre de droits dans un jeu, redistribution des fichiers bruts 
 
 Personnages définitifs et décor d'ambiance : après le choix de la direction artistique (VISION). Sons : phase 5 (UX §7).
 
-## 5. Personnage jouable (fiche DA.6, en cours de validation)
+## 5. Personnage jouable (fiche DA.6)
+
+Vue cible : `art/style/2-tribunal/A-maquette-jeu.png` (D-93).
 
 Un seul personnage, le juge (D-83, D-89), sur toutes les places, varié par textures (D-80). Pensé pour être vu **en buste au-dessus de la table, de près** (caméra plus large, D-90). Étude : `docs/research/2026-11-28-ETUDE-LIARS-BAR.md`.
 
 | Élément | Exigence |
 |---|---|
 | Silhouette | Celle du juge actuel : maigre, voûté, perruque à rouleaux, lunettes, veste noire, ceinture rouge. |
-| Mains | **Grandes et simples**, sans détail fin : main ouverte ≈ 2 × la hauteur d'une carte. Doigts épais et bien séparés (nombre : à fixer sur les maquettes). Mêmes mains pour les adversaires et pour **tes mains à l'écran** (D-88). |
+| Mains | **Grandes et simples**, sans détail fin : main ouverte ≈ 2 × la hauteur d'une carte. 5 doigts épais et bien séparés, comme sur la vue cible (D-93). Mêmes mains pour les adversaires et pour **tes mains à l'écran** (D-88). |
 | Os | Squelette Humanoid + 3 os par doigt. Poses de main préparées : tenir le paquet, main à plat, pointer, poing, tapoter. |
 | Cartes des adversaires | **Paquet serré tenu dans une main** (D-92), attaché à l'os de la main, épaisseur selon le nombre ; l'autre main libre. Nombre exact affiché en 3D au-dessus du joueur (RULES §9). |
 | Tes cartes | Tenues par tes mains visibles, effet loupe à la souris (UX, D-91). |
