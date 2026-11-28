@@ -85,3 +85,13 @@ Planche : `art/style/charte/charte-v1.png` ; matières et objets de référence 
 | Rouge justice | `#9E2A2B` | Rideaux, ceintures, velours |
 | Laiton | `#C9A24A` | Lampe, horloge, détails métal |
 | Ombre froide | `#3E4357` | Ombres, contre-jour |
+
+## 7. Décor du tribunal (D-96)
+
+Vue d'ensemble de référence : `art/style/2-tribunal/D-salle.png`. Style : charte §6.
+
+- **Salle** : grande salle d'audience, **vide, la nuit** ; aucun personnage hors des joueurs.
+- **Centre** : table ronde en bois verni, chaises hautes en bois à assise de velours rouge (une par joueur), lampe suspendue en laiton (spot ambre, seule lumière forte).
+- **Autour** : enceinte de balustrades autour de la table, banc du juge surélevé derrière (horloge en laiton, rideaux rouges), bancs du public vides, hautes fenêtres en arc avec clair de lune bleu.
+- **Objet de jeu** : **marteau du juge** posé sur la table ; il frappe quand un joueur doute (son et animation à définir avec l'interface).
+- Dimensions de la table et place de la caméra : à fixer avec le test de caméra plus large (D-90).
