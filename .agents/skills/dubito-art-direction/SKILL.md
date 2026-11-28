@@ -19,7 +19,7 @@ Outil : MCP `google-flow`, mode d'emploi général dans le skill `google-flow-im
 - `flow_status` : connecté, et `usageToday` laisse assez d'images (PRO : 100 Nano Banana Pro par jour). Prévoir le lot avant de lancer : directions × images × variantes.
 - Projet Flow : `Dubito DA` (un seul projet pour toute la phase, les références y restent).
 - Prompt = bloc commun de `PROMPTS.md` + prompt de l'image, **mot pour mot**. Format indiqué dans `PROMPTS.md`.
-- Exploration : `count: 4`, `resolution: "1k"`. Correction ciblée : `count: 2`.
+- **Toujours `count: 2` au maximum** (exploration comme correction), jamais 4 (demande du propriétaire, D-84). `resolution: "1k"`, puis 2K pour l'image validée.
 - Sortie brute : `art/style/<direction>/_gen/` (ignoré par git), `name_prefix` = `<direction>-<lettre>` (ex. `3-neon-A`).
 - Références locales (`references`) : seulement des images du dépôt ou validées (ex. image B validée pour garder le même personnage en C). Jamais d'image d'un jeu existant.
 
