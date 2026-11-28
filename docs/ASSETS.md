@@ -60,3 +60,28 @@ Un seul personnage, le juge (D-83, D-89), sur toutes les places, varié par text
 | Visage | Lisible de 1 à 2 m : gros sourcils, yeux, bouche ; expressions à tester (étape 4 de DA.6 : os, formes ou textures). |
 | Animations | Attente assise (2 ou 3 variantes), tête qui suit celui qui parle, jouer (poser des cartes au centre), douter (pointer ou taper la table), réactions à la révélation (rire, colère, dépit), victoire. |
 | Budget | Environ 25 000 triangles, 1 ou 2 matériaux, texture 2K. |
+
+## 6. Charte de style (D-95)
+
+Planche : `art/style/charte/charte-v1.png` ; matières et objets de référence : `art/style/charte/C-matieres.png`.
+
+| Élément | Règle |
+|---|---|
+| Rendu | 3D stylisée, textures peintes douces, sans contours (D-78). |
+| Formes | Rondes, généreuses, légèrement exagérées, peu de détails fins. |
+| Matières | Bois verni, velours rouge, laiton, parchemin, laine noire ; pas de métal chromé. |
+| Lumière | Spot ambre au-dessus de la table, ombres bleu-gris douces (D-74) ; fond sombre mais jamais noir pur (D-54). |
+| Table | Plateau en **bois verni** (plus de tapis vert). |
+
+| Couleur | Hex | Usage |
+|---|---|---|
+| Nuit chaude | `#1A1316` | Fonds, coins sombres |
+| Brun d'ombre | `#422620` | Boiseries dans l'ombre |
+| Bois verni | `#8B5A3C` | Table, chaises, balustrades |
+| Spot ambre | `#F2C27B` | Lumière principale, reflets chauds |
+| Peau | `#E0B08C` | Mains, visages |
+| Perruque | `#EDE6DA` | Perruques, jabots, cartes |
+| Veste noire | `#1E1B22` | Vestes des juges |
+| Rouge justice | `#9E2A2B` | Rideaux, ceintures, velours |
+| Laiton | `#C9A24A` | Lampe, horloge, détails métal |
+| Ombre froide | `#3E4357` | Ombres, contre-jour |
