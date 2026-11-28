@@ -23,7 +23,7 @@ Video game screenshot, first-person view from a seated player at a round card ta
 
 | Rendu | Phrase à coller avant la scène |
 |---|---|
-| **R1 cel-shading (choisi, D-73)** | `Cel-shaded 3D art style: flat color areas, two-tone hard shadows, bold black outlines around every shape, comic-book look.` |
+| R1 cel-shading (abandonné, D-78) | `Cel-shaded 3D art style: flat color areas, two-tone hard shadows, bold black outlines around every shape, comic-book look.` |
 | R2 animation lisse | `Smooth stylized 3D animated-film look: soft rounded shapes, subtle realistic lighting and soft shadows, clean simple materials.` |
 | R3 peint à la main | `Hand-painted 3D art style: low-detail models with painted textures, visible brush strokes, lighting painted into the colors.` |
 | R4 low-poly | `Low-poly 3D art style: simple geometric shapes with visible flat facets, flat shading, no textures, solid colors.` |
@@ -43,7 +43,7 @@ Rendu fixé : cel-shading (D-73). Prompt = phrase R1 + phrase d'éclairage + sc�
 
 ## Étape 3 · Décor (`1-salon`, `2-tribunal`, `3-neon`, `4-garage`)
 
-Fixés : cel-shading (D-73), spot sur la table et fond sombre (D-74). Prompt = phrase R1 + phrase L1 + scène ci-dessous (même réactions et mêmes contraintes que l'étape 1, seuls le lieu, la lampe et les tenues changent). Format 16:9. Fichier gardé : `art/style/<direction>/A-table.png`. Les fiches personnage (B) et objets (C) seront écrites pour le décor choisi.
+Image de comparaison faite en cel-shading (D-73, remplacé depuis par la 3D Unity de base, D-78), spot sur la table et fond sombre (D-74). Prompt = phrase R1 + phrase L1 + scène ci-dessous (même réactions et mêmes contraintes que l'étape 1, seuls le lieu, la lampe et les tenues changent). Format 16:9. Fichier gardé : `art/style/<direction>/A-table.png`. Les fiches personnage (B) et objets (C) seront écrites pour le décor choisi.
 
 **Scène** (remplacer `<LIEU>`, `<LAMPE>`, `<TENUES>`)
 ```text
@@ -58,6 +58,14 @@ Video game screenshot, first-person view from a seated player at a round card ta
 | 4 Garage entre potes | `a cluttered garage turned into a game room, with an old couch, string lights, shelves of boxes and tools` | `a bare bulb lamp` | `in casual hoodies and t-shirts` |
 
 Le premier essai (direction 1 en 3D lisse, avant D-72) reste dans `_gen/flow-manifest.jsonl` et l'historique git.
+
+## Étape 4 · Fiche personnage pour le test 3D (`2-tribunal`, D-77)
+
+Pour Meshy : pas de contours ni d'ombres peints (Meshy les copierait dans la texture), lumière neutre, couleurs unies. Format 3:4. Fichier gardé : `art/style/2-tribunal/B-personnage.png`.
+
+```text
+Character turnaround sheet for a 3D game model, stylized 3D render, clean simple shapes, flat even studio lighting, no outlines, no cast shadows, plain light grey background. One stylized human card player from a whimsical courtroom: a judge-like character wearing a simple dark red robe with a white collar and a short rounded judge hat, chunky proportions, slightly big head, big expressive hands with clearly separated fingers, expressive face with a mischievous suspicious look. Front view and side view side by side, identical proportions, standing in a neutral A-pose, arms away from the body, legs slightly apart. Simple solid colors, chunky modeled hair, no fine hair strands, no loose flowing cloth, robe ends above the knees so the legs are visible. Original design, no text, no letters, no logos, no watermark.
+```
 
 ## Après le choix
 
